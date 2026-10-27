@@ -1,0 +1,51 @@
+{
+ "summary": "A2 Layer 6 encodes significantly more explicit chemical features than T08b reference (178 vs 93 latents), despite receiving bond-type inputs that should theoretically make these 'cheap'. Bond-derived properties dominate (47% of context_chem), while functional group and ring topology remain distinct sparse representations. Random initialization fails to learn topological features like rings, confirming pretraining priors are necessary for non-local graph reasoning at this layer.",
+ "claims": [
+  {
+   "claim": "A2 Layer 6 encodes ~93% more 'context-chemistry' latents than the T08b reference pretrained GRASP (178 vs. 93), indicating that explicit bond inputs do not eliminate the need for internal feature computation.",
+   "evidence": "a2 counts: context_chemistry=178; Ref stats: ~93",
+   "kind": "shows",
+   "test": "Label column `is_context_chem` = (AUROC > 0.9 on any concept). Expect count(AUROC>0.9) \u2248 178 for A2, \u2248 93 for T08b.",
+   "prediction": "A2 will have ~178 latents with AUROC \u2265 0.9; Ref will have ~93."
+  },
+  {
+   "claim": "Bond-derived features (hybridization, aromaticity) constitute the largest family in A2 Layer 6 (84/178), suggesting that even with explicit bond inputs, the model retains or re-learns these properties as sparse latent codes.",
+   "evidence": "a2 families: bond_derived=84; total context_chemistry=178",
+   "kind": "shows",
+   "test": "SMARTS pattern for `hybridization_SP`: `[C;X2]` (alkyne carbon). Latent 170 should fire only on atoms matching this SMARTS.",
+   "prediction": "Latent 170 activation vector AND RDKit atom property 'SP' == True."
+  },
+  {
+   "claim": "Functional group context is represented redundantly across multiple latents per chemical motif, rather than a single canonical latent (e.g., `fg_ether` appears in Latents 1182, 1304, and 3853).",
+   "evidence": "top_context: L1182 (AUROC=1.0), L1304 (AUROC=0.988), L3853 (AUROC=0.987) all map to `fg_ether`.",
+   "kind": "suspects",
+   "test": "RDKit SMARTS for ether oxygen: `[O;X2]([C])([C])`. Check if Latents 1182, 1304, and 3853 fire on the same set of atoms or distinct subsets (e.g., specific ring vs chain ethers).",
+   "prediction": "Latent activation overlap > 90% for these IDs; they represent sub-classes of ether environments."
+  },
+  {
+   "claim": "Topological features like ring size are learned in A2 but absent in random initialization, implying pretraining provides priors necessary to encode non-local graph structure.",
+   "evidence": "a2 families: ring=23 (min_ring_size_4/3); a2_random families: ring count not listed (sum of others = 11).",
+   "kind": "shows",
+   "test": "RDKit `GetRingInfo().AtomRings()`. Latents in 'ring' family should fire on atoms belonging to rings of size \u22653.",
+   "prediction": "A2 Ring latents will show high AUROC (>0.9) for ring-size labels; Random Ring latents (if any exist) will not."
+  },
+  {
+   "claim": "Random initialization fails to capture context-chemistry features effectively, with only 11 latent concepts identified versus A2's 178.",
+   "evidence": "a2_random counts: context_chemistry=11",
+   "kind": "shows",
+   "test": "Compare `n_alive` and FVU. Random has dead_frac=0.523 vs A2 dead_frac=0.0; yet random still learns some hybridization (Latent 3943).",
+   "prediction": "Random SAE will show significantly lower context_chem count (<15) even after extended training compared to pretrained weights."
+  },
+  {
+   "claim": "Neighbor information (`has_O_neighbor`, `has_N_neighbor`) is explicitly encoded as a distinct family in A2 (21 latents), separate from the atom's intrinsic hybridization.",
+   "evidence": "a2 families: neighbour=21; top_context L357 has concept `has_O_neighbor` with AUROC 1.0",
+   "kind": "shows",
+   "test": "RDKit neighbor count check. For an Oxygen atom, verify if Latent 357 fires when a Nitrogen is within bond distance.",
+   "prediction": "Latent activation correlates strictly with presence of heteroatom neighbors."
+  }
+ ],
+ "trivial_explanations": [
+  "The high number of context_chem latents (178) compared to T08b (93) may be partly due to the specific SAE hyperparameters or layer depth differences rather than a fundamental change in model capability.",
+  "Random initialization showing FVU=0.0 with 52% dead neurons suggests reconstruction failure on non-trivial features, making its low context_chem count an artifact of training instability as much as lack of priors."
+ ]
+}

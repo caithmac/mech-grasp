@@ -1,0 +1,9 @@
+Processing feature 2610: fg_hydroxyl (family=[2610])
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v1\script.py", line 413, in <module>
+    res = run_feature(j)
+          ^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v1\script.py", line 68, in run_feature
+    T_mask = (A.tokens == tok_j).values.astype(bool)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'values'

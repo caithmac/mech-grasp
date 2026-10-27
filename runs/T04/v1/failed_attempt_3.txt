@@ -1,0 +1,14 @@
+Loading data...
+Loaded 50000 molecules.
+Scaffold split groups: 33469
+
+Running probes...
+Target ro5_pass: Positive rate = 1.0000
+Target ro5_violations: Positive rate = 0.0166
+
+Running threshold test...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T04\v1\script.py", line 80, in <module>
+    cls_test_pretrained = Am["cls"][12][test_indices]
+                          ~~^^^^^^^
+TypeError: 'Acts' object is not subscriptable

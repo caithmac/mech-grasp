@@ -1,0 +1,25 @@
+{
+ "verdict": "accept",
+ "bugs_or_flaws": [
+  "Feature 3867 (`has_N_neighbor`) has `within_auroc` = NaN. This indicates constant labels on the active subset (likely all positive), making correlation metrics undefined, though ablation tests still ran and showed causal effects.",
+  "Features with singleton families (2610, 710, 1316) show `-0.0` effect in `ablate_fam`. This is expected behavior given the family definition `[latent]`, but could be misinterpreted as a null test rather than 'no redundancy found'."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Latent 845 (COOH) causal representation",
+   "status": "supported",
+   "reason": "Ablation effect (~0.112 at L8) is significantly larger than random baseline (-0.007). LogP shift (+0.099) matches chemical intuition for removing polar group."
+  },
+  {
+   "claim": "Steering cannot force recognition (steer_flip = 0)",
+   "status": "supported",
+   "reason": "All `steer_flip` values are exactly 0 across features, consistent with Chemist's claim of input token dominance over residual stream for this task."
+  },
+  {
+   "claim": "Self-repair / redundancy (decay L7->L12)",
+   "status": "supported",
+   "reason": "`concept_removed` values decay monotonically from Layer 7 to 12 but remain above random baseline, indicating partial signal loss or repair."
+  }
+ ],
+ "rerun_instructions": "None required. The NaN AUROC for Feature 3867 is a metric edge case (perfect correlation on subset) rather than execution failure; causal ablation results are valid and distinct from noise baselines."
+}

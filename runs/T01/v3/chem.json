@@ -1,0 +1,80 @@
+{
+ "summary": "GRASP learns context-dependent chemical properties beyond input tokens, but some features are trivial (already in token). Key findings: aromaticity detection improves at layer 8 (benzene vs cyclohexane distinction), ring size learned via message passing (not in token), functional groups require different context depths.",
+ "claims": [
+  {
+   "claim": "GRASP distinguishes aromatic from non-aromatic rings beyond simple 'in-ring' boolean",
+   "evidence": "aromatic: token=0.979 AUC, grasp_best(layer8)=1.0, gap=0.02",
+   "kind": "shows",
+   "test": "SMARTS: [c] (aromatic C) vs [C] (aliphatic C in ring)",
+   "prediction": "At layer 8+, atoms in benzene should have higher aromaticity score than cyclohexane"
+  },
+  {
+   "claim": "Hybridization is trivial - already encoded in input token",
+   "evidence": "hybridization: token=1.0, grasp_best(layer0)=1.0, gap=0.0",
+   "kind": "shows",
+   "test": "Check if tok_element='C' and tok_degree matches expected hybridization (sp2 vs sp3)",
+   "prediction": "No improvement with layers - feature is local"
+  },
+  {
+   "claim": "Ring size is NOT in input token but learned via message passing",
+   "evidence": "min_ring_size: token=0.325 balanced_acc, grasp_best(layer7)=0.861, gap=0.535",
+   "kind": "shows",
+   "test": "SMARTS: [C] in 3-membered ring vs [C] in 6-membered ring",
+   "prediction": "Atoms in small rings should have lower min_ring_size score than large rings"
+  },
+  {
+   "claim": "Carbonyl carbon detection is mostly local (layer 1)",
+   "evidence": "fg_carbonyl_C: token=0.986 AUC, grasp_best(layer1)=0.999, gap=0.013",
+   "kind": "shows",
+   "test": "SMARTS: [C](=O) vs [CH2]",
+   "prediction": "Carbonyl C distinguished within 1 hop (direct bond to O)"
+  },
+  {
+   "claim": "Ester functional group requires broader context than amide",
+   "evidence": "fg_ester: token=0.868 AUC, grasp_best(layer6)=0.997; fg_amide: token=0.972 AUC, grasp_best(layer4)=1.0",
+   "kind": "shows",
+   "test": "SMARTS: [C](=O)[O] (ester) vs [C](=O)[N] (amide)",
+   "prediction": "Ester needs more hops to distinguish O-C=O from N-C=O"
+  },
+  {
+   "claim": "Michael acceptor detection requires context beyond immediate neighbors",
+   "evidence": "fg_michael_acceptor: token=0.916 AUC, grasp_best(layer4)=0.998, gap=0.084",
+   "kind": "shows",
+   "test": "SMARTS: C=C-C(=O) (\u03b1,\u03b2-unsaturated carbonyl)",
+   "prediction": "Needs 3-4 hops to capture conjugation pattern"
+  },
+  {
+   "claim": "Heteroatom neighbor detection shows electronic effect learning",
+   "evidence": "has_O_neighbor: token=0.876 AUC, grasp_best(layer4)=1.0, gap=0.124; has_N_neighbor: token=0.791 AUC, grasp_best(layer4)=1.0, gap=0.209",
+   "kind": "shows",
+   "test": "SMARTS: [C]-[O] vs [C]-[C]",
+   "prediction": "Inductive/resonance effects learned through message passing"
+  },
+  {
+   "claim": "fg_carboxylic_acid probe failed (all null values)",
+   "evidence": "fg_carboxylic_acid: all layers show null",
+   "kind": "shows",
+   "test": "Check if carboxylic acid atoms exist in training set",
+   "prediction": "Either no such atoms or probe implementation issue"
+  },
+  {
+   "claim": "Nitrile detection is trivial (local feature)",
+   "evidence": "fg_nitrile: token=1.0 AUC, grasp_best(layer0)=1.0, gap=0.0",
+   "kind": "shows",
+   "test": "SMARTS: [C]#N",
+   "prediction": "Triple bond to N is local feature"
+  },
+  {
+   "claim": "Aromatic nitrogen detection improves slightly with context",
+   "evidence": "fg_aromatic_N: token=0.997 AUC, grasp_best(layer7)=1.0, gap=0.004",
+   "kind": "shows",
+   "test": "SMARTS: [n] in aromatic ring (pyridine) vs aliphatic N",
+   "prediction": "Pyridine N distinguished from pyrrole N with context"
+  }
+ ],
+ "trivial_explanations": [
+  "hybridization is trivial because input token includes degree+H count which determines sp2/sp3",
+  "fg_nitrile is trivial because C\u2261N triple bond is local structural feature",
+  "tok_element and tok_in_ring baselines are expected to be near-perfect (they ARE the features)"
+ ]
+}

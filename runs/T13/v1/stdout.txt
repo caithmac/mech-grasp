@@ -1,0 +1,15 @@
+Processing feature 2610: fg_hydroxyl (family=[2610])
+Feature 2610: n_targets=128, n_steer=400, within_auroc=nan
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v1\script.py", line 413, in <module>
+    res = run_feature(j)
+          ^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v1\script.py", line 189, in run_feature
+    acts_edit_cache["ablate"] = model.run(enc, smi_subset, layers=[6, 7, 8, 10, 12], dtype=np.float32, add=add_dict_ablate)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\AppData\Local\miniconda3\envs\mech-grasp\Lib\site-packages\torch\utils\_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\model.py", line 151, in run
+    raise ValueError(f"{mode} layer must be 1..{N_LAYERS}, got {pl}")
+ValueError: add layer must be 1..12, got 13

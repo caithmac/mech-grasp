@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T09\v2\script.py", line 136, in <module>
+    print(f"Selected {len(sel_list)} molecules for editing. Swapping C -> {'N' if any(s[3]=='N' for s in sel_list) else 'O'}")
+                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T09\v2\script.py", line 136, in <genexpr>
+    print(f"Selected {len(sel_list)} molecules for editing. Swapping C -> {'N' if any(s[3]=='N' for s in sel_list) else 'O'}")
+                                                                                      ~^^^
+IndexError: tuple index out of range

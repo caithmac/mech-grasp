@@ -1,0 +1,9 @@
+Processing 50000 molecules...
+Running a1...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15b\v3\script.py", line 433, in <module>
+    main()
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15b\v3\script.py", line 134, in main
+    enc = model.load(kind, eval_mode=True) 
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: load() got an unexpected keyword argument 'eval_mode'

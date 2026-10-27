@@ -1,0 +1,60 @@
+{
+ "summary": "GRASP relies on SMILES sequence order (position embeddings) rather than pure graph topology, ignores stereochemistry entirely, and uses coarse-grained aromaticity tokens.",
+ "claims": [
+  {
+   "claim": "SMILES order sensitivity is real due to absolute position embeddings.",
+   "evidence": "smiles_invariance mean_cosine_distance=0.528",
+   "kind": "shows",
+   "test": "RDKit: Chem.MolToSmiles(mol, doRandom=True) vs canonical; expect distance > 0.1 if sensitive.",
+   "prediction": "If position_biased_input=True, distance should be ~0.14 (supervisor hint) or higher (observed 0.528)."
+  },
+  {
+   "claim": "Model is stereo-blind.",
+   "evidence": "stereo_blindness mean_cosine_distance=-0.0",
+   "kind": "shows",
+   "test": "RDKit: Compare enantiomers (e.g., C[C@H](N)O vs C[C@@H](N)O); expect distance ~0.",
+   "prediction": "Distance should be 0 if stereo info is not in input tokens or model ignores it."
+  },
+  {
+   "claim": "Pretrained weights encode chemical structure; random does not.",
+   "evidence": "pretrained_vs_random mean_cosine_similarity=-0.038",
+   "kind": "shows",
+   "test": "Compare pretrained CLS vs random-init CLS on same molecules; expect low similarity.",
+   "prediction": "Similarity near 0 indicates orthogonal representations (learned vs noise)."
+  },
+  {
+   "claim": "Pretrained model learns layer-specific activation scales.",
+   "evidence": "norms_pretrained varies from 48.5 to 104.4",
+   "kind": "shows",
+   "test": "Compute per-layer norm of A.atom[l] for pretrained; expect variation.",
+   "prediction": "Norms should vary by layer if model learns depth-wise features."
+  },
+  {
+   "claim": "Random-init model has uniform high activation norms.",
+   "evidence": "norms_random ~301 across layers",
+   "kind": "shows",
+   "test": "Compute per-layer norm of A.atom[l] for random; expect constant value.",
+   "prediction": "Norms should be constant if random init + LayerNorm without learned scaling."
+  },
+  {
+   "claim": "Aromaticity is mostly encoded as a hard class in tokens.",
+   "evidence": "token_check mixed_token_count=1, total_token_count=4",
+   "kind": "shows",
+   "test": "Group df['aromatic'] by A.tokens; count distinct values per token.",
+   "prediction": "Most tokens should have only 1 aromatic value (0 or 1)."
+  },
+  {
+   "claim": "Pretrained model is more expressive than random.",
+   "evidence": "cls_effective_rank pretrained=9.893, random=5.806",
+   "kind": "shows",
+   "test": "Compute participation ratio of covariance matrix; expect higher for pretrained.",
+   "prediction": "Higher rank indicates more dimensions used to capture chemical variance."
+  }
+ ],
+ "trivial_explanations": [
+  "SMILES sensitivity is explained by position_biased_input=True (absolute position embeddings).",
+  "Stereo blindness is explained by lack of stereo info in input tokens or model architecture.",
+  "Token mixing fraction is explained by coarse-grained tokenization (likely element/ring status only).",
+  "Norm differences are explained by learned scaling vs random init."
+ ]
+}

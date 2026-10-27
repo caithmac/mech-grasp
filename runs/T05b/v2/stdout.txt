@@ -1,0 +1,26 @@
+Finding parent molecules...
+Found 300 parent molecules.
+Processing model variant: pretrained
+  Processing layers: 6
+  Processing layers: 12
+Processing model variant: random
+  Processing layers: 6
+  Processing layers: 12
+    Built pretrained Layer 6 cosine matrix. Diagonal mean: 1.0000
+    Built pretrained Layer 12 cosine matrix. Diagonal mean: 1.0000
+    Built random Layer 6 cosine matrix. Diagonal mean: 1.0000
+    Built random Layer 12 cosine matrix. Diagonal mean: 1.0000
+Analysis complete.
+Found 300 parent molecules with aromatic C-H.
+
+Consistency Scores (Pretrained Layer 12):
+  F: Consistency (L12 Pretrained) = 0.0640
+  Cl: Consistency (L12 Pretrained) = 0.1406
+  OH: Consistency (L12 Pretrained) = 0.1938
+  NH2: Consistency (L12 Pretrained) = 0.1542
+  CH3: Consistency (L12 Pretrained) = 0.1006
+  COOH: Consistency (L12 Pretrained) = 0.3783
+  CN: Consistency (L12 Pretrained) = 0.2374
+  NO2: Consistency (L12 Pretrained) = 0.2556
+
+Mean delta cosine matrix (L12) diagonal mean: 1.0000

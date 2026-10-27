@@ -1,0 +1,37 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "CRITICAL BUG: Key mismatch between storage and retrieval in derived metrics computation.",
+  "- Storage uses list repr as string key (e.g., \"['a2', 'a2_random']\") from `f\"{pair_name}\"` where pair_name is a tuple",
+  "- Retrieval looks for f-string format like \"a2_a2_random\"",
+  "- This caused ALL 16 derived metric computations to fail with \"no valid pair entry\", despite raw probe data existing in results.json"
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Aromaticity gap exists (0.999 vs ~0.96 at layer 6)",
+   "status": "supported",
+   "reason": "Raw data shows: a2 error_model=0.001, control_error_ctrl=0.039 at layer 6 for aromatic"
+  },
+  {
+   "claim": "Hybridization reaches 0.0 error by layer 2 in both models",
+   "status": "supported",
+   "reason": "Raw data confirms: hybridization a2 model=1.0 (error=0.0) at layers 2-8"
+  },
+  {
+   "claim": "MR degrades at depth for A2 vs control",
+   "status": "supported",
+   "reason": "Raw data shows MR error_model rises from 0.05 to 0.172 by layer 10, while control stays ~0.04"
+  },
+  {
+   "claim": "Neighbor context captured at layer 2 (error=0.0)",
+   "status": "supported",
+   "reason": "Raw data confirms: has_O_neighbor and has_halogen_neighbor both reach error_model=0.0 by layer 2"
+  },
+  {
+   "claim": "Ring size best at layer 6 (error=0.245)",
+   "status": "supported",
+   "reason": "Raw data shows ring_size a2 minimum error=0.245 at layer 6, compared to control ~0.61-0.67"
+  }
+ ],
+ "rerun_instructions": "Fix the key mismatch bug in derived metrics computation:\n\n```python\n# In results[concept] storage section (around line where pair_name is used):\npair_key = f\"{pair[0]}_{pair[1]}\"  # Use explicit string format, not tuple repr\nresults[concept][pair_key] = {...}\n```\n\nThen re-run the derived metrics computation loop. The raw probe data already exists in results.json and supports all chemist claims - only the summary aggregation is broken.\", "
+}

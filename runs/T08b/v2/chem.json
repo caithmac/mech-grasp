@@ -1,0 +1,15 @@
+{
+ "summary": "Pretrained L6 SAE latents encode specific local chemical contexts (functional groups) that are absent in random initialization, indicating the transformer weights organize activation space by chemistry.",
+ "claims": [
+  {
+   "claim": "The pretrained model learns to represent 'fg_hydroxyl' environments on Carbon tokens via Latent 2610 with near-perfect within-token discrimination (AUROC=0.9985), whereas the random control achieves zero context_chemistry latents.",
+   "evidence": "Pretrained n_alive=4096, ContextChemistry=44; Random n_alive=3473, ContextChemistry=0. Latent 2610: tok_j=150 (C), within_auroc=0.9985.",
+   "kind": "shows",
+   "test": "RDKit SMARTS `[#6]([O])` on tokens with ID==150; Prediction: Latent 2610 activation > threshold for matches, < threshold for non-matches.",
+   "prediction": "AUROC >= 0.98"
+  }
+ ],
+ "trivial_explanations": [
+  "The high within-token AUROCs (>0.95) suggest the L6 activations already contain element-specific information; however, the existence of *context_chemistry* latents (44 in Pretrained vs 0 in Random) proves that pretrained weights are required to disentangle functional group context from general atom type statistics."
+ ]
+}

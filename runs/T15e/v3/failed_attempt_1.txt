@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15e\v3\script.py", line 160
+    probes.FixedProbe(data.get_acts("mols", kind).mean[6], labels.mol_labels(data.get_smiles("mols"))["logp"].values, np.asarray(data.get_scaffolds("mols")), seed=s).decision(model.run(model.load(kind), enant_list, layers=[6, 12]).mean[6].astype(np.float32)))) for s in SEEDS]))
+                                                                                                                                                                                                                                                                                   ^
+SyntaxError: closing parenthesis ']' does not match opening parenthesis '(' on line 159

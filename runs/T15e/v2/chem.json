@@ -1,0 +1,37 @@
+{
+ "summary": "GRASP-A1 is stereo-blind; GRASP-A2 encodes stereo in latent space but preserves achiral property predictions.",
+ "claims": [
+  {
+   "claim": "Model A1 treats enantiomers and diastereomers as chemically identical vectors because it lacks stereo input tokens.",
+   "evidence": "Layer 6 cls `rel_enant` = 0.0; Layer 6 logp `d_enant` = 0.0 (JSON).",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H]`. Prediction: For A1, vector distance between enantiomers is < 1e-4.",
+   "prediction": "A1 `rel_enant` remains ~0.0 regardless of stereo inversion."
+  },
+  {
+   "claim": "Model A2 encodes chiral configuration into latent vectors (Layer 6/12), distinguishing stereoisomers from the parent structure.",
+   "evidence": "Layer 6 mean `rel_enant` = 0.003; Layer 6 cls `rel_diast` = 0.003 (JSON).",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H]`. Prediction: A2 vector distance > 0 for chiral molecules.",
+   "prediction": "A2 `rel_enant` will be non-zero (~1e-3) while A1 is zero."
+  },
+  {
+   "claim": "Model A2 preserves the physical principle that logP is achiral, despite encoding stereo in vectors.",
+   "evidence": "Layer 6 cls `d_other` = 1.521 vs `d_enant` = 0.004 (JSON).",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H]`. Prediction: LogP drift for enantiomers < 0.5% of structural variance.",
+   "prediction": "`d_enant` remains negligible compared to `d_other`."
+  },
+  {
+   "claim": "Diastereomer vector perturbations are comparable in magnitude to full enantiomeric inversion, suggesting no strong hierarchy between single vs global stereo changes.",
+   "evidence": "Layer 6 cls mean: `diast`=0.003 vs `enant`=0.002 (JSON).",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H]`. Prediction: Inverting one center yields similar vector distance as inverting all.",
+   "prediction": "`rel_diast` \u2248 `rel_enant`."
+  }
+ ],
+ "trivial_explanations": [
+  "A1 zero values are trivial due to missing stereo tags in input SMILES (no @ symbols processed).",
+  "LogP achirality is expected physically; model failure would show high `d_enant`."
+ ]
+}

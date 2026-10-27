@@ -1,0 +1,37 @@
+{
+ "summary": "The pretrained GRASP model encodes heavy-atom connectivity topology (specifically single-bond linkage patterns) into its CLS token representation despite identical input atom tokens.",
+ "claims": [
+  {
+   "claim": "Pretrained layer 12 CLS vectors distinguish molecules with scrambled non-ring single bonds, indicating the transformer learns bond connectivity beyond atomic composition.",
+   "evidence": "AUROC = 0.769 (std 0.023) for `pretrained_cls_12` vs AUROC = 0.5 for `bag_of_tokens`. Input token match fraction was 1.0, ruling out atom-count differences as the driver.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C;X3]-[C;X2]` vs `[C;X2]-[C;X3]`. Prediction: A classifier trained on layer-12 CLS vectors of these isomers will achieve AUROC > 0.6, whereas a classifier on atom counts (Lipinski MW) or bag-of-tokens features will yield ~0.5.",
+   "prediction": "AUROC > 0.7 for pretrained model; AUROC \u2248 0.5 for random weights and token-only baselines."
+  },
+  {
+   "claim": "Connectivity sensitivity is a learned property of pretraining, not an artifact of the input graph structure or random weight initialization.",
+   "evidence": "`pretrained_cls_12` AUROC = 0.769 vs `random_cls_12` AUROC = 0.567 (std 0.036). Cosine distance between original/rewired vectors is 0.183 for pretrained but only 0.002 for random weights.",
+   "kind": "shows",
+   "test": "Label column: `model_type` ('pretrained' vs 'random'). Prediction: The mean cosine distance between representations of topological isomers will be >0.15 for pretraining and <0.01 for random initialization, confirming the latent space separation requires chemical knowledge.",
+   "prediction": "Pretrained models show vector divergence (dist \u2248 0.18); Random models collapse vectors (dist \u2248 0)."
+  },
+  {
+   "claim": "Layer-6 mean pooling captures connectivity changes with higher classification accuracy than layer-12 CLS tokens, suggesting early layers encode local bond topology more robustly for this task.",
+   "evidence": "`pretrained_mean_6` AUROC = 0.786 (std 0.034) vs `pretrained_cls_12` AUROC = 0.769 (std 0.023). However, CLS vectors show larger separation distance (0.183 vs 0.103), indicating mean pooling aggregates topology-sensitive features across the graph.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[*]-[*]` where both atoms are heavy and non-ring. Prediction: Subsetting molecules to those with >2 such bonds will maintain AUROC > 0.75 for mean pooling, confirming sensitivity is not driven by single-edge anomalies.",
+   "prediction": "Mean-pooled features at layer 6 should consistently outperform CLS tokens on connectivity classification tasks."
+  },
+  {
+   "claim": "The model does not rely on trivial atom counts or composition to detect rewiring; the signal arises from graph topology processing in attention layers.",
+   "evidence": "`token_match_fraction` = 1.0 (all token lists matched). `bag_of_tokens` AUROC = 0.5 (std 0.0), confirming no compositional difference exists for a classifier to exploit.",
+   "kind": "shows",
+   "test": "Label column: `is_topological_isomer`. Prediction: A model trained on molecular fingerprints (e.g., Morgan radius=2) will fail to distinguish the pairs if they share identical atom types, whereas GRASP layer-12 CLS succeeds.",
+   "prediction": "Fingerprint-based classifiers yield AUROC \u2248 0.5; Transformer layers > 0.7."
+  }
+ ],
+ "trivial_explanations": [
+  "The token match fraction of 1.0 confirms the input representation (atom types/counts) is identical for original and rewired pairs, so any classification signal must come from graph topology processing within the transformer.",
+  "Random models show AUROC ~0.57 but cosine distance ~0; this indicates random weights do not separate representations in latent space despite slight statistical bias in classifier output."
+ ]
+}

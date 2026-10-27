@@ -1,0 +1,37 @@
+{
+ "summary": "GRASP-A2 exhibits geometric collapse and property decodability loss at Layer 12, distinct from random initialization.",
+ "claims": [
+  {
+   "claim": "A2 undergoes significant representation space contraction at Layer 12 compared to the peak expansion at Layer 8.",
+   "evidence": "PR drops from 216.8 (L8) to 21.9 (L12); Anisotropy increases from 0.37 to 0.66.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `*` on all atoms; Label column: layer_index=12 vs 8. Prediction: PR variance fraction should drop significantly at L12 for trained models but remain flat (~10) for random weights.",
+   "prediction": "If true, A2_L12_PR < 50 while A2_Random_L12_PR \u2248 11."
+  },
+  {
+   "claim": "Continuous physicochemical properties (Crippen logp contribution) lose linear decodability at Layer 12.",
+   "evidence": "Linear R\u00b2 drops from 0.863 (L4) to 0.633 (L12); MLP R\u00b2 drops from 0.962 to 0.722.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C]` with `df.crippen_logp_contrib`. Prediction: Correlation between atom embedding and Crippen value should decrease at L12 compared to L4 for trained A2, but remain stable (~0.8) for random weights.",
+   "prediction": "A2_L12_Crippen_Linear_R\u00b2 < 0.65."
+  },
+  {
+   "claim": "Discrete topological features (Ring size, Heteroatom neighbors) survive Layer 12 collapse better than continuous properties.",
+   "evidence": "Ring5 Linear R\u00b2 remains 0.927 at L12 vs 0.988 at L4; O-Neighbor MLP stays >0.943.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[r5]` for Ring5, `[#6]-[O]` for O-neighbor on C. Prediction: Classification accuracy for these discrete labels should remain high (>0.9) at L12 even if continuous regression R\u00b2 drops.",
+   "prediction": "A2_L12_Ring5_Linear_R\u00b2 > 0.9."
+  },
+  {
+   "claim": "The collapse is a learned dynamic, not an architectural artifact of depth alone.",
+   "evidence": "A2_PR(L8)=216.8 -> L12=21.9; A2_Random_PR stays ~10-11 across all layers (L4=10.2, L12=11.2).",
+   "kind": "suspects",
+   "test": "Compare trained vs random PR trajectories over 50 epochs or layer indices. Prediction: Trained models show non-monotonic PR evolution; Random weights maintain constant low-dimensional noise structure.",
+   "prediction": "Random model should not exhibit the L8->L12 drop seen in A2."
+  }
+ ],
+ "trivial_explanations": [
+  "The high anisotropy (0.657) at Layer 12 may reflect standard deep-layer saturation where embeddings align with dominant global features rather than local chemistry.",
+  "Crippen R\u00b2 decline could be due to the MLP probe overfitting earlier layers; however, Linear drop confirms signal loss."
+ ]
+}

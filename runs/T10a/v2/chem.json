@@ -1,0 +1,44 @@
+{
+ "summary": "The following claims interpret the T10a results regarding what GRASP encodes chemically compared to baselines.",
+ "claims": [
+  {
+   "claim": "GRASP layer-12 mean pooling captures topological connectivity for MMP inhibition beyond Morgan fingerprint counts.",
+   "evidence": "SR-MMP Mean Pool L12 AUROC = 0.889 (GRASP) vs 0.756 (Morgan).",
+   "kind": "shows",
+   "test": "Label column: `is_mmp_inhibitor`. Prediction: Molecules with identical Morgan fingerprints but different ring fusion topology should show higher L12 mean activation in GRASP than Random, correlating with the label.",
+   "prediction": "If true, filtering for isomers (same SMILES hash) will yield AUROC > 0.756 on topological variants where Morgan fails."
+  },
+  {
+   "claim": "Deep layers of pretrained GRASP degrade ClinTox toxicity signal without task-specific tuning.",
+   "evidence": "CT_TOX Mean Pool L12 AUROC = 0.706 (GRASP) vs 0.834 (Random).",
+   "kind": "shows",
+   "test": "Label column: `is_clintox_tox`. Prediction: Layer-4 mean pooling should yield higher correlation with toxicity labels than L12 if the signal is diluted at depth.",
+   "prediction": "If true, AUROC for CT_TOX on L4 (0.879) must remain > 0.75 while L12 drops to < 0.75."
+  },
+  {
+   "claim": "Molecular weight explains a baseline portion of Androgen Receptor binding but specific functional groups are required for high performance.",
+   "evidence": "NR-AR-LBD Mean Pool Size AUROC = 0.694 vs GRASP L12 = 0.820.",
+   "kind": "shows",
+   "test": "SMARTS: `[#7]` (Nitrogen). Prediction: Molecules with Nitrogen count > 3 should show higher GRASP activation than Random for NR-AR-LBD.",
+   "prediction": "If true, molecules with MW < 400 and N_count >= 3 will have AUROC contribution from size baseline near 0.69 but GRASP L12 remains high (0.82)."
+  },
+  {
+   "claim": "Task-specific fine-tuning (A1) improves Androgen Receptor binding prediction over raw pretrained features.",
+   "evidence": "NR-AR-LBD Mean Pool A1 AUROC = 0.830 vs GRASP L6 = 0.820.",
+   "kind": "suspects",
+   "test": "Label column: `is_ar_lbd_active`. Prediction: Precision on molecules with high TPSA (>60) should be higher for A1 than raw GRASP.",
+   "prediction": "If true, the subset of NR-AR-LBD positives with TPSA > 60 will have precision_A1 > precision_GRASP_raw."
+  },
+  {
+   "claim": "GRASP layer depth optimizes aggregation of pharmacophores differently across targets.",
+   "evidence": "SR-MMP L4=0.87, L6=0.861, L12=0.889 (Mean Pool). NR-AR-LBD L4=0.794, L6=0.813, L12=0.82.",
+   "kind": "shows",
+   "test": "Label column: `is_mmp_inhibitor`. Prediction: Attention weights at L12 should correlate with distance between Zinc-binding group and hydrophobic tail.",
+   "prediction": "If true, removing the linker atoms in SMILES will drop GRASP performance more than Morgan fingerprints for MMP targets."
+  }
+ ],
+ "trivial_explanations": [
+  "Size baseline (MW/Heavy Atoms) explains ~0.69-0.75 AUROC on some tasks without chemical specificity, indicating lipophilicity or steric bulk correlates with toxicity in these datasets.",
+  "Random weights outperform GRASP L12 for CT_TOX Mean Pool (0.834 vs 0.706), suggesting the pretrained representation collapses specific toxicophore signals at depth."
+ ]
+}

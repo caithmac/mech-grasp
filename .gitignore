@@ -1,0 +1,9 @@
+# separate public repo: https://github.com/caithmac/GRASP
+GRASP/
+__pycache__/
+*.pyc
+*.bak*
+supervisor/*.bak_*/
+logs/ollama2.log
+logs/pull35.log
+ollama_pull.log

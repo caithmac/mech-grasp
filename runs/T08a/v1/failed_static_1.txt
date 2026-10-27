@@ -1,0 +1,3 @@
+Static check failed before running:
+script.py:11:12: undefined name 'A'
+script.py:144:17: undefined name 'total_fires_this_latent'

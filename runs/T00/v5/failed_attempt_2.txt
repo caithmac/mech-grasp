@@ -1,0 +1,19 @@
+Loading cached datasets...
+Running sanity check: smiles_invariance...
+Running sanity check: stereo_blindness...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T00\v5\script.py", line 95, in <module>
+    acts_pair0 = model.run(model.load("pretrained"), [pair[0]])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\AppData\Local\miniconda3\envs\mech-grasp\Lib\site-packages\torch\utils\_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\model.py", line 117, in run
+    for batch in make_loader(smiles, enc.vocabulary, batch_size):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\GRASP\grasp\encoder.py", line 61, in make_loader
+    values = validate_smiles(smiles)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\GRASP\grasp\encoder.py", line 53, in validate_smiles
+    raise ValueError(f"SMILES row {index} is invalid: {value!r}")
+ValueError: SMILES row 0 is invalid: 'OC(=O)[C@H]1CC[C@H]2CC=C3C(=O)N[C@H]4CC[C@@H]3[C@H]12'

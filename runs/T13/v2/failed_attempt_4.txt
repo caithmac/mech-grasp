@@ -1,0 +1,15 @@
+Processing feature 2610 (fg_hydroxyl)...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v2\script.py", line 398, in <module>
+    res = utils.memo(f"t13_feat_{j}_v2", lambda x=j, c=concept_col, s=sign: run_feature(x, c, s))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\utils.py", line 69, in memo
+    out = to_jsonable(fn())
+                      ^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v2\script.py", line 398, in <lambda>
+    res = utils.memo(f"t13_feat_{j}_v2", lambda x=j, c=concept_col, s=sign: run_feature(x, c, s))
+                                                                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v2\script.py", line 129, in run_feature
+    steer_candidates_global_indices = steer_at_idx[c_subset[steer_at_idx] < 0.5] 
+                                                   ~~~~~~~~^^^^^^^^^^^^^^
+IndexError: index 176 is out of bounds for axis 0 with size 175

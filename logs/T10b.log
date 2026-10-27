@@ -1,0 +1,27 @@
+[17:07:29] T10b -> C:\Users\ss864\Desktop\mech-grasp\runs\T10b\v1
+[17:13:36]   static check failed (not executed): ['except[^:\\n]*:\\s*pass\\b']
+[17:13:36]   failed (Script uses forbidden operations: ['except[^:\\n]*:\\s*pass\\b']. Remove them. Silently swallowing exceptions (`except .); asking MI agent to fix
+[17:15:43]   attempt 1: executing
+[17:15:57]   ran in 8s ok=False
+[17:15:57]   failed (IndexError: boolean index did not match indexed array along axis 0; size of axis is 0 but size of corresponding boolean ); asking MI agent to fix
+[17:17:28]   attempt 2: executing
+[17:17:42]   ran in 8s ok=False
+[17:17:42]   failed (ValueError: Input contains NaN.); asking MI agent to fix
+[17:19:13]   attempt 3: executing
+[17:20:24]   ran in 65s ok=True
+[17:20:24]   chemist reading results
+[17:21:51]   critic reviewing
+[17:26:52]   critic verdict: revise
+[17:26:52]   critic asked for revision; MI agent re-running
+[17:31:06]   attempt 1: executing
+[17:31:20]   ran in 8s ok=True
+[17:31:20]   chemist reading results
+[17:32:55]   critic reviewing
+[17:34:11]   critic verdict: revise
+[17:34:11]   critic asked for revision; MI agent re-running
+[17:35:44]   attempt 1: executing
+[17:40:39]   ran in 289s ok=True
+[17:40:39]   chemist reading results
+[17:42:47]   critic reviewing
+[17:44:48]   critic verdict: revise
+[17:45:07] done: C:\Users\ss864\Desktop\mech-grasp\runs\T10b\v3

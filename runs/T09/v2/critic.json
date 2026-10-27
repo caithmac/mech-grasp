@@ -1,0 +1,28 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Coverage Failure - Molecule Count: Task requests testing molecules in range 0..799 (800 total). Results show `n_mols`:400 for all models without explanation. Approximately half the requested test set was dropped due to selection criteria (`valid_indices_in_subset == 0`). This reduces generalizability and requires justification.",
+  "Coverage Failure - Missing Baselines: Task asks if GRASP is compared against 'token/bag/size baselines'. Script only runs `pretrained`, `random`, `a1`. No results for token-bag or size-controlled baselines are present in `results.json` to verify this comparison.",
+  "Methodological Weakness - Statistical Significance: Claims state the model 'distinguishes' local from remote atoms. This implies statistical significance, but only single-run means (`mean`) are reported without standard deviation over seeds (e.g., 5-10 runs). Without error bars or p-values, we cannot confirm the observed gaps (Pretrained L8 dist=3 vs >=6) are robust and not noise.",
+  "Coverage Failure - Missing Correlation Analysis: Chemist's test plan explicitly asks to 'Correlate CLS sensitivity with molecular weight... Prediction: High MW edits will show higher absolute CLS change'. The `results.json` contains only mean relative changes per layer, no correlation coefficients (`r`) or regression results. This specific claim cannot be verified from the output.",
+  "Over-claiming - Mechanism Interpretation: Claims interpret distance-dependent attenuation as 'inductive effect propagation limits' and deep layers as 'global property aggregation'. While plausible for a transformer, this is speculative without controlling for confounds (e.g., molecule size bias in selected 400 molecules) or ablation studies. The data supports 'distance dependence', not the specific chemical mechanism."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained model encodes graph connectivity via distance-attenuated sensitivity... distinguishing local from remote atoms",
+   "status": "unsupported",
+   "reason": "Observed gap (0.416 vs 0.156) exists in single run, but without standard deviation over seeds or p-values, we cannot claim 'distinguishes' statistically. Also missing token/bag baselines to rule out trivial structural effects."
+  },
+  {
+   "claim": "Deep layers transition... global molecular property aggregation",
+   "status": "unsupported",
+   "reason": "Gap narrowing (0.446 vs 0.372) suggests flattening, but correlation with MW requested in test plan is missing from results (`r` value not reported). Cannot confirm 'global property' link without this."
+  },
+  {
+   "claim": "Layer 0 behavior confirms no implicit long-range interactions",
+   "status": "supported",
+   "reason": "L0 dist>0 values are exactly 0.0 for all models, consistent with independent token embeddings at initialization (sanity check passed)."
+  }
+ ],
+ "rerun_instructions": "1. Re-run script to ensure `n_mols` reaches ~800 or explicitly report the filtering rate and bias of selected molecules.\n2. Add 'token_bag' and 'size_baseline' model runs as requested in Task Controls; include their results in JSON for comparison.\n3. Run each model configuration 5-10 times with different seeds to compute mean/std deviation for all metrics (rel_change, cls). Report these stats or p-values for claims of distinction.\n4. Compute and report Pearson correlation coefficient (`r`) between CLS relative change and molecular weight/LogP as requested in Chemist's test plan; include this metric in `results.json`."
+}

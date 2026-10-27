@@ -1,0 +1,31 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Probes (Context Chemistry): For 'a1' and 'a1_step1', all `_debug_model_raw` and `_debug_ctrl_raw` values are `null`, yet errors report 1.0/1.0. This indicates the extraction logic failed to find keys in cached results, defaulting to error=1.0 (score=0). The script's fallback `.get(",
+  "grasp",
+  ")` did not work for these models or cache files were empty/broken.",
+  "Probes: For 'pretrained', `_debug_model_raw` is `null` while control worked (`_debug_ctrl_raw`: ~0.9). This inconsistency suggests the key extraction logic (`.get(model_kind)` vs `.get(",
+  "grasp",
+  ")`) failed for model data but succeeded for control, invalidating any claim about Pretrained's probe performance.",
+  "Crippen R2: 'pretrained' Model R2=0.0 while Control R2~0.517 is suspicious (random baseline outperforming pretrained linearly). Combined with nulls in probes, suggests pipeline alignment or label issues rather than chemical truth.",
+  "Order Distance: Values are `-0.0` for A1/Step1 instead of `0.0`. While mathematically equivalent to 0, this indicates float handling artifacts (likely empty list mean or subtraction) that should be cleaned up before claiming 'perfect' invariance."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained GRASP retains sensitivity to atom ordering...",
+   "status": "supported",
+   "reason": "Order distance 0.118 vs ~0 for A1 is a robust numerical difference, despite `-0.0` formatting artifacts."
+  },
+  {
+   "claim": "`pretrained` layers do not linearly encode atomic aromaticity... better than random baseline.",
+   "status": "unsupported",
+   "reason": "Model errors are reported as 1.0 with `_debug_model_raw`: null for all models (including Pretrained). This indicates extraction failure, not chemical absence of signal."
+  },
+  {
+   "claim": "`a1` and `a1_step1` variants returned no valid probe signal... likely caching/extraction artifact.",
+   "status": "supported",
+   "reason": "Data confirms `_debug_model_raw`: null for all layers. The claims about their performance are based on missing data, not actual results."
+  }
+ ],
+ "rerun_instructions": "1. Re-run `probes.probe_atoms` explicitly without relying on cached JSON files (clear cache) to ensure fresh execution and verify key names in output dict (`grasp`, `random`, or model-specific). 2. Fix extraction logic: Do NOT default error=1.0 when keys are missing; flag as 'untested' instead of reporting high error. 3. Verify Pretrained Model Probe extraction (why did control work but model fail?). Check if key names differ by input argument to `probe_atoms`. 4. Clean up Order Distance floats: ensure `-0.0` is converted to `0.0` before JSON dump."
+}

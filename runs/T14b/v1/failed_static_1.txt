@@ -1,0 +1,3 @@
+Static check failed before running:
+script.py:457:22: undefined name 'concept_list'
+script.py:463:33: undefined name 'concept_list'

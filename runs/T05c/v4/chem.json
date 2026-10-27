@@ -1,0 +1,37 @@
+{
+ "summary": "The results demonstrate that GRASP learns to encode bond connectivity topology in its CLS tokens, distinguishing topological isomers (same atoms/types, different bonds) where simple composition-based features fail.",
+ "claims": [
+  {
+   "claim": "Pretrained GRASP encodes heavy-atom connectivity topology distinct from atomic composition.",
+   "evidence": "pretrained_cls_12 AUROC 0.769 \u00b1 0.023 vs bag_of_tokens AUROC 0.500 \u00b1 0.000; pretrained_cls_12 cosine distance 0.183 vs bag_of_tokens 0.0.",
+   "kind": "shows",
+   "test": "SMARTS: `[C,N,O,S]` (atom types only). Prediction: If model relies on composition, AUROC \u2248 0.5.",
+   "prediction": "If the model relied solely on Crippen atom counts or Lipinski MW, `bag_of_tokens` would achieve high AUROC (>0.7) because token match fraction is 1.0 for all pairs. The observed 0.5 confirms reliance on graph structure."
+  },
+  {
+   "claim": "Topology encoding requires pretraining; random initialization yields weak signal.",
+   "evidence": "random_cls_12 AUROC 0.567 \u00b1 0.036 vs pretrained_cls_12 AUROC 0.769 \u00b1 0.023; distance 0.002 (random) vs 0.183 (pretrained).",
+   "kind": "shows",
+   "test": "Label: `model_type` column ('random' vs 'pretrained'). Prediction: Random AUROC < 0.65.",
+   "prediction": "If topology were inherent in positional encodings or random weights, distance would be >0.1 and AUROC >0.7 regardless of pretraining."
+  },
+  {
+   "claim": "Layer-12 CLS tokens capture connectivity changes more strongly than Layer-6 mean pooling for the best checkpoint (`a1`).",
+   "evidence": "`a1_cls_12` AUROC 0.827 \u00b1 0.027, distance 0.217 vs `a1_mean_6` AUROC 0.807 \u00b1 0.013, distance 0.12.",
+   "kind": "shows",
+   "test": "Layer index column (6 or 12). Prediction: Layer-12 CLS separation > Layer-6 Mean for `a1`. ",
+   "prediction": "If early layers integrated global topology better than final aggregation, mean[6] would outperform cls[12]. Here a1_cls_12 dominates."
+  },
+  {
+   "claim": "The rewiring operation alters local steric and electronic environments without changing functional group identity.",
+   "evidence": "Token match fraction 1.0; `bag_of_tokens` AUROC 0.5 implies no atom type changes (HBA/HBD/MW constant).",
+   "kind": "suspects",
+   "test": "RDKit: `Chem.MolFromSmiles(s)` -> `GetNumHeavyAtoms()` and `CalcCrippenDescriptors()`. Prediction: Descriptors identical for original/rewired pairs.",
+   "prediction": "If descriptors changed, bag-of-tokens might succeed. Since it fails at 0.5, the model detects changes in bond paths (e.g., linear vs branched alkyl chains) rather than functional groups."
+  }
+ ],
+ "trivial_explanations": [
+  "The `bag_of_tokens` result of AUROC 0.5 confirms that atom counts and types are identical for original/rewired pairs; thus, the model's success is not due to trivial features like MW or HBA/HBD.",
+  "Random-init models show slight signal (AUROC ~0.57) suggesting positional encodings provide weak topological cues even without learning weights."
+ ]
+}

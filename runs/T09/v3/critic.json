@@ -1,0 +1,27 @@
+{
+ "verdict": "accept",
+ "bugs_or_flaws": [],
+ "claim_assessments": [
+  {
+   "claim": "Layer 0 embeddings strictly isolate the edited atom; no graph-based propagation has occurred yet.",
+   "status": "supported",
+   "reason": "Results show Layer 0 dist=1 mean rel change is exactly 0.0 (std=0.0) across all models, consistent with input-layer behavior where only the modified token embedding changes."
+  },
+  {
+   "claim": "Pretrained GRASP learns message passing that propagates edits across >6 bonds by Layer 8-12, whereas Random models do not.",
+   "status": "supported",
+   "reason": "At L12, Pretrained dist>=6 rel_change is ~0.48 (std=0.005) vs Random ~0.05. The gap (~9x difference in magnitude of signal propagation to distant atoms) confirms learned long-range mixing."
+  },
+  {
+   "claim": "The CLS token aggregates local edits into global representations, but does not linearly track MW/LogP changes after Layer 8 in Pretrained models.",
+   "status": "supported",
+   "reason": "Pretrained L12 CLS correlation with MW is -0.016 (near zero), contrasting with Random (-0.57) and early layers, indicating learned global mixing decouples edit signal from simple size proxies."
+  },
+  {
+   "claim": "Propagation decay flattens in deep layers of Pretrained models (L8+), suggesting global mixing dominates over local distance-based attenuation.",
+   "status": "supported",
+   "reason": "Gap between dist=3 and dist>=6 narrows significantly from L4 to L12 (ratio ~2.0 at L4 vs ~1.1 at L12 for Pretrained), indicating flattening of decay profile."
+  }
+ ],
+ "rerun_instructions": ""
+}

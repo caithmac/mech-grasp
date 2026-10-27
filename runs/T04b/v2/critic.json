@@ -1,0 +1,21 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Script copies mean6 metrics for cls12 instead of training on CLS token features.",
+  "Direction tests skipped due to class imbalance checks (<5 positives in train split).",
+  "ro5_pass LR failed (single class error) while Ridge succeeded, indicating binary classification is harder than regression here."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP mean-pooled layer-6 representation captures logP information with high fidelity.",
+   "status": "supported",
+   "reason": "Ridge AUROC 0.966 on thresholded predictions suggests strong signal, but baseline check missing."
+  },
+  {
+   "claim": "We cannot assess whether GRASP encodes other Lipinski properties (MW, HBD/HBA).",
+   "status": "untested",
+   "reason": "Tests skipped due to class imbalance in train split (<5 positives), not just 'cannot claim'."
+  }
+ ],
+ "rerun_instructions": "1. Fix cls12 logic: Ensure models are fitted on X_cls_full for both readouts, do NOT copy results.\n2. Check dataset distribution: Log counts of MW/HBD/Pass classes to confirm imbalance is real or due to split leakage.\n3. Add baseline model (random features) comparison for logP claim.\n4. Handle ro5_pass binary classification failure by checking if test set has both classes; if not, report as 'untestable' rather than null."
+}

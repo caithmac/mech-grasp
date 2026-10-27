@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:87:41: undefined name 'run_probe_fn'

@@ -1,0 +1,20 @@
+10242026 14:37:38|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/caithmac/GRASP-A2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+10242026 14:37:38|WARNING|huggingface_hub.utils._http| Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+10242026 14:37:38|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/caithmac/GRASP-A2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+10242026 14:37:39|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/caithmac/GRASP-A2/1bc7a819ca639dd9ab901e5e4125412f19b65c63/config.json?%2Fcaithmac%2FGRASP-A2%2Fresolve%2Fmain%2Fconfig.json=&etag=%224f0db997fb8291e113875f30be75e4fcb4075fd1%22 "HTTP/1.1 200 OK"
+10242026 14:37:39|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/caithmac/GRASP-A2/resolve/main/vocab.json "HTTP/1.1 307 Temporary Redirect"
+10242026 14:37:39|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/caithmac/GRASP-A2/1bc7a819ca639dd9ab901e5e4125412f19b65c63/vocab.json?%2Fcaithmac%2FGRASP-A2%2Fresolve%2Fmain%2Fvocab.json=&etag=%22c1a95cf106e811d56660b1a417cb948061fcb66b%22 "HTTP/1.1 200 OK"
+atoms/a2 done 40s E:69.2GB C:7.9GB
+10242026 14:38:10|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/caithmac/GRASP-A2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+10242026 14:38:11|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/caithmac/GRASP-A2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+10242026 14:38:11|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/caithmac/GRASP-A2/1bc7a819ca639dd9ab901e5e4125412f19b65c63/config.json?%2Fcaithmac%2FGRASP-A2%2Fresolve%2Fmain%2Fconfig.json=&etag=%224f0db997fb8291e113875f30be75e4fcb4075fd1%22 "HTTP/1.1 200 OK"
+10242026 14:38:11|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/caithmac/GRASP-A2/resolve/main/vocab.json "HTTP/1.1 307 Temporary Redirect"
+10242026 14:38:11|INFO|httpx2| HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/caithmac/GRASP-A2/1bc7a819ca639dd9ab901e5e4125412f19b65c63/vocab.json?%2Fcaithmac%2FGRASP-A2%2Fresolve%2Fmain%2Fvocab.json=&etag=%22c1a95cf106e811d56660b1a417cb948061fcb66b%22 "HTTP/1.1 200 OK"
+atoms/a2_random done 72s E:68.1GB C:7.9GB
+mols/a2 done 331s E:67.0GB C:7.9GB
+tox21/a2 done 388s E:65.3GB C:7.9GB
+clintox/a2 done 401s E:64.9GB C:7.9GB
+sae acts L6 a2 (1157595, 768) 620s E:63.1GB C:7.9GB
+ALL DONE
+CACHE3 EXIT 0

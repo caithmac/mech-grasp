@@ -1,0 +1,5 @@
+Built 0 molecules. Skipped 11607.
+Figure generation skipped/failed: 'kinds'
+Done.
+
+ERROR: results.json was not written to OUT_DIR.

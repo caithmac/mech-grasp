@@ -1,0 +1,37 @@
+{
+ "summary": "The embedding space distinguishes molecules by composition (formula) rather than purely structural connectivity.",
+ "claims": [
+  {
+   "claim": "Embedding distance is sensitive to molecular formula/atom count differences.",
+   "evidence": "Pretrained mean distance for same-formula pairs (A) = 0.338, different-formula pairs (B) = 0.487.",
+   "kind": "shows",
+   "test": "Calculate Pearson correlation between embedding distance and molecular weight difference (MW_diff). If > 0.5, claim is supported.",
+   "prediction": "High positive correlation expected if composition dominates."
+  },
+  {
+   "claim": "The distinction between A and B distances is likely driven by trivial features (size/composition) rather than learned structural nuances.",
+   "evidence": "Pretrained and Random embeddings show identical mean distances for A (0.338) and B (0.487).",
+   "kind": "suspects",
+   "test": "Check if Random embedding vectors are uniform (mean distance ~0.5). If not, 'random' embeddings encode composition.",
+   "prediction": "Random mean distance should be ~0.5 if truly noise."
+  },
+  {
+   "claim": "Pretrained embeddings show weaker correlation with fingerprint dissimilarity than random embeddings.",
+   "evidence": "Pretrained Spearman = 0.294, Random Spearman = 0.638.",
+   "kind": "shows",
+   "test": "Compare Spearman correlation of embedding distance vs (1-Tanimoto) for a held-out set of molecules with varying sizes.",
+   "prediction": "If size correlates with Tanimoto, random embeddings might show higher correlation."
+  },
+  {
+   "claim": "Isomers (same formula) share substructural features that reduce embedding distance compared to different formulas.",
+   "evidence": "A mean distance < B mean distance.",
+   "kind": "shows",
+   "test": "Compare distances for constitutional isomers vs. molecules with same MW but different atom types.",
+   "prediction": "Isomers should have lower distance than different-atom-type pairs of similar size."
+  }
+ ],
+ "trivial_explanations": [
+  "The identical mean distances for Pretrained and Random embeddings suggest that the embedding space is dominated by features present in both (e.g., molecular weight, atom count), rather than specific structural connectivity.",
+  "The Morgan fingerprint Tanimoto similarity is also sensitive to molecule size (more atoms = lower similarity), which could explain the correlation between distance and Tanimoto for random embeddings."
+ ]
+}

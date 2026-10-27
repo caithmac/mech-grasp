@@ -1,0 +1,44 @@
+{
+ "n_pairs": 300,
+ "token_match_fraction": 1.0,
+ "auroc": {
+  "pretrained_cls_12": [
+   0.7686944444444443,
+   0.02293519453041871
+  ],
+  "pretrained_cls_6": [
+   0.7344722222222222,
+   0.04919533062756627
+  ],
+  "pretrained_mean_6": [
+   0.7860833333333334,
+   0.03359267170965405
+  ],
+  "random_cls_12": [
+   0.56675,
+   0.0363025481199323
+  ],
+  "random_cls_6": [
+   0.56925,
+   0.03386390244624636
+  ],
+  "random_mean_6": [
+   0.5809166666666666,
+   0.026183498950368544
+  ],
+  "bag_of_tokens": [
+   0.5,
+   0.0
+  ]
+ },
+ "distance": {
+  "pretrained_cls_12": 0.183089017868042,
+  "pretrained_cls_6": 0.005008598789572716,
+  "pretrained_mean_6": 0.10326407849788666,
+  "random_cls_12": 0.0016534298192709684,
+  "random_cls_6": 0.0004974266048520803,
+  "random_mean_6": 0.006296116858720779,
+  "bag_of_tokens": -1.0331471678171056e-08
+ },
+ "figure_error": "tuple indices must be integers or slices, not str"
+}

@@ -1,0 +1,22 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "FVU Calculation Bug: The `compute_fvu_batched` function contains a matrix dimension mismatch (`shapes (2000,4096) and (768,4096) not aligned`). It attempts to compute reconstruction as `Z @ D.T`, but if decoder directions are `(Latents x Features)` = `(4096, 768)`, then `D.T` is `(768, 4096)`. Dot product requires inner dims (4096 vs 768) to match. This function fails for both models and falls back to `S.stats()`. The presence of this bug indicates the FVU metric in results relies on potentially inconsistent fallback logic.",
+  "Suspicious Random Stats: A2 reports FVU=0.145 (reasonable), but Random SAE reports FVU=0.0 exactly. For a trained sparse autoencoder on real molecular data with noise, an exact 0.0 reconstruction error is physically impossible unless the decoder weights are zero and inputs are mean-zero (unlikely) or stats retrieval failed/cached incorrectly for this model type.",
+  "Inconsistent Metric Reliability: The fallback to `S.stats()` was used because of the calculation bug. If A2 and Random models have different internal states (e.g., one loaded from cache, one trained fresh), their `.stats()` methods might behave differently or return cached dummy values for the 'random' case.",
+  "Over-claiming on Baseline: The Chemist claims Random exhibits 'ghost chemistry features'. While supported by AUROC counts, this is less critical than verifying if the baseline model actually learned anything (FVU=0 suggests it didn't learn to reconstruct). Comparing feature density against a broken baseline weakens the conclusion that A2 exceeds GRASP."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "A2 Layer 6 encodes significantly richer chemical context... exceeding reference pretrained GRASP count (178 vs ~93).",
+   "status": "untested",
+   "reason": "While the counts are present, the baseline metric quality is compromised. The Random model's FVU=0 suggests a pipeline bug that invalidates confidence in its 'quality' relative to A2. We cannot confirm if 178 vs 93 reflects true feature density or artifact of broken stats retrieval for one model."
+  },
+  {
+   "claim": "Random exhibits ghost chemistry features due to dataset bias.",
+   "status": "supported",
+   "reason": "The AUROC analysis on Random latents shows high scores (e.g., 1.0) driven by element correlations, which is consistent with the 'ghost' explanation."
+  }
+ ],
+ "rerun_instructions": "Fix `compute_fvu_batched` to use correct matrix multiplication (`np.dot(Z, D)` if D is `(Latents x Features)`). Verify that `S.stats()` returns valid FVU for both A2 and Random SAEs (expect non-zero error for trained models on real data). Re-run the analysis ensuring stats are computed consistently. If Random model training failed or returned dummy weights, retrain it properly before comparing counts."
+}

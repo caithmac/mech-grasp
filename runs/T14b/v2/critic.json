@@ -1,0 +1,26 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Print summary loop fails for Layer 12 due to key type mismatch (int vs string). The script uses integer keys in memory (`l` from `LAYERS=[4,6...]`) but the printed output shows NaNs because `.get(12)` likely failed against a dict where keys were converted or accessed incorrectly. This obscures verification of Layer 12 data.",
+  "Plotting crashes ('Figure generation failed: 4') due to zero-error values (e.g., `aromatic` L6 error=0.0) being passed to log scale (`ax.set_yscale('log')`). Log(0) is undefined, causing matplotlib failure or warnings that halt execution.",
+  "Inconsistent reporting between JSON file and Printed Output: JSON contains valid Layer 12 data (e.g., `crippen` L12 error=0.311), but Print Summary claims NaN for all Layer 12 errors."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Layer 12 degrades continuous property decodability (LogP/MR) and topological features, even with MLP.",
+   "status": "supported",
+   "reason": "JSON data confirms `mlp_drop` > 5 for Crippen/MR in pretrained/a1_step1. R\u00b2 drops from ~0.98 to ~0.84 (Crippen) and ~0.96 to ~0.87 (MR). Random baseline shows no drop (~1.0), confirming degradation is training-dependent."
+  },
+  {
+   "claim": "Binary features remain decodable at L12 despite high relative drops.",
+   "status": "supported",
+   "reason": "Absolute errors for `aromatic`/`o_neighbor` are low (L12 error ~0.003-0.03). High drop ratios (>400x) are artifacts of near-zero baseline errors, acknowledged by chemist."
+  },
+  {
+   "claim": "Non-linear decoding recovers more signal than linear at L12.",
+   "status": "supported",
+   "reason": "MLP R\u00b2 (0.843 for Crippen) > Linear R\u00b2 (0.689) at Layer 12, confirming non-linearity helps access re-encoded info."
+  }
+ ],
+ "rerun_instructions": "Fix key type consistency in print loop (ensure `lin_err` keys match lookup integers). Add epsilon to error values before plotting log scale (`max(err, 1e-9)`) or use linear scale for binary tasks. Re-run script to generate valid Figure t14b.png and consistent summary logs."
+}

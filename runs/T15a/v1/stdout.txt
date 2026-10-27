@@ -1,0 +1,14 @@
+Failed to process ('a2', 'a2_random')/ring_size: 'ring_size'
+Failed to process ('a1', 'a1_random')/ring_size: 'ring_size'
+
+=== T15a Summary ===
+aromatic: A2 Gain=None, A1 Gain=None
+ring_size: A2 Gain=None, A1 Gain=None
+hybridization: A2 Gain=None, A1 Gain=None
+conjugated: A2 Gain=None, A1 Gain=None
+crippen_logp_contrib: A2 Gain=None, A1 Gain=None
+crippen_mr_contrib: A2 Gain=None, A1 Gain=None
+has_O_neighbor: A2 Gain=None, A1 Gain=None
+has_halogen_neighbor: A2 Gain=None, A1 Gain=None
+
+Figure t15a.png generated successfully.

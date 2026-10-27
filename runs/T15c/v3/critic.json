@@ -1,0 +1,33 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "**FVU calculation FAILED** - Script explicitly printed 'Matrix dimension mismatch' and fell back to raw stats, yet reports FVU=0.145 for A2 (should be ~0.075 per reference) and FVU=0.0 for Random (impossible with dead_frac=0.523). This is a critical calculation bug that invalidates reconstruction quality claims.",
+  "**AUROC values of exactly 1.0** - Multiple latents report AUROC=1.0 which suggests either data leakage between train/test splits, or the metric is being computed on imbalanced labels where small sample sizes produce spurious perfect scores (e.g., fg_ether with ~50-80 positives).",
+  "**Token confound not controlled** - Top latents fire almost exclusively on single tokens ('C', 'N', 'O') with AUROC=1.0 for concepts like hybridization_SP, aromaticity etc. This could mean the SAE is learning token identity rather than chemical features (the exact problem T15c tries to detect).",
+  "**No proper baseline comparison** - Only A2 vs Random compared; no bag-of-words or size-matched controls mentioned. Cannot isolate whether learned features are due to pretraining priors versus model capacity.",
+  "**Dead neuron discrepancy unexplained** - Random SAE has dead_frac=0.523 while A2 shows 0.0 with identical n_latents (4096). This suggests different training conditions or bugs in how n_alive is computed, making direct comparison invalid."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "A2 has ~178 context_chem latents vs T08b's 93",
+   "status": "untested",
+   "reason": "T08b reference is from a different run with unknown conditions. Cannot compare without running both on identical data/SAE settings."
+  },
+  {
+   "claim": "Bond-derived features dominate (47% of context_chem)",
+   "status": "untested",
+   "reason": "Token confound not ruled out - latents may be learning 'C'/'N' token identity rather than hybridization/aromaticity."
+  },
+  {
+   "claim": "Random SAE fails to capture context_chemistry (11 vs 178)",
+   "status": "untested",
+   "reason": "FVU=0.0 for Random is impossible with dead_frac=0.523; suggests training failure or metric bug, not genuine lack of learning."
+  },
+  {
+   "claim": "Ring topology features learned in A2 but absent in Random",
+   "status": "untested",
+   "reason": "Cannot confirm because FVU calculation failed for at least one model; reconstruction quality unknown."
+  }
+ ],
+ "rerun_instructions": "1. Fix FVU computation - ensure D.T shape is (Features x Latents) = (768, 4096), not transposed incorrectly.\n2. Add AUROC sanity checks: report positive/negative counts per concept; flag if <50 positives or class imbalance >10x.\n3. Control for token confound by computing AUROC on atoms with >=2 different tokens firing the latent, not just single-token subsets.\n4. Run T08b reference SAE on identical data to get comparable FVU and context_chem counts (not from cached/old results).\n5. Add bag-of-words baseline: train linear model on token frequencies only; compare AUROC gap between A2 SAE vs this baseline.\n6. Verify n_alive/dead_frac computation is consistent across both SAEs with identical training hyperparameters."
+}

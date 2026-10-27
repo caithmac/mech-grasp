@@ -1,0 +1,23 @@
+{
+ "summary": "Experimental failure prevents chemical interpretation.",
+ "claims": [
+  {
+   "claim": "The probe pipeline failed to quantify GRASP Layer 12 representation for Crippen logP contributions or aromaticity due to scaffold splitting indexing errors, evidenced by `lin_drop`: Infinity across all seeds/kinds and null error values at layers >4.",
+   "evidence": "`IndexError: index 4006 is out of bounds`, `lin_drop`: Infinity",
+   "kind": "shows",
+   "test": "Fix scaffold indexing logic (ensure `idx < len(groups)`). Prediction: Finite error values will replace null/Infinity for Layer 12.",
+   "prediction": "Probe R2/AUROC errors at Layer 12 become finite (<0.5), allowing comparison of linear vs MLP performance on Crippen/aromatic labels."
+  },
+  {
+   "claim": "No chemical information regarding H\u00fcckel aromaticity or ring size (min_ring_size == 5) retention can be inferred for GRASP Layer 12 in this run, as all `mlp_drop` and `lin_drop` metrics are infinite.",
+   "evidence": "`aromatic`: lin_drop=Infinity, mlp_drop=Infinity; `ring5`: lin_drop=Infinity",
+   "kind": "shows",
+   "test": "Correct the index bounds check in `_splits`. Prediction: Layer 12 probe scores will yield finite errors.",
+   "prediction": "Finite error values for `aromatic` and `ring5` concepts at Layer 12."
+  }
+ ],
+ "trivial_explanations": [
+  "The 'Infinity' drop metrics are trivially explained by division failure or missing data due to code bugs (`IndexError: index out of bounds`), not chemical properties like Crippen atom types.",
+  "Default values (best_layer_lin=4) likely mask actual performance degradation at Layer 12 because the experiment crashed before completing probe fitting for deeper layers."
+ ]
+}

@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:97:39: undefined name 'X_train_enc'

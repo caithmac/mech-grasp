@@ -1,0 +1,7 @@
+
+--- stderr ---
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T00\v1\script.py", line 174, in <module>
+    cls_p_mol.append(np.mean(cls_p[mask], axis=0))
+                             ~~~~~^^^^^^
+IndexError: boolean index did not match indexed array along axis 0; size of axis is 4000 but size of corresponding boolean axis is 92662

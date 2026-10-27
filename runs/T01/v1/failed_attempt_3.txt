@@ -1,0 +1,8 @@
+Loading data...
+
+--- stderr ---
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T01\v1\script.py", line 36, in <module>
+    smi_carbon_ring = smi[mask_carbon_ring]
+                      ~~~^^^^^^^^^^^^^^^^^^
+TypeError: only integer scalar arrays can be converted to a scalar index

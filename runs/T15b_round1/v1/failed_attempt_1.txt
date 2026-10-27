@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15b\v1\script.py", line 442, in <module>
+    main()
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15b\v1\script.py", line 182, in main
+    dist_enant_cls = cosine_rel_dist(cls_vecs_orig, acts_enant.cls[L])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15b\v1\script.py", line 22, in cosine_rel_dist
+    diffs = np.linalg.norm(a - b, axis=-1)
+                           ~~^~~
+ValueError: operands could not be broadcast together with shapes (3000,768) (2968,768) 

@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:87:24: undefined name 'layer_idx'

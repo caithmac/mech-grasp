@@ -1,0 +1,4 @@
+Static check failed before running:
+script.py:161:17: undefined name 'plt'
+script.py:196:5: undefined name 'plt'
+script.py:198:5: undefined name 'plt'

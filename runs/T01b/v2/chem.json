@@ -1,0 +1,44 @@
+{
+ "summary": "The GRASP model demonstrates high-fidelity representation of local electronic features (functional groups, heteroatom neighbors) within the first few layers, while global topological features (ring counts) remain challenging. The input token alone is insufficient for ambiguous atoms; graph context resolves these ambiguities rapidly.",
+ "claims": [
+  {
+   "claim": "GRASP learns H\u00fcckel aromaticity and conjugation by Layer 3-4.",
+   "evidence": "aromatic AUROC reaches 0.997 at Layer 3 (Error 0.003). conjugated AUROC reaches 1.0 at Layer 4 (Error 0.0).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[a]1ccccc1` for aromatic, `C=CC=CC=C` for conjugation.",
+   "prediction": "If the model represents electronic delocalization, AUROC for these features should exceed 0.95 by Layer 3."
+  },
+  {
+   "claim": "Local heteroatom connectivity (O/N neighbors) is resolved in Layer 1-2.",
+   "evidence": "has_O_neighbor AUROC 0.992 at Layer 1. has_N_neighbor AUROC 0.976 at Layer 1.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[CX4](=O)` for carbonyl O, `[NX3]` for amine N.",
+   "prediction": "If the model relies on graph context to distinguish neighbors, error should drop significantly from Layer 0 (Token) to Layer 1."
+  },
+  {
+   "claim": "Functional group classification is highly accurate but varies by chemical complexity.",
+   "evidence": "fg_carbonyl_C AUROC 1.0 at Layer 4. fg_carboxylic_acid AUROC 1.0 at Layer 3. fg_nitrile AUROC 1.0 at Layer 2 (n=250).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `C(=O)N` for amide, `C(=O)OC` for ester.",
+   "prediction": "Rare features like nitriles (n=250) may saturate faster due to lower noise, but rare features should not inherently be easier than common ones unless the model overfits."
+  },
+  {
+   "claim": "Global topology (ring counts) is harder to represent than local chemistry.",
+   "evidence": "min_ring_size Error 0.1164 at Best Layer 8. n_rings Error 0.1151 at Best Layer 6.",
+   "kind": "shows",
+   "test": "RDKit: `Mol.NumRings` and `Mol.GetRingInfo().AtomRings`.",
+   "prediction": "Global counts require integrating information across the entire graph, which typically requires more layers than local electronic effects."
+  },
+  {
+   "claim": "The input token does not fully encode neighbor information for ambiguous atoms.",
+   "evidence": "Layer 0 grasp error is high (e.g., aromatic Error 0.106). Layer 1 error drops to ~0.012.",
+   "kind": "shows",
+   "test": "Compare `data.get_acts(",
+   "prediction": "If the token contained full neighbor info, Layer 0 and Layer 1 errors would be identical."
+  }
+ ],
+ "trivial_explanations": [
+  "The high performance on `has_O_neighbor` and `has_N_neighbor` at Layer 1 suggests the model quickly learns to propagate atom type information through bonds. This is consistent with standard message-passing mechanisms where atom features are updated by neighbors.",
+  "The low error for `fg_nitrile` (Layer 2) may be due to the small sample size (n=250), allowing the model to memorize the specific pattern rather than generalizing."
+ ]
+}

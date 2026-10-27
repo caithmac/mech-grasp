@@ -1,0 +1,21 @@
+Loading data and SAEs...
+Loading pretrained L6 SAE...
+Loading random L6 SAE (control)...
+Constructed 27 concept columns.
+Filtered to 19 concepts with >= 10 positives.
+Analyzing pretrained SAE...
+Analyzing random SAE...
+Writing results.json...
+
+=== SUMMARY ===
+pretrained: Alive=4096, ContextChemistry=44, Token=1341, Mixed=2711
+random: Alive=3986, ContextChemistry=0, Token=1924, Mixed=1549
+
+Top 5 context chemistry latents (Pretrained):
+Latent 2610: Concept=fg_hydroxyl (0.999), TokenID=150, Freq=177
+Latent 845: Concept=fg_carboxylic_acid (0.996), TokenID=125, Freq=256
+Latent 2804: Concept=has_O_neighbor (0.990), TokenID=13, Freq=1003
+Latent 3314: Concept=has_O_neighbor (0.989), TokenID=13, Freq=1021
+Latent 1727: Concept=has_N_neighbor (0.986), TokenID=54, Freq=316
+
+Script completed successfully.

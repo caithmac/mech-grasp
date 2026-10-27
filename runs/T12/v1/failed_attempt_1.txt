@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T12\v1\script.py", line 40, in <module>
+    acts_cache[k] = data.get_acts("atoms", k)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\data.py", line 137, in get_acts
+    enc = model.load(kind)
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\model.py", line 46, in load
+    raise ValueError(f"kind must be one of {KINDS}")
+ValueError: kind must be one of ['pretrained', 'random', 'a1', 'a1_random', 'a1_step1']

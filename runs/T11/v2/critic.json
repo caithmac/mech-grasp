@@ -1,0 +1,25 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Bag-of-tokens reporting logic overwrites results: The script uses `results['bag_of_tokens'] = {target_col: ...}` inside a loop, which replaces the entire dictionary in each iteration instead of updating it (e.g., line 143-145). This means only the last processed target (`ro5_pass`) appears in the final JSON for bag-of-tokens controls. MW/LogP/HBD/HBA results are missing from output despite probes running.",
+  "Threshold vs Continuous AUROC=1.0: Random model achieves perfect separation on `auroc_threshold_vs_continuous` (e.g., 1.0). While consistent with trivial encoding claims, this warrants a sanity check that the probe isn't overfitting or using constant scores."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Random models achieve AUROC > 0.98 on Ro5 features because input token embeddings preserve atom count statistics.",
+   "status": "supported",
+   "reason": "Results show Random Pretrained and Mean6/CLS12 probes achieving ~0.99-1.0 AUROCs, matching or exceeding pretrained performance."
+  },
+  {
+   "claim": "Layer 12 CLS token aggregates Ro5 constraints into a more linear subspace than Layer 6.",
+   "status": "supported",
+   "reason": "R\u00b2 for reconstruction of Pass from flags is higher in cls12 (0.786) vs mean6 (0.533). Cosine similarities also generally higher."
+  },
+  {
+   "claim": "Bag-of-tokens control confirms atom counts suffice to predict Ro5 compliance.",
+   "status": "untested",
+   "reason": "Only `ro5_pass` bag-of-token AUROC is reported due to script bug overwriting other entries. MW/LogP/HBD/HBA results are missing from JSON."
+  }
+ ],
+ "rerun_instructions": "Fix the Bag-of-tokens reporting logic: change line 143-146 to initialize dict once and update keys (e.g., `if 'bag_of_tokens' not in results: ...` then `results['bag_of_tokens'][target_col] = {...}`). Re-run script. Ensure all targets are reported under bag-of-tokens key."
+}

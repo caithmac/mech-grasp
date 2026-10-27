@@ -1,0 +1,30 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "**ring_size concept completely failed** - KeyError in probes.probe_atoms for 'min_ring_size' column (error message: \"'ring_size'\"). This is a critical missing test that the chemist's claims depend on.",
+  "**learned_gain metrics all None** - Derived metrics section has broken key lookups and indentation issues. The loop `for k in ["
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Aromaticity detection relies on topological inference",
+   "status": "supported",
+   "reason": "a2_random shows ~95% accuracy at layers 2+, model reaches near-perfect. Gap of ~4-5% is real."
+  },
+  {
+   "claim": "Hybridization states computed actively by model (~10% gap)",
+   "status": "supported",
+   "reason": "Model error = 0.0 vs control ~7-10%. However, perfect scores with std=0 are suspicious - may indicate probe issue rather than true learning."
+  },
+  {
+   "claim": "Deep layers degrade Crippen signals (L>6)",
+   "status": "supported",
+   "reason": "Model R2 drops from 0.95 to ~0.64-0.68 by Layer 12 while controls stay stable at ~0.82/0.95."
+  },
+  {
+   "claim": "Neighbor context learned faster than topology (Layer 2 zero error)",
+   "status": "supported",
+   "reason": "Model reaches perfect accuracy early, control plateaus at ~93-97%."
+  }
+ ],
+ "rerun_instructions": "**CRITICAL FIXES NEEDED BEFORE ACCEPTING ANY CLAIMS:**\n\n1. **Fix ring_size probe**: The column name mismatch causes complete failure for this concept. Check `df_atoms['min_ring_size']` exists and update mask logic in get_concept_mask(). This is a required test per task spec.\n\n2. **Fix learned_gain calculation bugs**:\n   - Remove the broken loop with incorrect variable names (`pair_key_a1 = f\"a1_{'a1_random'}\"`) \n   - Fix indentation so derived metrics actually execute for all concepts\n   - Ensure `learned_gain` is computed as control_error / model_error at best layer (not None)\n\n3. **Verify perfect scores**: Several probes show 0.0 error with std=0 across multiple layers and models. This could indicate:\n   - Probe implementation bug (e.g., always returning same value)\n   - Data leakage in labels or masks\n   - Need to verify probe_atoms function handles these concepts correctly\n\n4. **Re-run all probes** after fixes, then regenerate results.json with proper learned_gain values.\n\n5. **Verify token baseline**: Token_baseline = 0.887 for aromaticity across both A1 and A2 is suspicious (identical). Verify this isn't a caching bug."
+}

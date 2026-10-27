@@ -1,0 +1,34 @@
+{
+ "SR-ARE": {
+  "pretrained": {
+   "auroc": null
+  },
+  "random": {
+   "auroc": null
+  }
+ },
+ "NR-AhR": {
+  "pretrained": {
+   "auroc": null
+  },
+  "random": {
+   "auroc": null
+  }
+ },
+ "SR-MMP": {
+  "pretrained": {
+   "auroc": null
+  },
+  "random": {
+   "auroc": null
+  }
+ },
+ "SR-p53": {
+  "pretrained": {
+   "auroc": null
+  },
+  "random": {
+   "auroc": null
+  }
+ }
+}

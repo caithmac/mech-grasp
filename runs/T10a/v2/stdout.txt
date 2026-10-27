@@ -1,0 +1,3 @@
+Figure saved to C:\Users\ss864\Desktop\mech-grasp\runs\T10a\v2\toxicity_performance.png
+Analysis complete. Results written to OUT/results.json
+Claim check NR-AR-LBD L6: GRASP=0.8202641571169528, A1=0.8304291861953415. A1 outperforms or equal.

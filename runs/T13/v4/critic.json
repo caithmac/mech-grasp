@@ -1,0 +1,25 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "**Coverage Failure**: The script crashed for **7 out of 8 features** (2610, 845, 1898, 1151, 1316, 710, 3867) due to a 'boolean index did not match indexed array' error. Only Feature 2804 produced results. The claim that the method works for ",
+  "chemistry features"
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Ablation removes ~13% downstream detection (L7=0.12).",
+   "status": "supported",
+   "reason": "Feature 2804 `concept_removed`=0.12 at L7 is present in JSON."
+  },
+  {
+   "claim": "Ablation effect far exceeds random edit.",
+   "status": "untested",
+   "reason": "`random` results are empty `{}` for Feature 2804 (and missing entirely for other features). Cannot compare magnitudes without valid baseline data."
+  },
+  {
+   "claim": "Steering induces signals without altering Crippen properties.",
+   "status": "supported",
+   "reason": "`steer_shift`=0.15 vs `crippen_delta`=-0.003 is present in JSON for Feature 2804."
+  }
+ ],
+ "rerun_instructions": "Fix the indexing bug causing crashes (boolean index mismatch) and ensure 'random' baseline metrics are written even if NaNs occur (do not skip writing keys). Re-run all features before accepting causal claims. Specifically: \n1. Fix `ed.atom[L][t_idx]` alignment to prevent boolean/index size errors.\n2. Modify the condition loop to write `{L: {'concept_removed': np.nan, ...}}` if valid_mask is empty, instead of skipping and leaving an empty dict.\n3. Re-run all 8 features."
+}

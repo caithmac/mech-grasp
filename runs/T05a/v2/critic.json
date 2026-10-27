@@ -1,0 +1,22 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Random baseline distances are near-zero (0.021/0.036) implying constant embeddings or numerical instability, invalidating correlation analysis for random model.",
+  "No seed variation reported; cannot assess statistical significance of distance gaps.",
+  "Claim 'structure beyond composition' conflates composition effect (A < B) with structure tracking (correlation).",
+  "Pair selection bias: A pairs truncated to first 500 without checking scaffold diversity."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained embeddings are sensitive to molecular structure beyond atom counts.",
+   "status": "unsupported",
+   "reason": "Evidence shows composition sensitivity (A < B), but pooled correlation mixes composition and structure effects. Need within-A analysis."
+  },
+  {
+   "claim": "Random embeddings do not capture structural information meaningfully.",
+   "status": "supported",
+   "reason": "Near-zero distances confirm lack of variance, but baseline behavior needs clarification."
+  }
+ ],
+ "rerun_instructions": "1. Verify random model baseline: ensure it outputs non-constant vectors (e.g., random weights) or explain constant output design.\n2. Add seed variation (e.g., 5 seeds) and report mean/std over seeds for all metrics.\n3. Compute Spearman correlation separately for A and B sets to isolate structure tracking from composition effects.\n4. Check scaffold diversity in truncated A pairs."
+}

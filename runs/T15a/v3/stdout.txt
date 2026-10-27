@@ -1,0 +1,12 @@
+
+=== T15a Summary ===
+aromatic: A2 Gain=79.99816971258454, A1 Gain=26.98434866842121
+ring_size: A2 Gain=2.499925330168161, A1 Gain=3.453645386290479
+hybridization: A2 Gain=486.74570756198136, A1 Gain=263.167523802
+conjugated: A2 Gain=47.153328597546256, A1 Gain=40.04070238936957
+crippen_logp_contrib: A2 Gain=2.794458611993672, A1 Gain=1.9443287286108275
+crippen_mr_contrib: A2 Gain=1.0500074102703525, A1 Gain=0.991875490533789
+has_O_neighbor: A2 Gain=5425.5951070290475, A1 Gain=3716.46539186904
+has_halogen_neighbor: A2 Gain=20471.074152351106, A1 Gain=5604.927830682711
+
+Figure t15a.png generated successfully.

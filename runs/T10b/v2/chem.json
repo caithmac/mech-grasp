@@ -1,0 +1,30 @@
+{
+ "summary": "No valid attribution metrics were computed for GRASP's toxicophore sensitivity due to initialization failure.",
+ "claims": [
+  {
+   "claim": "GRASP atom attribution weights could not be aggregated into performance metrics (AUROC, Hit Rate) because `FixedProbe` failed to initialize across all tested random seeds (`0`, `1`, `2`, `3`, `4`).",
+   "evidence": "\"seed 0\" through \"seed 4\" in Printed Output; \"auroc\":null in RESULTS.",
+   "kind": "shows",
+   "test": "Fix `FixedProbe.__init__()` to remove unsupported keyword 'random_state'. Prediction: AUROC should return float values (e.g., >0.5) instead of null for tasks like SR-p53.",
+   "prediction": "Non-null numeric metrics; Hit Rate correlates with toxicophore presence in positive molecules (`y01 == 1`)."
+  },
+  {
+   "claim": "There is no evidence that GRASP representations align with specific chemical toxicophores (e.g., nitroaromatic `[c,n][N+](=O)[O-]`, Michael acceptor `[CX3]=[CX3][CX3]=[OX1]`) for Tox21 tasks in this run.",
+   "evidence": "\"auroc\":null\" for all 4 tasks (SR-ARE, NR-AhR, SR-MMP, SR-p53).",
+   "kind": "shows",
+   "test": "Re-run with corrected probe. Prediction: If GRASP learns toxicophores, `hit_rate` on positive molecules should exceed chance (`toxicophore atoms / total atoms`).",
+   "prediction": "Hit Rate > Chance for SR-p53 if nitroaromatics drive toxicity; otherwise ~Chance."
+  },
+  {
+   "claim": "The failure prevents distinguishing between model-driven toxicophore detection and trivial size effects (atom counts) in the current output.",
+   "evidence": "\"n_atoms per molecule\" calculation exists but yields no attribution scores due to probe error.",
+   "kind": "suspects",
+   "test": "Compare `hit_rate` of pretrained vs random models after fixing initialization. Prediction: Pretrained hit rate > Random if model learns chemistry; ~equal if trivial features dominate.",
+   "prediction": "Pretrained Hit Rate significantly higher than Random (e.g., 0.6 vs 0.2) for toxicophore atoms."
+  }
+ ],
+ "trivial_explanations": [
+  "The null metrics are due to a software configuration error (`random_state` argument mismatch), not model chemistry.",
+  "Without valid attribution weights, claims about H\u00fcckel aromaticity or Crippen atom types contributing to toxicity cannot be substantiated."
+ ]
+}

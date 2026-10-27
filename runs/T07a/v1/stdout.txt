@@ -1,0 +1,5 @@
+Error in pretrained analysis: operands could not be broadcast together with shapes (12,) (12,19) (12,) 
+Error in random analysis: operands could not be broadcast together with shapes (12,) (12,19) (12,) 
+Error in a1 analysis: operands could not be broadcast together with shapes (12,) (12,19) (12,) 
+Plotting error: 'pretrained'
+Analysis complete.

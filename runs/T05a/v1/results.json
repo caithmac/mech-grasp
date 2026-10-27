@@ -1,0 +1,44 @@
+{
+ "pretrained": {
+  "A": {
+   "mean_distance": 0.33773094415664673,
+   "median_distance": 0.29520708322525024,
+   "mean_tanimoto": 0.1741453856229782,
+   "median_tanimoto": 0.1646314263343811,
+   "spearman_corr": 0.18614164714248943,
+   "n_pairs": 500
+  },
+  "B": {
+   "mean_distance": 0.48653748631477356,
+   "median_distance": 0.48605912923812866,
+   "mean_tanimoto": 0.12482787668704987,
+   "median_tanimoto": 0.12104561924934387,
+   "spearman_corr": 0.18582976840516277,
+   "n_pairs": 500
+  },
+  "combined_spearman_corr": 0.29418987147138814,
+  "n_A": 500,
+  "n_B": 500
+ },
+ "random": {
+  "A": {
+   "mean_distance": 0.33773094415664673,
+   "median_distance": 0.29520708322525024,
+   "mean_tanimoto": 0.1741453856229782,
+   "median_tanimoto": 0.1646314263343811,
+   "spearman_corr": 0.18614164714248943,
+   "n_pairs": 500
+  },
+  "B": {
+   "mean_distance": 0.48653748631477356,
+   "median_distance": 0.48605912923812866,
+   "mean_tanimoto": 0.12482787668704987,
+   "median_tanimoto": 0.12104561924934387,
+   "spearman_corr": 0.18582976840516277,
+   "n_pairs": 500
+  },
+  "combined_spearman_corr": 0.6379068534814637,
+  "n_A": 500,
+  "n_B": 500
+ }
+}

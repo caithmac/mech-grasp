@@ -1,0 +1,14 @@
+Loading data...
+Loaded 50000 molecules.
+Scaffold split groups: 33469
+
+Running probes...
+Target ro5_pass: Positive rate = 1.0000
+Target ro5_violations: Positive rate = 0.0166
+
+Running threshold test...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T04\v1\script.py", line 86, in <module>
+    X_test_enc = enc(X_test_smiles)
+                 ^^^^^^^^^^^^^^^^^^
+TypeError: 'GRASPEncoder' object is not callable

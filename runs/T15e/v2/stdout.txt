@@ -1,0 +1,4 @@
+Built 1000 molecules. Skipped 29.
+A1 Sanity Check: rel=4.47e-09, d_enant=1.13e-08 -> PASS
+Results written to OUT/results.json
+Done.

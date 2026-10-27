@@ -1,0 +1,37 @@
+{
+ "summary": "Interpretation of Head Ablation Results for Aromaticity and Crippen Atom Types",
+ "claims": [
+  {
+   "claim": "Layer 3 is the primary computational bottleneck for atomic logp contributions (Crippen types).",
+   "evidence": "Whole layer ablation at l=3 causes a R2 drop (`d_crip`) of **0.115**, which is significantly higher than any other layer (l=2: **0.097**; l=4/5: **-0.0** by construction). Individual heads in this layer, specifically `l3h3` (**0.011**) and `l3h5` (**0.009**), show the largest individual contributions to Crippen prediction accuracy.",
+   "kind": "shows",
+   "test": "SMARTS: `[Cl]`, `[Br]`. Prediction: On a test set enriched with halogens (high Crippen variance), ablating Layer 3 heads should reduce R2 by >0.1, whereas ablating Layer 4/5 heads will show negligible change (<0.001) due to readout timing constraints.",
+   "prediction": "R2 drop for L3 ablation on halogen-rich molecules: ~0.1; R2 drop for L4/L5 ablation: <0.001"
+  },
+  {
+   "claim": "Aromaticity information is distributed redundantly rather than localized in specific attention heads.",
+   "evidence": "The top head `l5h7` shows a maximum AUROC drop (`d_aro`) of **0.000283** (Printed Output), while the JSON rounds this to **-0.0**. This is negligible compared to the signal margin between Clean (**0.9996**) and Random Baseline (**0.945**), which is ~0.0546.",
+   "kind": "shows",
+   "test": "Label column: `is_ambiguous` (from `amb` mask). Prediction: On token-ambiguous atoms where input tokens fail, ablating any single head in Layer 5 will not reduce AUROC below **0.98**, as the drop is <1% of the available signal margin.",
+   "prediction": "AUROC on ambiguous subset after L5 ablation > 0.98"
+  },
+  {
+   "claim": "Crippen feature computation occurs before Layer 4, rendering Layers 4-5 heads irrelevant for this specific probe readout.",
+   "evidence": "Ablation of all heads in layers l=4 and l=5 results in `d_crip` values of **-0.0** (JSON). The Supervisor Hint confirms the Crippen probe reads Layer-4 output, meaning heads acting after or at that stage do not alter the representation used for this specific metric.",
+   "kind": "shows",
+   "test": "RDKit: Calculate atomic contributions using `CalcCrippenContributions`. Prediction: If we ablate L2/L3 heads (which show drops), R2 should drop significantly; if we only ablate L4/5, the probe reading Layer-4 output will remain unchanged regardless of downstream head activity.",
+   "prediction": "R2 remains >0.9 when ablating L4+L5 combined"
+  },
+  {
+   "claim": "Aromaticity computation relies on contextual information beyond input tokens for ambiguous atoms.",
+   "evidence": "The `amb` mask selects token-ambiguous atoms where the input token alone has an error of **0.113** (T12). Despite this, Clean AUROC is **0.9996**, indicating context must resolve ambiguity. However, head ablation effects (`d_aro`) are near-zero.",
+   "kind": "suspects",
+   "test": "SMARTS: `c1ccccc1` vs `[CH3]`. Prediction: Ablating Layer 2 heads (not fully tested here but implied by L3 importance) should show larger aromaticity drops than ablating Layer 5, suggesting early context integration.",
+   "prediction": "Layer 2 ablation AUROC drop > Layer 5 ablation AUROC drop"
+  }
+ ],
+ "trivial_explanations": [
+  "The lack of `d_crip` signal in layers 4 and 5 is a construction artifact: the probe reads layer-4 output, so ablating heads that process data *after* this point cannot affect the specific activation vector used for scoring.",
+  "Aromaticity head drops are small because the model achieves near-perfect AUROC (0.9996); even if information were lost in one head, residual connections or other heads maintain performance above the random baseline of 0.945."
+ ]
+}

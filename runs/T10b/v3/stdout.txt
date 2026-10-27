@@ -1,0 +1,2 @@
+Analysis complete. Results written to OUT/results.json
+Script finished successfully.

@@ -1,0 +1,8 @@
+Results written to OUT/results.json
+Figure saved to OUT/order_by_layer.png
+
+Summary:
+Layer 3 retrieval rate (pretrained): 0.9720
+Layer 6 retrieval rate (pretrained): 0.9720
+Layer 9 retrieval rate (pretrained): 0.9767
+Layer 12 retrieval rate (pretrained): 0.6393

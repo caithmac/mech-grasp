@@ -1,0 +1,6 @@
+Loading datasets...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T06\v1\script.py", line 24, in <module>
+    scaf_subset = data.get_scaffolds("atoms")[indices]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+TypeError: only integer scalar arrays can be converted to a scalar index

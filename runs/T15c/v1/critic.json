@@ -1,0 +1,28 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Critical Metric Bug: Random Init SAE reports FVU = 0.0. A sparse autoencoder with random weights on non-trivial data cannot achieve zero reconstruction error unless the metric calculation is broken (e.g., division by variance where denominator is near-zero, or comparing identical tensors). This invalidates the baseline comparison.",
+  "Training Inconsistency: Pretrained A2 reports `dead_frac` = 0.0 (all 4096 latents alive), while Random Init reports `dead_frac` = 0.523 (~half dead). With identical k=32 constraints and similar data sizes, this divergence suggests either different convergence criteria were applied or one model failed to train properly but reported stats anyway.",
+  "Input Leakage vs Learning: A2 inputs explicitly contain bond types/hybridization (per task description). The script classifies latents as 'context_chemistry' if they correlate with these labels. Since the input *is* this information, high AUROC likely reflects preservation of input features rather than inferred context-chemistry. The classification logic does not control for token identity leakage sufficiently.",
+  "Overfitting/Noise: A2 FVU (0.145) is nearly double Reference GRASP (0.075), yet it claims to have 'more' latents (178 vs 93). Higher error + higher count suggests the model fits noise or redundant features, not necessarily better semantic encoding.",
+  "Perfect AUROC: Multiple top entries report exactly AUROC = 1.0 (e.g., hybridization_SP on Latent 170). In real datasets with float labels and activation scores, exact 1.0 is statistically improbable without label leakage or perfect token-concept alignment in the subset."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained A2 learns ~1.9x more context-chemistry latents than T08b Reference GRASP model.",
+   "status": "untested",
+   "reason": "Comparison relies on counts (178 vs 93) but ignores FVU degradation (A2 is worse at reconstruction). Higher count with higher error suggests overfitting or inefficient encoding, not necessarily 'better' features."
+  },
+  {
+   "claim": "Explicit bond inputs do not eliminate internal encoding of hybridization/aromaticity.",
+   "status": "untested",
+   "reason": "Since A2 *inputs* contain this info, the SAE can trivially preserve it. The script does not test if latents encode features *beyond* what is in `A.atom[6]`. Classification logic conflates input preservation with learned context."
+  },
+  {
+   "claim": "Random initialization fails to capture chemical structure.",
+   "status": "untested",
+   "reason": "FVU=0.0 for Random Init indicates a broken metric or training failure, not 'failure to capture'. Additionally, `top_context` shows AUROC=1.0 on random latents too (e.g., hybridization_SP2), suggesting the metric picks up token correlations even in baseline."
+  }
+ ],
+ "rerun_instructions": "Fix FVU calculation for Random Init SAE immediately; verify it is not returning zero due to division by variance or identity mapping. Re-run training with consistent convergence checks and log dead fraction per epoch to explain the A2 (0%) vs Random (52%) discrepancy. For classification, add a control where concept labels are shuffled within token subsets to establish baseline AUROC for 'token' latents; if 178 passes this threshold, it's likely noise/leakage."
+}

@@ -1,0 +1,27 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "CRITICAL: Missing control comparisons required by task spec - no random-init baseline, token/bag/size baselines present in results.json or script. Cannot establish noise floor for d_aro/d_crip values.",
+  "PRECISION ISSUE: JSON shows top_aro scores as exactly '0.0' but printed output says drop=0.0003 - rounding artifact obscures actual signal magnitude",
+  "LAYER INDEXING CONFUSION: Supervisor hint states d_crip should be zero for layers \u22654 by construction, yet l2/l3 show non-zero drops (l2 max: 0.097, l3 max: 0.115). Either probe reads earlier layer outputs than claimed or indexing mismatch exists.",
+  "REDACTED FOR BREVITY"
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Crippen logP contributions localized to Layer 3",
+   "status": "supported",
+   "reason": "l3h3 shows d_crip=0.011, highest among individual heads; whole-layer l2/l3 show largest drops (0.097/0.115). However missing baseline comparisons prevents statistical validation."
+  },
+  {
+   "claim": "Aromaticity highly redundant across heads",
+   "status": "supported",
+   "reason": "Individual d_aro mostly <0.005 while whole-layer ablations show larger effects (l3: 0.001, l5: 0.001). Signal appears distributed rather than concentrated."
+  },
+  {
+   "claim": "Layers 4-5 Crippen results are artifacts of probe reading layer-4 output",
+   "status": "supported",
+   "reason": "l4/l5 d_crip values show -0.0 as expected per supervisor hints, confirming design constraint."
+  }
+ ],
+ "rerun_instructions": "1) Add random-init baseline: fit probes on model with weights randomly initialized (same architecture), run same ablation protocol; compare noise floor to observed drops.\n2) Add token/bag/size baselines: test whether d_crip/d_aro exceeds what's achievable by simple feature substitution or size-matched controls.\n3) Fix precision display: ensure top_aro scores show actual values (0.0003 not 0.0), use consistent decimal formatting in JSON output.\n4) Clarify probe layer indexing: explicitly document which activation layer the Crippen probe reads from; verify l2/l3 non-zero drops are expected or indicate bug."
+}

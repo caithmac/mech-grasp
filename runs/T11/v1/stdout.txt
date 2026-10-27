@@ -1,0 +1,6 @@
+Results summary:
+mean6 / pretrained: [{'auroc': 0.9974}, {'auroc': 0.9902}, {'auroc': 0.9985}, {'auroc': 0.9979}, {'auroc': 0.9949, 'ro5_mw': {'cos': -0.6082}, 'ro5_logp': {'cos': -0.3163}, 'ro5_hbd': {'cos': -0.2485}, 'ro5_hba': {'cos': -0.4864}, 'reconstruction_r2': {'r2': 0.5333}}]
+mean6 / random: [{'auroc': 0.9989}, {'auroc': 0.9894}, {'auroc': 0.9998}, {'auroc': 0.9993}, {'auroc': 0.9953}]
+cls12 / pretrained: ['skipped', 'skipped', 'skipped', 'skipped', 'skipped']
+cls12 / random: ['skipped', 'skipped', 'skipped', 'skipped', 'skipped']
+Done.

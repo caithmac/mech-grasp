@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T09\v3\script.py", line 137, in <module>
+    key = (degrees[mask_m][local_idx], num_hs[mask_m][local_idx], in_rings[mask_m][local_idx]) 
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^
+IndexError: index 25 is out of bounds for axis 0 with size 25

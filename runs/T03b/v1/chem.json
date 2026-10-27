@@ -1,0 +1,23 @@
+{
+ "summary": "CRITICAL DATA QUALITY ISSUE - NO INTERPRETATION POSSIBLE",
+ "claims": [
+  {
+   "claim": "All GRASP probe results failed to compute due to API error",
+   "evidence": "Every target in results.json shows 'probe_mols() got an unexpected keyword argument size'",
+   "kind": "shows",
+   "test": "Check probe_mols() signature; verify size parameter is not required",
+   "prediction": "If fixed, we should see numeric grasp_best values for each target/pool combination"
+  },
+  {
+   "claim": "Positive rates are dataset prevalence only, not model interpretability results",
+   "evidence": "positive_rates: {'pains_alert_rate': 0.035, 'brenk_alert_rate': 0.274}",
+   "kind": "shows",
+   "test": "Compare these rates to RDKit MolFromSmiles().HasSubstructMatch() with PAINS/BRENK patterns",
+   "prediction": "If molecules are from a standard drug-like set, pains_alert ~3-5%, brenk_alert ~20-30% is plausible"
+  }
+ ],
+ "trivial_explanations": [
+  "The 'size' parameter error suggests the probe_mols() function signature changed between T03a and T03b",
+  "All summary metrics are N/A because no actual GRASP representations were computed"
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "summary": "Feature 2804 (`has_O_neighbor`) shows causal encoding in Layer 6 SAE latents, but its contribution to global lipophilicity (logP) is negligible compared to local structural signaling.",
+ "claims": [
+  {
+   "claim": "The model uses latent direction 2804 specifically for the `has_O_neighbor` concept rather than a generic 'oxygen' signal; ablating this single latent removes ~13% of downstream detection, whereas ablating its sparse coding family (directions 2804+3314) only removes ~3%.",
+   "evidence": "Feature 2804 `concept_removed` at L7 = 0.12 vs `ablate_fam` = 0.033.",
+   "kind": "shows",
+   "test": "SMARTS: `[C]-[O]`. Masking this bond in input SMILES should reduce Layer-6 activation of latent 2804 by >95% (matching AUROC=0.97) and downstream concept score by ~12%. If the model uses a generic 'oxygen' feature, ablating any oxygen-latent would yield similar `concept_removed` values.",
+   "prediction": "Ablation of latent 2804 alone yields higher `concept_removed` than ablation of family members (e.g. direction 3314) for the same input set."
+  },
+  {
+   "claim": "Information about O-neighbors persists downstream but decays significantly from Layer 7 to Layer 12, suggesting partial redundancy or self-repair mechanisms in the residual stream.",
+   "evidence": "`concept_removed` drops from 0.12 (L7) -> 0.091 (L8) -> 0.065 (L10) -> 0.047 (L12).",
+   "kind": "shows",
+   "test": "Compare `gap[L]` values across layers for a control feature that does not decay (e.g., atom count). If this is self-repair, the gap should remain constant while concept_removed shrinks.",
+   "prediction": "If no repair occurs, ablation effect at L12 would be comparable to L7. The observed 60% drop indicates downstream layers partially compensate for missing Layer-6 signals."
+  },
+  {
+   "claim": "Steering latent 2804 can induce `has_O_neighbor` signals in atoms lacking oxygen neighbors without altering their physical Crippen properties, proving the feature is a representational 'switch' rather than a property encoder.",
+   "evidence": "`steer_shift`=0.15 at L7 vs `crippen_delta`=-0.003; `steer_rand`=0.001.",
+   "kind": "shows",
+   "test": "SMARTS: `[C]`. Add steering vector to all carbons in a hydrocarbon (e.g., n-octane). RDKit Crippen logP contribution for these atoms should remain unchanged, but the model's internal concept probe score must increase by ~0.15.",
+   "prediction": "Physical property probes (RDKit) will show 0 change; Model feature probes will show +0.1 shift."
+  },
+  {
+   "claim": "Removal of `has_O_neighbor` signals has negligible impact on predicted molecule logP, indicating this latent is not a bottleneck for global lipophilicity estimation.",
+   "evidence": "`dlogp`= -0.005 at L8 (expected sign +1); Sign_agree=0.412; magnitude < 0.01 units vs typical OH effect ~1-2 logP units.",
+   "kind": "suspects",
+   "test": "Compare `dlogp` of this ablation to a known physicochemical perturbation (e.g., removing an explicit O atom from SMILES). The latter should shift clogP by >0.5, whereas latent removal shifts <0.01.",
+   "prediction": "Latent 2804 encodes local context for reactivity or H-bonding potential rather than bulk lipophilicity; global logP readout relies on aggregated atom types (e.g., explicit O counts) not this specific neighbor-context signal."
+  }
+ ],
+ "trivial_explanations": [
+  "The high AUROC (0.97) could reflect trivial input tokenization of oxygen atoms, but the specificity test (single latent vs family ablation) rules out a simple 'atom count' feature.",
+  "Small `crippen_delta` values (-0.001 to +0.013) during steering suggest Crippen contributions are computed from static atom types in RDKit probes, not dynamic model activations."
+ ]
+}

@@ -1,0 +1,33 @@
+Figure generation failed: 4
+
+=== T14b Summary ===
+pretrained / crippen: LinDrop=4.4580, MLPDrop=10.2948
+   -> Linear: Best@4, Layer12 Error=nan
+pretrained / mr: LinDrop=6.9972, MLPDrop=13.3494
+   -> Linear: Best@4, Layer12 Error=nan
+pretrained / aromatic: LinDrop=15.1248, MLPDrop=13.1457
+   -> Linear: Best@6, Layer12 Error=nan
+pretrained / ring5: LinDrop=2.3620, MLPDrop=5.9799
+   -> Linear: Best@6, Layer12 Error=nan
+pretrained / o_neighbor: LinDrop=430.8205, MLPDrop=799.2462
+   -> Linear: Best@4, Layer12 Error=nan
+a1_step1 / crippen: LinDrop=1.8288, MLPDrop=5.8247
+   -> Linear: Best@4, Layer12 Error=nan
+a1_step1 / mr: LinDrop=4.0718, MLPDrop=13.0002
+   -> Linear: Best@4, Layer12 Error=nan
+a1_step1 / aromatic: LinDrop=10.0819, MLPDrop=16.2283
+   -> Linear: Best@4, Layer12 Error=nan
+a1_step1 / ring5: LinDrop=2.0100, MLPDrop=5.9447
+   -> Linear: Best@4, Layer12 Error=nan
+a1_step1 / o_neighbor: LinDrop=83.1105, MLPDrop=571.3500
+   -> Linear: Best@4, Layer12 Error=nan
+random / crippen: LinDrop=1.0629, MLPDrop=1.0000
+   -> Linear: Best@4, Layer12 Error=nan
+random / mr: LinDrop=1.2577, MLPDrop=1.0000
+   -> Linear: Best@4, Layer12 Error=nan
+random / aromatic: LinDrop=1.0135, MLPDrop=1.0000
+   -> Linear: Best@6, Layer12 Error=nan
+random / ring5: LinDrop=1.0108, MLPDrop=1.0001
+   -> Linear: Best@4, Layer12 Error=nan
+random / o_neighbor: LinDrop=1.0104, MLPDrop=1.0000
+   -> Linear: Best@8, Layer12 Error=nan

@@ -1,0 +1,14 @@
+Kept 300 pairs.
+Token match fraction: 1.0
+Summary:
+Pairs: 300
+Token Match Fraction: 1.0000
+AUROC (pretrained_cls_12): 0.7687 ± 0.0229
+AUROC (random_cls_12): 0.5667 ± 0.0363
+AUROC (a1_cls_12): 0.8268 ± 0.0269
+AUROC (bag_of_tokens): 0.5000 ± 0.0000
+AUROC (pretrained_mean_6): 0.7861 ± 0.0336
+AUROC (random_mean_6): 0.5809 ± 0.0262
+AUROC (pretrained_cls_6): 0.7345 ± 0.0492
+AUROC (random_cls_6): 0.5693 ± 0.0339
+AUROC (a1_mean_6): 0.8066 ± 0.0134

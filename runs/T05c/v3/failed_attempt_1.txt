@@ -1,0 +1,12 @@
+Kept 300 pairs.
+Token match fraction: 1.0
+Summary:
+Pairs: 300
+Token Match Fraction: 1.0000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05c\v3\script.py", line 389, in <module>
+    main()
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05c\v3\script.py", line 386, in main
+    print(f"AUROC ({feat}): {scores['mean']:.4f} ± {scores['std']:.4f}")
+                             ~~~~~~^^^^^^^^
+TypeError: tuple indices must be integers or slices, not str

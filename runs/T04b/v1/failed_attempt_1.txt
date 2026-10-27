@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T04b\v1\script.py", line 168
+    X_feat_T = np.stack([coef_vectors[k] for k in ["ro5_mw", "ro5_logp", "ro5_hbd", "ro5_hba"]] if all(k in coef_vectors else [])).T 
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: expected 'else' after 'if' expression

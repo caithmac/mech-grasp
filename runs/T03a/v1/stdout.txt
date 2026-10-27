@@ -1,0 +1,49 @@
+Loading molecule-level data...
+Running probes for 6 targets...
+Saving results.json...
+Creating grouped bar plot...
+Figure saved to OUT/probe_comparison.png
+
+=== SUMMARY ===
+
+logp:
+  Size R²: 0.1888
+  Best GRASP Layer: 6 (R²=0.8810)
+  Random Init at best layer: 0.8760
+  Layer 12 GRASP R²: 0.8534
+  Residualized Best R²: 0.8562
+
+tpsa:
+  Size R²: 0.2114
+  Best GRASP Layer: 4 (R²=0.9131)
+  Random Init at best layer: 0.9744
+  Layer 12 GRASP R²: 0.7651
+  Residualized Best R²: 0.8924
+
+qed:
+  Size R²: 0.2748
+  Best GRASP Layer: 6 (R²=0.6667)
+  Random Init at best layer: 0.6701
+  Layer 12 GRASP R²: 0.5481
+  Residualized Best R²: 0.5462
+
+sa_score:
+  Size R²: 0.0346
+  Best GRASP Layer: 6 (R²=0.8922)
+  Random Init at best layer: 0.9020
+  Layer 12 GRASP R²: 0.8071
+  Residualized Best R²: 0.8855
+
+fsp3:
+  Size R²: 0.0954
+  Best GRASP Layer: 6 (R²=0.9602)
+  Random Init at best layer: 0.9965
+  Layer 12 GRASP R²: 0.8182
+  Residualized Best R²: 0.9534
+
+mw:
+  Size R²: 1.0000
+  Best GRASP Layer: 4 (R²=0.9941)
+  Random Init at best layer: 0.9942
+  Layer 12 GRASP R²: 0.8556
+  Residualized Best R²: 0.9249

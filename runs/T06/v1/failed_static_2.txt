@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:312:29: undefined name 'rdMolDescriptors'

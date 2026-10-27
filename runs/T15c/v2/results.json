@@ -1,0 +1,367 @@
+{
+ "a2": {
+  "stats": {
+   "fvu": 0.14481217323881088,
+   "l0": 32.0,
+   "dead_frac": 0.0,
+   "n_alive": 4096
+  },
+  "counts": {
+   "context_chemistry": 178,
+   "token": 1753,
+   "mixed": 2165
+  },
+  "families": {
+   "functional_group": 50,
+   "bond_derived": 84,
+   "neighbour": 21,
+   "ring": 23
+  },
+  "top_context": [
+   {
+    "latent": 170,
+    "tok": "C",
+    "element": "C",
+    "concept": "hybridization_SP",
+    "within_auroc": 1.0,
+    "n_fire": 325,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 357,
+    "tok": "N",
+    "element": "N",
+    "concept": "has_O_neighbor",
+    "within_auroc": 1.0,
+    "n_fire": 407,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2773,
+    "tok": "N",
+    "element": "N",
+    "concept": "fg_aniline_N",
+    "within_auroc": 1.0,
+    "n_fire": 361,
+    "family": "functional_group"
+   },
+   {
+    "latent": 459,
+    "tok": "N",
+    "element": "N",
+    "concept": "fg_nitrile",
+    "within_auroc": 0.9997574581615329,
+    "n_fire": 317,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1182,
+    "tok": "O",
+    "element": "O",
+    "concept": "fg_ether",
+    "within_auroc": 0.9997444416049068,
+    "n_fire": 859,
+    "family": "functional_group"
+   },
+   {
+    "latent": 193,
+    "tok": "N",
+    "element": "N",
+    "concept": "fg_nitrile",
+    "within_auroc": 0.9997207093981288,
+    "n_fire": 403,
+    "family": "functional_group"
+   },
+   {
+    "latent": 483,
+    "tok": "S",
+    "element": "S",
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9957552175451009,
+    "n_fire": 659,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2891,
+    "tok": "O",
+    "element": "O",
+    "concept": "hybridization_SP3",
+    "within_auroc": 0.990618159074325,
+    "n_fire": 534,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 446,
+    "tok": "O",
+    "element": "O",
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9900315329061132,
+    "n_fire": 499,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1834,
+    "tok": "N",
+    "element": "N",
+    "concept": "conjugated",
+    "within_auroc": 0.988562091503268,
+    "n_fire": 537,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 1304,
+    "tok": "O",
+    "element": "O",
+    "concept": "fg_ether",
+    "within_auroc": 0.9884032114183766,
+    "n_fire": 1172,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3853,
+    "tok": "O",
+    "element": "O",
+    "concept": "fg_ether",
+    "within_auroc": 0.9867947178871548,
+    "n_fire": 511,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2716,
+    "tok": "C",
+    "element": "C",
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9842760803743463,
+    "n_fire": 397,
+    "family": "functional_group"
+   },
+   {
+    "latent": 262,
+    "tok": "C",
+    "element": "C",
+    "concept": "min_ring_size_4",
+    "within_auroc": 0.9833762121511973,
+    "n_fire": 242,
+    "family": "ring"
+   },
+   {
+    "latent": 596,
+    "tok": "S",
+    "element": "S",
+    "concept": "hybridization_SP3",
+    "within_auroc": 0.983121113414273,
+    "n_fire": 507,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 1943,
+    "tok": "N",
+    "element": "N",
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.981049047634343,
+    "n_fire": 513,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3318,
+    "tok": "C",
+    "element": "C",
+    "concept": "fg_ester",
+    "within_auroc": 0.9802636337335455,
+    "n_fire": 1054,
+    "family": "functional_group"
+   },
+   {
+    "latent": 879,
+    "tok": "O",
+    "element": "O",
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9777049664958611,
+    "n_fire": 781,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1410,
+    "tok": "N",
+    "element": "N",
+    "concept": "fg_nitro",
+    "within_auroc": 0.9758860065765437,
+    "n_fire": 823,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3168,
+    "tok": "C",
+    "element": "C",
+    "concept": "min_ring_size_4",
+    "within_auroc": 0.9758333333333333,
+    "n_fire": 653,
+    "family": "ring"
+   },
+   {
+    "latent": 3438,
+    "tok": "O",
+    "element": "O",
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.975642470089597,
+    "n_fire": 669,
+    "family": "functional_group"
+   },
+   {
+    "latent": 122,
+    "tok": "C",
+    "element": "C",
+    "concept": "min_ring_size_3",
+    "within_auroc": 0.9746326264880952,
+    "n_fire": 480,
+    "family": "ring"
+   },
+   {
+    "latent": 703,
+    "tok": "O",
+    "element": "O",
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9744481163251817,
+    "n_fire": 770,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2812,
+    "tok": "O",
+    "element": "O",
+    "concept": "aromatic",
+    "within_auroc": 0.9737313432835821,
+    "n_fire": 296,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 1586,
+    "tok": "O",
+    "element": "O",
+    "concept": "aromatic",
+    "within_auroc": 0.9727319062181448,
+    "n_fire": 399,
+    "family": "bond_derived"
+   }
+  ]
+ },
+ "a2_random": {
+  "stats": {
+   "fvu": 0.0001392305393025078,
+   "l0": 32.0,
+   "dead_frac": 0.523193359375,
+   "n_alive": 1953
+  },
+  "counts": {
+   "context_chemistry": 11,
+   "token": 1062,
+   "mixed": 535
+  },
+  "families": {
+   "functional_group": 3,
+   "bond_derived": 6,
+   "neighbour": 2
+  },
+  "top_context": [
+   {
+    "latent": 3354,
+    "tok": "N",
+    "element": "N",
+    "concept": "hybridization_SP2",
+    "within_auroc": 0.9996501909598581,
+    "n_fire": 3168,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 3310,
+    "tok": "N",
+    "element": "N",
+    "concept": "fg_nitrile",
+    "within_auroc": 0.9994824909435915,
+    "n_fire": 404,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3975,
+    "tok": "N",
+    "element": "N",
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9993540051679586,
+    "n_fire": 192,
+    "family": "neighbour"
+   },
+   {
+    "latent": 676,
+    "tok": "N",
+    "element": "N",
+    "concept": "hybridization_SP2",
+    "within_auroc": 0.998348920526977,
+    "n_fire": 3552,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 897,
+    "tok": "N",
+    "element": "N",
+    "concept": "hybridization_SP3",
+    "within_auroc": 0.994989026818049,
+    "n_fire": 2409,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 2477,
+    "tok": "N",
+    "element": "N",
+    "concept": "fg_nitrile",
+    "within_auroc": 0.9941348973607038,
+    "n_fire": 228,
+    "family": "functional_group"
+   },
+   {
+    "latent": 178,
+    "tok": "N",
+    "element": "N",
+    "concept": "fg_nitrile",
+    "within_auroc": 0.9476398380156922,
+    "n_fire": 657,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3040,
+    "tok": "C",
+    "element": "C",
+    "concept": "hybridization_SP3",
+    "within_auroc": 0.9200819672131146,
+    "n_fire": 744,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 2984,
+    "tok": "C",
+    "element": "C",
+    "concept": "has_halogen_neighbor",
+    "within_auroc": 0.9118865030674846,
+    "n_fire": 523,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1082,
+    "tok": "C",
+    "element": "C",
+    "concept": "hybridization_SP2",
+    "within_auroc": 0.9051928243171941,
+    "n_fire": 21879,
+    "family": "bond_derived"
+   },
+   {
+    "latent": 3943,
+    "tok": "C",
+    "element": "C",
+    "concept": "hybridization_SP3",
+    "within_auroc": 0.9027204502814259,
+    "n_fire": 647,
+    "family": "bond_derived"
+   }
+  ]
+ }
+}

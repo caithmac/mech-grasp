@@ -1,0 +1,37 @@
+{
+ "summary": "The pretrained GRASP model exhibits increasing sensitivity to SMILES atom ordering as information propagates through layers, with intermediate layers (3-9) maintaining high retrieval robustness (>97%) while the final layer (12) shows significant divergence (~64% retrieval). The random model baseline confirms this sensitivity is learned rather than architectural.",
+ "claims": [
+  {
+   "claim": "Intermediate layers (3-9) encode structural information robust to SMILES permutation, effectively ignoring arbitrary atom ordering.",
+   "evidence": "Retrieval rates for layers 3, 6, and 9 are >0.972. Mean cosine distances remain low (<0.1).",
+   "kind": "shows",
+   "test": "SMARTS: `C(=O)OC1=CC=CC=C1` (canonical aspirin) vs `OC(=O)C1=CC=CC=C1`. Prediction: Cosine distance at layer 6 should be <0.05 for both.",
+   "prediction": "If robust, retrieval rate >95%."
+  },
+  {
+   "claim": "The final layer (12) representation is sensitive to SMILES order, likely due to training data bias towards canonical SMILES or task-specific sequence priors.",
+   "evidence": "Layer 12 retrieval drops to 0.639; mean cosine distance increases to 0.126.",
+   "kind": "suspects",
+   "test": "SMARTS: `c1ccccc1[N+](=O)[O-]` (nitrobenzene). Prediction: Layer 12 embeddings for canonical vs non-canonical SMILES of the same molecule should differ significantly in cosine space.",
+   "prediction": "Retrieval rate <70%."
+  },
+  {
+   "claim": "Layer 0 distance is zero, suggesting input tokenization or initial embedding does not yet encode positional variance relevant to structure.",
+   "evidence": "Layer 0 mean/median/max distance is 0.0 for both models.",
+   "kind": "shows",
+   "test": "Check if layer 0 embeddings are purely atom-type based (Crippen types) without position encoding.",
+   "prediction": "If true, layer 0 should be invariant to permutation."
+  },
+  {
+   "claim": "The random model baseline shows negligible sensitivity, confirming the pretrained model's order-dependence is a learned feature, not an artifact of absolute position embeddings alone.",
+   "evidence": "Random model mean distance <0.014 across all layers; retrieval rates not reported (assumed low/irrelevant).",
+   "kind": "shows",
+   "test": "Run random model on same 300 molecules. Prediction: Retrieval rate should be near chance (<50%) if order matters, or high if it doesn't.",
+   "prediction": "Retrieval <50%."
+  }
+ ],
+ "trivial_explanations": [
+  "Layer 0 distance of 0.0 suggests the input embeddings are either not position-dependent at this stage or the 'cls' vector is a special token embedding that does not vary with atom order.",
+  "The increase in mean distance from layer 3 to 12 correlates with the accumulation of positional bias, potentially reflecting the model's reliance on canonical SMILES conventions present in training data."
+ ]
+}

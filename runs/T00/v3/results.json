@@ -1,0 +1,54 @@
+{
+ "smiles_invariance": {
+  "max_cosine_distance": 0.0,
+  "mean_cosine_distance": 0.0,
+  "count": 0
+ },
+ "stereo_blindness": {
+  "mean_cosine_distance": 1.3245476616753471e-08,
+  "max_cosine_distance": 5.960464477539063e-08,
+  "count": 9
+ },
+ "pretrained_vs_random": {
+  "mean_cosine_similarity": 1.0389094102382659,
+  "norms_pretrained": [
+   22.625,
+   16.9375,
+   12.171875,
+   16.078125,
+   20.703125,
+   25.265625,
+   28.65625,
+   29.8125,
+   33.375,
+   34.15625,
+   33.4375,
+   30.15625,
+   44.0
+  ],
+  "norms_random": [
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   138.75,
+   138.875,
+   137.875,
+   137.375,
+   Infinity,
+   137.375,
+   Infinity,
+   Infinity
+  ]
+ },
+ "token_check": {
+  "tokens_mixing_aromatic_nonaromatic": 9,
+  "total_unique_tokens": 57,
+  "fraction_atoms_carrying_mixed_tokens": 0.48648852819926186
+ },
+ "cls_effective_rank": {
+  "pretrained": 9.892519208614017,
+  "random": 5.806001142576117
+ }
+}

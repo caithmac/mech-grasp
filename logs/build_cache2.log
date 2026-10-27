@@ -1,0 +1,18 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+atoms/a1 done 21s E:11.2GB C:13.1GB
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Fetching 3 files: 100%|##########| 3/3 [00:00<00:00, 1497.25it/s]
+atoms/a1_step1 done 37s E:11.2GB C:12.0GB
+atoms/a1_random done 55s E:11.2GB C:10.9GB
+mols/a1 done 230s E:10.1GB C:10.9GB
+mols/a1_step1 done 430s E:10.1GB C:9.8GB
+tox21/pretrained done 481s E:8.4GB C:9.8GB
+tox21/random done 533s E:8.4GB C:8.2GB
+tox21/a1 done 582s E:6.7GB C:8.2GB
+clintox/pretrained done 592s E:6.7GB C:7.7GB
+clintox/random done 601s E:6.7GB C:7.3GB
+clintox/a1 done 611s E:6.7GB C:6.9GB
+tox21 labels done 659s
+clintox labels done 671s
+sae acts L6 pretrained (1157595, 768) 825s E:6.7GB C:5.0GB
+sae acts L6 a1 (1157595, 768) 973s E:4.9GB C:5.0GB
+ALL DONE

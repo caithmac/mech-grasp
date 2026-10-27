@@ -1,0 +1,44 @@
+{
+ "summary": "A1 ignores stereochemistry; A2 encodes it locally with rapid decay in atom embeddings; LogP probe metrics are pipeline artifacts.",
+ "claims": [
+  {
+   "claim": "GRASP-A1 vectors for enantiomers are bit-identical (distance = 0.0), confirming the model lacks stereochemical input or ignores chiral tags.",
+   "evidence": "\"a1\":{\"rel\":{...,\"enant\":{\"cls\":0.0}}}",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H]([CH3])([Cl])[NH2]` (chiral center). Prediction: `||v_orig - v_enant|| < 1e-5`. If true, A1 is stereo-blind.",
+   "prediction": "Vector difference should be exactly zero for all molecules with chiral centers. Any non-zero value implies data leakage or embedding noise >0."
+  },
+  {
+   "claim": "GRASP-A2 encodes stereochemistry in latent space (distance = 0.003) but maintains high similarity between enantiomers, consistent with achiral property symmetry.",
+   "evidence": "\"a2\":{\"rel\":{...,\"enant\":{\"cls\":0.003}}}",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H]([CH3])([Cl])[NH2]`. Prediction: `||v_orig - v_enant|| > 1e-5` for A2, but < 0.01 relative norm.",
+   "prediction": "A2 vectors must differ (non-zero distance) to reflect R/S flip in embeddings, yet remain close (<0.01 rel dist) compared to random noise."
+  },
+  {
+   "claim": "Stereochemical signal is highly localized at Layer 0 and attenuates rapidly through the graph layers.",
+   "evidence": "\"spread_a2\":{\"0\":{\"0\":0.124,\"1\":0.0...},\"6\":{\"0\":0.004,...}}",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H]([CH3])([Cl])[NH2]`. Prediction: Atom embedding distance at stereocentre (Bin 0) > neighbors (Bins 1-4+) in early layers.",
+   "prediction": "Layer 0 Bin 0 should be ~5x higher than Layer 6 Bin 0. Signal spreads to Bins 1+ by L=2 but decays."
+  },
+  {
+   "claim": "LogP probe deltas (d_enant = 2.26) are artifacts of data pipeline mismatch, not chemical property differences.",
+   "evidence": "\"a2\":{\"logp_probe\":{...,\"d_rand\":2.259}}; Printed: \"A2 Random Permutation Noise Floor: 2.258665\"",
+   "kind": "suspects",
+   "test": "SMARTS: `[C@H]([CH3])([Cl])[NH2]`. Prediction: `d_rand` must be ~0 for identical inputs.",
+   "prediction": "If vectors are truly identical (rand perm), d_enant/d_diast should match d_rand. Current values indicate index misalignment in probe evaluation."
+  },
+  {
+   "claim": "A2 does not strongly separate diastereomers from enantiomers in CLS token space relative to A1's baseline.",
+   "evidence": "\"a2\":{\"rel\":{...,\"ratio\":{\"cls\":1.065}}}",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H]([CH3])([Cl])[NH2]`. Prediction: `dist(diast) / dist(enant)` should be > 1 for chemically distinct diastereomers.",
+   "prediction": "If A2 captures stereochemistry well, Diast distance >> Enant distance. Ratio ~1 suggests similar vector perturbation magnitude."
+  }
+ ],
+ "trivial_explanations": [
+  "The LogP probe `d_rand` = 2.26 for identical inputs is a pipeline bug (Supervisor Hint), not model behavior.",
+  "`n_meso_skipped`=32 molecules were symmetric; their enantiomer distance would be zero by definition, excluded from stats."
+ ]
+}

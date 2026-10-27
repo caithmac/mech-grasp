@@ -1,0 +1,9 @@
+Loading data...
+Processing molecules for stereochemistry analysis...
+Total kept (non-meso): 2968, Meso skipped: 266, With Diast (>=2 centers in kept set): 1149
+Processing a2...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15b\v1\script.py", line 269, in <module>
+    c_orig = cls_orig_layers[L].astype(np.float32)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'astype'

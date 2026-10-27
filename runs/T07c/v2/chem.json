@@ -1,0 +1,30 @@
+{
+ "summary": "Interpretation of GRASP Head Ablation Results for Aromaticity and Crippen LogP Contributions",
+ "claims": [
+  {
+   "claim": "Crippen logP contributions for carbon atoms are localized to Layer 3 attention heads rather than distributed across the network.",
+   "evidence": "Individual head ablation in layer 3 causes R2 drops up to `d_crip = 0.011` (head l3h3), whereas layers 4 and 5 show `-0.0` drop by construction, and earlier layers show <0.006.",
+   "kind": "shows",
+   "test": "RDKit SMARTS `[C]` on carbon atoms; predict that ablating head `l3h3` yields a larger R2 degradation (~1%) compared to ablating heads in layer 4 or 5 (which should yield ~0%).",
+   "prediction": "R2 drop for l3h3 > R2 drop for l4hX."
+  },
+  {
+   "claim": "Aromaticity information is highly redundant across attention heads; no single head accounts for a unique aromatic signal.",
+   "evidence": "Individual `d_aro` values are predominantly `-0.0` or `0.0`. Whole-layer ablation only increases error from 0.00044 to ~0.0018 (Layer 3/5), implying the feature is distributed across all heads.",
+   "kind": "shows",
+   "test": "Compare single-head vs whole-layer ablation AUROC drops; prediction: Single head drop should be negligible (<0.001) while whole layer drop shows ~2x error increase, confirming redundancy.",
+   "prediction": "Single head d_aro < 0.005 for all heads."
+  },
+  {
+   "claim": "Crippen probe results for Layers 4 and 5 are trivial artifacts of the experimental design (probe reads Layer 4 output).",
+   "evidence": "Supervisor hint states `d_crip` is `-0.0` by construction because probes read layer-4 activations; heads in l4/l5 act after this point.",
+   "kind": "shows",
+   "test": "Change probe target to layer 6 outputs; prediction: Heads from layers 4 and 5 should now show non-zero `d_crip` drops if they contribute to later-stage feature refinement.",
+   "prediction": "`d_crip > 0.01` for l4/l5 heads when probing deeper layers."
+  }
+ ],
+ "trivial_explanations": [
+  "The lack of Crippen signal in Layers 4 and 5 is not evidence that these layers do not compute logP features, but rather a consequence of the probe reading Layer-4 activations before L4/L5 processing occurs.",
+  "Aromaticity `d_aro` values near zero for individual heads may reflect high redundancy or early resolution (e.g., in positional embeddings) where attention head ablation cannot disrupt the signal."
+ ]
+}

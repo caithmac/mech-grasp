@@ -1,0 +1,46 @@
+[16:12:23] T15c -> C:\Users\ss864\Desktop\mech-grasp\runs\T15c\v1
+[16:14:12]   static check failed (not executed): []script.py:230:23: undefined name 'R'
+[16:14:12]   failed (script.py:230:23: undefined name 'R'); asking MI agent to fix
+[16:15:16]   attempt 1: executing
+[16:40:33]   ran in 1511s ok=False
+[16:40:33]   failed (AttributeError: 'numpy.ndarray' object has no attribute 'tokens'); asking MI agent to fix
+[16:41:47]   attempt 2: executing
+[16:42:04]   ran in 11s ok=False
+[16:42:04]   failed (AttributeError: 'numpy.ndarray' object has no attribute 'tokens'); asking MI agent to fix [REPEATED - escalating]
+[16:46:20]   static check failed (not executed): ['except[^:\\n]*:\\s*pass\\b']
+[16:46:20]   failed (Script uses forbidden operations: ['except[^:\\n]*:\\s*pass\\b']. Remove them. Silently swallowing exceptions (`except .); asking MI agent to fix
+[16:47:43]   static check failed (not executed): []script.py:271:20: undefined name 'families_map'
+[16:47:43]   failed (script.py:271:20: undefined name 'families_map'); asking MI agent to fix
+[16:49:00]   attempt 3: executing
+[16:51:51]   ran in 165s ok=False
+[16:51:51]   failed (TypeError: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported ); asking MI agent to fix
+[16:53:30]   attempt 4: executing
+[16:54:51]   ran in 75s ok=True
+[16:54:51]   chemist reading results
+[16:56:11]   critic reviewing
+[16:58:05]   critic verdict: revise
+[16:58:05]   critic asked for revision; MI agent re-running
+[17:00:09]   static check failed (not executed): []script.py:212:30: undefined name 'total_tts'
+script.py:227:39: undefined name 'batch_size'
+script.py:228:25: undefined
+[17:00:09]   failed (script.py:241:8: undefined name 'total_tts'); asking MI agent to fix
+[17:01:46]   static check failed (not executed): []script.py:82:8: undefined name 'total_tts'
+script.py:84:33: undefined name 'total_tts'
+[17:01:46]   failed (script.py:84:33: undefined name 'total_tts'); asking MI agent to fix
+[17:03:20]   static check failed (not executed): []script.py:81:8: undefined name 'total_tts'
+script.py:83:33: undefined name 'total_tts'
+[17:03:20]   failed (script.py:83:33: undefined name 'total_tts'); asking MI agent to fix
+[17:04:55]   static check failed (not executed): []script.py:83:33: undefined name 'total_tts'
+[17:04:55]   failed (script.py:83:33: undefined name 'total_tts'); asking MI agent to fix [REPEATED - escalating]
+[17:06:38]   attempt 1: executing
+[17:07:58]   ran in 75s ok=True
+[17:07:58]   chemist reading results
+[17:09:08]   critic reviewing
+[17:11:25]   critic verdict: revise
+[17:11:25]   critic asked for revision; MI agent re-running
+[17:13:12]   attempt 1: executing
+[17:15:26]   ran in 127s ok=True
+[17:15:26]   chemist reading results
+[17:16:54]   critic reviewing
+[17:17:40]   critic verdict: revise
+[17:17:57] done: C:\Users\ss864\Desktop\mech-grasp\runs\T15c\v3

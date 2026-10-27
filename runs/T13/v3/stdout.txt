@@ -1,0 +1,14 @@
+Loaded 4000 molecules and 92662 atom rows
+Fitting molecule logp probes...
+Fitting atom crippen probes...
+Error processing feature 2610: boolean index did not match indexed array along axis 0; size of axis is 128 but size of corresponding boolean axis is 300
+Error processing feature 845: boolean index did not match indexed array along axis 0; size of axis is 170 but size of corresponding boolean axis is 300
+Error processing feature 1898: boolean index did not match indexed array along axis 0; size of axis is 126 but size of corresponding boolean axis is 300
+Error processing feature 1151: boolean index did not match indexed array along axis 0; size of axis is 163 but size of corresponding boolean axis is 201
+Error processing feature 1316: boolean index did not match indexed array along axis 0; size of axis is 293 but size of corresponding boolean axis is 300
+Error processing feature 710: boolean index did not match indexed array along axis 0; size of axis is 110 but size of corresponding boolean axis is 300
+Error processing feature 3867: boolean index did not match indexed array along axis 0; size of axis is 198 but size of corresponding boolean axis is 33
+=== T13 Results Summary ===
+Feature 2804 (has_O_neighbor): AUROC=0.970, Ablation Effect@L8 (normed)=0.09063221765509558
+
+Script completed. Check OUT/results.json and OUT/t13.png

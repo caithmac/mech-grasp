@@ -1,0 +1,44 @@
+{
+ "summary": "The results indicate that while the Pretrained GRASP model exhibits sensitivity to SMILES atom ordering (non-invariant), neither variant encodes local chemical properties like aromaticity, hybridization, or Crippen logP contributions in their token embeddings at a level detectable by linear probes. The A1 variants achieve permutation invariance but lose this order-sensitivity.",
+ "claims": [
+  {
+   "claim": "Pretrained GRASP is not SMILES-order invariant; it encodes sequence information via position embeddings, whereas A1/A1-Step1 are invariant due to their lack of positional encoding.",
+   "evidence": "Order distance for Pretrained `cls[12]` = 0.118 (non-zero), while A1 and A1_Step1 show -0.0 (effectively zero).",
+   "kind": "shows",
+   "test": "SMARTS: [C;H3]-[CH2]-[N]; RDKit `RenumberAtoms` to permute atom indices 0,1,2 -> 2,1,0. Predict cosine distance of cls embeddings between original and permuted SMILES strings.",
+   "prediction": "Pretrained model will yield mean cosine distance > 0 (approx 0.1). A1/A1_Step1 models will yield ~0."
+  },
+  {
+   "claim": "Atom-level aromaticity is not linearly encoded in Pretrained GRASP token embeddings for ambiguous atoms, despite the pretraining objective.",
+   "evidence": "Pretrained `model_err` = 1.0 across all layers (0-12) on `aromatic` probe; Control error ~0.06 suggests signal exists elsewhere but not in frozen embeddings.",
+   "kind": "shows",
+   "test": "SMARTS: [c] or [#6a]. Label column: df['is_aromatic']. Train linear classifier on layer 12 atom vectors to predict aromaticity for atoms where `ambiguous_only=True`.",
+   "prediction": "Accuracy will be ~0.5 (random), R\u00b2 \u2248 0, confirming no encoding."
+  },
+  {
+   "claim": "Crippen atomic logP contributions are not represented in the embedding space of any model variant at layer 12 or earlier.",
+   "evidence": "All models show `crippen_r2` = 0.0 for Model across all layers (Pretrained: 0.0, A1: 0.0). Pretrained Control shows ~0.5 R\u00b2 but Models do not.",
+   "kind": "shows",
+   "test": "SMARTS: [C], [O]. Label column: `df['crippen_logp_contrib']`. Compute Pearson correlation between atom embedding vector and ground truth Crippen contribution for Carbon atoms only (mask = element == 'C').",
+   "prediction": "Correlation coefficient r < 0.1, R\u00b2 \u2248 0."
+  },
+  {
+   "claim": "Hybridization state is not recoverable from Pretrained GRASP embeddings via linear probing on ambiguous atom subsets.",
+   "evidence": "Pretrained `model_err` = 1.0 for `hybridization` probe at all layers; Control error ~0.12-0.26 indicates baseline noise or trivial bias, but Model fails completely.",
+   "kind": "shows",
+   "test": "SMARTS: [C]([H])([H])[H], [#7]. Label column: df['hybridization']. Split atoms by sp3 vs sp2 hybridization status in ambiguous set. Train probe on layer 12 vectors.",
+   "prediction": "Probe accuracy will not exceed random baseline (error \u2248 1.0)."
+  },
+  {
+   "claim": "The A1 and A1-Step1 variants successfully enforce permutation invariance, removing sequence bias from the representation of molecular graphs.",
+   "evidence": "Order distance `cls[12]` = -0.0 for both models compared to Pretrained's 0.118.",
+   "kind": "suspects",
+   "test": "SMARTS: C-C-O (ethanol). Permute SMILES string order randomly using RDKit `RenumberAtoms`. Compare mean cosine distance of layer 6 (`mean[6]`) embeddings between original and permuted versions across N=300 molecules.",
+   "prediction": "Mean distance will remain ~0.0 for A1/Step1, confirming invariance."
+  }
+ ],
+ "trivial_explanations": [
+  "The `token_err` = 1.0 on all probes indicates that the input token type alone (e.g., 'C', 'O') does not contain sufficient information to determine aromaticity or hybridization without graph context; this is expected for ambiguous atoms where SMILES parsing requires ring closure logic.",
+  "Pretrained Control R\u00b2 ~0.5 in Crippen probe likely reflects a dataset bias or trivial feature correlation (e.g., atom count) rather than learned chemical knowledge, as the Model itself shows 0.0."
+ ]
+}

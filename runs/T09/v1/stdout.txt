@@ -1,0 +1,67 @@
+Selected 800 molecules for editing.
+Processing model: pretrained
+Processing model: random
+Processing model: a1
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+10232026 16:00:49|INFO|matplotlib.category| Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+=== T09 Results Summary ===
+
+Model: pretrained
+Layer 0: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 1: dist=3 -> 0.1105, dist>=6 -> 0.1086
+Layer 2: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 3: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 4: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 6: dist=3 -> 0.2259, dist>=6 -> 0.2173
+Layer 8: dist=3 -> 0.2327, dist>=6 -> 0.2421
+Layer 12: dist=3 -> 0.1939, dist>=6 -> 0.1709
+
+Model: random
+Layer 0: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 1: dist=3 -> 0.0478, dist>=6 -> 0.0489
+Layer 2: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 3: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 4: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 6: dist=3 -> 0.0269, dist>=6 -> 0.0300
+Layer 8: dist=3 -> 0.0145, dist>=6 -> 0.0142
+Layer 12: dist=3 -> 0.0663, dist>=6 -> 0.0532
+
+Model: a1
+Layer 0: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 1: dist=3 -> 0.1732, dist>=6 -> 0.1794
+Layer 2: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 3: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 4: dist=3 -> 0.0000, dist>=6 -> 0.0000
+Layer 6: dist=3 -> 0.2153, dist>=6 -> 0.2074
+Layer 8: dist=3 -> 0.2064, dist>=6 -> 0.2084
+Layer 12: dist=3 -> 0.2261, dist>=6 -> 0.2013
+
+Script completed successfully.

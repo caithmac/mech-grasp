@@ -1,0 +1,288 @@
+Error in seed 0 for pretrained/crippen: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for pretrained/crippen: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for pretrained/mr: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for pretrained/mr: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for pretrained/aromatic: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for pretrained/aromatic: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for pretrained/ring5: index 4006 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4006 is out of bounds for axis 0 with size 4000
+Error in seed 1 for pretrained/ring5: index 4006 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4006 is out of bounds for axis 0 with size 4000
+Error in seed 0 for pretrained/o_neighbor: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for pretrained/o_neighbor: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for a1_step1/crippen: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for a1_step1/crippen: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for a1_step1/mr: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for a1_step1/mr: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for a1_step1/aromatic: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for a1_step1/aromatic: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for a1_step1/ring5: index 4006 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4006 is out of bounds for axis 0 with size 4000
+Error in seed 1 for a1_step1/ring5: index 4006 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4006 is out of bounds for axis 0 with size 4000
+Error in seed 0 for a1_step1/o_neighbor: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for a1_step1/o_neighbor: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for random/crippen: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for random/crippen: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for random/mr: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for random/mr: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for random/aromatic: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for random/aromatic: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 0 for random/ring5: index 4006 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4006 is out of bounds for axis 0 with size 4000
+Error in seed 1 for random/ring5: index 4006 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4006 is out of bounds for axis 0 with size 4000
+Error in seed 0 for random/o_neighbor: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Error in seed 1 for random/o_neighbor: index 4000 is out of bounds for axis 0 with size 4000
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v1\script.py", line 72, in _compute_block
+    p_lin = probes.FixedProbe(X_l, y_vals, groups=scaf_all, seed=s, mask=valid_mask)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: index 4000 is out of bounds for axis 0 with size 4000
+Figure error: 4
+
+=== T14b Summary ===
+pretrained / crippen: LinDrop=inf, MLPDrop=inf
+pretrained / mr: LinDrop=inf, MLPDrop=inf
+pretrained / aromatic: LinDrop=inf, MLPDrop=inf
+pretrained / ring5: LinDrop=inf, MLPDrop=inf
+pretrained / o_neighbor: LinDrop=inf, MLPDrop=inf
+a1_step1 / crippen: LinDrop=inf, MLPDrop=inf
+a1_step1 / mr: LinDrop=inf, MLPDrop=inf
+a1_step1 / aromatic: LinDrop=inf, MLPDrop=inf
+a1_step1 / ring5: LinDrop=inf, MLPDrop=inf
+a1_step1 / o_neighbor: LinDrop=inf, MLPDrop=inf
+random / crippen: LinDrop=inf, MLPDrop=inf
+random / mr: LinDrop=inf, MLPDrop=inf
+random / aromatic: LinDrop=inf, MLPDrop=inf
+random / ring5: LinDrop=inf, MLPDrop=inf
+random / o_neighbor: LinDrop=inf, MLPDrop=inf

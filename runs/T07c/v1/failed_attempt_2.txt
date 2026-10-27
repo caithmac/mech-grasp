@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T07c\v1\script.py", line 195, in <module>
+    run_script()
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T07c\v1\script.py", line 65, in run_script
+    @utils.memo("abl_cache")
+     ^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: memo() missing 1 required positional argument: 'fn'

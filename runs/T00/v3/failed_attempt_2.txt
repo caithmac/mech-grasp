@@ -1,0 +1,25 @@
+Loading pretrained GRASP and random control...
+Checking SMILES invariance...
+Checking stereo blindness...
+Error processing stereo pair (C/C=C/C, C/C=C\C): shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)
+Error processing stereo pair (C[C@H](N)O, C[C@@H](N)O): shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)
+Error processing stereo pair (C[C@H](F)Cl, C[C@@H](F)Cl): shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)
+Error computing stereo distance for (CC(C)[C@H](O)c1ccccc1, CC(C)[C@H](O)c1ccccc1): shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)
+Error computing stereo distance for (CC(C)[C@H](O)c1ccccc1, CC(C)[C@H](O)c1ccccc1): shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)
+Error computing stereo distance for (CC(C)[C@H](O)c1ccccc1, CC(C)[C@H](O)c1ccccc1): shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)
+Error computing stereo distance for (CC(C)[C@H](O)c1ccccc1, CC(C)[C@H](O)c1ccccc1): shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)
+Error computing stereo distance for (CC(C)[C@H](O)c1ccccc1, CC(C)[C@H](O)c1ccccc1): shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)
+Error computing stereo distance for (CC(C)[C@H](O)c1ccccc1, CC(C)[C@H](O)c1ccccc1): shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)
+Comparing pretrained vs random...
+Checking token aromaticity info...
+Computing effective rank...
+Generating figure...
+Summary:
+SMILES Invariance - Max Dist: 0.0000, Mean: 0.0000
+
+--- stderr ---
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T00\v3\script.py", line 309, in <module>
+    print(f"Stereo Blindness - Mean Dist: {results['stereo_blindness']['mean_cosine_distance']:.4f}")
+                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'mean_cosine_distance'

@@ -1,0 +1,15 @@
+Fitting molecule logp probes...
+Fitting atom crippen probes...
+Error processing feature 2610: operands could not be broadcast together with shapes (128,) (15962,) 
+Error processing feature 845: operands could not be broadcast together with shapes (170,) (3503,) 
+Error processing feature 1898: operands could not be broadcast together with shapes (129,) (2562,) 
+Error processing feature 1151: operands could not be broadcast together with shapes (163,) (210,) 
+Error processing feature 1316: operands could not be broadcast together with shapes (295,) (1292,) 
+Error processing feature 2804: operands could not be broadcast together with shapes (871,) (6053,) 
+Error processing feature 710: operands could not be broadcast together with shapes (110,) (5237,) 
+Error processing feature 3867: operands could not be broadcast together with shapes (217,) (33,) 
+No valid results to plot.
+=== T13 Results Summary ===
+Script completed. Check OUT/results.json and OUT/t13.png
+
+ERROR: results.json contains no results, only []: {}. Your plotting code probably replaced the results dict - keep results separate and re-dump it after recording figure_error.

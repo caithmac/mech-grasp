@@ -1,0 +1,31 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Norm computation uses axis=0 instead of axis=1, inflating random model norms from expected ~27.7 to observed ~301 (factor of 11x error)",
+  "Token check only found 4 tokens when supervisor expects ~57 distinct tokens - token counting logic is broken",
+  "Stereo distances showing exactly 0.0 with negative values printed suggests float precision issues or wrong comparison"
+ ],
+ "claim_assessments": [
+  {
+   "claim": "SMILES order sensitivity is real",
+   "status": "supported",
+   "reason": "0.528 > 0.14 expected, consistent with position_biased_input=True"
+  },
+  {
+   "claim": "Model is stereo-blind",
+   "status": "untested",
+   "reason": "Distance=0.0 may be buggy; need to verify with proper float handling"
+  },
+  {
+   "claim": "Pretrained vs random orthogonal representations",
+   "status": "unsupported",
+   "reason": "Norm computation bug invalidates comparison"
+  },
+  {
+   "claim": "Aromaticity encoded as hard class in tokens",
+   "status": "untested",
+   "reason": "Token count discrepancy (4 vs 57) makes this claim unverifiable"
+  }
+ ],
+ "rerun_instructions": "1. Fix norm computation: use np.linalg.norm(A.atom[l], axis=1).mean() instead of axis=0\n2. Verify token counting: check if all tok_* columns are being captured correctly\n3. Re-run stereo_blindness with explicit float handling to verify 0.0 is not a bug\n4. Compare random norms (should be ~27.7) vs pretrained norms after fix"
+}

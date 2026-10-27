@@ -1,0 +1,1 @@
+Script uses forbidden operations: ['except[^:\\n]*:\\s*pass\\b']. Remove them. Silently swallowing exceptions (`except ...: pass`) is forbidden because it hides failed tests. Either let the error raise, or catch it and RECORD it, e.g. `except Exception as e: errors.append(f'{name}: {e}')` and save `errors` in results.json.

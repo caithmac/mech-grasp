@@ -1,0 +1,9 @@
+Loading datasets and models...
+Running sanity check 1: SMILES invariance...
+
+--- stderr ---
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T00\v2\script.py", line 39, in <module>
+    mol = model.enc.smiles_to_mol(smiles) # Assuming a simple encoder or using RDKit directly if available via mechlib internals
+          ^^^^^^^^^
+AttributeError: module 'mechlib.model' has no attribute 'enc'

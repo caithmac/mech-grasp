@@ -1,0 +1,7 @@
+Static check failed before running:
+script.py:65:10: undefined name 'labels'
+script.py:218:24: undefined name 'labels'
+script.py:275:109: undefined name 'labels'
+script.py:276:109: undefined name 'labels'
+script.py:278:111: undefined name 'labels'
+script.py:279:111: undefined name 'labels'

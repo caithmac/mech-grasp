@@ -1,0 +1,12 @@
+[18:13:53] T15b -> C:\Users\ss864\Desktop\mech-grasp\runs\T15b\v1
+[18:28:07]   attempt 1: executing
+[18:28:13]   ran in 0s ok=False
+[18:28:13]   failed (SyntaxError: ':' expected after dictionary key); asking MI agent to fix
+[18:31:00]   attempt 2: executing
+[18:32:29]   ran in 83s ok=False
+[18:32:29]   failed (AttributeError: 'NoneType' object has no attribute 'astype'); asking MI agent to fix
+[18:34:44]   static check failed (not executed): []script.py:292:108: invalid syntax
+[18:34:44]   failed (script.py:292:108: invalid syntax); asking MI agent to fix
+[18:36:40]   static check failed (not executed): []script.py:299:108: invalid syntax
+[18:36:40]   failed (script.py:299:108: invalid syntax); asking MI agent to fix
+[18:38:35] MI agent could not produce a working script; supervisor needed

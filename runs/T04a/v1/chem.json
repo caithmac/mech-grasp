@@ -1,0 +1,37 @@
+{
+ "summary": "The GRASP model encodes Lipinski rule-of-5 properties differently based on their structural complexity. MW, HBD, and Pass flags are trivially encoded in the input graph (atom counts), while LogP requires deep message passing to capture hydrophobic contributions.",
+ "claims": [
+  {
+   "claim": "MW and HBD violations are trivially represented in the embedding at layer 0.",
+   "evidence": "For `ro5_mw` and `ro5_hbd`, the model output (`grasp_best`) is 1.0 across all layers (0-12), matching the baseline bag mean of 1.0 exactly. The positive rate for these flags is 0.0, indicating no violations in the dataset.",
+   "kind": "shows",
+   "test": "SMARTS: '[C;H1+](=O)' or 'N' for HBD/HBA counts. If the model predicts MW > 500, it should correlate with heavy atom count directly without layer dependence.",
+   "prediction": "If true, `ro5_mw` predictions at layer 0 and layer 12 should be identical (both 1.0). Observed: Layer 0=1.0, Layer 12=1.0."
+  },
+  {
+   "claim": "LogP prediction improves with network depth, indicating non-trivial hydrophobicity encoding.",
+   "evidence": "For `ro5_logp`, the model output increases from layer 4 (0.151) to layer 12 (0.252), significantly outperforming random (0.087). The baseline bag mean is 0.065.",
+   "kind": "shows",
+   "test": "Add a phenyl ring (SMARTS: 'c1ccccc1') to a molecule. If true, the model's `ro5_logp` prediction should increase by ~0.2-0.3 units relative to the baseline.",
+   "prediction": "Layer 12 output (0.252) > Layer 4 output (0.151). Observed: True."
+  },
+  {
+   "claim": "The dataset is filtered for Lipinski compliance, as `ro5_pass` is 1.0.",
+   "evidence": "Positive rate for `ro5_pass` is 1.0 across all layers and baselines. This implies all molecules in the test set satisfy MW <= 500, LogP <= 5, HBD <= 5, HBA <= 10.",
+   "kind": "shows",
+   "test": "Check `df['mw']` column. If true, max(mw) should be <= 500.",
+   "prediction": "If true, no molecules should have MW > 500."
+  },
+  {
+   "claim": "HBA prediction shows baseline discrepancy but model convergence at layer 12.",
+   "evidence": "For `ro5_hba`, the baseline bag mean is 0.667, but the positive rate is 0.0. The model output at layer 12 is 0.333 (cls) or 0.333 (mean), matching random.",
+   "kind": "shows",
+   "test": "Count heteroatoms with lone pairs (SMARTS: '[N;H0]!@[#6]' or '[O;!H0]'). If true, the model output should correlate with HBA count.",
+   "prediction": "If true, `ro5_hba` predictions should increase with more heteroatoms."
+  }
+ ],
+ "trivial_explanations": [
+  "MW and HBD are atomic properties directly encoded in the input graph tokens (atom types). The model does not need to learn these from scratch; they are present at layer 0.",
+  "LogP is a global property dependent on functional group arrangement (e.g., aromatic rings vs aliphatic chains), requiring deeper layers to aggregate local hydrophobic contributions."
+ ]
+}

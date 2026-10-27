@@ -1,0 +1,51 @@
+{
+ "summary": "The pretrained GRASP-A2 model at Layer 6 encodes significantly more explicit chemical structure than random initialization or reference models, despite receiving bond-type inputs that make some features redundant.",
+ "claims": [
+  {
+   "claim": "Pretrained A2 learns ~1.9x more context-chemistry latents than the T08b Reference GRASP model.",
+   "evidence": "A2 has 178 'context_chemistry' latents compared to Ref's ~93 (T08b ref) and Random's 11.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[#6]` vs `[n]`. Prediction: Latent count should drop if trained on non-aromatic dataset.",
+   "prediction": "If true, training A2 on a saturated alkane-only set will reduce 'bond_derived' and 'functional_group' counts significantly below 178."
+  },
+  {
+   "claim": "Explicit bond inputs do not eliminate internal encoding of hybridization/aromaticity at Layer 6.",
+   "evidence": "'bond_derived' family contains 84 latents (highest count). Top latent 170 fires on C with 'hybridization_SP', AUROC=1.0, n_fire=325.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C;H3]` vs `[#6X4]`. Prediction: Latent 170 should fire selectively on sp3 carbons regardless of input token type.",
+   "prediction": "If true, filtering atoms to only those with RDKit property 'hybridization' == 'SP2' will zero out activation for latent 170 (AUROC drops)."
+  },
+  {
+   "claim": "Functional group detection is robust and distinct from simple neighbor counts.",
+   "evidence": "'functional_group' family has 50 latents. Top examples include `fg_ether` (latent 1182, AUROC=0.984) and `fg_nitrile` (latent 357/459, AUROC=1.0).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C]-[O]-[C]` vs `[#6X2]=[N+]`. Prediction: Latents for ether/nitrile should not fire on esters or nitro groups.",
+   "prediction": "If true, applying a filter to exclude ethers from the dataset will reduce activation of latent 1182 by >90%."
+  },
+  {
+   "claim": "Random initialization fails to capture chemical structure despite identical inputs and architecture.",
+   "evidence": "Random A2 has only 11 'context_chemistry' latents vs 178 for pretrained. Dead fraction is high (523/4096 dead).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[#6]`. Prediction: Latent counts should remain low (<20) across multiple random seeds.",
+   "prediction": "If true, repeating the SAE training on 10 different random weight initializations will yield a mean 'context_chemistry' count <30."
+  },
+  {
+   "claim": "The model encodes ring size context specifically for small rings (strain).",
+   "evidence": "'ring' family has 23 latents. Top examples include `min_ring_size_4` (latent 1943, AUROC=0.98) and `min_ring_size_3` (latent 122, AUROC=0.975).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C]1CC1`. Prediction: Latents should fire on cyclopropane/cyclobutane motifs.",
+   "prediction": "If true, removing all rings < 6 atoms from the dataset will reduce 'ring' family count to near zero."
+  },
+  {
+   "claim": "Neighbor information is encoded as a distinct chemical feature class.",
+   "evidence": "'neighbour' family has 21 latents. Top example `has_O_neighbor` (latent 357, AUROC=0.98).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C]-[O]`. Prediction: Latent should fire on alcohols/ethers but not pure hydrocarbons.",
+   "prediction": "If true, filtering for molecules with no heteroatoms will reduce 'neighbour' family activation to near zero."
+  }
+ ],
+ "trivial_explanations": [
+  "Hybridization and aromaticity are explicitly provided in A2 inputs; the model may be redundantly encoding them at Layer 6 rather than inferring them.",
+  "The high FVU (0.145) for A2 compared to Ref GRASP (0.075) suggests Layer 6 activations contain more variance/noise, requiring more latents to explain."
+ ]
+}

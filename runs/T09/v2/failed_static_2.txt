@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:191:81: undefined name 'idx_end'

@@ -1,0 +1,15 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Critical Initialization Bug: `FixedProbe.__init__()` raised `unexpected keyword argument 'random_state'`. This caused all probe instantiations to fail across seeds and tasks.",
+  "Coverage Failure: All AUROC, decomposition error, and toxicophore stats are `null` or empty. No data was generated for any task (SR-ARE, NR-AhR, SR-MMP, SR-p53) on either Pretrained or Random models."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP atom attribution weights could not be aggregated into performance metrics due to initialization failure.",
+   "status": "supported",
+   "reason": "Printed output confirms `FixedProbe` init errors for all seeds. Results JSON shows `"
+  }
+ ],
+ "rerun_instructions": "1. Fix the API mismatch: Remove or rename the `'random_state'` argument in `probes.FixedProbe(...)` call to match its actual signature (likely handled via global seed setting inside FixedProbe, or removed if it handles splits deterministically). 2. Re-run seeds 0-4 for all tasks and models after fix. 3. Verify index mapping logic (`valid_indices`, `test_idx`) once probe runs successfully to ensure Supervisor Hint #2 is respected (global vs local indices)."
+}

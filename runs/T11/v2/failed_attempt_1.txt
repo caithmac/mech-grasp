@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T11\v2\script.py", line 236, in <module>
+    auc_thresh = float(probes.auroc(decision_scores, y_binary)) 
+                       ^^^^^^^^^^^^
+AttributeError: module 'mechlib.probes' has no attribute 'auroc'

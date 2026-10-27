@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v2\script.py", line 372
+    dP_ablate = float(final_results['ablate'].get(str(L), {}).get('dP_mean', 0) if L := int(L_str) else final_results['ablate'].get(L_str, {}).get('dP_mean', 0)) # Fix logic below
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: expected 'else' after 'if' expression

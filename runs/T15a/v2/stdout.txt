@@ -1,0 +1,28 @@
+Skipping a2 for aromatic: no valid pair entry
+Skipping a1 for aromatic: no valid pair entry
+Skipping a2 for ring_size: no valid pair entry
+Skipping a1 for ring_size: no valid pair entry
+Skipping a2 for hybridization: no valid pair entry
+Skipping a1 for hybridization: no valid pair entry
+Skipping a2 for conjugated: no valid pair entry
+Skipping a1 for conjugated: no valid pair entry
+Skipping a2 for crippen_logp_contrib: no valid pair entry
+Skipping a1 for crippen_logp_contrib: no valid pair entry
+Skipping a2 for crippen_mr_contrib: no valid pair entry
+Skipping a1 for crippen_mr_contrib: no valid pair entry
+Skipping a2 for has_O_neighbor: no valid pair entry
+Skipping a1 for has_O_neighbor: no valid pair entry
+Skipping a2 for has_halogen_neighbor: no valid pair entry
+Skipping a1 for has_halogen_neighbor: no valid pair entry
+
+=== T15a Summary ===
+aromatic: A2 Gain=None, A1 Gain=None
+ring_size: A2 Gain=None, A1 Gain=None
+hybridization: A2 Gain=None, A1 Gain=None
+conjugated: A2 Gain=None, A1 Gain=None
+crippen_logp_contrib: A2 Gain=None, A1 Gain=None
+crippen_mr_contrib: A2 Gain=None, A1 Gain=None
+has_O_neighbor: A2 Gain=None, A1 Gain=None
+has_halogen_neighbor: A2 Gain=None, A1 Gain=None
+
+Figure t15a.png generated successfully.

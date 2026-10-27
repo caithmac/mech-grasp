@@ -1,0 +1,43 @@
+Loading data for A2...
+Loading/Training A2 SAE...
+Training A2 SAE...
+[sae] step 0 nmse 0.7814 dead 0
+[sae] step 2000 nmse 0.1788 dead 0
+[sae] step 4000 nmse 0.1618 dead 0
+[sae] step 6000 nmse 0.1552 dead 0
+[sae] step 8000 nmse 0.1523 dead 0
+[sae] step 10000 nmse 0.1502 dead 0
+[sae] step 12000 nmse 0.1500 dead 0
+[sae] step 14000 nmse 0.1480 dead 0
+[sae] step 16000 nmse 0.1474 dead 0
+[sae] step 18000 nmse 0.1460 dead 0
+[sae] step 20000 nmse 0.1470 dead 0
+[sae] step 22000 nmse 0.1467 dead 0
+[sae] step 24000 nmse 0.1443 dead 0
+[sae] step 26000 nmse 0.1454 dead 0
+[sae] step 28000 nmse 0.1452 dead 0
+Training Random-A2 SAE...
+[sae] step 0 nmse 0.8106 dead 0
+[sae] step 2000 nmse 0.0236 dead 1767
+[sae] step 4000 nmse 0.0322 dead 1014
+[sae] step 6000 nmse 0.0327 dead 953
+[sae] step 8000 nmse 0.0320 dead 1291
+[sae] step 10000 nmse 0.0319 dead 1679
+[sae] step 12000 nmse 0.0317 dead 1879
+[sae] step 14000 nmse 0.0316 dead 1972
+[sae] step 16000 nmse 0.0315 dead 2022
+[sae] step 18000 nmse 0.0315 dead 2051
+[sae] step 20000 nmse 0.0315 dead 2086
+[sae] step 22000 nmse 0.0314 dead 2118
+[sae] step 24000 nmse 0.0314 dead 2110
+[sae] step 26000 nmse 0.0314 dead 2133
+[sae] step 28000 nmse 0.0314 dead 2140
+Analyzing latents...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15c\v1\script.py", line 233, in <module>
+    counts_a2, fams_a2, tops_a2 = analyze_latents(S, A.atom[6], df_atoms, valid_concepts)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15c\v1\script.py", line 178, in analyze_latents
+    tok_vals_str = acts.tokens.astype(str) 
+                   ^^^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'tokens'

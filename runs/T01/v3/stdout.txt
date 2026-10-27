@@ -1,0 +1,42 @@
+Loading datasets...
+Running probes for 16 columns...
+  Processing column: aromatic
+  Processing column: hybridization
+  Processing column: conjugated
+  Processing column: min_ring_size
+  Processing column: has_O_neighbor
+  Processing column: has_N_neighbor
+  Processing column: has_halogen_neighbor
+  Processing column: fg_carbonyl_C
+  Processing column: fg_amide
+  Processing column: fg_ester
+  Processing column: fg_carboxylic_acid
+  Processing column: fg_nitrile
+  Processing column: fg_aromatic_N
+  Processing column: fg_michael_acceptor
+  Processing column: tok_element
+  Processing column: tok_in_ring
+Generating figures...
+
+==============================
+SUMMARY
+==============================
+aromatic: Best Layer=8, Gap vs Token=0.0203, Gap vs Random=0.0080
+hybridization: Best Layer=0, Gap vs Token=0.0000, Gap vs Random=0.0000
+conjugated: Best Layer=3, Gap vs Token=0.0099, Gap vs Random=0.0055
+min_ring_size: Best Layer=7, Gap vs Token=0.5355, Gap vs Random=0.5051
+has_O_neighbor: Best Layer=4, Gap vs Token=0.1244, Gap vs Random=0.0592
+has_N_neighbor: Best Layer=4, Gap vs Token=0.2093, Gap vs Random=0.1511
+has_halogen_neighbor: Best Layer=2, Gap vs Token=0.0784, Gap vs Random=0.0236
+fg_carbonyl_C: Best Layer=1, Gap vs Token=0.0126, Gap vs Random=0.0056
+fg_amide: Best Layer=4, Gap vs Token=0.0282, Gap vs Random=0.0144
+fg_ester: Best Layer=6, Gap vs Token=0.1291, Gap vs Random=0.0358
+fg_carboxylic_acid: Best Layer=12, Gap vs Token=nan, Gap vs Random=nan
+fg_nitrile: Best Layer=4, Gap vs Token=0.0001, Gap vs Random=0.0000
+fg_aromatic_N: Best Layer=7, Gap vs Token=0.0038, Gap vs Random=0.0016
+fg_michael_acceptor: Best Layer=4, Gap vs Token=0.0836, Gap vs Random=0.0361
+
+Results saved to OUT/results.json
+Figure saved to OUT/probe_results.png
+
+--- stderr ---

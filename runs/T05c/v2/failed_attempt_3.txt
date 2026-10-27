@@ -1,0 +1,8 @@
+Kept 300 pairs.
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05c\v2\script.py", line 304, in <module>
+    main()
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05c\v2\script.py", line 132, in main
+    acts_p_orig, _ = model.run(enc_pretrained, orig_smiles, attention=False)
+    ^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable Acts object

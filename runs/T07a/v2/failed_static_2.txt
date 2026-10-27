@@ -1,0 +1,3 @@
+Static check failed before running:
+script.py:65:60: undefined name 'dval'
+script.py:65:39: undefined name 'dval'

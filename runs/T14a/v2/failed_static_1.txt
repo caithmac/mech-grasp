@@ -1,0 +1,5 @@
+Static check failed before running:
+script.py:97:35: undefined name 'm'
+script.py:97:91: undefined name 'm'
+script.py:97:24: undefined name 'm'
+script.py:109:28: undefined name 'm'

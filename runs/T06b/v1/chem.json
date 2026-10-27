@@ -1,0 +1,30 @@
+{
+ "summary": "The model exhibits severe non-invariance to atom ordering at Layer 6 for physicochemical properties.",
+ "claims": [
+  {
+   "claim": "Layer 6 predictions are not permutation invariant for logP and TPSA.",
+   "evidence": "drift_mean (logP=2.36, TPSA=33.0) >> test_mae (logP=0.34, TPSA=5.05).",
+   "kind": "shows",
+   "test": "Apply RDKit canonicalization to a set of molecules; if the model is truly graph-invariant, drift should approach 0.",
+   "prediction": "Drift will remain high unless positional encodings are removed or graph topology is used directly without string ordering."
+  },
+  {
+   "claim": "QED predictions are more robust to atom ordering than logP/TPSA.",
+   "evidence": "drift_over_mae for QED (2.20) is lower than logP (6.95) and TPSA (6.53).",
+   "kind": "shows",
+   "test": "Compare drift on molecules with identical atom counts but different topologies.",
+   "prediction": "QED drift should be lower if the target aggregates multiple features that dilute sequence noise."
+  },
+  {
+   "claim": "The model relies on SMILES token sequence rather than pure graph topology for Layer 6.",
+   "evidence": "High drift when only SMILES order changes (doRandom=True).",
+   "kind": "suspects",
+   "test": "Check if input is SMILES string or atom-indexed adjacency matrix.",
+   "prediction": "If input is SMILES string, drift is expected. If input is graph, drift implies positional encoding bias."
+  }
+ ],
+ "trivial_explanations": [
+  "Atom counts are invariant to permutation; the high drift proves the model does not simply count atoms (which would yield 0 drift).",
+  "The properties logP and TPSA are additive/fragment-based in standard definitions (Crippen/Ertl); high drift suggests the model fails to learn these additive rules robustly."
+ ]
+}

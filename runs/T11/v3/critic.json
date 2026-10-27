@@ -1,0 +1,27 @@
+{
+ "verdict": "accept",
+ "bugs_or_flaws": [],
+ "claim_assessments": [
+  {
+   "claim": "`cls12` readout encodes MW as continuous property.",
+   "status": "supported",
+   "reason": "AUROC threshold-vs-continuous (0.993) is near-perfect, indicating the model's internal scalar tracks magnitude well enough to recover binary violations."
+  },
+  {
+   "claim": "HBD/HBA driven by trivial atom counts.",
+   "status": "supported",
+   "reason": "Random and Bag-of-tokens achieve AUROC ~1.0, matching Pretrained performance within noise margins (e.g., MW 0.988 vs Bot 0.999). No structural signal required."
+  },
+  {
+   "claim": "`ro5_pass` aligned with MW/HBA in `cls12`.",
+   "status": "supported",
+   "reason": "Cosine similarities (MW: 0.803, HBA: 0.773) are significantly higher than LogP/HBD (~0.3-0.5), confirming geometric alignment."
+  },
+  {
+   "claim": "No marginal gain over bag-of-tokens.",
+   "status": "supported",
+   "reason": "Bag-of-tokens AUROC (MW: 0.999) matches Pretrained `cls12` (MW: 0.988). Gap is negligible compared to task triviality."
+  }
+ ],
+ "rerun_instructions": ""
+}

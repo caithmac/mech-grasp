@@ -1,0 +1,9 @@
+Figure generation failed: 4
+
+=== T14b Summary ===
+pretrained / crippen: LinDrop=inf, MLPDrop=inf
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v2\script.py", line 229, in <module>
+    print(f"   -> Linear: Best@{data_block['best_layer_lin']}, Layer12 Error={data_block['lin_err'][12]:.4f}")
+                                                                              ~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 12

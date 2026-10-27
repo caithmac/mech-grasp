@@ -1,0 +1,30 @@
+{
+ "summary": "Interpretation of GRASP head ablation results for aromaticity and Crippen logp contributions.",
+ "claims": [
+  {
+   "claim": "The model treats aromaticity as a feature derived from input tokenization or early embeddings rather than distributed attention mechanisms, evidenced by negligible AUROC drops (max `d_aro` = 0.0003 for head l5h7) across all layers upon single-head ablation.",
+   "evidence": "Clean Aromaticity AUROC: 0.9996; Top head drop: l5h7 score=0.0 (JSON), print says 0.0003. All other heads show `d_aro` of `-0.0` or `0.0`. Layer-wise drops are also near zero (`whole_layer[2]`: d_aro=0.0).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[c1ccccc1]` (aromatic) vs `C1=CC=CC=C1` (Kekule). Prediction: If the model relies on tokenization, switching between aromatic and Kekule SMILES will change input embeddings but not attention head weights; ablation of heads should yield identical AUROC (>0.99) for both representations.",
+   "prediction": "Ablating any single head in layers 2-6 results in Aromaticity AUROC > 0.99, confirming the feature is robust to attention disruption."
+  },
+  {
+   "claim": "Crippen logp contributions for carbon atoms are encoded primarily in Layers 2 and 3 of the transformer stack (mid-layers), as indicated by measurable R2 drops (`d_crip` up to 0.011) when specific heads like l3h3 or l2h7 are zeroed, whereas Layer 4/5 show no sensitivity.",
+   "evidence": "Clean Crippen R2: 0.937; Top head for Crippen `l3h3` drop=0.011 (Print) / 0.011 (JSON). L2/L3 heads dominate the top list (`top_crip`). Layers 4/5 show `-0.0` drops.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C;H0]` (quaternary sp3) vs `c1ccccc1` (aromatic C). Prediction: Ablating head l3h3 should disproportionately reduce R2 for aromatic carbons compared to aliphatic quaternary centers, as the drop correlates with hybridization-dependent logp terms.",
+   "prediction": "R2 on a test set of molecules containing only sp2 carbon rings will decrease by >0.01 when head l3h3 is ablated, while R2 for saturated alkane chains remains stable."
+  },
+  {
+   "claim": "The model likely contains redundant pathways or residual connections that preserve Crippen logp estimation despite single-head failure in Layers 4-5, as `d_crip` drops are effectively zero (`-0.0`) for these layers.",
+   "evidence": "`whole_layer[4]`: d_aro=0.0, d_crip=-0.0; `l4h*` entries all `-0.0`. This contrasts with L3 where sum of heads yields 0.115 total drop.",
+   "kind": "suspects",
+   "test": "RDKit SMARTS: `[C]` (any carbon). Prediction: Ablating *all* heads in Layer 4 simultaneously will cause a larger R2 drop than ablating single heads, revealing redundancy masked by the one-at-a-time protocol.",
+   "prediction": "Simultaneous ablation of all L4 heads reduces Crippen R2 to <0.90, whereas individual head ablations show no effect."
+  }
+ ],
+ "trivial_explanations": [
+  "The aromaticity probe (`P_aro`) was fitted on `amb` (token-ambiguous atoms). If the tokenizer explicitly marks aromatic bonds in SMILES tokens (e.g., 'c' vs 'C'), the model may bypass graph-based reasoning entirely, making attention head ablation irrelevant for this binary classification.",
+  "The Crippen probe (`P_crip`) was masked to `tok_element == \"C\"`. This isolates carbon contributions from heteroatoms. The observed sensitivity in L2/L3 likely reflects local hybridization encoding (sp2 vs sp3) rather than global molecular properties like TPSA or MW."
+ ]
+}

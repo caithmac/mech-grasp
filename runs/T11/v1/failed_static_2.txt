@@ -1,0 +1,3 @@
+Static check failed before running:
+script.py:29:74: undefined name 'scafs'
+script.py:53:18: undefined name 'pd'

@@ -1,0 +1,44 @@
+{
+ "summary": "Layer 12 blurs chemistry by degrading the decodability of additive atomic properties (LogP/MR) and specific topological features (5-membered rings), even when non-linear probes are used, though binary structural flags remain robustly preserved.",
+ "claims": [
+  {
+   "claim": "For continuous atomic property contributions like Crippen LogP (`crippen_logp_contrib`) and Molecular Refractivity (`mr`), the information is significantly degraded at layer 12 compared to early layers (4-8) for both linear and non-linear decoders, indicating entanglement rather than perfect re-encoding.",
+   "evidence": "Pretrained `mlp_drop`=10.3 for Crippen; MLP error rises from Err=0.015 at Layer 4 to Err=0.157 at Layer 12 (R2 drops from 0.985 to 0.843). Linear probe shows similar degradation (`lin_drop`=4.5, R2 0.93 -> 0.69).",
+   "kind": "shows",
+   "test": "Train an MLP head on atom embeddings at Layer 12 vs Layer 4 using label `crippen_logp_contrib`. Prediction: Mean Absolute Error increases by >8x (e.g., from ~0.015 to >0.1) and R\u00b2 drops below 0.9.",
+   "prediction": "R\u00b2(Layer 12 MLP) < 0.85, while R\u00b2(Layer 4 MLP) > 0.97."
+  },
+  {
+   "claim": "Binary structural features like aromaticity (`aromatic`) remain decodable at layer 12 with low absolute error (<0.03), despite high relative drop metrics caused by near-zero baseline errors in early layers.",
+   "evidence": "Pretrained `aromatic` Lin Error L12=0.004, MLP Error L12=0.003; Relative drops are 15x/13x because best layer error is ~0.0 (R\u00b2~1.0). Absolute performance remains high compared to Random baseline.",
+   "kind": "shows",
+   "test": "Filter atoms with SMARTS `[c]` or `tok_element='C' & tok_in_ring=1`. Train probe on Layer 12 embeddings for label `aromatic`. Prediction: AUROC > 0.995, Error < 0.03.",
+   "prediction": "Absolute error at L12 remains < 0.03 despite high drop ratio."
+  },
+  {
+   "claim": "The degradation pattern is specific to learned representations; random-initialized models show no depth-related performance loss (Drop ~1.0), confirming the 'blur' is a consequence of training dynamics, not architectural layer count.",
+   "evidence": "Random `mlp_drop`=1.0 for all concepts (e.g., Crippen Drop=1.0). Pretrained/a1_step1 drops range 5x-800x depending on baseline error magnitude.",
+   "kind": "shows",
+   "test": "Run FixedProbe/MLPProbe on model kind `random` across layers [4,6,8,10,12]. Prediction: Error ratio (L12/Lbest) \u2248 1.0 for all concepts.",
+   "prediction": "lin_drop and mlp_drop values will be approximately 1.0 \u00b1 0.1."
+  },
+  {
+   "claim": "Non-linear decoding recovers more signal than linear probing at layer 12, but still suffers significant degradation relative to its own best-layer performance (e.g., Layer 4), suggesting information is re-encoded non-linearly rather than discarded entirely.",
+   "evidence": "Pretrained `crippen` MLP R\u00b2=0.843 vs Linear R\u00b2=0.689 at L12, yet both drop from Best Layer values (`mlp_drop`=10.3). This indicates the signal exists but is less accessible than in shallow layers.",
+   "kind": "suspects",
+   "test": "Compare MLP probe performance against FixedProbe on `mr` label at Layer 12 using same seed/mask. Prediction: MLP R\u00b2 > Linear R\u00b2 (e.g., 0.87 vs 0.68), but both < Best Layer values.",
+   "prediction": "MLP error will be lower than Linear error, yet still higher than the probe's own best-layer performance."
+  },
+  {
+   "claim": "The blurring effect is consistent across Pretrained and RTD-only (`a1_step1`) models for regression tasks (e.g., `mr`), implying pretraining objectives drive deep layers toward global context over local atomic property fidelity.",
+   "evidence": "`a1_step1` MR MLP Drop=13.0 vs Pretrained 13.3; both significantly higher than Random (~1.2). Absolute errors at L12 are ~0.13-0.34, much worse than early layers (Err~0.01).",
+   "kind": "shows",
+   "test": "Compare `a1_step1` vs Pretrained on label `mr`. Prediction: Both show MLP Drop > 5 and Best Layer Error < 0.02.",
+   "prediction": "`mlp_drop` for MR will be ~13 in both models, confirming shared representation dynamics."
+  }
+ ],
+ "trivial_explanations": [
+  "High performance on binary flags (`aromatic`, `o_neighbor`) may reflect preserved identity features (element type/ring status) that are less susceptible to mixing than continuous property values derived from additive contributions.",
+  "The high relative drop metrics for low-error tasks (e.g., 430x for `o_neighbor` linear) are mathematical artifacts of dividing by near-zero baseline errors, not necessarily catastrophic information loss."
+ ]
+}

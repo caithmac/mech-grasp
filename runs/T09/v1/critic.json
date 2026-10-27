@@ -1,0 +1,25 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Layer Indexing/Metric Bug: Layers 0, 2, 3 show exactly 0.0 relative change across ALL models (pretrained/random/a1). Layer 4 is mostly zero with noise only at dist=0. This 'on-off-on' pattern (L1 signal -> L2-4 dead zone -> L6+ signal) suggests a systematic bug in layer extraction or indexing, not physical propagation behavior. Specifically, if token override affects input embeddings, Layer 0 should show non-zero change; the fact it is zero implies `token_override` does not propagate to L0 activations in this pipeline or indices are misaligned.",
+  "Missing Baselines: Task requested 'token/bag/size baselines'. Script only runs pretrained/random/a1. No bag-of-tokens or size-matched controls were executed, leaving the claim about global mixing vs locality unverified against these specific null models."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Global mixing at L6+",
+   "status": "untested",
+   "reason": "L2-4 zeros suggest data pipeline failure; cannot trust continuity of signal to infer 'mixing' behavior without verifying why intermediate layers return zero. Also, edit type (C->C token swap) does not test electronic effects."
+  },
+  {
+   "claim": "Signal vanishing at L2-4",
+   "status": "supported",
+   "reason": "Numbers show 0.0 for these layers across all models. However, this is likely an artifact of indexing/metric failure rather than architectural 'vanishing', given it affects Random model too."
+  },
+  {
+   "claim": "Pretrained > Random sensitivity",
+   "status": "supported",
+   "reason": "L1 Pretrained (0.12) vs Random (0.057); L6+ Pretrained (~0.23) vs Random (~0.03). Gap is consistent and larger than noise."
+  }
+ ],
+ "rerun_instructions": "1. Fix layer indexing: Verify `model.run` returns activations for layers 0, 2-4 correctly; check if indices are shifted (e.g., L0 might be input tokens not embeddings in this framework). Ensure token override affects embedding lookup at Layer 0.\n2. Change edit type: Modify script to swap Carbon atoms with Nitrogen or Oxygen (`tok_element` change) rather than just swapping C-token IDs within the same class, to test 'electronic effects' claims properly.\n3. Add Baselines: Implement and run bag-of-words/size-matched baselines as requested in Task description."
+}

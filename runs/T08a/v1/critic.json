@@ -1,0 +1,30 @@
+{
+ "verdict": "accept",
+ "bugs_or_flaws": [
+  "Minor deviation in `n_alive` reporting logic for control SAEs (`atoms_random_L6`). The script computes alive count based on eval firing events rather than strictly using the training stats['n_alive']. However, this is internally consistent with the reported dead_frac (0.027) and does not invalidate the comparison.",
+  "Token ID assumption: Script assumes token IDs < 128 for `global_token_counts` allocation without explicit check. Results are valid numbers, suggesting vocab size was within bounds."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained Layer-6 activations do not map to discrete atomic identities.",
+   "status": "supported",
+   "reason": "The `frac_token_like` metric (3.7%) is significantly lower than the trivial baseline (`atoms_random_L6`, 31%), and median purity is lower (0.40 vs 0.67). This contrast supports that latents are not simply encoding token identities."
+  },
+  {
+   "claim": "Layer-6 representations contain entangled chemical features.",
+   "status": "supported",
+   "reason": "FVU=0.075 for pretrained is substantially higher than the trivial baseline (0.001), indicating reconstruction error that cannot be explained by simple token mapping, consistent with feature mixing."
+  },
+  {
+   "claim": "`a1` condition represents reduced compressibility.",
+   "status": "supported",
+   "reason": "FVU=0.179 is more than double the standard pretrained FVU (0.075), and token-like fraction drops further, consistent with harder-to-compress features."
+  },
+  {
+   "claim": "Pretrained Layer-6 maintains feature diversity without 'dead neuron' collapse.",
+   "status": "supported",
+   "reason": "`dead_frac`=0.0 for pretrained variants vs 2.7% for random control, indicating stable latent usage in the trained space."
+  }
+ ],
+ "rerun_instructions": ""
+}

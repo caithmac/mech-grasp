@@ -1,0 +1,44 @@
+{
+ "summary": "GRASP-A2 encodes stereochemistry locally but dilutes it in global embeddings; A1 ignores it completely.",
+ "claims": [
+  {
+   "claim": "The control model GRASP-A1 is chemically blind to stereochemistry and atom ordering.",
+   "evidence": "For all tested pairs (enant, diast, rand), the relative vector distance at CLS layer is exactly 0.0 for A1 (`a1.rel.enant.cls` = `0.0`, `diast.cls` = `0.0`, `rand.cls` = `0.0`).",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H](Cl)(F)Br`. Input pair 1 (R), Pair 2 (S). Prediction: Cosine similarity of CLS vectors must be exactly 1.0 (`||a-b||` = `0`).",
+   "prediction": "If A1 truly ignores stereo, the vector difference norm will remain zero regardless of chiral tags in SMILES."
+  },
+  {
+   "claim": "GRASP-A2 distinguishes enantiomers and diastereomers at the CLS token level, but with very small magnitude relative to overall structural variance.",
+   "evidence": "A2 shows non-zero distances for stereo pairs: `a2.rel.enant.cls` = `0.003`, `diast.cls` = `0.004`. Diastereomers are slightly further apart than enantiomers (`0.004 > 0.003`).",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H](Cl)(F)Br` (enant pair). SMARTS: `CC[C@H](O)[C@@H](N)CO` vs `CC[C@H](O)[C@H](N)CO` (diast pair). Prediction: Mean relative distance for diastereomers should be consistently higher than enantiomer pairs across the test set.",
+   "prediction": "If stereo is encoded, dist(diast) > dist(enant). If not, both ~0. Data shows 1.3x difference."
+  },
+  {
+   "claim": "Stereochemical information does not propagate to affect LogP predictions in GRASP-A2, consistent with physical chemistry (logP is achiral).",
+   "evidence": "LogP probe decision differences are zero for all stereo variations: `a2.logp_probe.6.d_enant` = `0.0`, `d_diast` = `0.0`. Probe score remains high (`0.831`).",
+   "kind": "shows",
+   "test": "Label column: `logp`. SMARTS: `[C@H](O)(Cl)F` vs `[C@@H](O)(Cl)F`. Prediction: Model output for logP must be identical (diff = 0). If stereo affected property prediction, diff > 0.",
+   "prediction": "Since physical properties like LogP are invariant to chirality in achiral solvents, the model's decision boundary should not shift."
+  },
+  {
+   "claim": "Stereochemical signal is localized at input layers but decays rapidly into general structural noise by deep layers (Layer 6+).",
+   "evidence": "At Layer 0, stereocentre atom diff is `a2.spread_a2.0.bin_0` = `0.124`, while neighbors are `0.0`. By Layer 6, signal spreads but drops to uniform low values: bin `0`= `0.003`, bin `4+`=`0.002`.",
+   "kind": "suspects",
+   "test": "RDKit distance matrix on kept molecules (n=3000). Compute atom-wise embedding diffs per layer. Prediction: Diff should correlate with graph distance from stereocenter at Layer 0, but flatten by Layer 6 as stereo info mixes into topology features.",
+   "prediction": "If signal persists locally, bin `0` > bin `4+`. If diluted, bins converge (observed ~convergence)."
+  },
+  {
+   "claim": "GRASP-A2 is robust to atom reordering (order-invariant), isolating stereochemistry as the only source of vector change in this test.",
+   "evidence": "A2 random permutation distance at CLS layer is `0.0` (`a2.rel.rand.cls`). This contrasts with A1 which also shows 0.0, but confirms A2 does not hallucinate differences from SMILES string reordering alone.",
+   "kind": "shows",
+   "test": "RDKit: `Chem.RenumberAtoms(mol, perm)`. Prediction: Vector distance between original and permuted canonical graph must be zero (or near float epsilon).",
+   "prediction": "If model is order-invariant, permutation diffs = 0. Data confirms this (`rand.cls` = `0.0`)."
+  }
+ ],
+ "trivial_explanations": [
+  "The 'n_meso_skipped' count of 32 molecules was excluded because their SMILES strings for enantiomers were identical (symmetric structures). This is a data filtering artifact, not model behavior.",
+  "A1's zero distances are trivial: A1 has no stereo input embeddings by design (`a1` control), so it must output identical vectors regardless of chiral tags."
+ ]
+}

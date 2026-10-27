@@ -1,0 +1,51 @@
+{
+ "summary": "The pretrained GRASP model (layer 6) demonstrates task-specific alignment with known toxicophores, significantly outperforming random-weight baselines in attributing toxicity to specific functional groups like nitroaromatics and epoxides for SR-ARE and p53 tasks. However, the learned representations exhibit lower additivity than random weights, suggesting complex feature entanglement.",
+ "claims": [
+  {
+   "claim": "Pretrained GRASP associates Nitroaromatic groups with high confidence in SR-ARE toxicity attribution compared to chance or random initialization.",
+   "evidence": "For task 'SR-ARE', Pretrained `nitroaromatic` hit_rate is 0.927 (std: 0.145) vs Chance 0.352, whereas Random weights yield only 0.621 (std: 0.318).",
+   "kind": "shows",
+   "test": "SMARTS `[c,n][N+](=O)[O-]`. For SR-ARE positive test molecules containing this motif, the atom with max attribution score must belong to N or O of NO2 in >90% of cases for Pretrained model.",
+   "prediction": "Pretrained hit_rate >> Chance; Random hit_rate ~ Chance."
+  },
+  {
+   "claim": "The model correctly identifies Polycyclic Aromatic Hydrocarbons (PAHs) as the dominant signal for NR-AhR activation, consistent with known AhR binding mechanisms.",
+   "evidence": "For task 'NR-AhR', Pretrained `polycyclic_aromatic` hit_rate is 1.0 vs Chance 0.626. Random weights achieve only 0.76 (std: 0.388).",
+   "kind": "shows",
+   "test": "SMARTS `c1ccc2ccccc2c1`. For NR-AhR positive test molecules containing this motif, the atom with max attribution score must belong to ring carbons in ~100% of cases for Pretrained model.",
+   "prediction": "Pretrained hit_rate = 1.0; Random < 1.0."
+  },
+  {
+   "claim": "Epoxides are flagged as critical toxicophores by the pretrained SR-p53 probe, despite low sample size in positive test set.",
+   "evidence": "For task 'SR-p53', Pretrained `epoxide` hit_rate is 1.0 vs Chance 0.13 (std: 0.0). Random weights yield 0.0 for this class entirely.",
+   "kind": "shows",
+   "test": "SMARTS `C1OC1`. For SR-p53 positive test molecules containing an epoxide, the atom with max attribution score must belong to C or O of the ring in all cases (Pretrained).",
+   "prediction": "Pretrained hit_rate = 1.0; Random hit_rate < Chance."
+  },
+  {
+   "claim": "The pretrained model does not treat Nitroaromatics as a primary driver for SR-MMP activity, unlike its strong signal in AhR/ARE tasks.",
+   "evidence": "For task 'SR-MMP', Pretrained `nitroaromatic` hit_rate is 0.312 vs Chance 0.287 (std: 0.018). Random weights actually perform better here at 0.781, suggesting the pretrained model suppresses this feature for MMP.",
+   "kind": "suspects",
+   "test": "SMARTS `[c,n][N+](=O)[O-]`. For SR-MMP positive test molecules containing nitro groups, max attribution should NOT consistently map to NO2 atoms (hit_rate ~0.31).",
+   "prediction": "Pretrained hit_rate \u2248 Chance; Random > Pretrained."
+  },
+  {
+   "claim": "Learned representations in layer 6 are less additively decomposable than random weights, indicating feature entanglement.",
+   "evidence": "`decomp_err` is consistently higher for Pretrained models across all tasks (e.g., SR-MMP: 13.46 vs Random 9.456; NR-AhR: 12.158 vs Random 8.315).",
+   "kind": "shows",
+   "test": "Compare `decomp_err` column means for Pretrained vs Random seeds on the same task labels.",
+   "prediction": "Mean(decomp_err, Pre) > Mean(decomp_err, Rand)."
+  },
+  {
+   "claim": "Quinones and Thiols are not recognized as significant toxicophores by either model in this test set configuration.",
+   "evidence": "`quinone` hit_rate is 0.0 for all tasks/models (Chance ~0.33). `thiol` hit_rate is 0.0 for Pretrained SR-ARE/NR-AhR/SR-p53 and Random NR-AhR/Thiol.",
+   "kind": "shows",
+   "test": "SMARTS `O=C1C=CC(=O)C=C1`. For positive molecules containing quinones, max attribution should NOT map to carbonyl/carbons (hit_rate = 0.0).",
+   "prediction": "Hit rate remains at baseline noise level despite presence of motif."
+  }
+ ],
+ "trivial_explanations": [
+  "The low `n_mols` values for 'any' toxicophore in SR-p53 (12.6) and NR-AhR (28.6) indicate small sample sizes, making high hit rates statistically fragile.",
+  "`chance` metric accounts for atom count proportion; thus a 0% hit rate on Quinones is not due to lack of atoms but likely absence in positive test set or model insensitivity."
+ ]
+}

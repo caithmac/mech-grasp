@@ -1,0 +1,7 @@
+=== MI Engineer Report ===
+Processed 50000 molecules.
+Computed metrics for targets: logp, tpsa, qed, pains_alert, brenk_alert, n_aromatic_rings, hbd, hba
+Positive rates recorded: ['pains_alert_rate', 'brenk_alert_rate']
+Figures generated successfully.
+
+Summary of best GRASP scores:

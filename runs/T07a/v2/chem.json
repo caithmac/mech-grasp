@@ -1,0 +1,38 @@
+{
+ "summary": "The GRASP model exhibits distinct attention patterns across layers and heads that correlate with chemical topology rather than just random noise, though a significant portion of 'diffuse' behavior is explained by graph distance statistics.",
+ "claims": [
+  {
+   "claim": "Pretrained Layer 7 Head 5 functions as a global molecular property aggregator (CLS sink).",
+   "evidence": "In the pretrained model, layer index 6 head index 5 shows `mass_cls` = **0.646** and entropy = **1.098**. This contrasts with the random baseline where all heads have `mass_cls` ~**0.04-0.05** (matching uniform chance) and entropy >**3.13 nats**. The label for this head is explicitly **'cls_sink'**.",
+   "kind": "shows",
+   "test": "Filter molecules by molecular weight using RDKit SMARTS `[#6]` to identify carbon-rich scaffolds, then compare the mean attention mass on CLS between Layer 7 Head 5 and a random head (e.g., L0 H1). Prediction: The 'cls_sink' head should maintain `mass_cls` > **0.5** for high MW molecules (>300 Da), whereas random heads will remain near chance (~**0.04**) regardless of size.",
+   "prediction": "If the claim is true, Layer 7 Head 5's attention to CLS must correlate with global descriptors (MW/LogP) and exceed **0.6**, while other heads in the same layer should not."
+  },
+  {
+   "claim": "Early layers preserve local atom identity ('self' attention), consistent with initial feature encoding.",
+   "evidence": "Layer index 0 head index 3 is labeled **'self'** because `mass_d[0]` > **0.5**. Its entropy (**1.74 nats**) is significantly lower than the random baseline mean (~**3.14 nats**), indicating focused attention on the querying atom itself rather than neighbors or CLS.",
+   "kind": "shows",
+   "test": "Use RDKit SMARTS `[C;H3]` (methyl groups) to isolate sp3 carbons with distinct local environments compared to quaternary centers. Prediction: For methyl groups, this head's self-attention mass should be higher than for aromatic systems due to the need to encode specific valence states early.",
+   "prediction": "If true, `mass_d[0]` for `[C;H3]` subgraphs in Layer 0 Head 3 must exceed **0.5**, whereas random weights show no such bias (all 'diffuse')."
+  },
+  {
+   "claim": "'Diffuse' classification is largely a topological artifact rather than lack of learning.",
+   "evidence": "`chance_d[",
+   "kind": "shows",
+   "test": "Filter molecules by average path length using RDKit `GetShortestPath` on the graph. Prediction: In dense graphs where `chance_d[4+]` drops below **0.6**, even random weights should show fewer 'diffuse' labels, proving the label is driven by distance distribution.",
+   "prediction": "If true, reducing average path length to <3 should decrease 'diffuse' counts in Random model from 12/layer to near zero."
+  },
+  {
+   "claim": "`a1` checkpoint exhibits learned attention sparsity distinct from random initialization.",
+   "evidence": "`a1` entropy values (e.g., Layer 0 Head 6 = **0.341 nats**, Head 8 = **0.239 nats**) are significantly lower than `random` model (~**3.14 nats**), indicating the weights have concentrated attention on specific keys rather than distributing uniformly.",
+   "kind": "shows",
+   "test": "Apply SMARTS `[O;H]` (hydroxyl groups) to identify molecules with hydrogen bond donors. Prediction: `a1` heads with entropy < **2.0** should show higher attention mass on oxygen atoms than random weights, which distribute uniformly across all keys.",
+   "prediction": "If true, the correlation between `[O;H]` presence and attention mass in low-entropy `a1` heads must be positive (p<0.05), while Random model shows no correlation."
+  }
+ ],
+ "trivial_explanations": [
+  "The 'diffuse' label applies to **63.8%** of atom pairs by chance (`chance_d[",
+  "kinds",
+  "prediction"
+ ]
+}

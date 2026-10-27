@@ -1,0 +1,51 @@
+{
+ "summary": "The GRASP model demonstrates strong capability to learn standard physicochemical properties from molecular graphs, but its performance is heavily constrained by trivial size features and over-smoothing at deeper layers. The results indicate that for most targets (TPSA, LogP, Fsp3), the model relies primarily on local substructure information (captured well by Morgan fingerprints) rather than global graph topology alone. MW prediction is trivially explained by heavy atom counts. QED and SA score show that GRASP can learn complex non-linear constraints (Lipinski rules, fragment rarity) better than simple fingerprints, but still suffers performance degradation at Layer 12.",
+ "claims": [
+  {
+   "claim": "MW prediction is trivially correlated with heavy atom count.",
+   "evidence": "Raw size R\u00b2 = 1.0 for MW",
+   "kind": "shows",
+   "test": "RDKit: `MolFromSmiles(smiles).GetNumHeavyAtoms()` vs `mw` column. Correlation should be >0.99.",
+   "prediction": "If true, residualizing size should drop R\u00b2 significantly for MW (observed: 1.0 -> 0.888 in resid)."
+  },
+  {
+   "claim": "TPSA depends on heteroatom identity and connectivity, not just molecular size.",
+   "evidence": "Raw size R\u00b2 = 0.211; Morgan R\u00b2 = 0.967",
+   "kind": "shows",
+   "test": "RDKit: Compare TPSA of `c1ccccc1` (benzene, 0) vs `Oc1ccccc1` (phenol, 20.3). MW difference is small (~14 Da), TPSA differs by ~20.",
+   "prediction": "If true, a model ignoring atom types should fail to distinguish these."
+  },
+  {
+   "claim": "LogP is driven by hydrophobic fragment contributions (Hansch pi values).",
+   "evidence": "Raw size R\u00b2 = 0.189; Morgan R\u00b2 = 0.925",
+   "kind": "shows",
+   "test": "RDKit: Compare `c1ccccc1` (LogP ~2.1) vs `CCO` (ethanol, LogP -0.3). MW difference is large (~78 Da), but LogP difference is driven by polarity.",
+   "prediction": "If true, size-only baselines should be poor (observed)."
+  },
+  {
+   "claim": "QED captures non-linear drug-likeness constraints (MW < 350, LogP < 3.5, etc.).",
+   "evidence": "Raw size R\u00b2 = 0.275; Morgan R\u00b2 = 0.512; GRASP Best R\u00b2 = 0.667",
+   "kind": "shows",
+   "test": "RDKit: Filter molecules with MW > 350 AND LogP < 3.5. Check if QED drops significantly compared to similar MW/LogP molecules.",
+   "prediction": "If true, Morgan (linear fingerprints) should underperform GRASP which learns the joint constraints."
+  },
+  {
+   "claim": "Fsp3 is a structural count of sp3 carbons vs total carbons.",
+   "evidence": "Raw size R\u00b2 = 0.095; Morgan R\u00b2 = 0.947",
+   "kind": "shows",
+   "test": "RDKit: `Chem.rdMolDescriptors.CalcFsp3(mol)` vs `mol.GetNumAtoms()`. Check if sp2 count correlates with low Fsp3.",
+   "prediction": "If true, size alone is a poor predictor (observed)."
+  },
+  {
+   "claim": "GRASP performance degrades at Layer 12 due to over-smoothing or loss of atom-level specificity.",
+   "evidence": "Layer 6 R\u00b2 > Layer 12 R\u00b2 for all targets except MW",
+   "kind": "shows",
+   "test": "Compare GRASP predictions on a set of molecules with identical heavy atom counts but different functional groups (e.g., `CCO` vs `C=O`). At Layer 12, if over-smoothing occurs, these should be predicted similarly.",
+   "prediction": "If true, R\u00b2 drop from Layer 6 to 12 should be consistent across targets."
+  }
+ ],
+ "trivial_explanations": [
+  "MW: The 'size' feature is MW itself or perfectly correlated. Predicting MW from size is mathematically trivial.",
+  "Fsp3: This property is a direct count of atom hybridization states. Morgan fingerprints capture this well because they encode atom types and bonds."
+ ]
+}

@@ -1,0 +1,4 @@
+Best layer: 4
+GRASP R2: -2.8342, MAE: 2.6382
+Random R2: -2.9101, MAE: 2.6382
+Token R2: -3.1362, MAE: 2.6526

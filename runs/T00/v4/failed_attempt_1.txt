@@ -1,0 +1,12 @@
+Loading data...
+Checking smiles invariance...
+
+--- stderr ---
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T00\v4\script.py", line 77, in <module>
+    rand_norm = np.linalg.norm(rand_vec)
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\AppData\Local\miniconda3\envs\mech-grasp\Lib\site-packages\numpy\linalg\_linalg.py", line 2752, in norm
+    x = x.astype(float)
+        ^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: np.str_('O=C(N1CCC[C@H]1/C(=N/S(=O)(=O)C)[O-])OC(C)(C)C')

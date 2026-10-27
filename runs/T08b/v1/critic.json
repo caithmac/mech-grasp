@@ -1,0 +1,26 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Missing Baseline Tests: The task explicitly asks to compare GRASP against 'token/bag/size baselines'. These metrics and comparisons are absent from results.json, leaving a gap in proving SAE features are distinct from simple token statistics.",
+  "Count Mismatch (Random): For the Random Control, `n_alive` is 3986 but sum of classified counts (`context_chemistry`=0 + `token`=1924 + `mixed`=1549) = 3473. ~513 latents fired on >=20 atoms were not counted in the dictionary (likely due to silent exceptions during AUROC calculation or logic gaps). This makes the 'context_chemistry=0' claim robust but the total coverage incomplete.",
+  "Metric Degeneracy: The script forces Z into a binary mask (`Z > 0`) before computing AUROC. While consistent between Pretrained/Random, this reduces AUROC to correlation of presence (TPR/FPR at threshold), losing magnitude information that might distinguish feature strength."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained SAE learns chemistry features; Random does not.",
+   "status": "supported",
+   "reason": "44 vs 0 context_chemistry latents is a strong signal. The gap exceeds noise expectations for random weights on semantic data."
+  },
+  {
+   "claim": "Within-token AUROC >> Global AUROC (e.g., L2610: 0.999 vs 0.567).",
+   "status": "supported",
+   "reason": "Numbers clearly show high specificity within token subset, confirming 'context_chemistry' classification logic."
+  },
+  {
+   "claim": "Redundancy between latents (L2804/L3314).",
+   "status": "supported",
+   "reason": "Identical stats for Token 13/O-neighbor features suggest split representations. Chemist's suspicion is valid based on data, though correlation test not run."
+  }
+ ],
+ "rerun_instructions": "1. Add token/bag-of-words baseline metrics to results.json (e.g., AUROC of simple feature counts vs labels). 2. Fix the `analyze_sae` loop for Random SAE: ensure all latents with firing_count >= 20 are counted in 'counts' even if AUROC calculation fails, or log them separately. 3. Verify `n_alive` definition matches 'firing on >= 20 atoms'. If not, align definitions to avoid the ~513 latent discrepancy."
+}

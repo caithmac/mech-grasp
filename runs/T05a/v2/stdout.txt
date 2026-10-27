@@ -1,0 +1,22 @@
+Loading datasets...
+Loaded 4000 molecules.
+E shape: (4000, 768), ER shape: (4000, 768)
+Finding pairs with same formula (A)...
+Found 520 same-formula pairs.
+Finding pairs B (different formula, |heavy atoms diff| <= 1)...
+Found 500 different-formula pairs with |heavy atoms diff| <= 1.
+Total pairs for correlation: 1000
+Computing distances and similarities...
+
+Results summary:
+Pretrained - A pairs: 500, mean dist: 0.3377
+Pretrained - B pairs: 500, mean dist: 0.4865
+Pretrained - Combined Spearman corr: 0.2942
+
+Random - A pairs: 500, mean dist: 0.0215
+Random - B pairs: 500, mean dist: 0.0360
+Random - Combined Spearman corr: 0.6379
+
+Figure saved to C:\Users\ss864\Desktop\mech-grasp\runs\T05a\v2\t05a_structure_vs_composition.png
+
+Script completed successfully.

@@ -1,0 +1,28 @@
+Loading molecule-level acts and labels...
+Preparing features and splitting...
+Running threshold test on mean[6]...
+Error fitting ro5_logp on mean6: This LogisticRegression instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+Error fitting ro5_pass on mean6: This LogisticRegression instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+Running direction test on mean[6]...
+Error fitting direction for ro5_pass on mean6: Found input variables with inconsistent numbers of samples: [9813, 40187]
+Error fitting direction for ro5_mw on mean6: Found input variables with inconsistent numbers of samples: [9813, 40187]
+Error fitting direction for ro5_hbd on mean6: Found input variables with inconsistent numbers of samples: [9813, 40187]
+Error fitting direction for ro5_hba on mean6: Found input variables with inconsistent numbers of samples: [9813, 40187]
+Processing CLS token...
+Error fitting ro5_logp on cls12: This LogisticRegression instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+Error fitting ro5_pass on cls12: This LogisticRegression instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+Running direction test on cls[12]...
+Error fitting direction for ro5_pass on cls12: Found input variables with inconsistent numbers of samples: [9813, 40187]
+Error fitting direction for ro5_mw on cls12: Found input variables with inconsistent numbers of samples: [9813, 40187]
+Error fitting direction for ro5_hbd on cls12: Found input variables with inconsistent numbers of samples: [9813, 40187]
+Error fitting direction for ro5_hba on cls12: Found input variables with inconsistent numbers of samples: [9813, 40187]
+Writing results.json...
+
+--- Summary for MEAN6 ---
+  Direction Test (Cosine Similarities):
+
+--- Summary for CLS12 ---
+  Direction Test (Cosine Similarities):
+
+Done.
+Script completed successfully.

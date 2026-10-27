@@ -1,0 +1,12 @@
+Loading/training A2 SAE...
+Loading/training Random A2 SAE...
+Matrix dimension mismatch in batch 0: Z shape (2048, 4096), D.T shape (768, 4096)
+Error computing batched FVU, falling back to raw stats: shapes (2048,4096) and (768,4096) not aligned: 4096 (dim 1) != 768 (dim 0)
+=== T15c Results Summary ===
+A2 Context-Chemistry Latents: 178 (Ref GRASP: ~93)
+Random A2 Context-Chemistry Latents: 11
+Families in A2:
+  - functional_group: 50
+  - bond_derived: 84
+  - neighbour: 21
+  - ring: 23

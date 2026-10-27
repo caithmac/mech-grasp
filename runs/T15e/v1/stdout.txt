@@ -1,0 +1,4 @@
+Built 0 molecules. Skipped 1000.
+Results written to OUT/results.json
+Figure generation skipped/failed: 'kinds'
+Done.

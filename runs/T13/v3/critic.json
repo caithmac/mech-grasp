@@ -1,0 +1,26 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Coverage Failure: Only 1 of 8 features (2804) ran successfully; others failed with 'boolean index did not match' errors. Cannot support general claims about SAE chemistry features.",
+  "Missing Control Data: The JSON output shows \"random\":{} for all metrics because the script logic skips writing results when cond_name is \"random\" (only ablate/fam and steer/steer_rand blocks write). Causal claim 'more than random edit' cannot be verified numerically even for feature 2804.",
+  "Molecule Level Controls: No mol.random or mol.steer metrics computed in JSON, only ablate/fam. Cannot confirm weak logp impact is distinct from noise without baseline comparison."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Ablation reduces concept detection more than random edit.",
+   "status": "unsupported",
+   "reason": "\"random\" metrics are empty in results.json. Cannot compare ablation effect (0.12) to baseline noise."
+  },
+  {
+   "claim": "Feature 2804 encodes has_O_neighbor with high fidelity.",
+   "status": "supported",
+   "reason": "AUROC=0.97 for feature 2804 is valid and present in results.json (though generalization to other features fails)."
+  },
+  {
+   "claim": "Weak causal impact on global logp readout.",
+   "status": "supported",
+   "reason": "dlogp values are small (-0.005) with low sign_agree (~41%), though missing mol.random baseline makes this less rigorous."
+  }
+ ],
+ "rerun_instructions": "Fix the conditional logic in run_feature() to ensure 'random' metrics are written to res[cond_name] (currently skipped). Debug index alignment errors causing crashes for features 2610, 845, etc. Re-run all 8 features and verify results.json contains non-empty data for both ablation AND random baselines before plotting."
+}

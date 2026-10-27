@@ -1,0 +1,37 @@
+{
+ "summary": "GRASP CLS vectors encode topological connectivity distinct from atomic composition; rewiring single bonds alters representation space despite identical input tokens.",
+ "claims": [
+  {
+   "claim": "The GRASP model distinguishes constitutional isomers via learned graph topology, not atom counts.",
+   "evidence": "AUROC for `cls` features is 0.78 (mean) while bag-of-tokens AUROC is exactly 0.5 across n=300 pairs with token_match_fraction of 1.0.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C;H3][O][CH2]`. Prediction: If model relies on topology, molecules with different SMILES but identical atom counts will have distinct CLS vectors (cosine distance > 0).",
+   "prediction": "Cosine distance between original and rewired `cls` vectors should be non-zero (observed 0.182), whereas bag-of-tokens distances remain ~ -0.0."
+  },
+  {
+   "claim": "Connectivity information is encoded in hidden layers, not input tokens.",
+   "evidence": "Token match fraction is 1.0 for all pairs; yet AUROC remains 0.78 for CLS features (layers 6/12).",
+   "kind": "shows",
+   "test": "RDKit `GetNumAtoms` label column check. Prediction: Atom counts must be identical for original and rewired molecules.",
+   "prediction": "Atom count lists from RDKit iteration will match exactly, confirming the AUROC signal arises from structural aggregation in transformer layers."
+  },
+  {
+   "claim": "The model detects changes in functional group context caused by bond swapping.",
+   "evidence": "Cosine distance between `cls` vectors is 0.182 for rewired pairs where single bonds were swapped between heavy atoms.",
+   "kind": "suspects",
+   "test": "SMARTS: `[C]-[O]`. Prediction: Rewiring that alters local bonding environments (e.g., C-O-C vs C-C) will drive the distance metric higher than random bond swaps preserving functional groups.",
+   "prediction": "Pairs rewired to preserve specific substructures should show lower `cls` distances (<0.182 mean), while those breaking them show higher separation."
+  },
+  {
+   "claim": "Performance is not driven by trivial features like molecular size or composition.",
+   "evidence": "Bag-of-tokens AUROC is 0.5 with std=0, ruling out atom count differences as the driver for CLS performance.",
+   "kind": "shows",
+   "test": "Filter pairs where `Chem.MolFromSmiles` MW diff > 1 Da. Prediction: If trivial features drive results, filtering by composition should drop AUROC to ~0.5; if topology drives it, AUROC remains high.",
+   "prediction": "AUROC for filtered set (identical atom counts) will remain near 0.78, confirming topological encoding is the primary signal."
+  }
+ ],
+ "trivial_explanations": [
+  "The token_match_fraction of 1.0 confirms that input tokens are identical between original and rewired molecules; thus, any AUROC > 0.5 for CLS features must arise from graph structure processing (message passing/attention) rather than atom type or count differences.",
+  "Bag-of-tokens distance is -0.0 because the feature set sums static atomic properties which do not change when bonds are reconnected between existing heavy atoms."
+ ]
+}

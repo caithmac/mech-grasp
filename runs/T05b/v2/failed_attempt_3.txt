@@ -1,0 +1,44 @@
+Finding parent molecules...
+Found 300 parent molecules.
+Processing model variant: pretrained
+Error processing pretrained layer 6 for F: '6'
+Error processing pretrained layer 6 for Cl: '6'
+Error processing pretrained layer 6 for OH: '6'
+Error processing pretrained layer 6 for NH2: '6'
+Error processing pretrained layer 6 for CH3: '6'
+Error processing pretrained layer 6 for COOH: '6'
+Error processing pretrained layer 6 for CN: '6'
+Error processing pretrained layer 6 for NO2: '6'
+Error processing pretrained layer 12 for F: '12'
+Error processing pretrained layer 12 for Cl: '12'
+Error processing pretrained layer 12 for OH: '12'
+Error processing pretrained layer 12 for NH2: '12'
+Error processing pretrained layer 12 for CH3: '12'
+Error processing pretrained layer 12 for COOH: '12'
+Error processing pretrained layer 12 for CN: '12'
+Error processing pretrained layer 12 for NO2: '12'
+Processing model variant: random
+Error processing random layer 6 for F: '6'
+Error processing random layer 6 for Cl: '6'
+Error processing random layer 6 for OH: '6'
+Error processing random layer 6 for NH2: '6'
+Error processing random layer 6 for CH3: '6'
+Error processing random layer 6 for COOH: '6'
+Error processing random layer 6 for CN: '6'
+Error processing random layer 6 for NO2: '6'
+Error processing random layer 12 for F: '12'
+Error processing random layer 12 for Cl: '12'
+Error processing random layer 12 for OH: '12'
+Error processing random layer 12 for NH2: '12'
+Error processing random layer 12 for CH3: '12'
+Error processing random layer 12 for COOH: '12'
+Error processing random layer 12 for CN: '12'
+Error processing random layer 12 for NO2: '12'
+Warning: No matrix data available to plot swaps.png
+Analysis complete.
+Found 300 parent molecules with aromatic C-H.
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05b\v2\script.py", line 261, in <module>
+    val = results["consistency"]["pretrained"]["12"].get(X, 0.0) # Handle missing keys gracefully for print
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: '12'

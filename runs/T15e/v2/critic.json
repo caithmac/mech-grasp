@@ -1,0 +1,32 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "**Missing random-init/control baselines**: The script only tests GRASP-A1/A2 against each other, but never includes a random-initialized model or token-bag/size baselines to establish whether rel_enant \u2248 0.003 is meaningful noise vs learned signal.",
+  "**No statistical significance reported**: All distance metrics are single-point means over n=1000 molecules with no std/dev across seeds, making it impossible to assess if the ~0.003 gap from zero (A2) or between enant/diast is statistically distinguishable from noise.",
+  "**LogP probe R\u00b2 incomplete**: Only layer-6 R\u00b2 reported; task specification requires both layers [6,12] for logp metrics in results.json structure.",
+  "**Metric misuse risk**: LogP drift uses mean absolute difference (d_enant/d_diast) which is fine, but no baseline comparison to random permutation or shuffled labels exists."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "A1 treats enantiomers as identical vectors",
+   "status": "supported",
+   "reason": "rel_enant = ~0.0 for A1 matches expectation; sanity check passes (4.47e-09 < 1e-4)"
+  },
+  {
+   "claim": "A2 encodes chiral configuration in latent space",
+   "status": "untested",
+   "reason": "rel_enant \u2248 0.003 is non-zero but without random-init baseline or seed std, cannot distinguish learned stereo encoding from model noise"
+  },
+  {
+   "claim": "LogP achirality preserved (d_enant << d_other)",
+   "status": "supported",
+   "reason": "d_enant = 0.004 vs d_other = 1.52 is ~380x difference, consistent with physical principle; but no statistical validation"
+  },
+  {
+   "claim": "Diastereomer perturbations comparable to enantiomeric inversion (rel_diast \u2248 rel_enant)",
+   "status": "untested",
+   "reason": "Values are numerically similar (~0.003 vs ~0.002) but no statistical test confirms whether this similarity is meaningful or just noise"
+  }
+ ],
+ "rerun_instructions": "1. Add random-initialized model baseline (same architecture, weights initialized randomly); compute rel_enant/diast for it to establish noise floor.\n\n2. Run 3-5 seeds with different data shuffles; report mean \u00b1 std for all distance metrics in results.json.\n\n3. Complete logp R\u00b2 reporting: add layer-12 probe_r2 value (currently missing from JSON).\n\n4. Add token-bag/size baseline comparison to rule out that rel_enant \u2248 0.003 is just vector space artifact rather than stereo encoding.\n\n5. Consider AUROC for logP prediction quality instead of R\u00b2 if class imbalance exists in logp labels."
+}

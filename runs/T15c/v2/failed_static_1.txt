@@ -1,0 +1,5 @@
+Static check failed before running:
+script.py:212:30: undefined name 'total_tts'
+script.py:227:39: undefined name 'batch_size'
+script.py:228:25: undefined name 'batch_size'
+script.py:241:8: undefined name 'total_tts'

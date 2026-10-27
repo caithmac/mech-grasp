@@ -1,0 +1,25 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "MW residualized size baseline (0.888) is inconsistent with other targets (~-0.003) and theoretical expectations (should be ~0 if MW is removed from features). Bag/Morgan baselines dropped for MW in resid run, but Size did not, suggesting residualization logic failed specifically for MW or metric reporting is broken.",
+  "Random Init R\u00b2 for MW (0.994) matches GRASP (0.994), confirming triviality, but the residualized metrics are unreliable for this target."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "MW prediction is trivially correlated with heavy atom count.",
+   "status": "supported",
+   "reason": "Raw size R\u00b2 = 1.0, Bag/Morgan ~1.0. However, residualized evidence is broken (size baseline 0.888)."
+  },
+  {
+   "claim": "TPSA depends on heteroatom identity...",
+   "status": "supported",
+   "reason": "Size R\u00b2=0.21 vs Morgan=0.97."
+  },
+  {
+   "claim": "GRASP performance degrades at Layer 12...",
+   "status": "supported",
+   "reason": "Layer 6 > Layer 12 for all targets except MW (where triviality dominates)."
+  }
+ ],
+ "rerun_instructions": "Debug `probe_mols` residualization logic for MW target. Ensure `size_feats` passed to residualized run excludes the target variable itself if it's being residualized, or fix metric reporting so size baseline in `resid` reflects variance explained by size features on the residualized target (should be ~0). Re-run MW probe with corrected residualization."
+}

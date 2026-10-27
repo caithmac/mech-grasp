@@ -1,0 +1,58 @@
+{
+ "summary": "The Pretrained L6 SAE encodes specific chemical substructures (functional groups, neighbor environments) in its latent space that Random initialization does not capture at this layer depth.",
+ "claims": [
+  {
+   "claim": "Pretraining induces Layer 6 latents with high specificity for functional group presence within atom-type contexts, whereas random weights do not achieve this threshold.",
+   "evidence": "Pretrained `context_chemistry` count = 44 (within-token AUROC >= 0.9), Random `context_chemistry` count = 0. Top latent Latent 2610 has within_auroc=0.999 for fg_hydroxyl.",
+   "kind": "shows",
+   "test": "SMARTS: `[C;$(CO)]`. Prediction: For atoms matching this SMARTS, activation of Latent 2610 should have AUROC > 0.95 against the concept label.",
+   "prediction": "AUROC >= 0.98 for Pretrained on test set; Random SAE latent activations will show AUROC < 0.7 (no separation)."
+  },
+  {
+   "claim": "Latent 2610 specifically represents Carbon atoms in hydroxyl-bearing environments (C-OH), not just generic oxygen presence.",
+   "evidence": "tok_j=150, element_of_tok_j='C', within_concept='fg_hydroxyl', within_auroc=0.999. Global AUROC is lower (0.567).",
+   "kind": "suspects",
+   "test": "SMARTS: `[CH2;$(CO)]` or `[CH1;$(CO)]`. Prediction: Latent 2610 activation should correlate with C atoms attached to O, not just any Carbon.",
+   "prediction": "Activation mean on `C-OH` carbons > Activation mean on aliphatic `C-C` bonds."
+  },
+  {
+   "claim": "Carboxylic acid features are split across atom types: Latent 845 fires on Carbons (tok=125), Latent 3045 fires on Oxygens (tok=54) within the same functional group context.",
+   "evidence": "Latent 845: tok_j=125, elem=C, concept fg_carboxylic_acid, within_auroc=0.961. Latent 3045: tok_j=54, elem=O, concept fg_carboxylic_acid, within_auroc=0.961.",
+   "kind": "shows",
+   "test": "SMARTS for Carboxyl C vs O. Prediction: Latent 845 fires on `C(=O)O` carbons; Latent 3045 fires on `C(=O)O` oxygens (both OH and =O).",
+   "prediction": "Latent 845 AUROC > 0.9 for Carboxyl C subset of token 125 atoms."
+  },
+  {
+   "claim": "Neighbor connectivity (`has_O_neighbor`) is encoded as a distinct feature from functional group identity, detectable on Carbon tokens.",
+   "evidence": "Latents 2804/3314: tok_j=13 (C), within_concept='has_O_neighbor', within_auroc ~0.99. Firing frequency > 1000.",
+   "kind": "shows",
+   "test": "SMARTS: `[CHx;X2]` where one neighbor is O. Prediction: Latent activation correlates with C atoms having at least one Oxygen bond, regardless of whether it forms a specific FG like ether or alcohol.",
+   "prediction": "AUROC > 0.95 for `has_O_neighbor` on token 13 subset."
+  },
+  {
+   "claim": "Sulfonamide groups are detected via Nitrogen tokens (Latent 822/4065) with high within-token specificity, distinct from generic N features.",
+   "evidence": "Latent 822: tok_j=50, elem=N, concept fg_sulfonamide, within_auroc=0.972. Latent 1898 similar (within_auroc=0.985).",
+   "kind": "shows",
+   "test": "SMARTS: `[N;$(NS(=O)(=O))]`. Prediction: Activation of Latent 822 on Nitrogen atoms should distinguish Sulfonamide N from Amine/Amide N.",
+   "prediction": "AUROC > 0.95 for `fg_sulfonamide` label within token 50 subset."
+  },
+  {
+   "claim": "Global AUROCs (~0.5-0.7) are significantly lower than Within-Token AUROCs (>0.9), indicating the features are conditional on atom type/token, not global molecule properties.",
+   "evidence": "Latent 2610: Global=0.567 vs Within=0.999. Latent 845: Global=0.666 vs Within=0.996.",
+   "kind": "shows",
+   "test": "Compare AUROC on full dataset (all tokens) vs subset of `tok_j`. Prediction: Full set AUROC should drop to ~0.5-0.7 due to noise from non-firing token types.",
+   "prediction": "Global AUROC < 0.6 for all top context latents."
+  },
+  {
+   "claim": "The 'context_chemistry' class is trivially absent in Random SAEs, confirming pretraining drives chemical feature emergence rather than data sparsity alone.",
+   "evidence": "Random `n_alive`=3473 (vs Pretrained 4096), but `context_chemistry`=0. All top latents for random would have within_auroc < 0.9.",
+   "kind": "shows",
+   "test": "Re-run analysis on Random SAE activations with same concept labels. Prediction: No latent will reach AUROC >= 0.9 threshold for any chemical concept.",
+   "prediction": "Max Within-Token AUROC in Random set < 0.85."
+  }
+ ],
+ "trivial_explanations": [
+  "High firing frequencies (e.g., Latent 2804 freq=1003) may reflect common aliphatic carbons with oxygen neighbors rather than rare toxicophores.",
+  "Token IDs like '13' or '150' likely map to specific Crippen atom types; the specificity comes from L6 context, not token ID alone."
+ ]
+}

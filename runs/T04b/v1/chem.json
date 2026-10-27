@@ -1,0 +1,7 @@
+{
+ "summary": "No numerical results available to cite due to execution errors in both readouts (mean6 and cls12). All AUROC values are null; all direction test metrics failed with shape mismatch or unfitted estimator errors.",
+ "claims": [],
+ "trivial_explanations": [
+  "The experiment design tests whether GRASP encodes discrete Lipinski thresholds vs continuous physicochemical properties. This is a valid interpretability question, but the current results contain no numbers to support any claim about model behavior."
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "summary": "GRASP-A2 encodes stereochemistry (unlike A1), but treats enantiomers and diastereomers as structurally similar perturbations to the scaffold rather than distinct chemical entities in embedding space, while preserving achiral property invariance for logP.",
+ "claims": [
+  {
+   "claim": "GRASP-A2 distinguishes stereoisomers from identical molecules (unlike A1), confirming it reads chiral tags in layers 6 and 12.",
+   "evidence": "A2 `rel_enant` = 0.004 at L12 cls, whereas A1 `rel_enant` = 0.0 for all layers/pooling types (results.json).",
+   "kind": "shows",
+   "test": "SMARTS: `[C@H]`. Prediction: If model ignores stereochemistry, A2 enantiomer distance should equal A1 (`~0.0`). Since 0.004 > 0.0, the vector space encodes tag inversion.",
+   "prediction": "A2 `rel_enant` must be significantly non-zero (e.g., > 1e-3) while A1 remains < 1e-5."
+  },
+  {
+   "claim": "The LogP probe head learns achiral property invariance: enantiomers and diastereomers yield identical logP predictions to the original molecule.",
+   "evidence": "A2 L6 `d_enant` = 0.004, A2 L12 `d_diast` = 0.003 vs A2 L6 `d_other` = 1.521 (results.json).",
+   "kind": "shows",
+   "test": "Label column: 'logp'. Prediction: For enantiomers/diastereomers, probe decision distance should be near zero (<0.01), significantly lower than for different molecules (>1.0).",
+   "prediction": "`d_enant` and `d_diast` must remain < 0.05 while `d_other` > 1.0."
+  },
+  {
+   "claim": "Embedding distance (`rel`) is dominated by scaffold topology rather than stereochemical inversion count; diastereomers are not systematically further from origin than enantiomers.",
+   "evidence": "A2 L6 cls `rel_diast` = 0.002 vs `rel_enant` = 0.002 (equal); A12 mean `diast`=0.003 vs `enant`=0.004 (`diast < enant`) (results.json).",
+   "kind": "suspects",
+   "test": "SMARTS: `[C@@H]` and `[C@H]`. Prediction: If model weights inversion count, diastereomers (>1 center change) should have `rel_diast > rel_enant`. Observed equality suggests topology dominates.",
+   "prediction": "`rel_diast` \u2248 `rel_enant` (both << 0.05), while both are << `rel_other` (~0.97). If stereo-count mattered, diast would be larger."
+  },
+  {
+   "claim": "The low relative distances for isomers compared to random molecules (`other`) reflect trivial structural identity (same atoms/connectivity) rather than learned property similarity.",
+   "evidence": "`rel_other` = 0.974 at L6 cls A2 vs `rel_enant` = 0.002; all share identical Crippen atom types and graph topology (results.json).",
+   "kind": "shows",
+   "test": "RDKit: Compare MolToSmiles(O) with O' where atoms are permuted but tags inverted vs Molecule P with different scaffold. Prediction: `rel` distance for tag-inverted isomers must be < 0.1, while scaffold change > 0.5.",
+   "prediction": "`rel_enant/diast` << `rel_other`. If model learned properties only, random molecules might cluster closer if they shared logP."
+  }
+ ],
+ "trivial_explanations": [
+  "The small values of `rel_enant` and `rel_diast` (~0.003) compared to `rel_other` (~1.0) are trivially explained by the fact that E, D, and O share identical atom types (Crippen), connectivity graphs, and scaffolds; only chiral tags differ.",
+  "The A2 model's ability to distinguish enantiomers from random molecules (`rel_enant`=0.004 vs `other`=0.97) is expected for any graph transformer that processes input SMILES with stereochemistry."
+ ]
+}

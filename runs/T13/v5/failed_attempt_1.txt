@@ -1,0 +1,17 @@
+Loaded 4000 molecules and 92662 atom rows
+Fitting molecule logp probes...
+Fitting atom crippen probes...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v5\script.py", line 378, in <module>
+    res_val = utils.memo(key, lambda k=j, c=concept, s=sign, f=fam: run_feature(k, c, s, f))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\utils.py", line 69, in memo
+    out = to_jsonable(fn())
+                      ^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v5\script.py", line 378, in <lambda>
+    res_val = utils.memo(key, lambda k=j, c=concept, s=sign, f=fam: run_feature(k, c, s, f))
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v5\script.py", line 267, in run_feature
+    rel_change_val_s = float(np.mean(diffs_norm_s / norms_cl[valid_mask]))
+                                                    ~~~~~~~~^^^^^^^^^^^^
+IndexError: boolean index did not match indexed array along axis 0; size of axis is 128 but size of corresponding boolean axis is 300

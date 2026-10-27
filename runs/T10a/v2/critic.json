@@ -1,0 +1,27 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Coverage Failure: Script ignored Supervisor Hint requiring re-runs of SR-ARE, SR-p53, SR-HSE, SR-MMP (tox21) and CT_TOX with seeds=(0..9). Current results lack robust variance estimates for these high-noise tasks.",
+  "Confounds Uncontrolled: `residualized_size` is false. Claims about encoding 'beyond fingerprints' are confounded by size baselines reaching 0.756 AUROC (SR-MMP Morgan) to 0.837 (Bag).",
+  "Over-claiming Stats: NR-AR-LBD claim A1 improves over GRASP cites gap 0.83 vs 0.82 with std ~0.09. Gap < noise, not statistically significant.",
+  "Schema Deviation: `cls12` key contains layers [4,6] data despite task spec for layer 12 only."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP L12 captures topology beyond Morgan",
+   "status": "untested",
+   "reason": "No residualization of size; high AUROC gap could be MW-driven. No isomer ablation test."
+  },
+  {
+   "claim": "Deep layers degrade ClinTox signal",
+   "status": "untested",
+   "reason": "CT_TOX L12 std=0.129 (GRASP) vs Random 0.834. Gap ~0.13 is within noise without requested 10-seed robustness check."
+  },
+  {
+   "claim": "A1 improves over raw GRASP",
+   "status": "unsupported",
+   "reason": "Gap (0.01) smaller than std (~0.09). Cannot conclude improvement statistically."
+  }
+ ],
+ "rerun_instructions": "Re-run SR-ARE, SR-p53, SR-HSE, SR-MMP and CT_TOX with seeds=(0..9), pool='mean', layers=[12] under new memo keys (e.g., _mean_10seeds). Enable residualized_size=true for claims on 'beyond fingerprints'."
+}

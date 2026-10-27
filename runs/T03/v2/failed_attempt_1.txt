@@ -1,0 +1,34 @@
+Loading molecule-level data...
+Running probes...
+Error probing logp with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing logp with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing tpsa with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing tpsa with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing hbd with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing hbd with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing hba with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing hba with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing rot_bonds with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing rot_bonds with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing n_rings with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing n_rings with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing n_aromatic_rings with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing n_aromatic_rings with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing fsp3 with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing fsp3 with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing qed with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing qed with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing sa_score with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing sa_score with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing formal_charge with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing formal_charge with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing pains_alert with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing pains_alert with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing brenk_alert with pool=cls, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Error probing brenk_alert with pool=mean, resid=False: unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'
+Constructing summary table...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T03\v2\script.py", line 105, in <module>
+    if "layers" in r:
+       ^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not iterable

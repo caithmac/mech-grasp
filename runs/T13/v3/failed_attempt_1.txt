@@ -1,0 +1,10 @@
+Fitting molecule logp probes...
+Fitting atom crippen probes...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v3\script.py", line 70, in <module>
+    Q[L] = probes.FixedProbe(A.atom[L], df["crippen_logp_contrib"].values, g)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 54, in __init__
+    (_, (tr, te)), = list(_splits(np.asarray(groups)[idx], None, (seed,)))
+                                  ~~~~~~~~~~~~~~~~~~^^^^^
+IndexError: too many indices for array: array is 0-dimensional, but 1 were indexed

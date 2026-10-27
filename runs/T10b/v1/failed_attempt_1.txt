@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T10b\v1\script.py", line 321, in <module>
+    analyze_acts(At, "pretrained")
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T10b\v1\script.py", line 59, in analyze_acts
+    y_valid_raw = Y_t.loc[Y_t.index.isin(smi_t), task].values[keep_mask]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+IndexError: boolean index did not match indexed array along axis 0; size of axis is 0 but size of corresponding boolean axis is 7680

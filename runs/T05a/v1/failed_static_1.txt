@@ -1,0 +1,3 @@
+Static check failed before running:
+script.py:155:50: undefined name 'mol_from_smiles'
+script.py:156:50: undefined name 'mol_from_smiles'

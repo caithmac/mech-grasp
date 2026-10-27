@@ -1,0 +1,19 @@
+Processed 6/72 heads
+Processed 12/72 heads
+Processed 18/72 heads
+Processed 24/72 heads
+Processed 30/72 heads
+Processed 36/72 heads
+Processed 42/72 heads
+Processed 48/72 heads
+Processed 54/72 heads
+Processed 60/72 heads
+Processed 66/72 heads
+Processed 72/72 heads
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T07c\v1\script.py", line 216, in <module>
+    run_script()
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T07c\v1\script.py", line 180, in run_script
+    im0 = axes[0].imshow(mat_aro, cmap="RdBu_r", vmin=0, vmax=max(np.max(mat_aro), 1e-6)) # Positive drop means head helps
+          ^^^^^^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'imshow'

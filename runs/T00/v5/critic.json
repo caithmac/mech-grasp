@@ -1,0 +1,36 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "smiles_invariance mean cosine distance=0.534 is way too high for a graph model that should be invariant to SMILES permutation; expected ~0 (float16 noise level), this suggests model includes string features or has graph construction bug",
+  "stereo_blindness all distances exactly 0.0 is suspicious - verify utils.cosine_distance isn't returning similarity instead of distance",
+  "token_check only 4 tokens with 1 mixed seems low - verify vocabulary size and that atom_labels returns correct token columns"
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Model sensitive to SMILES permutation (not purely topological invariant)",
+   "status": "untested",
+   "reason": "smiles_invariance ran but shows high distances suggesting model may not be truly graph-based; need to investigate if string features leak into embeddings"
+  },
+  {
+   "claim": "Model ignores stereochemistry",
+   "status": "supported",
+   "reason": "stereo_blindness mean=0.0, max=0.0 confirms stereoisomers produce identical embeddings as expected for stereo-blind model"
+  },
+  {
+   "claim": "Pretrained model learns layer-dependent activation scaling",
+   "status": "supported",
+   "reason": "norms_pretrained vary from 48-104 while norms_random constant ~300, confirming pretraining adjusts scales"
+  },
+  {
+   "claim": "Input tokenization has aromaticity ambiguity for 25% of atoms",
+   "status": "untested",
+   "reason": "token_check ran but only 4 tokens returned; need to verify vocabulary size and that all atom types are represented"
+  },
+  {
+   "claim": "Pretrained CLS spans more dimensions than random noise",
+   "status": "supported",
+   "reason": "effective_rank pretrained=9.89 vs random=5.81 confirms pretraining expands representational capacity"
+  }
+ ],
+ "rerun_instructions": "1. For smiles_invariance: verify model architecture truly uses only graph topology (no string features); if using GRASP, check that Chem.MolToSmiles(mol, doRandom=True, canonical=False) produces valid graphs; 2. For stereo_blindness: add print statements to verify utils.cosine_distance returns proper distances in [0,2]; 3. For token_check: print len(df_atoms.columns) and all columns starting with 'tok_' to verify vocabulary size; 4. Re-run smiles_invariance on fresh molecules to rule out caching issues"
+}

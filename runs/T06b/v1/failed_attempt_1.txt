@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T06b\v1\script.py", line 65, in <module>
+    preds_canonical = model.run(enc, batch_canonical)[0]  # shape (300, 768)
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+TypeError: 'Acts' object is not subscriptable

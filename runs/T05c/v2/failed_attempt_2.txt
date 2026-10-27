@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05c\v2\script.py", line 407, in <module>
+    main()
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05c\v2\script.py", line 60, in main
+    idxs = rng.choice(len(bonds), size=4, replace=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "numpy/random/_generator.pyx", line 917, in numpy.random._generator.Generator.choice
+ValueError: Cannot take a larger sample than population when replace is False

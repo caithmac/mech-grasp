@@ -1,0 +1,239 @@
+{
+ "logp_mean": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "tpsa_mean": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "qed_mean": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "pains_alert_cls": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "pains_alert_mean": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "brenk_alert_cls": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "brenk_alert_mean": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "n_aromatic_rings_cls": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "n_aromatic_rings_mean": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "hbd_cls": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "hbd_mean": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "hba_cls": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "hba_mean": {
+  "error": "probe_mols() got an unexpected keyword argument 'size'"
+ },
+ "positive_rates": {
+  "pains_alert_rate": 0.03538,
+  "brenk_alert_rate": 0.27442
+ },
+ "summary": [
+  {
+   "target": "logp",
+   "pool": "mean",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "logp",
+   "pool": "cls",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "tpsa",
+   "pool": "mean",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "tpsa",
+   "pool": "cls",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "qed",
+   "pool": "mean",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "qed",
+   "pool": "cls",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "pains_alert",
+   "pool": "cls",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "pains_alert",
+   "pool": "mean",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "brenk_alert",
+   "pool": "cls",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "brenk_alert",
+   "pool": "mean",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "n_aromatic_rings",
+   "pool": "cls",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "n_aromatic_rings",
+   "pool": "mean",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "hbd",
+   "pool": "cls",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "hbd",
+   "pool": "mean",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "hba",
+   "pool": "cls",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  },
+  {
+   "target": "hba",
+   "pool": "mean",
+   "metric": "N/A",
+   "bag": "N/A",
+   "morgan": "N/A",
+   "size": "N/A",
+   "grasp_best": "N/A",
+   "grasp_best_layer": "N/A",
+   "random_at_best": "N/A",
+   "grasp_layer12": "N/A"
+  }
+ ]
+}

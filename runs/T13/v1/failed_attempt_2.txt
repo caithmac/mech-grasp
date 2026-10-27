@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v1\script.py", line 347
+    results_feature[cond_name][L] = {
+                                    ^
+SyntaxError: '{' was never closed

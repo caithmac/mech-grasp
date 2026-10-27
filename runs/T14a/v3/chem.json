@@ -1,0 +1,30 @@
+{
+ "summary": "Layer 12 specialization suppresses general chemistry",
+ "claims": [
+  {
+   "claim": "Trained GRASP models undergo a geometric collapse at Layer 12 that is absent in Random initialization, indicating task-specific compression of chemical information.",
+   "evidence": "Participation Ratio (PR) drops from ~165 to ~4 for `a1_step1` L6->L12 (`pretrained`: 119.7 -> 13.5), whereas Random remains stable (~28-30). Anisotropy increases at Layer 12 in trained models (e.g., `a1_step1`: 0.31 -> 0.8) vs Random (0.42 -> 0.54).",
+   "kind": "shows",
+   "test": "Compute PR for clean activations restricted to specific functional group subsets (SMARTS: `[N;H]` amines, `c1ccccc1` aromatics) at L6 vs L12.",
+   "prediction": "If Layer 12 blurs chemistry via compression, the subset-specific PR should drop significantly more than global PR in trained models compared to Random."
+  },
+  {
+   "claim": "The RTD detection signal becomes orthogonal to the principal axes of clean chemical variance at Layer 12.",
+   "evidence": "`var_frac_rtd` drops from L6 to L12 for all trained variants (e.g., `a1`: 0.76 -> 0.14), while Random stays low/stable (~0.05). Cosine similarity between RTD probe weights and clean PCs remains negligible (<0.09) across layers.",
+   "kind": "shows",
+   "test": "Calculate cosine similarity between Layer 12 activations of atoms labeled as 'aromatic' (RDKit `IsAromatic`) vs non-aromatic, projected onto the RTD probe vector w.",
+   "prediction": "Similarity should be near zero for trained models at L12; if chemistry were preserved in the RTD direction, similarity would correlate with aromatic labels."
+  },
+  {
+   "claim": "Layer 12 retains high discriminative power on 'hard' replacement cases (matching degree) using non-topological chemical cues.",
+   "evidence": "`rtd_auroc_samedeg` remains >0.97 at L12 for trained models (`a1_step1`: 0.989), significantly higher than Random (~0.79). This persists despite masking degree information, implying reliance on bond order or electronic context.",
+   "kind": "shows",
+   "test": "Probe accuracy on atoms where replacement token matches original valence but differs in hybridization (SMARTS: `C(=O)` vs `C-O`), using RDKit labels for Crippen atom types.",
+   "prediction": "Trained models should maintain high AUROC (>0.9) at L12, whereas Random will fail (~0.5-0.6), confirming non-trivial chemical encoding survives the collapse."
+  }
+ ],
+ "trivial_explanations": [
+  "The drop in Participation Ratio (PR) and rise in Anisotropy could be trivial depth effects if observed in Random models, but since PR stays flat (~30) for `random` across layers while trained models crash to <20, the collapse is training-dependent.",
+  "High RTD AUROC at Layer 12 might simply reflect that later layers aggregate context better; however, the geometric metrics (PR/Aniso) confirm this comes with representational compression."
+ ]
+}

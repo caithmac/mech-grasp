@@ -1,0 +1,37 @@
+{
+ "mean6": {
+  "threshold_test": {
+   "ro5_logp": {
+    "lr_auc": NaN,
+    "lr_balanced_accuracy": NaN,
+    "ridge_auc": NaN,
+    "ridge_balanced_accuracy_thresholded_5": NaN
+   },
+   "ro5_pass": {
+    "lr_auc": NaN,
+    "lr_balanced_accuracy": NaN,
+    "ridge_auc": NaN,
+    "ridge_balanced_accuracy_thresholded_5": NaN
+   }
+  },
+  "direction_test": {}
+ },
+ "cls12": {
+  "threshold_test": {
+   "ro5_logp": {
+    "lr_auc": NaN,
+    "lr_balanced_accuracy": NaN,
+    "ridge_auc": NaN,
+    "ridge_balanced_accuracy_thresholded_5": NaN
+   },
+   "ro5_pass": {
+    "lr_auc": NaN,
+    "lr_balanced_accuracy": NaN,
+    "ridge_auc": NaN,
+    "ridge_balanced_accuracy_thresholded_5": NaN
+   }
+  },
+  "direction_test": {}
+ },
+ "figure_error": "shape mismatch: objects cannot be broadcast to a single shape.  Mismatch is between 'x' with shape (2,) and 'height' with shape (0,)."
+}

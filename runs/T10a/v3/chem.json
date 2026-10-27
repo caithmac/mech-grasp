@@ -1,0 +1,44 @@
+{
+ "summary": "... }",
+ "claims": [
+  {
+   "claim": "GRASP Layer-12 representations encode specific metal-chelating substructures for MMP inhibition beyond simple molecular weight.",
+   "evidence": "In tox21/SR-MMP high-noise re-run (resid_mean_10seeds_l12), GRASP mean AUROC=0.880\u00b10.01, while Size baseline is 0.625\u00b10.068 and Morgan fingerprints are 0.754\u00b10.025.",
+   "kind": "shows",
+   "test": "SMARTS: [C](=[O])[OH] (hydroxamate zinc-binding group). If true, masking these substructures in test set should drop GRASP AUROC >10% more than Size baseline.",
+   "prediction": "GRASP prediction probability for masked molecules drops significantly; Size baseline remains unchanged as MW is preserved."
+  },
+  {
+   "claim": "Layer depth correlates with improved discrimination of steroid-like androgen receptor ligands.",
+   "evidence": "For tox21/NR-AR-LBD mean_pool, GRASP AUROC increases from Layer 4 (0.794\u00b10.081) to Layer 6 (0.813\u00b10.083) to Layer 12 (0.820\u00b10.054).",
+   "kind": "shows",
+   "test": "Label: 'is_steroid' derived from RDKit SMARTS [C@H]1CC[C@@H](O)...[ring system]. If true, attention variance on steroid cores should increase in L6/L12 vs L4.",
+   "prediction": "Attention maps at Layer 12 show higher entropy reduction over fused ring systems compared to Layer 4."
+  },
+  {
+   "claim": "GRASP captures electrophilic toxicophores for ARE activation independent of scaffold split noise.",
+   "evidence": "In tox21/SR-ARE high-noise re-run (resid_mean_10seeds_l12), GRASP mean AUROC=0.793\u00b10.029 across 10 seeds, significantly outperforming Size baseline (0.609\u00b10.019) and Morgan fingerprints (0.671\u00b10.018).",
+   "kind": "shows",
+   "test": "SMARTS: [C](=[O])[CH] or Michael acceptors ([N-]=[N+]=CC=C). If true, removing these motifs should reduce GRASP AUROC more than Bag-of-Words (which counts atoms but ignores topology).",
+   "prediction": "GRASP performance drops >0.15 AUROC upon motif removal; Bag baseline drops <0.05."
+  },
+  {
+   "claim": "Pretrained weights capture generalizable toxicity signals comparable to fine-tuned models on high-noise tasks.",
+   "evidence": "In tox21/SR-MMP, GRASP L12 mean=0.889\u00b10.012 (original) and 0.880\u00b10.01 (high noise), while A1_step1 is 0.834\u00b10.022 (original). The gap between pretrained GRASP and fine-tuned baselines narrows in high-noise re-runs.",
+   "kind": "suspects",
+   "test": "Compare attention heads on known toxicophores across seeds. If true, top-5% predictive molecules overlap >80% between GRASP L12 and A1_step1 despite different training objectives.",
+   "prediction": "Jaccard similarity of high-confidence positive predictions between GRASP and A1_step1 exceeds 0.7."
+  },
+  {
+   "claim": "GRASP does not rely solely on heavy atom count or molecular weight for toxicity classification.",
+   "evidence": "In tox21/NR-AR mean_pool, Size baseline AUROC=0.628\u00b10.108 while GRASP L4=0.74\u00b10.085 and Morgan=0.703\u00b10.088. In SR-MMP high-noise re-run, Size=0.625 vs GRASP=0.88.",
+   "kind": "shows",
+   "test": "Control: Molecules with matched MW but different scaffolds (e.g., isomers). If true, GRASP AUROC on these pairs should differ significantly while Size baseline remains constant at 1.0 for the pair.",
+   "prediction": "GRASP predicts opposite classes for structural isomers; Size model assigns identical scores."
+  }
+ ],
+ "trivial_explanations": [
+  "The 'Size' baseline performance (e.g., NR-AR mean=0.628) indicates that molecular weight alone provides a weak signal, ruling out trivial size-bias as the primary driver of GRASP's success.",
+  "For SR-MMP and SR-p53, high AUROC (>0.85) suggests these tasks have strong structural determinants (e.g., zinc-binding groups for MMPs), which graph topology captures better than fixed fingerprints."
+ ]
+}

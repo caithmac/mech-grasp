@@ -1,0 +1,1 @@
+{"lin": {"4": NaN, "6": NaN, "8": NaN, "10": NaN, "12": NaN}, "mlp": {"4": NaN, "6": NaN, "8": NaN, "10": NaN, "12": NaN}, "lin_err": {"4": NaN, "6": NaN, "8": NaN, "10": NaN, "12": NaN}, "mlp_err": {"4": NaN, "6": NaN, "8": NaN, "10": NaN, "12": NaN}, "lin_drop": Infinity, "mlp_drop": Infinity, "best_layer_lin": 4, "best_layer_mlp": 4}

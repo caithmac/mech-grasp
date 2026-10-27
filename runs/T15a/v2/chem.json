@@ -1,0 +1,44 @@
+{
+ "summary": "GRASP-A2 learns explicit bond inputs but still computes topology-dependent chemistry; MR prediction degrades at depth.",
+ "claims": [
+  {
+   "claim": "Aromaticity is not merely read from the input embedding in GRASP-A2, as A2 achieves 99.9% accuracy (Error=0.001) by Layer 6 while its random-weight control with identical inputs only reaches ~96% (Error=0.039).",
+   "evidence": "Layer 6 `aromatic` error_model: 0.001 vs error_ctrl: 0.039.",
+   "kind": "shows",
+   "test": "SMARTS `[cH]C(=O)N`: Force aromaticity flag on non-aromatic ring in input; A2 should predict 'non-aromatic' if it computes H\u00fcckel count, whereas `a2_random` would follow the erroneous token.",
+   "prediction": "Aromatic prediction accuracy drops to <50% for forced anti-aromatic inputs only if model relies solely on tokens; GRASP-A2 will maintain >90% by correcting via graph context."
+  },
+  {
+   "claim": "Hybridization is computable from explicit bond types without deep layers in A2, as both models reach 1.0 accuracy (Error=0.0) at Layer 2.",
+   "evidence": "`hybridization` layer 2 error_model: 0.0 for both `a2` and `a1`. Control errors remain ~0.1.",
+   "kind": "shows",
+   "test": "RDKit SMARTS `[C;X3]`: Check sp-hybridized carbons (e.g., alkynes). If bond types are explicit inputs, Layer 2 should suffice for all hybridization states.",
+   "prediction": "Layer 4 error will not improve beyond Layer 2 values of 0.0."
+  },
+  {
+   "claim": "Molecular Refractivity (MR) prediction degrades in deeper layers of A2 compared to its control, suggesting the model prioritizes learned graph features over Crippen atom-additivity at depth.",
+   "evidence": "`crippen_mr_contrib` Layer 6 error_model: 0.123 vs error_ctrl: 0.042; Model R2 drops from 0.95 (Layer 0) to 0.877 (Layer 6).",
+   "kind": "suspects",
+   "test": "Plot predicted MR against Crippen sum for molecules with >10 heavy atoms at Layer 6 vs Layer 2.",
+   "prediction": "Correlation coefficient between prediction and atom-additive baseline will decrease by ~30% in deeper layers."
+  },
+  {
+   "claim": "Neighbor context (O/Halogen) is captured as early as Layer 2, consistent with first-hop aggregation in graph transformers.",
+   "evidence": "`has_O_neighbor` error_model: 0.0 at Layer 2; Control remains Error=0.072.",
+   "kind": "shows",
+   "test": "SMARTS `C-O`: Isolate ether carbons and check prediction confidence at Layer 1 vs Layer 3.",
+   "prediction": "Layer 1 accuracy will be <85%, rising to >99% by Layer 2."
+  },
+  {
+   "claim": "Ring size requires deeper context than hybridization, with best performance for A2 occurring at Layer 6 (Error=0.245) rather than Layer 2.",
+   "evidence": "`ring_size` layer 6 error_model: 0.245 vs Layer 2 error_model: 0.253; Control remains ~0.61-0.67 across layers.",
+   "kind": "shows",
+   "test": "SMARTS `C1CCCCC1`: Test cyclohexane ring size classification at different depths.",
+   "prediction": "Layer 4 accuracy will not exceed Layer 6 values for complex fused rings."
+  }
+ ],
+ "trivial_explanations": [
+  "Token baseline matches Layer 0 error exactly (e.g., aromatic Error=0.113), indicating initial embeddings contain no computed chemistry yet; all learning occurs in attention layers.",
+  "MR degradation at depth may be trivial if A2 overfits to specific scaffold sizes rather than atomic contributions."
+ ]
+}

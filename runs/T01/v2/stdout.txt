@@ -1,0 +1,8 @@
+Loading data...
+
+--- stderr ---
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T01\v2\script.py", line 16, in <module>
+    smi = data.get_smiles(SMILES_SET)
+          ^^^^
+NameError: name 'data' is not defined

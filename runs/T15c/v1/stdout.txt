@@ -1,0 +1,10 @@
+Loading/training A2 SAE...
+Loading/training Random A2 SAE...
+=== T15c Results Summary ===
+A2 Context-Chemistry Latents: 178 (Ref GRASP: ~93)
+Random A2 Context-Chemistry Latents: 11
+Families in A2:
+  - functional_group: 50
+  - bond_derived: 84
+  - neighbour: 21
+  - ring: 23

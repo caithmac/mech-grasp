@@ -1,0 +1,36 @@
+{
+ "summary": "The Pretrained GRASP model learns long-range chemical propagation by Layer 12 (dist>=6 rel_change=0.481), unlike Random models which fail beyond dist=3 (rel_change=0.05). This indicates learned message passing for global properties, not just local topology.",
+ "claims": [
+  {
+   "claim": "Layer 0 embeddings strictly isolate the edited atom; no graph-based propagation has occurred yet.",
+   "evidence": "At Layer 0, `dist=1` mean rel change is exactly 0.0 across all models (Pretrained: 0.0, Random: 0.0).",
+   "kind": "shows",
+   "test": "SMARTS: `[C]([H])([H])[CH3]`. Edit central C to N. Prediction: `rel_change` for methyl H atoms at distance=1 must be exactly 0.0.",
+   "prediction": "dist=1 rel change = 0.0"
+  },
+  {
+   "claim": "Pretrained GRASP learns message passing that propagates edits across >6 bonds by Layer 8-12, whereas Random models do not.",
+   "evidence": "At Layer 12, Pretrained `dist>=6` mean is 0.481 (std=0.005), while Random `dist>=6` mean is only 0.051.",
+   "kind": "shows",
+   "test": "SMARTS: `[C]([H])([H])[CH2][CH2][CH2][CH2][CH3]`. Edit terminal C to N at distance=7 from other end. Prediction: Pretrained `rel_change` for dist>=6 atoms > 0.4; Random < 0.1.",
+   "prediction": "Pretrained rel change >= 0.4"
+  },
+  {
+   "claim": "The CLS token aggregates local edits into global representations, but does not linearly track MW/LogP changes after Layer 8 in Pretrained models.",
+   "evidence": "CLS mean `rel_change` at L12 is 0.531 for Pretrained, yet correlation with MW (`avg_r_mw`) drops to -0.016 (near zero).",
+   "kind": "suspects",
+   "test": "Label: `MW`. Prediction: For single atom edits, CLS change should correlate weakly (<|r|=0.2) with MW shift at L12.",
+   "prediction": "|correlation| < 0.2"
+  },
+  {
+   "claim": "Propagation decay flattens in deep layers of Pretrained models (L8+), suggesting global mixing dominates over local distance-based attenuation.",
+   "evidence": "Pretrained `dist=3` rel change grows from 0.198 at L4 to 0.541 at L12; `dist>=6` grows from 0.103 (L4) to 0.481 (L12).",
+   "kind": "shows",
+   "test": "SMARTS: `[cH]`. Edit aromatic C in benzene ring vs aliphatic chain. Prediction: Aromatic `rel_change` at dist=6+ should be higher than alkane if electronic delocalization is encoded.",
+   "prediction": "Aromatic > Alkane"
+  }
+ ],
+ "trivial_explanations": [
+  "Layer 0 behavior (dist>0 = 0.0) confirms the edit token only affects its own embedding before GNN layers, ruling out input leakage artifacts."
+ ]
+}

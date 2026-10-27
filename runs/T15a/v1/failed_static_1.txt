@@ -1,0 +1,3 @@
+Static check failed before running:
+script.py:60:70: undefined name 'pd'
+script.py:102:41: undefined name 'run_probe_fn'

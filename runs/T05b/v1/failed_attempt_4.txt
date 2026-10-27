@@ -1,0 +1,18 @@
+Loaded 300 parent molecules.
+Failed to compile reaction for F: module 'rdkit.Chem' has no attribute 'ReactionFromSmarts'
+Failed to compile reaction for Cl: module 'rdkit.Chem' has no attribute 'ReactionFromSmarts'
+Failed to compile reaction for OH: module 'rdkit.Chem' has no attribute 'ReactionFromSmarts'
+Failed to compile reaction for NH2: module 'rdkit.Chem' has no attribute 'ReactionFromSmarts'
+Failed to compile reaction for CH3: module 'rdkit.Chem' has no attribute 'ReactionFromSmarts'
+Failed to compile reaction for COOH: module 'rdkit.Chem' has no attribute 'ReactionFromSmarts'
+Failed to compile reaction for CN: module 'rdkit.Chem' has no attribute 'ReactionFromSmarts'
+Failed to compile reaction for NO2: module 'rdkit.Chem' has no attribute 'ReactionFromSmarts'
+Min variants per substituent: 0
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05b\v1\script.py", line 73, in <module>
+    variants_batches = [list(variants_smi[name]) for name in substituent_names]
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05b\v1\script.py", line 73, in <listcomp>
+    variants_batches = [list(variants_smi[name]) for name in substituent_names]
+                             ~~~~~~~~~~~~^^^^^^
+KeyError: 'F'

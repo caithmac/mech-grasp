@@ -1,0 +1,27 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Coverage Gap: Supervisor Hints explicitly requested 'a1_cls_12' and 'a1_mean_6', but script only loads 'pretrained' and 'random'. These tests were not run.",
+  "Data Format Mismatch: AUROC values are stored as lists `[mean, std]` (e.g., `0.769`, `0.023`) instead of the expected dict structure `{\"mean\": ..., \"std\": ...}` per schema description and Supervisor Hints style. This caused plotting failure (`figure_error`).",
+  "Statistical Over-claim: Claim that 'Layer-6 mean pooling captures connectivity changes with higher classification accuracy than layer-12 CLS' (AUROC 0.786 vs 0.769) is weak given the standard deviations (~0.034 and ~0.023). The difference (0.017) is smaller than the noise, so this should be framed as 'suggestive', not definitive.",
+  "Plotting Bug: `figure_error` indicates code tried to access keys on list values (`results['auroc'][k]['mean']`) but received lists instead."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained layer 12 CLS vectors distinguish molecules with scrambled non-ring single bonds",
+   "status": "supported",
+   "reason": "AUROC = 0.769 (std 0.023) is significantly higher than bag-of-tokens AUROC = 0.5 and random-init AUROC ~0.57."
+  },
+  {
+   "claim": "Connectivity sensitivity is a learned property of pretraining",
+   "status": "supported",
+   "reason": "Pretrained distance (0.183) >> Random distance (0.002). Pretrained AUROC gap vs baseline > 0.2, while random gap < 0.1."
+  },
+  {
+   "claim": "Layer-6 mean pooling captures connectivity changes with higher classification accuracy than layer-12 CLS tokens",
+   "status": "untested",
+   "reason": "Difference in AUROC (0.786 vs 0.769) is smaller than standard deviations (~0.03). Cannot conclude 'higher' statistically."
+  }
+ ],
+ "rerun_instructions": "1. Add `model.load('a1')` and run encoding/classification for 'a1_cls_12', 'a1_mean_6'. 2. Change AUROC output format to `{\"mean\": float, \"std\": float}` per Supervisor Hint schema (currently lists). 3. Fix plotting code to handle list values or update data structure before plotting."
+}

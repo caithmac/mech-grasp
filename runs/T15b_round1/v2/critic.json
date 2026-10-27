@@ -1,0 +1,26 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Probe Baseline Noise: A2 d_rand = 2.259 while vector distance = 0.0 (CLS). This implies the probe output varies significantly even when input vectors are identical/near-identical, invalidating claims about stereochemical leakage vs random noise.",
+  "A1 Probe Mismatch: A1 Enant Vector Distance = 0.0 but d_enant = 1.26. If vectors are bitwise identical (dist=0), decision difference should be ~0 unless probe has hidden randomness or caching alignment issues.",
+  "Float Precision/Caching Alignment: Task notes 'orig vectors equal the cached ones up to float16 rounding'. The discrepancy between vector distance and probe output suggests a mismatch in precision handling between `data.get_acts` (cached) and re-runs, causing false positives on property leakage."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "A2 fails to distinguish enantiomers from diastereomers",
+   "status": "supported",
+   "reason": "Ratio Diast/Enant = 1.065 is close to 1, indicating latent space does not capture chemical difference magnitude well at CLS level."
+  },
+  {
+   "claim": "LogP probe fails for enantiomers (stereo leakage)",
+   "status": "untested",
+   "reason": "Baseline noise (`d_rand` = 2.259) matches signal (`d_enant` = 2.26). Cannot distinguish stereo effect from model instability/metric error."
+  },
+  {
+   "claim": "A1 is blind to chirality",
+   "status": "supported",
+   "reason": "Enant Vector Distance = 0.0 confirms identical vectors for stereoisomers in A1."
+  }
+ ],
+ "rerun_instructions": "Fix probe reliability: Ensure `model.eval()` before probing and verify deterministic inference (no dropout/BatchNorm variance). Re-run probes comparing cached vs re-runs on a held-out set to quantify baseline noise. If d_rand remains high with dist=0, the metric is invalid for this task; switch to using raw LogP values from probe instead of decision differences or use correlation metrics that tolerate small shifts."
+}

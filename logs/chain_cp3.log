@@ -1,0 +1,7 @@
+=== T13 start 12:21
+=== T13 exit 1 12:35: [12:35:53] MI agent could not produce a working script; supervisor needed
+=== T14a start 12:35
+=== T14a exit 0 13:33: [13:33:00] done: C:\Users\ss864\Desktop\mech-grasp\runs\T14a\v3
+=== T14b start 13:33
+=== T14b exit 0 14:23: [14:23:00] done: C:\Users\ss864\Desktop\mech-grasp\runs\T14b\v3
+=== CHAIN DONE

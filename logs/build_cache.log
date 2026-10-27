@@ -1,0 +1,9 @@
+atoms smiles+scaffolds 2
+mols smiles+scaffolds 32
+atoms pretrained False acts 102
+atoms random False acts 166
+atoms pretrained True acts 214
+mols pretrained False acts 474
+mols random False acts 721
+atom labels 729
+mol labels 1005

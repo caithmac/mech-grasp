@@ -1,0 +1,27 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "1. **Index Mapping Bug (Critical)**: The script violates Supervisor Hint #2 regarding `p.test_idx`. It treats indices as local offsets and remaps them via `valid_indices` (`mol_orig_idx = valid_indices[int(rel_mol_id)]`). Per the hint, these are GLOBAL molecule IDs. This means toxicophore attribution is performed on incorrect molecules (or random noise), invalidating all hit_rate claims for specific functional groups.",
+  "2. **Decomposition Error Scaling**: `decomp_err` values (~7 to 15) are suspiciously high for a linear probe decomposition check, suggesting a systematic scaling mismatch between the attribution formula and the model's internal decision function (e.g., sum vs mean pooling). Comparing Pretrained > Random as 'entanglement' is invalid if both suffer from this implementation artifact.",
+  "3. **Missing Attribution Magnitudes**: `mean_c_tox` and `mean_c_other` are hardcoded to NaN in aggregation, preventing verification of whether toxic atoms have *higher* attribution values than others (only max-atom identity was tested).",
+  "4. **Small Sample Fragility**: SR-p53 claims rely on n_mols \u2248 12.6 per seed average; a hit_rate=1.0 here is statistically fragile and over-interpreted as 'critical' signal."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained GRASP associates Nitroaromatic groups with high confidence...",
+   "status": "unsupported",
+   "reason": "Hit rates are based on incorrect molecule indices due to the mapping bug. The observed gap (0.927 vs 0.621) may be an artifact of index misalignment."
+  },
+  {
+   "claim": "Learned representations... less additively decomposable...",
+   "status": "unsupported",
+   "reason": "High absolute errors (~10-15) indicate a calculation mismatch (scaling/pooling), not necessarily entanglement. Both models show high error."
+  },
+  {
+   "claim": "Epoxides are flagged as critical... SR-p53...",
+   "status": "untested",
+   "reason": "Sample size is too small (~12 molecules) to support 'critical' claims; also affected by index bug."
+  }
+ ],
+ "rerun_instructions": "Fix the `p.test_idx` handling: do NOT map via `valid_indices`. Use indices directly as global IDs. Re-run decomposition check ensuring attribution summation matches model pooling (check if n_atoms division is needed). Verify `mean_c_tox/other` are computed and aggregated in results.json."
+}

@@ -1,0 +1,8 @@
+Processing pretrained...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T14a\v3\script.py", line 287, in <module>
+    p_hard = probes.FixedProbe(X_hard, y_hard, groups=scaf[C.mol_index][hard_mask])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\probes.py", line 51, in __init__
+    raise ValueError("FixedProbe supports binary classification or regression")
+ValueError: FixedProbe supports binary classification or regression

@@ -1,0 +1,6 @@
+Loading datasets...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T06\v1\script.py", line 27, in <module>
+    scaf_subset = scaff_all[indices].copy()
+                  ~~~~~~~~~^^^^^^^^^
+TypeError: only integer scalar arrays can be converted to a scalar index

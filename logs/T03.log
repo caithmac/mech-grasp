@@ -1,0 +1,20 @@
+[22:38:35] T03 -> C:\Users\ss864\Desktop\mech-grasp\runs\T03\v2
+[22:40:49]   attempt 1: executing
+[22:55:09]   ran in 861s ok=False
+[22:55:09]   failed (TypeError: argument of type 'NoneType' is not iterable); asking MI agent to fix
+[22:55:58]   attempt 2: executing
+[22:55:58]   waiting for GPU lock (0s)
+[23:10:05]   ran in 827s ok=False
+[23:10:05]   failed (TypeError: argument of type 'NoneType' is not iterable); asking MI agent to fix [REPEATED - escalating]
+[23:11:08]   attempt 3: executing
+[23:11:09]   waiting for GPU lock (0s)
+[23:27:01]   ran in 943s ok=False
+[23:27:01]   failed (ValueError: Unknown format code 'f' for object of type 'str'); asking MI agent to fix
+[23:27:40]   attempt 4: executing
+[23:27:40]   waiting for GPU lock (0s)
+[23:47:48]   ran in 1085s ok=False
+[23:47:48]   failed (TypeError: float() argument must be a string or a real number, not 'dict'); asking MI agent to fix
+[23:48:25]   attempt 5: executing
+[23:48:25]   waiting for GPU lock (0s)
+[00:06:24]   ran in 781s ok=False
+[00:06:24] MI agent could not produce a working script; supervisor needed

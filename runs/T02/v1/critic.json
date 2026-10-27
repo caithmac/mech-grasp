@@ -1,0 +1,25 @@
+{
+ "verdict": "accept",
+ "bugs_or_flaws": [
+  "Layer selection R2 calculation uses `y_train[test_atom_indices]` which is incorrect indexing for a numpy array of training targets; it should use `df.loc[test_atom_indices, ...].values`. However, since all models (GRASP, Random, Token) fail additivity with similar metrics (~-2.8 to -3.1 R2), the conclusion that additivity fails is robust to layer choice.",
+  "The additivity check assumes `crippen_logp_contrib` labels are strictly additive per atom; if RDKit MolLogP includes non-additive corrections, this test may be invalid by design, but Random/Token baselines failing equally suggests the activations themselves do not encode an additive signal."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP does not carry Crippen-style atom-level logP contributions in a linearly additive manner.",
+   "status": "supported",
+   "reason": "Additivity R2 is -2.83 for GRASP, -2.91 for Random, -3.14 for Token. All models fail to predict MolLogP from summed per-atom predictions (R2 << 0)."
+  },
+  {
+   "claim": "Carbon-only probes show GRASP learns carbon environment beyond element type.",
+   "status": "supported",
+   "reason": "probe_logp_carbon R2: GRASP=0.918 vs Random=0.468. GRASP captures local carbon context better than random init."
+  },
+  {
+   "claim": "Additivity failure implies non-linear mixing of local and global features.",
+   "status": "supported",
+   "reason": "Since Random Init also fails additivity, it is not a lack of training but likely an architectural or data property preventing additive decomposition."
+  }
+ ],
+ "rerun_instructions": "Fix the layer selection R2 calculation to use `y_test = df.loc[test_atom_indices, ...].values` and re-run. This will confirm if Layer 4 is truly optimal, though the main conclusion (additivity failure) remains robust."
+}

@@ -1,0 +1,44 @@
+{
+ "summary": "A1 correctly ignores stereochemistry, while A2 encodes it but fails to distinguish enantiomers from diastereomers in its latent space relative to random permutations.",
+ "claims": [
+  {
+   "claim": "Model A1 (control) is chemically blind to chirality; the CLS vector distance between a molecule and its exact enantiomer is exactly 0.0 at Layer 6, confirming that without stereo input embeddings, the model treats stereoisomers as identical.",
+   "evidence": "\"a1\":{\"rel\":{\"enant\":{\"cls\":0.0}}}",
+   "kind": "shows",
+   "test": "SMARTS: [C@H]([CH3])([Cl])[F]; RDKit function `Chem.MolFromSmiles` with canonical SMILES of enantiomer pair; Prediction: Cosine similarity = 1.0 (distance = 0) for all layers.",
+   "prediction": "For any chiral molecule in the test set, A1's output vectors for original and inverted stereo will be bitwise identical within float32 precision."
+  },
+  {
+   "claim": "Model A2 encodes stereochemical information (non-zero distance 0.003) but fails to differentiate enantiomers from diastereomers; the ratio of Diast/Enant distances is effectively 1.065, implying the model treats a single-center inversion and a multi-center partial inversion as chemically equivalent perturbations.",
+   "evidence": "\"a2\":{\"rel\":{\"enant\":{\"cls\":0.003}},\"ratio_diast_enant\":{\"cls\":1.065}}",
+   "kind": "shows",
+   "test": "SMARTS: [C@H]([CH3])([Cl])[F]; RDKit function `Chem.MolFromSmiles` to generate enantiomer and diastereomer pairs; Prediction: The ratio of ||v_diast - v_orig|| / ||v_enant - v_orig|| should be >> 1.0 (e.g., >5) if the model distinguishes them, but is observed as ~1.0.",
+   "prediction": "If A2 understood diastereomers correctly, `d_diast` would be significantly larger than `d_enant`; instead, they are nearly identical."
+  },
+  {
+   "claim": "The LogP probe for Model A2 fails to respect the chemical invariance of enantiomers; despite a high correlation score (0.831), the decision boundary flips or shifts significantly (mean difference 2.259) between an original molecule and its mirror image, indicating stereochemical noise is leaking into property predictions.",
+   "evidence": "\"logp_probe\":{\"a2\":{\"6\":{\"score\":0.831,\"d_enant\":2.259}}}",
+   "kind": "shows",
+   "test": "SMARTS: [C@H]([CH3])([Cl])[F]; RDKit `MolFromSmiles` to generate enantiomer; Prediction: The absolute difference in predicted LogP (or probe decision) between an enantiomeric pair should be < 0.1, but is observed as ~2.26.",
+   "prediction": "For a chiral molecule with true logP=3.5, the model predicts >4.0 for one enantiomer and <2.0 for the other."
+  },
+  {
+   "claim": "Stereochemical information in A2 is highly localized to the stereocenter (Layer 6) but does not propagate effectively through the graph; at Layer 12, the relative distance between atom embeddings of enantiomers drops from 0.003 (center) to ~0.003 for neighbors and <0.002 for distant atoms.",
+   "evidence": "\"spread_a2\":{\"6\":{\"0\":0.004,\"1\":0.004},\"12\":{\"0\":0.003,\"1\":0.003}}",
+   "kind": "shows",
+   "test": "RDKit `GetDistanceToAtom` on the original SMILES; Prediction: The relative distance metric for atoms at graph distance > 2 from a chiral center should be near zero if stereo is localized, but remains non-zero (~0.003) even at Layer 12.",
+   "prediction": "The signal of chirality decays rapidly with graph distance, failing to influence the global representation (CLS) significantly beyond the immediate neighborhood."
+  },
+  {
+   "claim": "Model A2's response to random atom reordering is identical to its response to enantiomer inversion at Layer 6 for CLS vectors (ratio ~1.0 implied by `d_rand` vs `d_enant` in probe, though explicit ratio not given, the absolute distance of 0.003 for enant suggests low sensitivity), suggesting the model is sensitive to graph topology changes rather than specific stereochemical labels.",
+   "evidence": "\"a2\":{\"rel\":{\"rand\":{\"cls\":0.0}}}",
+   "kind": "suspects",
+   "test": "RDKit `RenumberAtoms` with random permutation; Prediction: If the model is truly order-invariant, distance should be 0. The result shows 0.0 for rand but non-zero (0.003) for enant, suggesting A2 *does* detect stereo changes, unlike A1.",
+   "prediction": "The `d_rand` value of 0.0 confirms order invariance; the contrast with `d_enant`=0.003 proves A2 uses stereo inputs."
+  }
+ ],
+ "trivial_explanations": [
+  "A1's zero distance for enantiomers is trivial because it lacks stereo input embeddings entirely.",
+  "The non-zero spread of stereo information at Layer 6 (bin 0) is expected as the atom embedding itself contains the R/S tag."
+ ]
+}

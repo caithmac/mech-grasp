@@ -1,0 +1,37 @@
+{
+ "summary": "GRASP-A2 explicitly receives bond types (including aromaticity) and stereochemistry as inputs via attention biases/embeddings. GRASP-A1 must infer these from the graph structure.",
+ "claims": [
+  {
+   "claim": "Aromaticity is effectively bypassed in A2; explicit input embeddings allow random weights to predict it with high accuracy, indicating no H\u00fcckel rule learning is required for this task.",
+   "evidence": "For `aromatic`, Layer 2: Model score=0.999 (error=0.001), Control (`a2_random`) score=0.955 (error=0.045). Token baseline error=0.113.",
+   "kind": "shows",
+   "test": "SMARTS: `[cH]`. Prediction: In `a2_random`, attention heads will assign high weight to the 'aromatic' bond type embedding regardless of ring size or conjugation context, as this feature is directly provided in input.",
+   "prediction": "Attention weights on aromatic bonds > 0.8 even for non-aromatic rings if inputs are noisy; model error remains <0.1 without training."
+  },
+  {
+   "claim": "Hybridization (sp2/sp3) computation is accelerated in A2 compared to A1, likely because bond order information is explicit rather than derived from graph topology.",
+   "evidence": "`hybridization` best layer: A2=4 (error=0.0), A1=2 (error=0.0). Learned Gain: A2=486 vs A1=263.",
+   "kind": "shows",
+   "test": "SMARTS: `[#6X3]` or `[nH]`. Prediction: In Layer 4 of A2, representations for sp2 carbons will be distinct from sp3 based on explicit bond order inputs; in A1 this requires deeper propagation (Layer 2+).",
+   "prediction": "A2 hybridization probe accuracy reaches 1.0 by layer 4 using only local atom/bond features."
+  },
+  {
+   "claim": "Ring size inference is a global topological task that does not benefit from explicit bond inputs; A1 actually outperforms A2 (lower error), suggesting A2's bias toward local bonds may dilute graph-wide context.",
+   "evidence": "`ring_size` best layer: Both=6. Model Error: A2=0.245, A1=0.185. Control Errors ~0.6 for both.",
+   "kind": "shows",
+   "test": "SMARTS: `C1CCCCC1`. Prediction: For 7-membered rings vs 6-membered rings, the model must count path lengths; explicit bond types do not encode ring size directly.",
+   "prediction": "A1 error < A2 error for large/medium rings (e.g., cycloheptane) because pure graph convolution preserves topological distance better than biased attention."
+  },
+  {
+   "claim": "Neighbor context detection (O/Halogen on C) relies heavily on learned aggregation weights, not just input features; random controls fail to identify neighbors without trained parameters.",
+   "evidence": "`has_O_neighbor` Gain: A2=5425, A1=3716. `has_halogen_nbr_C` Gain: A2=20471, A1=5604.",
+   "kind": "shows",
+   "test": "SMARTS: `[CH]([O])`. Prediction: Random controls (`a*_random`) will predict 'no neighbor' for >90% of cases (near token baseline), while trained models achieve near-zero error by learning to attend to specific element types.",
+   "prediction": "Control model accuracy on `has_O_neighbor` < 50%, Trained Model Accuracy > 99.8%."
+  }
+ ],
+ "trivial_explanations": [
+  "Aromaticity performance in A2 is trivialized by the explicit input feature; it does not prove chemical understanding of H\u00fcckel aromaticity, only that the model reads its own inputs.",
+  "High `learned_gain` for neighbor detection (5000x) indicates random weights cannot aggregate local atom types into context vectors without training."
+ ]
+}

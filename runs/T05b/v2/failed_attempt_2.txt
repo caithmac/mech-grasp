@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05b\v2\script.py", line 141
+    n_per_substituent.setdefault(kind, {}).setdefault(layer_idx, {}) = {X_name: len(valid_pairs)} # Handle missing keys carefully below
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: cannot assign to function call here. Maybe you meant '==' instead of '='?

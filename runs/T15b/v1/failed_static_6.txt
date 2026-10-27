@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:292:108: invalid syntax

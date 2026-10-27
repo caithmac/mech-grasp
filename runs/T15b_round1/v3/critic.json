@@ -1,0 +1,28 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Coverage Failure (Part 1): The results JSON only contains per-layer values for the last layer processed (L=12) due to a logic bug where `kind_results_rel[f\"pair\"]` is overwritten inside the loop over layers. All requested metrics for L=[0, 2, 4, 6, 8, 12] are missing from results.json.",
+  "Coverage Failure (Part 1): Mean-pooling distances and \"other\" pair comparisons were never computed or saved in `results.json` despite being required by the task setup. Only CLS token distances exist.",
+  "Pipeline Alignment Bug (Part 2): LogP probe deltas (`d_enant`=2.26, `d_rand`=2.259) are physically impossible for enantiomers/identical permutations on a valid pipeline where vectors should match or be near-identical. This confirms the Supervisor Hint: rows of cached data were compared against new runs without strict alignment (likely float16 rounding or index mismatch).",
+  "Inconsistency Check: Part 1 CLS distance for random permutation is reported as `0.0` (`\"a2\":{\"rel\":{...,\"rand\":{\"cls\":0.0}}}`), yet LogP probe delta for the same comparison is `2.259`. This indicates a disconnect between how vectors are stored/loaded in Part 1 vs Part 2, invalidating both sets of numbers as direct evidence.",
+  "Coverage Failure (Part 3): Spread analysis only includes Layer L=0 and L=6+? The results show spread for layers [0, 2, 4, 6, 8, 12] but the script logic `if len(single_center_smis_orig) > 0` wraps it. However, the main issue is that Part 3 relies on A2 only and single-center molecules (n=??), which reduces statistical power compared to full set."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "A1 ignores stereochemistry",
+   "status": "supported",
+   "reason": "Distance = 0.0 for enantiomers is consistent with the claim, though only L=12 data survives due to script bug. The value itself supports A1 being blind."
+  },
+  {
+   "claim": "LogP probe deltas are artifacts of pipeline mismatch",
+   "status": "supported",
+   "reason": "d_rand = 2.26 for identical inputs is a definitive signature of the alignment bug described in Supervisor Hint. Claims about LogP property changes cannot be trusted until fixed."
+  },
+  {
+   "claim": "A2 encodes stereochem locally with decay",
+   "status": "untested",
+   "reason": "Part 3 spread data exists, but Part 1 distance metrics are incomplete (missing layers/mean-pool). Cannot fully validate the 'decay' claim across all depths without fixing layer aggregation."
+  }
+ ],
+ "rerun_instructions": "1. Fix loop overwriting: Store per-layer results in lists/dicts keyed by L before assigning to `results`. Ensure keys like `\"a2\":{\"rel\":{...}}` contain values for ALL layers [0, 2, 4, 6, 8, 12].\n2. Add missing metrics: Implement mean-pooling distance calculation (`||mean(a)-mean(b)||`) and \"other\" pair comparison (molecule i vs i+1).\n3. Fix LogP Probe Alignment: Do not use `data.get_acts` for probe labels if comparing against new runs. Use the vectors from your current run (`model.run(..., kept_smis_orig)`) as both training data and baseline predictions to ensure float16/index alignment.\n4. Verify Consistency: Ensure Part 1 CLS distance logic matches Part 2 vector loading (e.g., check if `acts_rand` actually produces identical vectors for permuted SMILES). If d_rand=0 in Part 1 but >0 in Part 2, the pipeline is inconsistent."
+}

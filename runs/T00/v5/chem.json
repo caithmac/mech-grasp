@@ -1,0 +1,45 @@
+{
+ "summary": "The GRASP model exhibits expected stereo-blindness but fails SMILES invariance checks, suggesting sensitivity to input string features rather than pure graph topology. Pretrained activations show layer-dependent scaling, while random-init activations remain constant at high magnitude. Input tokens have ambiguity regarding aromaticity for 25% of atoms.",
+ "claims": [
+  {
+   "claim": "The model is sensitive to SMILES permutation (not purely topological invariant).",
+   "evidence": "smiles_invariance: mean_cosine_distance=0.534, max=1.153",
+   "kind": "shows",
+   "test": "SMARTS: c1ccccc1; Compare canonical vs random SMILES for 10 molecules. Prediction: Distance ~0 if topological invariant.",
+   "prediction": "Distance should be ~0 (float16 noise level). Observed 0.534 implies string-based features or non-canonical graph construction affect embeddings."
+  },
+  {
+   "claim": "The model ignores stereochemistry (enantiomers treated as identical).",
+   "evidence": "stereo_blindness: mean_cosine_distance=-0.0, max=0.0",
+   "kind": "shows",
+   "test": "SMARTS: C[C@H](N)O vs C[C@@H](N)O; Compare layer-12 CLS vectors.",
+   "prediction": "Distance should be 0 if stereo-blind. Observed 0 confirms model lacks chiral input features (e.g., no chirality flag in atom tokens)."
+  },
+  {
+   "claim": "Pretrained model learns layer-dependent activation scaling, unlike random-init which maintains constant high magnitude.",
+   "evidence": "pretrained_vs_random: norms_pretrained=[48.543...104.395], norms_random=[301.583...297.776]",
+   "kind": "shows",
+   "test": "Compare per-layer norms for pretrained vs random on cached 'atoms' set.",
+   "prediction": "Pretrained norms should vary by layer; Random should be constant (if initialized with LayerNorm). Observed variation confirms pretraining adjusts activation scales."
+  },
+  {
+   "claim": "Input tokenization has ambiguity regarding aromaticity for 25% of atoms.",
+   "evidence": "token_check: mixed_token_count=1, total_token_count=4, fraction_mixed=0.25",
+   "kind": "shows",
+   "test": "SMARTS: c1ccccc1 (aromatic) vs C1CCCCC1 (aliphatic); Check 'aromatic' column for each atom.",
+   "prediction": "Tokens should be distinct if aromaticity is encoded. Observed mixing implies some tokens (e.g., Carbon) can represent both contexts, forcing model to learn from neighbors."
+  },
+  {
+   "claim": "Pretrained CLS representation spans more dimensions than random noise.",
+   "evidence": "cls_effective_rank: pretrained=9.893, random=5.806",
+   "kind": "shows",
+   "test": "Compute participation ratio of CLS covariance for 'mols' set.",
+   "prediction": "Pretrained rank should be higher than random (noise). Observed 9.9 vs 5.8 confirms pretraining expands representational capacity relevant to chemistry."
+  }
+ ],
+ "trivial_explanations": [
+  "SMILES invariance failure likely due to input tokenization including string features or non-canonical graph construction, not just atom counts.",
+  "Stereo blindness is expected for graph models without explicit chiral inputs (e.g., no @/@@ flags).",
+  "Random-init norms are constant because LayerNorm preserves variance during initialization; Pretrained norms vary because learning adjusts scales."
+ ]
+}

@@ -1,0 +1,4 @@
+Results:
+logp: test_mae=0.3398, drift_mean=2.3609, drift_p95=3.1174, drift_over_mae=6.9472
+tpsa: test_mae=5.0488, drift_mean=32.9718, drift_p95=37.7350, drift_over_mae=6.5306
+qed: test_mae=0.0590, drift_mean=0.1299, drift_p95=0.1551, drift_over_mae=2.2027

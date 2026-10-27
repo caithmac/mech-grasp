@@ -1,0 +1,954 @@
+{
+ "positive_rates": {
+  "ro5_pass": 1.0,
+  "ro5_mw": 0.0,
+  "ro5_logp": 0.01656,
+  "ro5_hbd": 0.0,
+  "ro5_hba": 2e-05
+ },
+ "probes": {
+  "ro5_pass_cls": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "cls",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "morgan": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "size": {
+     "mean": 1.0,
+     "std": 0.0
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    }
+   }
+  },
+  "ro5_pass_mean": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "mean",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "morgan": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "size": {
+     "mean": 1.0,
+     "std": 0.0
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    }
+   }
+  },
+  "ro5_mw_cls": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "cls",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "morgan": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "size": {
+     "mean": 1.0,
+     "std": 0.0
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    }
+   }
+  },
+  "ro5_mw_mean": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "mean",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "morgan": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "size": {
+     "mean": 1.0,
+     "std": 0.0
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    }
+   }
+  },
+  "ro5_logp_cls": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "cls",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 0.06485813166253711,
+     "std": 0.007195670568026604
+    },
+    "morgan": {
+     "mean": -0.004371649656399394,
+     "std": 0.008899395536591645
+    },
+    "size": {
+     "mean": 0.03943500580410971,
+     "std": 0.005879836965714592
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": -0.000649747162680366,
+      "std": 0.0008858672668313938
+     },
+     "random": {
+      "mean": -0.0003735200341320836,
+      "std": 0.0005030702380034082
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 0.1514010726604477,
+      "std": 0.01583212122481044
+     },
+     "random": {
+      "mean": 0.0670926892472166,
+      "std": 0.006168792147783297
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 0.19789624053990787,
+      "std": 0.023924793892106836
+     },
+     "random": {
+      "mean": 0.07903777731411217,
+      "std": 0.01043192067220635
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 0.16273742642536718,
+      "std": 0.0008093875252504353
+     },
+     "random": {
+      "mean": 0.08401488724848864,
+      "std": 0.004268283965586125
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 0.2519995391334127,
+      "std": 0.0072810900500421
+     },
+     "random": {
+      "mean": 0.08731671664421721,
+      "std": 0.010866083674473656
+     }
+    }
+   }
+  },
+  "ro5_logp_mean": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "mean",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 0.06485813166253711,
+     "std": 0.007195670568026604
+    },
+    "morgan": {
+     "mean": -0.004371649656399394,
+     "std": 0.008899395536591645
+    },
+    "size": {
+     "mean": 0.03943500580410971,
+     "std": 0.005879836965714592
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": 0.05720620845017924,
+      "std": 0.01010110649152309
+     },
+     "random": {
+      "mean": 0.05925055315770914,
+      "std": 0.008797748539323798
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 0.17701631444133678,
+      "std": 0.014964350685655808
+     },
+     "random": {
+      "mean": 0.06660176955068169,
+      "std": 0.007187152713119861
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 0.1923380359352154,
+      "std": 0.01783818768179914
+     },
+     "random": {
+      "mean": 0.07771303882453484,
+      "std": 0.01122127612516976
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 0.1517166798971912,
+      "std": 0.0017345804655123857
+     },
+     "random": {
+      "mean": 0.0764609879990286,
+      "std": 0.005744031199164261
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 0.2463031266782334,
+      "std": 0.008835110748213254
+     },
+     "random": {
+      "mean": 0.08003969483774902,
+      "std": 0.002329642114765449
+     }
+    }
+   }
+  },
+  "ro5_hbd_cls": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "cls",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "morgan": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "size": {
+     "mean": 1.0,
+     "std": 0.0
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    }
+   }
+  },
+  "ro5_hbd_mean": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "mean",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "morgan": {
+     "mean": 1.0,
+     "std": 0.0
+    },
+    "size": {
+     "mean": 1.0,
+     "std": 0.0
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 1.0,
+      "std": 0.0
+     }
+    }
+   }
+  },
+  "ro5_hba_cls": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "cls",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 0.6666666666666666,
+     "std": 0.4714045207910317
+    },
+    "morgan": {
+     "mean": 0.0,
+     "std": 0.0
+    },
+    "size": {
+     "mean": 0.6666666666666666,
+     "std": 0.4714045207910317
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     },
+     "random": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 0.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 0.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 0.6666666666666666,
+      "std": 0.4714045207910317
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     },
+     "random": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     }
+    }
+   }
+  },
+  "ro5_hba_mean": {
+   "task": "regression",
+   "metric": "r2",
+   "residualized_size": false,
+   "pool": "mean",
+   "n_mols": 50000,
+   "baselines": {
+    "bag": {
+     "mean": 0.6666666666666666,
+     "std": 0.4714045207910317
+    },
+    "morgan": {
+     "mean": 0.0,
+     "std": 0.0
+    },
+    "size": {
+     "mean": 0.6666666666666666,
+     "std": 0.4714045207910317
+    }
+   },
+   "layers": {
+    "0": {
+     "grasp": {
+      "mean": 1.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     }
+    },
+    "4": {
+     "grasp": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     },
+     "random": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     }
+    },
+    "6": {
+     "grasp": {
+      "mean": 0.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     }
+    },
+    "8": {
+     "grasp": {
+      "mean": 0.0,
+      "std": 0.0
+     },
+     "random": {
+      "mean": 0.6666666666666666,
+      "std": 0.4714045207910317
+     }
+    },
+    "12": {
+     "grasp": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     },
+     "random": {
+      "mean": 0.3333333333333333,
+      "std": 0.4714045207910317
+     }
+    }
+   }
+  }
+ },
+ "summary": [
+  {
+   "target": "ro5_pass",
+   "pool": "cls",
+   "positive_rate": 1.0,
+   "bag": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "morgan": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "size": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "grasp_best": 1.0,
+   "best_layer": 0,
+   "random_at_best": 1.0,
+   "grasp_layer12": 1.0
+  },
+  {
+   "target": "ro5_pass",
+   "pool": "mean",
+   "positive_rate": 1.0,
+   "bag": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "morgan": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "size": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "grasp_best": 1.0,
+   "best_layer": 0,
+   "random_at_best": 1.0,
+   "grasp_layer12": 1.0
+  },
+  {
+   "target": "ro5_mw",
+   "pool": "cls",
+   "positive_rate": 0.0,
+   "bag": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "morgan": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "size": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "grasp_best": 1.0,
+   "best_layer": 0,
+   "random_at_best": 1.0,
+   "grasp_layer12": 1.0
+  },
+  {
+   "target": "ro5_mw",
+   "pool": "mean",
+   "positive_rate": 0.0,
+   "bag": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "morgan": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "size": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "grasp_best": 1.0,
+   "best_layer": 0,
+   "random_at_best": 1.0,
+   "grasp_layer12": 1.0
+  },
+  {
+   "target": "ro5_logp",
+   "pool": "cls",
+   "positive_rate": 0.01656,
+   "bag": {
+    "mean": 0.06485813166253711,
+    "std": 0.007195670568026604
+   },
+   "morgan": {
+    "mean": -0.004371649656399394,
+    "std": 0.008899395536591645
+   },
+   "size": {
+    "mean": 0.03943500580410971,
+    "std": 0.005879836965714592
+   },
+   "grasp_best": 0.2519995391334127,
+   "best_layer": 12,
+   "random_at_best": 0.08731671664421721,
+   "grasp_layer12": 0.2519995391334127
+  },
+  {
+   "target": "ro5_logp",
+   "pool": "mean",
+   "positive_rate": 0.01656,
+   "bag": {
+    "mean": 0.06485813166253711,
+    "std": 0.007195670568026604
+   },
+   "morgan": {
+    "mean": -0.004371649656399394,
+    "std": 0.008899395536591645
+   },
+   "size": {
+    "mean": 0.03943500580410971,
+    "std": 0.005879836965714592
+   },
+   "grasp_best": 0.2463031266782334,
+   "best_layer": 12,
+   "random_at_best": 0.08003969483774902,
+   "grasp_layer12": 0.2463031266782334
+  },
+  {
+   "target": "ro5_hbd",
+   "pool": "cls",
+   "positive_rate": 0.0,
+   "bag": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "morgan": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "size": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "grasp_best": 1.0,
+   "best_layer": 0,
+   "random_at_best": 1.0,
+   "grasp_layer12": 1.0
+  },
+  {
+   "target": "ro5_hbd",
+   "pool": "mean",
+   "positive_rate": 0.0,
+   "bag": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "morgan": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "size": {
+    "mean": 1.0,
+    "std": 0.0
+   },
+   "grasp_best": 1.0,
+   "best_layer": 0,
+   "random_at_best": 1.0,
+   "grasp_layer12": 1.0
+  },
+  {
+   "target": "ro5_hba",
+   "pool": "cls",
+   "positive_rate": 2e-05,
+   "bag": {
+    "mean": 0.6666666666666666,
+    "std": 0.4714045207910317
+   },
+   "morgan": {
+    "mean": 0.0,
+    "std": 0.0
+   },
+   "size": {
+    "mean": 0.6666666666666666,
+    "std": 0.4714045207910317
+   },
+   "grasp_best": 1.0,
+   "best_layer": 0,
+   "random_at_best": 0.3333333333333333,
+   "grasp_layer12": 0.3333333333333333
+  },
+  {
+   "target": "ro5_hba",
+   "pool": "mean",
+   "positive_rate": 2e-05,
+   "bag": {
+    "mean": 0.6666666666666666,
+    "std": 0.4714045207910317
+   },
+   "morgan": {
+    "mean": 0.0,
+    "std": 0.0
+   },
+   "size": {
+    "mean": 0.6666666666666666,
+    "std": 0.4714045207910317
+   },
+   "grasp_best": 1.0,
+   "best_layer": 0,
+   "random_at_best": 0.3333333333333333,
+   "grasp_layer12": 0.3333333333333333
+  }
+ ],
+ "figure_error": "0"
+}

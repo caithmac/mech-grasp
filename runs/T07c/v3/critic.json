@@ -1,0 +1,20 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "**Precision Bug in Results File**: The printed output shows `Top head for Aromaticity: l5h7 (drop=0.000283)`, but `results.json` records this as `",
+  "score\": 0.0"
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Layer 3 is the primary computational bottleneck for atomic logp contributions",
+   "status": "supported",
+   "reason": "Whole layer drop of 0.115 at l=3 is significantly larger than other layers (l=2: 0.097, others ~0). This signal exceeds noise floor."
+  },
+  {
+   "claim": "Aromaticity information is distributed redundantly rather than localized in specific attention heads",
+   "status": "untested",
+   "reason": "The `results.json` file rounds all aromaticity drops to 0.0 (e.g., `"
+  }
+ ],
+ "rerun_instructions": "- **Fix JSON Precision**: Update the script's `json.dump` logic or float formatting for small values (`d_aro`). Currently, a drop of 0.000283 is saved as `0.0`, making it indistinguishable from noise in the artifact file.\n- **Verify Random Init Baseline**: Investigate why `Random Init AUROC = 0.945`. This value implies random weights encode label information, which should be ~0.5 for a contextual task on ambiguous tokens. Check if `data.get_acts("
+}

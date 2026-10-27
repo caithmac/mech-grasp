@@ -1,0 +1,24 @@
+{
+ "add_zero_maxdiff": 0.0,
+ "add_vs_patch_maxdiff_L12": 0.0,
+ "add_L6_target_diff": 2.384185791015625e-07,
+ "add_other_mols_maxdiff": 0.0,
+ "raw_recon_vs_forward_maxdiff": 4.76837158203125e-07,
+ "fvu_200": 0.07547935843467712,
+ "crippen_L6": {
+  "linear": 0.8735482866617368,
+  "mlp": 0.9790634512901306
+ },
+ "crippen_L12": {
+  "linear": 0.683717161757751,
+  "mlp": 0.8275026082992554
+ },
+ "arom_ringC_L6": {
+  "linear": 0.999518190484715,
+  "mlp": 0.9995735994669372
+ },
+ "arom_ringC_L12": {
+  "linear": 0.9961792665271496,
+  "mlp": 0.9972934399316906
+ }
+}

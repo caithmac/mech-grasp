@@ -1,0 +1,25 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Missing Random-Init Baseline in Results: The script loads and runs the random-init model (`model.load('random')`), but never reports its AUROC or distance metrics in `results.json`. To claim 'learned graph topology', you must show that Pretrained > Random. Without this comparison, we cannot rule out trivial token-order sensitivity present even in untrained weights.",
+  "Float Formatting Bug: Cosine distance for bag-of-tokens is reported as `-0.0` instead of `0.0`. This suggests a floating-point precision artifact (e.g., subtraction resulting in -epsilon) that should be cleaned up to avoid confusion about negative distances."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP CLS vectors encode topological connectivity distinct from atomic composition",
+   "status": "supported",
+   "reason": "AUROC for `cls` (0.78 \u00b1 0.012) is significantly above chance, while Bag-of-tokens AUROC is exactly 0.5 with std=0. This gap confirms the signal comes from structure processing beyond atom counts."
+  },
+  {
+   "claim": "Connectivity information is encoded in hidden layers",
+   "status": "supported",
+   "reason": "Token match fraction = 1.0 (identical multisets of tokens) yet CLS vectors differ (distance 0.182). This implies aggregation depends on connectivity, not just token content."
+  },
+  {
+   "claim": "Performance is learned topology encoding",
+   "status": "untested",
+   "reason": "Random-init AUROC results are missing from `results.json`. We cannot verify the signal requires training without seeing that Random-Init performance drops to ~0.5 (chance)."
+  }
+ ],
+ "rerun_instructions": "1. Update script to compute and save AUROC/Distance metrics for the random-init model features in `results.json` alongside pretrained results.\n2. Fix cosine distance calculation or post-processing to ensure zero distances are reported as positive 0.0, not -0.0.\n3. Re-run analysis with these fixes."
+}

@@ -1,0 +1,5 @@
+Static check failed before running:
+script.py:234:16: undefined name 'conc'
+script.py:245:18: undefined name 'conc'
+script.py:245:37: undefined name 'conc'
+script.py:247:20: undefined name 'conc'

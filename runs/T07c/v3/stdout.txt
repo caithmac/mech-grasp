@@ -1,0 +1,21 @@
+Processed 6/72 heads
+Processed 12/72 heads
+Processed 18/72 heads
+Processed 24/72 heads
+Processed 30/72 heads
+Processed 36/72 heads
+Processed 42/72 heads
+Processed 48/72 heads
+Processed 54/72 heads
+Processed 60/72 heads
+Processed 66/72 heads
+Processed 72/72 heads
+=== Summary ===
+Clean Aromaticity AUROC: 0.999559
+Random Init Auroc Baseline: 0.944956
+Difference (Signal): 0.054603
+
+Clean Crippen R2: 0.937288
+Random Init R2 Baseline: 0.543506
+Top head for Aromaticity: l5h7 (drop=0.000283)
+Top head for Crippen (l<=3): l3h3 (drop=0.011123)

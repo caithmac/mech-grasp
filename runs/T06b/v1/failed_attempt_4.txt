@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T06b\v1\script.py", line 106, in <module>
+    drifts = np.abs(preds_canonical_pred - preds_variant_pred)  # shape (n_variants,)
+                    ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+ValueError: operands could not be broadcast together with shapes (300,) (5,) 

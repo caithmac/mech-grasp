@@ -1,0 +1,10 @@
+
+--- stderr ---
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T00\v1\script.py", line 80, in <module>
+    d = cosine_dist(cls_canonical[i], all_cls_variants[i*3 + j])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T00\v1\script.py", line 73, in cosine_dist
+    return 1 - np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+               ^^^^^^^^^^^^^^
+ValueError: shapes (1,768) and (1,768) not aligned: 768 (dim 1) != 1 (dim 0)

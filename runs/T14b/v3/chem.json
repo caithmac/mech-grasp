@@ -1,0 +1,37 @@
+{
+ "summary": "The results indicate that Layer 12 in GRASP degrades the fidelity of atomic physicochemical features (LogP, MR) compared to early layers (L4-L6), and this degradation is not fully recovered by non-linear MLP probes (`mlp_drop` ~5-13x). However, binary topological features like aromaticity remain robust (>97% accuracy at L12 despite high relative drop metrics due to near-zero baselines). Random initialization shows no layer-dependent degradation (Drop~1.0), confirming the blur is a learned phenomenon specific to trained models.",
+ "claims": [
+  {
+   "claim": "In `pretrained` GRASP, atomic LogP contributions are degraded by Layer 12 compared to early layers, and non-linear decoding recovers only partial signal.",
+   "evidence": "Linear probe error rises from $0.07$ (L4) to $0.311$ (L12); MLP probe error also increases significantly from $0.015$ (L4 best) to $0.157$ (L12), with `mlp_drop`=10.29.",
+   "kind": "shows",
+   "test": "RDKit Crippen LogP contribution per atom vs Layer 12 MLP decoder output; expect correlation drop from L4 ($R^2 \to 0.85$) to L12 ($R^2 \to 0.69$).",
+   "prediction": "If information were fully re-encoded non-linearly at L12, `mlp_err[12]` should match `mlp_err[L4]`; instead it is $>10\times$ higher."
+  },
+  {
+   "claim": "Binary topological features (aromaticity) remain highly accessible at Layer 12 despite high relative error metrics.",
+   "evidence": "`pretrained`/`aromatic`: Linear absolute error at L12 is $0.004$ vs $0.0$ best; MLP error is $0.003$. Relative drops (`lin_drop`=15, `mlp_drop`=13) are inflated by near-zero baselines.",
+   "kind": "shows",
+   "test": "RDKit SMARTS `[c]` (aromatic carbon) vs Model label at L12; expect >99% match accuracy regardless of probe type.",
+   "prediction": "Absolute error should remain $<0.01$ for both probes, confirming robust encoding survives depth."
+  },
+  {
+   "claim": "The Layer 12 'blur' is specific to learned representations and not an artifact of network depth alone (random weights do not degrade).",
+   "evidence": "`random`/`crippen`: LinDrop=1.06, MLP Drop=1.0 across layers; errors stable ($\text{err} \to 0.2$) from L4 to L12.",
+   "kind": "shows",
+   "test": "Train identical architecture with random weights on same task (LogP); expect flat error curve vs layer index.",
+   "prediction": "If depth caused blur, `random` LinDrop/MLpDrop should be $>4$ like `pretrained`; observed $\text{Drop} \to 1.0$."
+  },
+  {
+   "claim": "RTD-only pretraining (`a1_step1`) learns chemical structure but suffers similar deep-layer degradation as supervised models.",
+   "evidence": "`a1_step1`/`crippen`: LinDrop=1.83, MLP Drop=5.82; absolute L4 error ($0.137$) higher than `pretrained`, yet relative degradation at L12 persists (`mlp_err`=0.142).",
+   "kind": "shows",
+   "test": "Compare `a1_step1` vs `pretrained` on same test set; expect both to show $R^2$ drop from $\text{L6} \to 0.85$ at L12.",
+   "prediction": "Both models should exhibit significant error increase by Layer 12 compared to early layers, confirming depth effect is general."
+  }
+ ],
+ "trivial_explanations": [
+  "For `random` initialization, the stable performance across layers suggests that without learned hierarchical organization, layer index does not inherently destroy information; degradation in trained models reflects optimization dynamics pushing features toward global task embeddings rather than local atomic properties.",
+  "High relative drops (`lin_drop`=430 for `o_neighbor`) are artifacts of near-zero baseline errors ($\text{err}=0.0$ at L4) and do not imply total loss, as absolute error remains low (L12 err=0.028)."
+ ]
+}

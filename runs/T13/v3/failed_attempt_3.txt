@@ -1,0 +1,6 @@
+Fitting molecule logp probes...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v3\script.py", line 57, in <module>
+    M[L] = probes.FixedProbe(A.mean[L], dm["logp"].values, g_mols=np.asarray(scaf_raw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: FixedProbe.__init__() got an unexpected keyword argument 'g_mols'

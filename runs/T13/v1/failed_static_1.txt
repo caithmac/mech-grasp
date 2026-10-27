@@ -1,0 +1,4 @@
+Static check failed before running:
+script.py:144:9: undefined name 'M_mol_probes'
+script.py:527:29: undefined name 'M_mol_probes'
+script.py:527:66: undefined name 'M_mol_probes'

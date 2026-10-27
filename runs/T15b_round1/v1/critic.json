@@ -1,0 +1,32 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "CRITICAL: Part 2 (LogP Probe) test logic was not executed for stereo variants.",
+  "The script explicitly initializes `d_enant`, `d_diast`, and `d_rand` to literal `0.0` in the results dictionary without calling `probes.FixedProbe.decision()` on the enantiomer/diastereomer vectors (see code block: `results[kind][\"logp_probe\"][L] = { ..., \"d_enant\": 0.0, ... }`).",
+  "This means Claim 3 ('Stereochemical information does not propagate to affect LogP predictions') is based on a hardcoded assumption in the script, not empirical evidence.",
+  "The test for property sensitivity was effectively skipped; it must be re-run with actual stereo vectors passed through the probe decision function."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "A1 ignores stereochemistry",
+   "status": "supported",
+   "reason": "Distances are exactly 0.0, consistent with A1 design (no stereo input embeddings). This is a valid control check."
+  },
+  {
+   "claim": "A2 distinguishes enantiomers/diastereomers at CLS level",
+   "status": "supported",
+   "reason": "Non-zero distances observed (`enant`: 0.003, `diast`: 0.004). Diast > Enant is chemically sensible."
+  },
+  {
+   "claim": "LogP predictions are invariant to stereochemistry (diff = 0)",
+   "status": "unsupported",
+   "reason": "The script hardcodes these difference values (`d_enant`, etc.) as `0.0` without computing them from model outputs for stereo variants in Part 2 logic."
+  },
+  {
+   "claim": "Stereo signal decays/spreads to deep layers",
+   "status": "supported",
+   "reason": "Spread results show high diff at Layer 0 (bin 0: 0.124) dropping to ~0.003 uniformly by Layer 6, consistent with dilution into noise."
+  }
+ ],
+ "rerun_instructions": "Fix Part 2 script logic: Load stereo variant embeddings (`acts_enant`, `acts_diast`) and pass them through the fitted probe's `.decision()` method (or re-fit on originals then predict on variants) to compute actual decision differences. Update results.json with computed values instead of hardcoded zeros.\n\nAlso implement calculation for `ratio_diast_enant` per layer as requested in Task Part 1, and include it in `results['a2']['ratio_diast_enant']`. \n\nFix spread_a2 indexing bug: use `end_e` (computed from enantiomer batch indices) instead of `end_m` when slicing `acts_single_enant.atom[L]`, to ensure robustness even if atom counts vary."
+}

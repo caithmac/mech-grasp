@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v2\script.py", line 322
+    z_med_val = np.median([np.abs(Z_subset[lookup[(mol_to_local_idx[int(A.mol_index[g])], int(A.atom_index[g])]], j].toarray().ravel()[0] for g in rows_ablate)]) # Re-calc median from subset? 
+                                                                                                              ^
+SyntaxError: closing parenthesis ']' does not match opening parenthesis '('

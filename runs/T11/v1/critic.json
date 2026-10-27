@@ -1,0 +1,27 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "**Critical Bug: CLS12 Probes Never Ran**\nThe script initializes `results['cls12']` but **never populates it**. The probing loop uses `acts_matrix = R_mean6_pre if kind == 'random' else X_mean6_pre`, which loads Mean embeddings. It never assigns the loaded `X_cls12_pre` or `R_cls12_pre` to any variable used in the probe fitting.\n**Impact**: The Chemist's claim that \"Layer 12 Class Token representations fail... due to class imbalance\" is **false**. They failed because of a code omission, not data properties. This specific evidence must be re-run with correct matrix assignment.",
+  "**Missing Implementation: Threshold vs Continuous Test**\nTask Step 2 explicitly requests regression probes (`P_c = probes.FixedProbe(X, logp...)`) and AUROC against continuous labels for MW/LogP.\nThe script contains a comment `# Threshold vs continuous:` but **no code block implements this**. The results.json lacks these metrics. Claims about \"linear separability\" rely solely on binary classification (AUROC), not the requested regression threshold analysis.",
+  "**Scope Bug in Direction Test**\nDirection test logic relies on loop variables (`X_subset`, `y_binary`) from the end of the inner target loop. While it works because 'ro5_pass' is last, this is fragile and non-idiomatic (variable scope leakage).",
+  "**Suspiciously High AUROCs (~1.0)**\nAUROCs for Random initialization are nearly identical to Pretrained (`mean6` MW: 0.9974 vs 0.9989; LogP: 0.9902 vs 0.9894). This strongly supports the \"trivial encoding\" hypothesis (graph topology preserved in random weights), but requires verification that `Random` model was actually used for probes (script logic confirms this, so likely valid)."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Layer 12 Class Token representations fail... due to class imbalance",
+   "status": "unsupported",
+   "reason": "CLS12 data was never loaded or probed in the script. The 'skipped' status is a code artifact, not experimental evidence of failure."
+  },
+  {
+   "claim": "Layer 6 mean-pooled embeddings linearly separate Ro5 violations regardless of initialization",
+   "status": "supported",
+   "reason": "Mean6 probes ran for both Pretrained and Random. AUROCs are ~0.99-1.0 in both cases, indicating trivial encoding."
+  },
+  {
+   "claim": "'Ro5 Pass' decision is not a simple linear superposition... (R2=0.53)",
+   "status": "supported",
+   "reason": "Direction test logic executed for `ro5_pass` in Pretrained Mean6 mode. R2 of 0.53 supports the claim that 'Pass' isn't just additive."
+  }
+ ],
+ "rerun_instructions": "1. Fix script to load and probe `X_cls12_pre` / `R_cls12_pre` for both kinds (currently only Mean6 is used).\n2. Implement Step 2 logic: Regression probes on continuous MW/LogP values against RO5 thresholds, report AUROC of decision vs labels.\n3. Refactor Direction Test to avoid loop variable scope dependency.\n4. Re-run and re-evaluate Chemist's CLS12 claims."
+}

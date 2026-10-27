@@ -1,0 +1,36 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Random model explodes at layer 12 (norm=Infinity), invalidating cosine comparison.",
+  "Metric labeled 'similarity' but calculated as distance; value 1.039 impossible for similarity.",
+  "Comparison of exploded random baseline to pretrained is methodologically unsound."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "SMILES invariance holds",
+   "status": "supported",
+   "reason": "Max/mean distance 0.0 is expected for graph models."
+  },
+  {
+   "claim": "Model is stereo-blind",
+   "status": "supported",
+   "reason": "Distance 0.0 implies no stereo encoding in input/output."
+  },
+  {
+   "claim": "Pretrained vs Random unrelatedness",
+   "status": "unsupported",
+   "reason": "Random model explodes (Inf norms), comparison invalid."
+  },
+  {
+   "claim": "Tokens don't encode aromaticity",
+   "status": "supported",
+   "reason": "Mixed tokens indicate model must learn context-dependent info."
+  },
+  {
+   "claim": "Effective rank higher in pretrained",
+   "status": "unsupported",
+   "reason": "Random baseline unstable, rank comparison meaningless."
+  }
+ ],
+ "rerun_instructions": "1. Fix random init to be stable (e.g., Xavier/He) so layer 12 norms are finite.\n2. Rename 'mean_cosine_similarity' key to 'mean_cosine_distance' and verify calculation returns [0, 1] range.\n3. Re-run 'pretrained_vs_random' check with stable random baseline.\n4. Verify effective rank computation handles NaN/Inf gracefully or use only valid samples."
+}

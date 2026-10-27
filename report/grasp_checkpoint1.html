@@ -1,0 +1,464 @@
+<title>Does GRASP Know Chemistry?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column (~68ch) with full-width figures and tables; lab-report rhythm. */
+:root {
+  --bg: #f7f8f7;
+  --surface: #ffffff;
+  --ink: #15191c;
+  --ink-2: #4a5157;
+  --ink-3: #737b82;
+  --rule: #dde1e2;
+  --accent: #2a78d6;      /* GRASP series */
+  --contrast: #eb6834;    /* random-init control */
+  --aqua: #1baf7a;        /* secondary GRASP series */
+  --base: #8a9196;        /* token baseline */
+  --good: #1f7a3d; --good-bg: #e6f3ea;
+  --warn: #8a5a00; --warn-bg: #fbf0d9;
+  --bad: #a3302f;  --bad-bg: #f8e4e3;
+  --display: "Newsreader", "Georgia", serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", "Consolas", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121516; --surface: #1a1e20; --ink: #eceeee; --ink-2: #b9bfc2; --ink-3: #8d959a; --rule: #2e3437;
+    --accent: #3987e5; --contrast: #d95926; --aqua: #199e70; --base: #8d959a;
+    --good: #7fd29a; --good-bg: #173322; --warn: #e8c070; --warn-bg: #3a2d10; --bad: #f09a98; --bad-bg: #3d1c1c;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121516; --surface: #1a1e20; --ink: #eceeee; --ink-2: #b9bfc2; --ink-3: #8d959a; --rule: #2e3437;
+  --accent: #3987e5; --contrast: #d95926; --aqua: #199e70; --base: #8d959a;
+  --good: #7fd29a; --good-bg: #173322; --warn: #e8c070; --warn-bg: #3a2d10; --bad: #f09a98; --bad-bg: #3d1c1c;
+}
+body { background: var(--bg); color: var(--ink); font: 15.5px/1.6 var(--body); padding-inline: 20px; }
+main { max-width: 980px; margin: 0 auto; padding-block: 48px 80px; display: grid; gap: 44px; }
+.prose { max-width: 68ch; }
+h1, h2 { font-family: var(--display); font-weight: 600; text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 4.5vw, 2.9rem); letter-spacing: -0.01em; }
+h2 { font-size: 1.55rem; }
+h3 { font-size: 1rem; font-weight: 600; margin: 0; }
+p { margin: 0; }
+section { display: grid; gap: 16px; }
+.eyebrow { font: 500 0.74rem/1 var(--mono); letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); }
+.lede { font-size: 1.12rem; color: var(--ink-2); max-width: 64ch; }
+.meta { font: 0.8rem/1.5 var(--mono); color: var(--ink-3); }
+.verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.v { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.pill { justify-self: start; font: 600 0.72rem/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 8px; border-radius: 4px; }
+.pill.good { color: var(--good); background: var(--good-bg); }
+.pill.warn { color: var(--warn); background: var(--warn-bg); }
+.pill.bad { color: var(--bad); background: var(--bad-bg); }
+.v p { color: var(--ink-2); font-size: 0.94rem; }
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; min-width: 620px; }
+th, td { padding: 9px 12px; text-align: right; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font: 500 0.72rem/1.3 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); background: var(--surface); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+td strong { color: var(--accent); }
+.caption { font-size: 0.86rem; color: var(--ink-3); max-width: 80ch; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 14px 10px; display: grid; gap: 6px; position: relative; }
+figcaption { font-size: 0.86rem; color: var(--ink-2); }
+figure h3 { font-size: 0.95rem; }
+svg { width: 100%; height: auto; display: block; overflow: visible; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.82rem; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--base) 0 4px, transparent 4px 7px); }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font: 0.78rem/1.4 var(--mono); padding: 6px 8px; border-radius: 4px; white-space: nowrap; z-index: 2; }
+ul.tight { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; max-width: 72ch; }
+.callout { background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 4px; padding: 14px 16px; display: grid; gap: 6px; max-width: 76ch; }
+code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%, transparent); padding: 1px 5px; border-radius: 3px; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 22px; font: 0.86rem var(--mono); color: var(--ink-2); }
+.stats b { color: var(--ink); font-weight: 500; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<main>
+  <header style="display:grid; gap:14px">
+    <div class="eyebrow">GRASP · mechanistic interpretability · checkpoints 1–3</div>
+    <h1>Does GRASP know chemistry?</h1>
+    <p class="lede">Yes, and we can now see how. GRASP passes information along bonds like a message-passing network, builds features that recognise functional groups in context (none exist in an untrained copy), and notices when a molecule's connectivity is scrambled. That chemistry comes from self-supervised pretraining, not from the assay labels. The assay step adds a real but narrow toxicity signal. The functional-group features are causally used: removing one at layer 6 takes its concept away from later layers, and for polar groups it moves the logP read-out in the chemically expected direction. The final layer collapses into a few directions and discards fine-grained chemistry in every checkpoint, including GRASP-A2 with explicit bond and stereo inputs. The released model's dependence on SMILES order is caused by its absolute position embeddings: GRASP-A1, trained without them, is exactly order-invariant and loses nothing.</p>
+    <p class="meta">caithmac/GRASP (Step 2), caithmac/GRASP-A1 (Step 1 and Step 2), caithmac/GRASP-A2 (Step 2) · ZINC250k (4,000 molecules atom-level, 50,000 molecule-level), Tox21, ClinTox · Murcko-scaffold splits · Local agents: qwen3.5 9B/4B (checkpoint 1), qwen3.5 35B-A3B (checkpoints 2–3) via Ollama · Every claim below was re-checked by the supervisor</p>
+  </header>
+
+  <section>
+    <div class="eyebrow">Verdict</div>
+    <div class="verdict">
+      <div class="v"><span class="pill good">Chemistry</span><h3>Layers 3–8 compute local chemistry</h3><p>On atoms whose token cannot decide, GRASP's errors are 11× to over 1,000× lower than a random-init control. The receptive field grows with depth: neighbours by layer 4, rings by layers 6–8.</p></div>
+      <div class="v"><span class="pill good">Chemistry</span><h3>Its features are functional groups in context</h3><p>A sparse autoencoder on layer 6 finds 93 features that split atoms sharing one input token by chemistry (phenol C–OH, carboxylate C, sulfonamide N, CF₃ carbon; AUROC up to 1.00). The same analysis on a random-init network finds 0.</p></div>
+      <div class="v"><span class="pill good">Causal</span><h3>The features are used, not just present</h3><p>Removing one layer-6 chemistry feature removes 3–32% of its concept from later layers (more when its duplicates go too); an equal-size random edit removes nothing. Removing the carboxylate, phenol or sulfonamide feature raises predicted logP in 92–100% of molecules, as chemistry predicts.</p></div>
+      <div class="v"><span class="pill good">Mechanism</span><h3>Information flows along bonds</h3><p>Neighbour-attending heads sit in layers 1–4. A single-atom edit spreads outward about one bond per one to two layers; in a random network it spreads evenly with no regard to distance.</p></div>
+      <div class="v"><span class="pill good">Chemistry</span><h3>It notices scrambled connectivity</h3><p>Swap two bonds so every atom token is unchanged: GRASP separates original from rewired molecules with AUROC 0.78 (A1: 0.83); random-init 0.57, token counts 0.50.</p></div>
+      <div class="v"><span class="pill good">Source</span><h3>Pretraining, not assays, taught the chemistry</h3><p>GRASP-A1 before assay supervision (Step 1) matches the final model on every atom-level probe. The assay step adds only a toxicity signal.</p></div>
+      <div class="v"><span class="pill warn">Toxicity</span><h3>Real, narrow, and possibly leaked</h3><p>Four Tox21 stress-response endpoints beat every control by 0.05–0.11 AUROC, and that gain appears only after Step-2 assay training, whose ChEMBL data may contain Tox21. Nuclear-receptor endpoints and ClinTox show no learned signal.</p></div>
+      <div class="v"><span class="pill bad">Shortcut</span><h3>SMILES order leaks in through position embeddings</h3><p>Rewriting a SMILES string moves a layer-12 logP prediction by 0.57 on average. GRASP-A1, the same recipe without absolute positions, is exactly order-invariant and learns the same chemistry.</p></div>
+      <div class="v"><span class="pill warn">Lost</span><h3>Layer 12 collapses and discards chemistry</h3><p>In all four checkpoints the atom representation shrinks from ~180 effective dimensions at layer 8 to 4–22 at layer 12. Even a non-linear probe then reads atom logP contributions no better than from a random network. This comes from pretraining, not the assays. Lipinski flags are no test at all: token counts predict them as well as GRASP.</p></div>
+      <div class="v"><span class="pill good">GRASP-A2</span><h3>Explicit bonds sharpen chemistry, but don't change the story</h3><p>A2 learns aromaticity ~5× more precisely than A1 and builds 178 context features (A1-style GRASP: 93), but its random control gains almost nothing from the bond inputs, and its last layer collapses like the others. Stereo inputs reach the model and spread outward along bonds, but change the final embedding by only ~0.3%, and diastereomers move less than enantiomers.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">1 · Atom-level probes</div>
+    <h2>The token can't tell benzene from cyclohexene. Layer 3 can.</h2>
+    <div class="prose"><p>Each atom enters GRASP as a radius-0 Morgan token: element, degree, H count, charge and an in-ring flag. Nine of the 57 tokens in our data cover both aromatic and non-aromatic atoms (benzene C–H and alkene C–H share token 144), and those nine carry 48.6% of all atoms. We trained linear probes on every layer and kept only atoms whose token occurs with both label values, so the token alone cannot answer. Controls: the same architecture with random weights, and a token-only classifier.</p></div>
+    <div class="figs">
+      <figure><h3>Ring size (smallest ring) on ambiguous atoms</h3><div class="legend" aria-hidden="true"><span><i class="sw" style="background:var(--accent)"></i>GRASP</span><span><i class="sw" style="background:var(--contrast)"></i>Random-init</span><span><i class="sw dash"></i>Token only</span></div><svg id="c-ring" role="img" aria-label="Ring-size error by layer: GRASP falls from 0.78 to 0.12 at layer 8, rises to 0.46 at layer 12; random-init stays near 0.73"></svg><figcaption>Balanced-accuracy error (lower is better), 7 classes.</figcaption></figure>
+      <figure><h3>Crippen logP contribution, carbon atoms</h3><div class="legend" aria-hidden="true"><span><i class="sw" style="background:var(--accent)"></i>GRASP</span><span><i class="sw" style="background:var(--contrast)"></i>Random-init</span><span><i class="sw dash"></i>Token only</span></div><svg id="c-clogp" role="img" aria-label="Carbon Crippen logP R squared by layer: GRASP peaks at 0.92 at layer 4 and declines to 0.66; random-init near 0.47"></svg><figcaption>Probe R² (higher is better). Carbon Crippen types depend on neighbours.</figcaption></figure>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Property (not in token)</th><th>Atoms</th><th>Token error</th><th>Random-init error</th><th>GRASP error, best layer</th><th>GRASP error, layer 12</th></tr></thead>
+      <tbody>
+        <tr><td>Aromatic</td><td class="num">45,079</td><td class="num">0.113</td><td class="num">0.058</td><td class="num"><strong>0.0007</strong> (L6)</td><td class="num">0.0047</td></tr>
+        <tr><td>Conjugated</td><td class="num">61,137</td><td class="num">0.101</td><td class="num">0.051</td><td class="num"><strong>0.0003</strong> (L4)</td><td class="num">0.0077</td></tr>
+        <tr><td>Has N neighbour</td><td class="num">88,619</td><td class="num">0.222</td><td class="num">0.159</td><td class="num"><strong>0.0001</strong> (L4)</td><td class="num">0.026</td></tr>
+        <tr><td>Ester atom</td><td class="num">55,769</td><td class="num">0.225</td><td class="num">0.056</td><td class="num"><strong>0.0023</strong> (L4)</td><td class="num">0.025</td></tr>
+        <tr><td>Michael acceptor atom</td><td class="num">46,488</td><td class="num">0.192</td><td class="num">0.075</td><td class="num"><strong>0.0066</strong> (L6)</td><td class="num">0.015</td></tr>
+        <tr><td>Smallest ring size</td><td class="num">58,775</td><td class="num">0.778</td><td class="num">0.731</td><td class="num"><strong>0.116</strong> (L8)</td><td class="num">0.458</td></tr>
+        <tr><td>Number of rings</td><td class="num">54,441</td><td class="num">0.667</td><td class="num">0.605</td><td class="num"><strong>0.115</strong> (L6)</td><td class="num">0.451</td></tr>
+      </tbody></table></div>
+    <p class="caption">Error = 1 − AUROC for binary labels, 1 − balanced accuracy for multi-class. Mean of 3 scaffold splits; seed-to-seed std is below 0.003 for every binary row. Task T01b (agent), spot-checked by the supervisor.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">2 · Molecule-level probes</div>
+    <h2>The chemistry lives in the atoms, not the CLS token</h2>
+    <div class="prose"><p>Molecular descriptors that are sums over atom types are easy for any representation that counts atoms. Against that bar, the CLS vector adds nothing: it matches the random-init network. Averaging the layer-4 atom vectors instead gives the best readout we found.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Readout</th><th>logP R²</th><th>QED R²</th><th>TPSA R²</th></tr></thead>
+      <tbody>
+        <tr><td>Mean-pooled atoms, layer 4 (GRASP)</td><td class="num"><strong>0.945</strong></td><td class="num"><strong>0.786</strong></td><td class="num">0.976</td></tr>
+        <tr><td>CLS, layer 6 (GRASP)</td><td class="num">0.880</td><td class="num">0.687</td><td class="num">0.911</td></tr>
+        <tr><td>CLS, layer 12 (GRASP default)</td><td class="num">0.852</td><td class="num">0.565</td><td class="num">0.766</td></tr>
+        <tr><td>CLS, random-init network</td><td class="num">0.876</td><td class="num">0.692</td><td class="num">0.979</td></tr>
+        <tr><td>Morgan r2 count fingerprint</td><td class="num">0.925</td><td class="num">0.535</td><td class="num">0.967</td></tr>
+        <tr><td>Bag of input tokens</td><td class="num">0.886</td><td class="num">0.456</td><td class="num">0.997</td></tr>
+      </tbody></table></div>
+    <p class="caption">50,000 molecules, scaffold split, ridge probes. TPSA is fully determined by atom-type counts, so it cannot reward structural knowledge. Lipinski's rule of 5 could not be tested: every ZINC250k molecule passes it. That test moves to checkpoint 2 on datasets with violations.</p>
+    <div class="callout"><h3>Additivity test</h3><p>A ridge probe on layer-4 atom vectors predicts each atom's Crippen group contribution (atom plus its hydrogens). Summed per molecule, the predictions reproduce RDKit's MolLogP with R² 0.90 (MAE 0.34 log units). Token one-hot gives 0.73, random-init 0.85, and GRASP layer 12 gives 0.27.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">3 · SMILES-order sensitivity</div>
+    <h2>The same molecule, written differently, gets a different embedding</h2>
+    <div class="prose"><p>GRASP's config sets <code>position_biased_input: true</code> with 512 absolute positions, so besides graph distances the model sees where each atom sits in the SMILES string. We encoded each molecule in its canonical form and in five random atom orderings.</p></div>
+    <div class="figs">
+      <figure><h3>Cosine distance between orderings of the same molecule</h3><div class="legend" aria-hidden="true"><span><i class="sw" style="background:var(--accent)"></i>GRASP CLS</span><span><i class="sw" style="background:var(--aqua)"></i>GRASP mean of atoms</span><span><i class="sw" style="background:var(--contrast)"></i>Random-init CLS</span></div><svg id="c-order" role="img" aria-label="Order distance by layer: GRASP CLS stays below 0.03 until layer 10 then rises to 0.126 at layer 12; mean of atoms rises steadily to about 0.09; random-init stays below 0.003"></svg><figcaption>300 molecules × 5 orderings. For scale: two random different molecules sit 0.52 apart; a molecule and its most similar neighbour, 0.33.</figcaption></figure>
+      <div class="tablewrap" style="align-self:start"><table style="min-width:0">
+        <thead><tr><th>Measure</th><th>Layer 6</th><th>Layer 12</th></tr></thead>
+        <tbody>
+          <tr><td>Reordered SMILES finds itself (nearest of 4,000)</td><td class="num">97.2%</td><td class="num">63.9%</td></tr>
+          <tr><td>logP prediction drift, mean</td><td class="num">0.39</td><td class="num">0.57</td></tr>
+          <tr><td>logP drift, 95th percentile</td><td class="num">1.04</td><td class="num">1.73</td></tr>
+          <tr><td>logP probe test MAE (for scale)</td><td class="num">0.34</td><td class="num">0.38</td></tr>
+          <tr><td>QED drift, mean (probe MAE)</td><td class="num">0.029 (0.059)</td><td class="num">0.038 (0.071)</td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="callout"><h3>Practical consequence</h3><p><code>GRASPEncoder.encode()</code> does not canonicalise its input. Two users who write the same molecule differently get different embeddings and different predictions. Canonicalising with RDKit before encoding removes the problem at no cost.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">4 · Similarity geometry</div>
+    <h2>GRASP's idea of "similar" is not fingerprint overlap</h2>
+    <div class="prose"><p>Over 3,000 random molecule pairs, we rank-correlated embedding distance with Morgan Tanimoto dissimilarity. Spearman ρ: GRASP CLS layer 12 <b>0.12</b>, layer 6 <b>0.38</b>, mean-pooled layer 6 <b>0.37</b>; random-init network <b>0.55</b> at every layer. Pretraining reorganises molecular similarity away from shared substructure, most strongly at the final layer. That is expected for a model tuned on assay labels, but it means nearest-neighbour searches in GRASP space will not behave like fingerprint searches.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">5 · Three checkpoints compared</div>
+    <h2>Position embeddings cause the order leak. Assays did not teach the chemistry.</h2>
+    <div class="prose"><p>GRASP-A1 is the same model trained without absolute atom-position embeddings, released with its Step-1 (pretraining only) and Step-2 (after 642 ChEMBL assays) weights. Running the same probes on all three separates what each ingredient contributes.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Probe (token-ambiguous atoms)</th><th>GRASP</th><th>A1, Step 2</th><th>A1, Step 1</th><th>Random-init</th><th>Token only</th></tr></thead>
+      <tbody>
+        <tr><td>Aromatic, error at best layer</td><td class="num">0.0009</td><td class="num">0.0018</td><td class="num">0.0017</td><td class="num">0.045–0.061</td><td class="num">0.113</td></tr>
+        <tr><td>Smallest ring size, error at best layer</td><td class="num">0.159</td><td class="num">0.164</td><td class="num">0.152</td><td class="num">0.67–0.73</td><td class="num">0.779</td></tr>
+        <tr><td>Smallest ring size, error at layer 2</td><td class="num">0.484</td><td class="num"><strong>0.279</strong></td><td class="num"><strong>0.272</strong></td><td class="num">0.75</td><td class="num">0.779</td></tr>
+        <tr><td>Smallest ring size, error at layer 12</td><td class="num">0.506</td><td class="num">0.510</td><td class="num">0.533</td><td class="num">0.67–0.72</td><td class="num">0.779</td></tr>
+        <tr><td>Carbon Crippen logP R², best layer</td><td class="num">0.92</td><td class="num">0.90</td><td class="num">0.90</td><td class="num">0.52–0.56</td><td class="num">0.48</td></tr>
+        <tr><td>Cosine distance between atom orderings, CLS 12</td><td class="num">0.118</td><td class="num">0.000</td><td class="num">0.000</td><td class="num">–</td><td class="num">–</td></tr>
+      </tbody></table></div>
+    <p class="caption">Error = 1 − AUROC (aromatic) or 1 − balanced accuracy (ring size), 3 scaffold splits, std ≤ 0.05. A1 controls use the A1 architecture with random weights. Order distance on 300 molecules with random atom permutations. Tasks T12 (agents' extraction read the wrong keys three times; numbers re-extracted from the agents' probe outputs by the supervisor).</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">6 · Attention heads</div>
+    <h2>Neighbour heads early, molecule-wide mixing late, no single head essential</h2>
+    <div class="prose"><p>For each of the 144 heads we measured where atoms send their attention, by graph distance. Then we zeroed heads one at a time, and whole layers at once, and re-scored fixed probes trained on clean activations.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Attention layer</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7–12</th></tr></thead>
+      <tbody>
+        <tr><td>GRASP: heads with &gt;50% on bonded neighbours</td><td class="num">2</td><td class="num">3</td><td class="num">5</td><td class="num">4</td><td class="num">1</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>GRASP: strongest neighbour head</td><td class="num">0.72</td><td class="num">0.76</td><td class="num">0.89</td><td class="num">0.86</td><td class="num">0.58</td><td class="num">0.47</td><td class="num">0.24–0.31</td></tr>
+        <tr><td>A1: heads with &gt;50% on bonded neighbours</td><td class="num">4</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>Random-init: strongest neighbour head</td><td class="num">0.10</td><td class="num">0.09</td><td class="num">0.09</td><td class="num">0.09</td><td class="num">0.09</td><td class="num">0.10</td><td class="num">0.09–0.10</td></tr>
+        <tr><td>GRASP: mean attention to CLS</td><td class="num">0.05</td><td class="num">0.17</td><td class="num">0.05</td><td class="num">0.09</td><td class="num">0.07</td><td class="num">0.16</td><td class="num">0.24–0.39</td></tr>
+      </tbody></table></div>
+    <p class="caption">500 molecules. Bonded neighbours make up 8.6% of keys, so a uniform head scores about 0.09. Even the "diffuse" deep layers put only 0.21–0.38 of attention on atoms four or more bonds away, against 0.57 for the random network.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Zero-ablation (GRASP)</th><th>Aromatic error, layer 6 (clean 0.00044)</th><th>Carbon Crippen R², layer 4 (clean 0.937)</th></tr></thead>
+      <tbody>
+        <tr><td>Worst single head</td><td class="num">0.0007</td><td class="num">0.926</td></tr>
+        <tr><td>All heads of attention layer 1 / 2</td><td class="num">0.0004 / 0.0004</td><td class="num">0.926 / 0.934</td></tr>
+        <tr><td>All heads of attention layer 3 / 4</td><td class="num">0.0008 / 0.0013</td><td class="num"><strong>0.840 / 0.823</strong></td></tr>
+        <tr><td>All heads of attention layer 6</td><td class="num"><strong>0.0018</strong></td><td class="num">–</td></tr>
+      </tbody></table></div>
+    <p class="caption">Fixed linear probes, scaffold test split. The work is spread across heads: no single head matters, but removing the attention of layers 3–4 costs 0.10 of Crippen R², and aromaticity is still decided (AUROC ≥ 0.998) after any one layer is removed. Tasks T07a and T07c; head profiles and the layer-4 ablation recomputed by the supervisor.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">7 · Sparse autoencoder features</div>
+    <h2>GRASP has functional-group features; an untrained copy has none</h2>
+    <div class="prose"><p>We trained TopK sparse autoencoders (4,096 features, 32 active per atom) on layer-6 atom activations: 1.16 million atoms from 50,000 molecules for the main dictionary, and 96,000 atoms for a size-matched comparison with the random-init network. A feature counts as chemistry in context when, among atoms that share one input token, its activation separates a chemical label with AUROC ≥ 0.9. The token is identical across those atoms, so that information has to come from context.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Dictionary (layer 6)</th><th>Unexplained variance</th><th>Token-pure features</th><th>Context features (AUROC ≥ 0.9)</th><th>≥ 0.95</th></tr></thead>
+      <tbody>
+        <tr><td>GRASP, 96k atoms</td><td class="num">0.069</td><td class="num">1.0%</td><td class="num"><strong>93</strong></td><td class="num"><strong>53</strong></td></tr>
+        <tr><td>Random-init, 96k atoms</td><td class="num">0.0014</td><td class="num">31%</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>GRASP, 1.16M atoms</td><td class="num">0.075</td><td class="num">3.7%</td><td class="num">44</td><td class="num">–</td></tr>
+        <tr><td>GRASP-A1, 1.16M atoms</td><td class="num">0.179</td><td class="num">0.3%</td><td class="num">–</td><td class="num">–</td></tr>
+      </tbody></table></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Example GRASP feature</th><th>Fires on token</th><th>Separates</th><th>Within-token AUROC</th></tr></thead>
+      <tbody>
+        <tr><td>2610</td><td>ring C, 3 neighbours, no H</td><td>ring carbon bearing OH (phenol)</td><td class="num">1.000</td></tr>
+        <tr><td>1151</td><td>chain C, 4 neighbours, no H</td><td>carbon bonded to halogen (CF₃)</td><td class="num">1.000</td></tr>
+        <tr><td>845</td><td>chain C, 3 neighbours, no H</td><td>carboxylic acid / carboxylate carbon</td><td class="num">0.9999</td></tr>
+        <tr><td>2804</td><td>CH₃</td><td>methyl bonded to oxygen (methoxy)</td><td class="num">0.99</td></tr>
+        <tr><td>1898</td><td>chain NH, 2 neighbours</td><td>sulfonamide nitrogen</td><td class="num">0.988</td></tr>
+        <tr><td>1316</td><td>chain O, 2 neighbours</td><td>ester oxygen</td><td class="num">0.975</td></tr>
+      </tbody></table></div>
+    <p class="caption">The random network's activations are almost fully determined by the token (it reconstructs to 0.14% unexplained variance, and a third of its features are token-pure), so it has nothing contextual to decompose. A1's layer 6 is harder to compress than GRASP's (0.179 vs 0.075). Tasks T08a and T08b; four features and both size-matched counts recomputed by the supervisor.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">8 · How information moves</div>
+    <h2>A single-atom edit travels outward along the graph</h2>
+    <div class="prose"><p>We swapped the input token of one carbon for the matching nitrogen token, left the graph unchanged, and measured how much every other atom's representation moved, by graph distance from the edit and by layer.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Relative change at distance (bonds)</th><th>Layer</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>6+</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="4">GRASP</td><td class="num">1</td><td class="num">1.13</td><td class="num">0.14</td><td class="num">0.08</td><td class="num">0.04</td><td class="num">0.03</td><td class="num">0.04</td></tr>
+        <tr><td class="num">3</td><td class="num">1.37</td><td class="num">0.43</td><td class="num">0.18</td><td class="num">0.07</td><td class="num">0.06</td><td class="num">0.07</td></tr>
+        <tr><td class="num">6</td><td class="num">1.12</td><td class="num">0.56</td><td class="num">0.45</td><td class="num">0.34</td><td class="num">0.21</td><td class="num">0.11</td></tr>
+        <tr><td class="num">12</td><td class="num">0.69</td><td class="num">0.51</td><td class="num">0.49</td><td class="num">0.45</td><td class="num">0.41</td><td class="num">0.37</td></tr>
+        <tr><td rowspan="2">GRASP-A1</td><td class="num">1</td><td class="num">1.15</td><td class="num">0.57</td><td class="num">0.25</td><td class="num">0.15</td><td class="num">0.06</td><td class="num">0.02</td></tr>
+        <tr><td class="num">6</td><td class="num">0.98</td><td class="num">0.59</td><td class="num">0.49</td><td class="num">0.40</td><td class="num">0.28</td><td class="num">0.13</td></tr>
+        <tr><td rowspan="2">Random-init</td><td class="num">1</td><td class="num">0.91</td><td class="num">0.013</td><td class="num">0.013</td><td class="num">0.013</td><td class="num">0.013</td><td class="num">0.012</td></tr>
+        <tr><td class="num">12</td><td class="num">0.80</td><td class="num">0.048</td><td class="num">0.049</td><td class="num">0.049</td><td class="num">0.048</td><td class="num">0.047</td></tr>
+      </tbody></table></div>
+    <p class="caption">‖edited − clean‖ / ‖clean‖, averaged over 400 molecules. At layer 0 only the edited atom changes, as it should. The trained models behave like message passing; the random network spreads the edit evenly with no regard to distance. By layer 12 the edit is nearly uniform across the molecule while the edited atom's own change halves, which fits the loss of local chemistry at layer 12. Task T09; reproduced by the supervisor on 150 other molecules.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">9 · Structural perturbations</div>
+    <h2>It notices rewired graphs and sorts substituents by polarity</h2>
+    <div class="prose"><p><b>Rewiring.</b> We removed two non-ring single bonds A–B and C–D and reconnected them as A–D and C–B. Every atom keeps its token and degree, so a token count cannot tell the molecules apart. A linear probe can, if the network has learned which connectivities are normal.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Readout</th><th>GRASP</th><th>GRASP-A1</th><th>Random-init</th><th>Bag of tokens</th></tr></thead>
+      <tbody>
+        <tr><td>Original vs rewired AUROC, mean-pooled layer 6</td><td class="num"><strong>0.786</strong></td><td class="num"><strong>0.807</strong></td><td class="num">0.581</td><td class="num">0.500</td></tr>
+        <tr><td>Original vs rewired AUROC, CLS layer 12</td><td class="num"><strong>0.769</strong></td><td class="num"><strong>0.827</strong></td><td class="num">0.567</td><td class="num">0.500</td></tr>
+      </tbody></table></div>
+    <p class="caption">300 pairs, 5-fold cross-validation grouped by pair, std ≤ 0.05. Supervisor re-run on 250 fresh pairs: GRASP 0.775 / 0.772, random-init 0.572 / 0.568. Task T05c.</p>
+    <div class="prose"><p><b>Substituents.</b> We added F, Cl, CH₃, OH, NH₂, COOH, CN or NO₂ to an aromatic C–H in 200–300 molecules and compared the average shift of the layer-12 CLS vector. In GRASP, F, Cl and CH₃ point the same way (cosine 0.76–0.77), as do OH and NH₂ (0.86), while COOH points against the lipophilic groups (−0.57 against CH₃, −0.58 against Cl). In the random network every pair is about +0.5 to +0.7: adding any group just adds atoms. The shift for a given group also varies with the parent molecule (consistency 0.06–0.38, against about 0.5 for random-init), so GRASP has no single "add group X" direction. Task T05b; matrix recomputed by the supervisor.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">10 · Toxicity</div>
+    <h2>A real stress-response signal, which appears only after the assay step</h2>
+    <div class="prose"><p>Linear probes on frozen embeddings (scaffold splits, untested labels dropped) for 12 Tox21 assays and ClinTox. Controls: the random-init network, bag of input tokens, Morgan count fingerprints, and molecule size. The A1 pair shows what Step-2 assay supervision adds.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Endpoint (AUROC, layer-12 mean pool, 10 splits)</th><th>GRASP</th><th>A1 Step 2</th><th>A1 Step 1</th><th>Random-init</th><th>Bag of tokens</th><th>Morgan</th></tr></thead>
+      <tbody>
+        <tr><td>SR-p53 (DNA damage)</td><td class="num"><strong>0.860</strong></td><td class="num">0.878</td><td class="num">0.767</td><td class="num">0.755</td><td class="num">0.752</td><td class="num">0.650</td></tr>
+        <tr><td>SR-ARE (oxidative stress)</td><td class="num"><strong>0.793</strong></td><td class="num">0.802</td><td class="num">0.725</td><td class="num">0.714</td><td class="num">0.721</td><td class="num">0.671</td></tr>
+        <tr><td>SR-HSE (heat shock)</td><td class="num"><strong>0.778</strong></td><td class="num">0.816</td><td class="num">0.712</td><td class="num">0.700</td><td class="num">0.756</td><td class="num">0.618</td></tr>
+        <tr><td>SR-MMP (mitochondrial membrane)</td><td class="num"><strong>0.880</strong></td><td class="num">0.873</td><td class="num">0.833</td><td class="num">0.829</td><td class="num">0.830</td><td class="num">0.754</td></tr>
+        <tr><td>NR-AR (androgen receptor), layer 4, 3 splits</td><td class="num">0.740</td><td class="num">0.735</td><td class="num">0.727</td><td class="num">0.739</td><td class="num">0.737</td><td class="num">0.703</td></tr>
+        <tr><td>NR-AhR (aryl hydrocarbon receptor), layer 4, 3 splits</td><td class="num">0.846</td><td class="num">0.838</td><td class="num">0.838</td><td class="num">0.838</td><td class="num">0.824</td><td class="num">0.736</td></tr>
+        <tr><td>ClinTox CT_TOX</td><td class="num">0.698</td><td class="num">0.757</td><td class="num">0.783</td><td class="num">0.815</td><td class="num"><strong>0.838</strong></td><td class="num">0.787</td></tr>
+      </tbody></table></div>
+    <p class="caption">Split-to-split std 0.01–0.05 for the four stress-response rows, up to 0.10 for ClinTox (96 positives). The A1 Step-1 model sits at the random-init level on every Tox21 endpoint; Step 2 lifts the stress-response endpoints by 0.04–0.11. Morgan here is a linear probe on count fingerprints, a weaker baseline than a tuned random forest. Task T10a.</p>
+    <div class="callout"><h3>Leakage caveat</h3><p>GRASP's Step-2 set is built from ChEMBL activities, and the build removed only TDC ADMET test-set molecules. ChEMBL hosts Tox21 depositions, and the 642 assays are stored by internal ChEMBL assay IDs that we could not map offline. The Step-2 gain may therefore come from having seen these exact assays rather than from learned biology. Mapping the 642 assay IDs to their ChEMBL descriptions would settle it.</p></div>
+    <div class="prose"><p><b>Do the probes look at toxicophores?</b> A linear probe on a mean pool splits exactly into per-atom contributions. For positive test molecules containing a classic toxicophore (nitroaromatic, aromatic amine, Michael acceptor, polycyclic aromatic, epoxide and others), we checked whether the top-contributing atom lies inside it. For <b>SR-ARE</b> it does in 48% of molecules, against 31% by chance and 33% for random-init. The effect is strongest for Michael acceptors (0.46 vs 0.24) and nitroaromatics (0.71 vs 0.50), the electrophiles that activate the Nrf2/ARE pathway. For SR-MMP, SR-p53 and NR-AhR the top atom hits a toxicophore only at chance (0.33–0.36 vs 0.34–0.35), apart from polycyclic aromatic systems for AhR (0.98) and p53 (0.82). Task T10b; computed by the supervisor after the agents' decomposition failed its own sanity check.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">11 · Lipinski's rule of 5</div>
+    <h2>Rule-of-5 flags test atom counting, not chemistry</h2>
+    <div class="prose"><p>On 8,622 Tox21 and ClinTox molecules (7.7% over 500 Da, 9.3% logP over 5, 5.8% failing the rule), every Ro5 flag is linearly readable from GRASP with AUROC 0.98–0.999. So it is from a bag of input tokens (0.991–0.9998) and from the random-init network (0.989–0.9998), because molecular weight, donor and acceptor counts are atom counts and logP is additive. Thresholding a continuous logP probe at 5 predicts the flag at least as well as a probe trained on the flag itself (0.997 vs 0.990), so there is no special rule-threshold representation. Task T11.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">12 · Causal test of the SAE features</div>
+    <h2>Removing a chemistry feature removes the chemistry downstream</h2>
+    <div class="prose"><p>Correlation is not use. For eight layer-6 features we subtracted the feature's contribution (code × decoder direction) from the residual stream of the atoms where it fires, let the model run on, and asked fixed probes at later layers whether the concept was still there. Controls: an edit of the same size in a random direction, and removing the feature together with its duplicate latents. In the reverse direction we added the feature to atoms of the same token that lack the concept.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Feature (concept)</th><th>Removed, L7</th><th>+ duplicates, L7</th><th>Random edit, L7</th><th>Removed, L12</th><th>Added (steer), L7</th><th>logP moves expected way, L8</th></tr></thead>
+      <tbody>
+        <tr><td>845 carboxylate C (+2996)</td><td class="num">0.16</td><td class="num"><strong>0.26</strong></td><td class="num">0.01</td><td class="num">0.01</td><td class="num">0.17</td><td class="num"><strong>100%</strong> (+0.10)</td></tr>
+        <tr><td>2610 phenol C</td><td class="num">0.19</td><td class="num">0.19</td><td class="num">0.01</td><td class="num">0.03</td><td class="num">0.19</td><td class="num"><strong>92%</strong> (+0.03)</td></tr>
+        <tr><td>1898 sulfonamide N (+822)</td><td class="num">0.05</td><td class="num"><strong>0.17</strong></td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0.03</td><td class="num"><strong>94%</strong> (+0.015)</td></tr>
+        <tr><td>3867 C next to N</td><td class="num">0.03</td><td class="num">0.03</td><td class="num">0.00</td><td class="num">0.01</td><td class="num">0.06</td><td class="num">90% (+0.02)</td></tr>
+        <tr><td>1151 C next to halogen</td><td class="num"><strong>0.32</strong></td><td class="num">0.32</td><td class="num">0.02</td><td class="num">0.10</td><td class="num">0.33</td><td class="num">47%</td></tr>
+        <tr><td>2804 C next to O (+3)</td><td class="num">0.12</td><td class="num">0.20</td><td class="num">0.01</td><td class="num">0.05</td><td class="num">0.15</td><td class="num">44%</td></tr>
+        <tr><td>710 aliphatic C–OH</td><td class="num">0.18</td><td class="num">0.18</td><td class="num">0.02</td><td class="num">0.04</td><td class="num">0.18</td><td class="num">51%</td></tr>
+        <tr><td>1316 ester O</td><td class="num">0.13</td><td class="num">0.13</td><td class="num">0.00</td><td class="num">0.05</td><td class="num">0.14</td><td class="num">39%</td></tr>
+      </tbody></table></div>
+    <p class="caption">"Removed" = share of the concept's probe signal (positive minus negative atoms of the same token) lost at that layer; 1.0 would mean all of it. Standard errors ≤ 0.01. logP column: fraction of edited molecules whose mean-pooled layer-8 logP prediction moves in the direction chemistry expects (polar group removed → logP up; halogen removed → logP down), with the mean change in log units. 110–400 target atoms per feature. Task T13 (agents) for single-feature, random and steering conditions; the duplicate-latent condition and every number here were recomputed independently by the supervisor (the agents' duplicate condition was broken).</p>
+    <div class="prose"><p>Three things follow. The features are causal: equal-size random edits do nothing. No single feature carries a whole concept: duplicates and the part of the activation the SAE does not capture hold the rest, and steering moves read-outs toward a concept without ever flipping an atom. And the effect fades to 0–0.10 by layer 12, consistent with the layer-12 collapse below. Where the logP read-out does move, it moves the chemically correct way for polar groups; it does not respond consistently to the halogen, ester, ether-O or aliphatic-OH features.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">13 · Why layer 12 blurs chemistry</div>
+    <h2>The last layers collapse into a few directions and throw fine-grained chemistry away</h2>
+    <div class="prose"><p>GRASP's Step-1 objective is replaced-token detection (RTD): a small generator swaps 25% of atom tokens and the 12-layer encoder must say, for every atom, whether its token was replaced; the RTD head reads layer 12. The head is not released, so we rebuilt the task (15% of atoms per molecule replaced by another token of the same element) and probed each layer.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Measure</th><th>Layer</th><th>0</th><th>4</th><th>6</th><th>8</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="3">Replaced-token AUROC</td><td>GRASP</td><td class="num">0.62</td><td class="num">0.97</td><td class="num">0.97</td><td class="num">0.96</td><td class="num">0.96</td><td class="num">0.96</td><td class="num">0.96</td></tr>
+        <tr><td>A1 Step 1</td><td class="num">0.56</td><td class="num">0.95</td><td class="num">0.96</td><td class="num">0.97</td><td class="num">0.98</td><td class="num">0.98</td><td class="num">0.98</td></tr>
+        <tr><td>Random-init</td><td class="num">0.56</td><td class="num">0.70</td><td class="num">0.69</td><td class="num">0.70</td><td class="num">0.69</td><td class="num">0.69</td><td class="num">0.69</td></tr>
+        <tr><td rowspan="4">Effective dimensions (participation ratio)</td><td>GRASP</td><td class="num">24</td><td class="num">54</td><td class="num">120</td><td class="num"><strong>180</strong></td><td class="num">108</td><td class="num">34</td><td class="num"><strong>13.5</strong></td></tr>
+        <tr><td>A1 Step 1</td><td class="num">10</td><td class="num">109</td><td class="num">163</td><td class="num">171</td><td class="num">56</td><td class="num">35</td><td class="num"><strong>3.8</strong></td></tr>
+        <tr><td>GRASP-A2</td><td class="num">10</td><td class="num">86</td><td class="num">167</td><td class="num">217</td><td class="num">123</td><td class="num">48</td><td class="num">21.9</td></tr>
+        <tr><td>Random-init</td><td class="num">26</td><td class="num">27</td><td class="num">28</td><td class="num">29</td><td class="num">29</td><td class="num">29</td><td class="num">30</td></tr>
+      </tbody></table></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Error at layer (lower is better)</th><th>Probe</th><th>4</th><th>8</th><th>12</th><th>Random-init, 12</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="2">Atom logP contribution (1 − R²), GRASP</td><td>linear</td><td class="num">0.067</td><td class="num">0.170</td><td class="num">0.316</td><td class="num">0.215</td></tr>
+        <tr><td>MLP</td><td class="num">0.013</td><td class="num">0.036</td><td class="num"><strong>0.172</strong></td><td class="num">0.170</td></tr>
+        <tr><td>5- vs 6-membered ring (1 − AUROC), GRASP</td><td>MLP</td><td class="num">0.005</td><td class="num">0.001</td><td class="num">0.064</td><td class="num">0.177</td></tr>
+        <tr><td>Carbon next to O (1 − AUROC), GRASP</td><td>MLP</td><td class="num">0.000</td><td class="num">0.001</td><td class="num">0.022</td><td class="num">0.060</td></tr>
+        <tr><td>Atom logP contribution (1 − R²), A1 Step 1</td><td>MLP</td><td class="num">0.023</td><td class="num">0.041</td><td class="num">0.143</td><td class="num">–</td></tr>
+        <tr><td>Atom logP contribution (1 − R²), GRASP-A2</td><td>MLP</td><td class="num">0.038</td><td class="num">0.091</td><td class="num">0.278</td><td class="num">0.199</td></tr>
+      </tbody></table></div>
+    <p class="caption">Atom set (4,000 molecules, 92,662 atoms), scaffold splits. MLP = one hidden layer (256), same split as the linear probe. Effective dimensions on 20,000 atoms. Tasks T14a, T14b, T15d; T14a and T14b reproduced independently by the supervisor (all values within 0.015).</p>
+    <div class="prose"><p>The simple explanation, that the last layer is where replacements are detected, is wrong: detection is essentially complete by layers 2–4. What happens at layers 10–12 is a collapse: atoms are squeezed into a handful of directions (anisotropy up to 0.8), and quantitative chemistry is discarded, not just hidden. At layer 12 even a non-linear probe reads atom logP contributions no better than from a random network, while coarse categories (aromatic or not, next to O or not) survive. The collapse is strongest in A1 Step 1 (RTD only, 3.8 effective dimensions) and partly undone by assay training. It appears in every checkpoint, including A2. Our working hypothesis, not yet tested, is that the final layers are shaped to feed the single-logit RTD head, for which "does this token fit here?" matters and the fine detail does not.</p></div>
+    <div class="callout"><h3>Practical consequence</h3><p>The README's default representation, the final-layer CLS embedding, reads from the layer where atom-level chemistry is weakest. For chemistry-sensitive tasks use layers 4–8 (GRASP's fine-tuning recipe already mixes layers 4/8/10/12, which helps).</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">14 · GRASP-A2</div>
+    <h2>Explicit bond and stereo inputs: sharper aromaticity, same overall picture</h2>
+    <div class="prose"><p>GRASP-A2 adds bond type (single, double, triple, aromatic) as per-head attention biases and atom/bond stereo labels as embeddings to the position-free A1 encoder. The right control is an A2 network with random weights that receives the same bond and stereo inputs.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Error (lower is better)</th><th>A2</th><th>A2 random-init</th><th>A1</th><th>A1 random-init</th></tr></thead>
+      <tbody>
+        <tr><td>Aromatic, ambiguous atoms, layer 2</td><td class="num"><strong>0.0006</strong></td><td class="num">0.045</td><td class="num">0.0029</td><td class="num">0.049</td></tr>
+        <tr><td>Hybridization, ambiguous atoms, layer 4</td><td class="num"><strong>0.0002</strong></td><td class="num">0.080</td><td class="num">0.0010</td><td class="num">0.097</td></tr>
+        <tr><td>Smallest ring size, best layer (6)</td><td class="num">0.245</td><td class="num">0.61</td><td class="num"><strong>0.185</strong></td><td class="num">0.64</td></tr>
+        <tr><td>Atom logP contribution (1 − R²), layer 2</td><td class="num"><strong>0.066</strong></td><td class="num">0.18</td><td class="num">0.092</td><td class="num">0.18</td></tr>
+        <tr><td>Carbon next to O, layer 2</td><td class="num">0.000</td><td class="num">0.072</td><td class="num">0.000</td><td class="num">0.074</td></tr>
+        <tr><td>SAE context-chemistry features, layer 6</td><td class="num"><strong>178</strong></td><td class="num">11</td><td class="num">–</td><td class="num">–</td></tr>
+      </tbody></table></div>
+    <p class="caption">Linear probes, 3 scaffold splits (T15a). SAE count (T15c): 50 functional-group, 84 bond-derived, 21 neighbour and 23 ring features; GRASP had 93 on the same atoms. Not like-for-like: A2's SAE leaves more variance unexplained (0.145 vs 0.075), and the random control's SAE has 52% dead latents. T15c counts were read from the agents' results and not re-run by the supervisor.</p>
+    <div class="prose"><p>The random A2 network is no better than the random A1 network at aromaticity, so the bond inputs do not hand the answer over: A2 still learns it, just more precisely. Molar refractivity is not a useful test for any model (random weights already reach R² 0.96 because atom type almost fixes it). <b>Stereo.</b> A1 gives bit-identical vectors for enantiomers; A2 does not. Flipping a stereocentre changes only that atom at layer 0, spreads outward with a bond-distance gradient by layer 2, and is nearly uniform by layer 12, where it changes the CLS embedding by about 0.3%. Across 1,000 molecules with two or more stereocentres, the enantiomer (all centres flipped) moves the layer-12 CLS by 0.37% and a diastereomer (one centre flipped) by only 0.24%, against 96% for a different molecule; the logP read-out moves by about 0.003 log units for either. So enantiomers' logP stays essentially identical, as chemistry requires, but only because stereo barely changes anything: A2 does not treat diastereomers as the more different pair. Task T15e, spot-checked by the supervisor on 200 other molecules; A1 gives identical vectors (sanity check).</p></div>
+    <p class="caption">A2 inputs here are computed with RDKit 2026.09; the release pins 2025.3.6. On 21,680 molecules the two differ for 5 (stereo label "none" vs "unspecified" on symmetric ring centres). The A2 loader reproduces GRASP and A1 activations bit-for-bit and matches the release's enantiomer control (0.04619).</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Recommendations for GRASP users</div>
+    <ul class="tight">
+      <li>Canonicalise SMILES (<code>Chem.MolToSmiles(Chem.MolFromSmiles(s))</code>) before calling <code>encode()</code>; consider doing it inside <code>encode()</code>.</li>
+      <li>Prefer GRASP-A1 where it performs comparably: it is exactly order-invariant and carries the same atom-level chemistry.</li>
+      <li>For property prediction from frozen embeddings, use mean-pooled atom vectors from layers 4–8 rather than the final-layer CLS: layer 12 has discarded most atom-level chemistry in every checkpoint (section 13).</li>
+      <li>Treat the layer-12 CLS as assay-specialised: good for transfer tasks that resemble Step-2 assays, weaker as a general chemistry representation.</li>
+      <li>Before claiming toxicity transfer, check the target assays against the 642 Step-2 ChEMBL assays; publishing their ChEMBL IDs with the model would make this easy.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="eyebrow">How this was done</div>
+    <h2>Local agents did the work; every claim was audited</h2>
+    <div class="prose"><p>A Python harness drives four local agents through Ollama: an MI engineer that writes and runs experiment scripts against a fixed library with built-in controls, a chemist that interprets results, a skeptical critic, and a scribe. The supervisor (Claude) wrote the task specs and the verified library (probes, interventions, sparse autoencoder), intervened through hint files, and re-checked every claim before it entered the ledger. Checkpoint 2 ran 11 tasks in about 7 hours on one 16 GB GPU, with a 35B mixture-of-experts model (3B active) at about 60 tokens/s.</p></div>
+    <div class="stats"><span><b>160</b> claims in ledger</span><span><b>107</b> confirmed (15 after correction)</span><span><b>22</b> rejected</span><span><b>20</b> weak, untested or plausible</span><span><b>11</b> process notes or superseded</span></div>
+    <ul class="tight">
+      <li>The agent pipeline found the order-sensitivity first (T00), with the wrong magnitude; the supervisor confirmed and measured it.</li>
+      <li>Agents' numbers were wrong in 4 places (summed norms, token counting, a misaligned drift estimate, a broken random control). The critic caught three of them.</li>
+      <li>Two label bugs were the supervisor's own: deprotonated acids missing from the carboxylic-acid SMARTS, and Crippen hydrogens missing from atom contributions. Both were caught by checks and fixed before the claims that depend on them.</li>
+      <li>Small single-purpose tasks work with a 9B model; long multi-part specs fail repeatedly. Tasks T03, T04, T05 and T06 were split accordingly.</li>
+      <li>Checkpoint 2: the agents ran every experiment, but in 3 of 11 tasks (T12, T07a, T10b) their final numbers were wrong, and in 2 more (T09, T05b) an earlier run or a bookkeeping field was. Causes: reading the wrong result keys, a row offset that never advanced, misses never counted, an exception hiding every probe. Because they used a library that caches intermediate results, the supervisor could re-extract or recompute the correct numbers. Three of those bugs led to harness changes: results with no finite numbers, or only error entries, now fail the run.</li>
+      <li>The critic caught most broken runs, but also endorsed two chemically wrong readings (Tox21 SR-MMP taken as matrix metalloproteinase rather than mitochondrial membrane potential; "aromaticity is in the token") and once rejected a correct result over a bookkeeping field. Supervisor review stayed necessary.</li>
+      <li>Checkpoint 3 (8 tasks): the causal-ablation task failed twice on row bookkeeping (10 attempts), so the supervisor added a tested helper (<code>mechlib.edits</code>) that does the mapping; with it the agents completed the task, but one condition was still wrong and was recomputed. Recurring failure: a per-item <code>try/except</code> that swallows every error and writes an empty or partial result. The critic caught a hard-coded 0.0 standing in for a measurement (T15b) and the chemist repeatedly cited metrics that did not exist; those claims were rejected.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="eyebrow">Open questions</div>
+    <ul class="tight">
+      <li>Toxicity leakage: map the 642 Step-2 ChEMBL assay IDs to descriptions and check for Tox21 depositions. This decides whether the Step-2 stress-response gain is learned biology or memorised assays.</li>
+      <li>Test the RTD-head explanation of the layer-12 collapse directly: with the released RTD head, or intermediate Step-1 checkpoints, check whether the collapsed directions are the ones the head reads.</li>
+      <li>A2 stereo is barely used. Test it where stereo matters: stereo-specific activity cliffs in ChEMBL, or fine-tuning on a chiral endpoint.</li>
+      <li>Causal role of the SAE features in the toxicity read-outs (section 12 covered logP only).</li>
+      <li>The 182 constant-label Step-2 assays (4.4% of labels): test whether they taught chemical-series membership rather than activity.</li>
+      <li>Ames and hERG were not tested (no offline copies); MoleculeNet Tox21 and ClinTox were used instead.</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+const DATA = {"ring": {"g": [0.78, 0.574, 0.466, 0.386, 0.24, 0.194, 0.16, 0.135, 0.116, 0.133, 0.208, 0.343, 0.458], "r": [0.779, 0.759, 0.745, 0.742, 0.737, 0.734, 0.734, 0.728, 0.731, 0.723, 0.718, 0.715, 0.713], "t": 0.778}, "clogp": {"g": [0.43, 0.645, 0.771, 0.902, 0.918, 0.883, 0.84, 0.814, 0.784, 0.76, 0.773, 0.722, 0.664], "r": [0.43, 0.467, 0.472, 0.472, 0.468, 0.468, 0.47, 0.471, 0.472, 0.472, 0.468, 0.471, 0.472], "t": 0.426}, "order": {"cls_p": [0.0, 0.0092, 0.004, 0.006, 0.0122, 0.011, 0.004, 0.002, 0.0081, 0.0223, 0.0289, 0.0544, 0.1262], "mean_p": [0.0013, 0.0286, 0.0461, 0.0571, 0.068, 0.0768, 0.0813, 0.086, 0.087, 0.0868, 0.076, 0.0801, 0.0976], "cls_r": [0.0, 0.0001, 0.0002, 0.0003, 0.0005, 0.0006, 0.0008, 0.001, 0.0013, 0.0016, 0.002, 0.0023, 0.0028]}};
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+function chart(id, series, opts) {
+  const svg = document.getElementById(id), W = 440, H = 250, m = {l: 44, r: 12, t: 10, b: 34};
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const x = i => m.l + i * (W - m.l - m.r) / 12;
+  const y = v => m.t + (1 - (v - opts.min) / (opts.max - opts.min)) * (H - m.t - m.b);
+  const ink3 = "var(--ink-3)", rule = "var(--rule)";
+  opts.ticks.forEach(t => {
+    el("line", {x1: m.l, x2: W - m.r, y1: y(t), y2: y(t), stroke: rule, "stroke-width": 1}, svg);
+    el("text", {x: m.l - 6, y: y(t) + 4, "text-anchor": "end", "font-size": 11, fill: ink3, "font-family": "IBM Plex Mono, monospace"}, svg).textContent = opts.fmt(t);
+  });
+  [0, 2, 4, 6, 8, 10, 12].forEach(i => el("text", {x: x(i), y: H - m.b + 16, "text-anchor": "middle", "font-size": 11, fill: ink3, "font-family": "IBM Plex Mono, monospace"}, svg).textContent = i);
+  el("text", {x: (m.l + W - m.r) / 2, y: H - 3, "text-anchor": "middle", "font-size": 11, fill: ink3}, svg).textContent = "layer";
+  series.forEach(s => {
+    if (s.flat !== undefined) {
+      el("line", {x1: m.l, x2: W - m.r, y1: y(s.flat), y2: y(s.flat), stroke: s.color, "stroke-width": 2, "stroke-dasharray": "5 4", fill: "none"}, svg);
+    } else {
+      el("path", {d: s.v.map((v, i) => (i ? "L" : "M") + x(i) + " " + y(v)).join(" "), stroke: s.color, "stroke-width": 2, fill: "none", "stroke-linejoin": "round", "stroke-linecap": "round"}, svg);
+    }
+  });
+  const fig = svg.closest("figure"), tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; fig.appendChild(tip);
+  const cross = el("line", {y1: m.t, y2: H - m.b, stroke: "var(--ink-3)", "stroke-width": 1, opacity: 0}, svg);
+  const dots = series.filter(s => s.v).map(s => el("circle", {r: 4.5, fill: s.color, stroke: "var(--surface)", "stroke-width": 2, opacity: 0}, svg));
+  const hit = el("rect", {x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent"}, svg);
+  function show(evt) {
+    const pt = svg.createSVGPoint(); pt.x = evt.clientX; pt.y = evt.clientY;
+    const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+    const i = Math.max(0, Math.min(12, Math.round((p.x - m.l) / ((W - m.l - m.r) / 12))));
+    cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.setAttribute("opacity", 0.5);
+    series.filter(s => s.v).forEach((s, k) => { dots[k].setAttribute("cx", x(i)); dots[k].setAttribute("cy", y(s.v[i])); dots[k].setAttribute("opacity", 1); });
+    tip.innerHTML = `layer ${i}<br>` + series.map(s => `${s.name}: ${opts.fmt(s.v ? s.v[i] : s.flat, true)}`).join("<br>");
+    const r = svg.getBoundingClientRect(), fr = fig.getBoundingClientRect();
+    tip.hidden = false;
+    let left = r.left - fr.left + (x(i) / W) * r.width + 12;
+    if (left + tip.offsetWidth > fr.width - 6) left -= tip.offsetWidth + 24;
+    tip.style.left = left + "px"; tip.style.top = (r.top - fr.top + 14) + "px";
+  }
+  function hide() { tip.hidden = true; cross.setAttribute("opacity", 0); dots.forEach(d => d.setAttribute("opacity", 0)); }
+  hit.addEventListener("pointermove", show); hit.addEventListener("pointerleave", hide);
+}
+const f2 = (v, full) => full ? v.toFixed(3) : v.toFixed(1);
+chart("c-ring", [
+  {name: "GRASP", v: DATA.ring.g, color: "var(--accent)"},
+  {name: "Random-init", v: DATA.ring.r, color: "var(--contrast)"},
+  {name: "Token only", flat: DATA.ring.t, color: "var(--base)"}], {min: 0, max: 0.8, ticks: [0, 0.2, 0.4, 0.6, 0.8], fmt: f2});
+chart("c-clogp", [
+  {name: "GRASP", v: DATA.clogp.g, color: "var(--accent)"},
+  {name: "Random-init", v: DATA.clogp.r, color: "var(--contrast)"},
+  {name: "Token only", flat: DATA.clogp.t, color: "var(--base)"}], {min: 0.4, max: 1.0, ticks: [0.4, 0.6, 0.8, 1.0], fmt: f2});
+chart("c-order", [
+  {name: "GRASP CLS", v: DATA.order.cls_p, color: "var(--accent)"},
+  {name: "GRASP atoms", v: DATA.order.mean_p, color: "var(--aqua)"},
+  {name: "Random CLS", v: DATA.order.cls_r, color: "var(--contrast)"}], {min: 0, max: 0.14, ticks: [0, 0.04, 0.08, 0.12], fmt: (v, full) => v.toFixed(full ? 4 : 2)});
+</script>

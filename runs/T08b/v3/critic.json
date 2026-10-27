@@ -1,0 +1,47 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Coverage: Baseline comparison incomplete - only computed for 3 of 19 valid concepts, not all chemistry-in-context claims can be validated against token baselines.",
+  "Sanity check needed on n_alive=4096 (pretrained) vs 3473 (random): This suggests ALL latents fired >=20 times in pretrained. While sparse SAEs do have many non-empty columns, this high count warrants verification that the firing threshold isn't too low for ~1M atom activations.",
+  "Confounder: tok_j=13 (Carbon) appears across multiple context_chemistry latents with different concepts - need to verify these aren't just capturing common aliphatic carbons rather than true functional group specificity. The script does check within-token AUROC but doesn't explicitly test against Carbon-only baselines.",
+  "Confounder: Global AUROCs (~0.5-0.7) are lower as expected, but the gap between within-token (>=0.9) and global could partly reflect token frequency differences rather than true conditional specificity."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretraining induces Layer 6 latents with high specificity for functional group presence",
+   "status": "supported",
+   "reason": "44 context_chemistry vs 0 in random is a strong signal. Within-token AUROCs >0.95 are consistent."
+  },
+  {
+   "claim": "Latent 2610 represents C-OH not just generic oxygen",
+   "status": "untested",
+   "reason": "No explicit test comparing activation on C-OH vs aliphatic C-C bonds within token subset. Only global AUROC provided (0.567)."
+  },
+  {
+   "claim": "Carboxylic acid features split across atom types",
+   "status": "supported",
+   "reason": "Latents 845 and 3045 both show high within-token AUROCs for fg_carboxylic_acid on different tokens."
+  },
+  {
+   "claim": "Neighbor connectivity distinct from functional group identity",
+   "status": "untested",
+   "reason": "No explicit test distinguishing has_O_neighbor vs specific FGs like ether/alcohol. Token 13 fires across multiple concepts."
+  },
+  {
+   "claim": "Sulfonamide detected via Nitrogen tokens with high specificity",
+   "status": "supported",
+   "reason": "Latents 822/4065 show within_auroc >0.97 on token 50 (Nitrogen)."
+  },
+  {
+   "claim": "Global AUROCs lower than Within-Token indicates conditional features",
+   "status": "supported",
+   "reason": "Pattern consistent: Global ~0.5-0.7 vs Within >=0.9 across all top latents."
+  },
+  {
+   "claim": "context_chemistry trivially absent in Random SAEs confirms pretraining drives emergence",
+   "status": "supported",
+   "reason": "Random has 0 context_chemistry while pretrained has 44 - strong control signal."
+  }
+ ],
+ "rerun_instructions": "1. Compute token-baseline AUROCs for ALL valid concepts (not just 3) to verify within-token features exceed simple atom-type predictions.\n2. For top latents, explicitly test activation mean on C-OH vs aliphatic C-C bonds within the same token subset (e.g., tok_j=150/13).\n3. Verify firing threshold: check distribution of firing counts across all 4096 latents to confirm >=20 isn't too low.\n4. For Carbon tokens, test whether has_O_neighbor vs fg_ether/alcohol can be distinguished (not just presence of O neighbor). This requires concept-level disambiguation tests."
+}

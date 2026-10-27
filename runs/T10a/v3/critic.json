@@ -1,0 +1,26 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Claims 1 & 3 overstate mechanistic proof: Citing AUROC gaps (GRASP > Size/Morgan) supports 'structural encoding beyond fingerprints', but does not prove specific substructure mechanisms ('metal-chelating', 'electrophilic') without ablation/masking results. The Chemist's own plan lists these as future tests, yet claims them as established facts in the evidence section.",
+  "Summary inconsistency: Summary uses Standard run for `grasp_best` (0.89), while Claims 1 & 3 cite High-Noise re-run values (0.88). While numerically close, strict adherence to Supervisor Hint suggests high-noise results should be prioritized for these specific tasks in the summary.",
+  "Baseline ambiguity: Random Init baseline AUROC is ~0.71 on SR-MMP (High Noise), which is unusually high for untrained features; likely a trained control with different init rather than null noise, requiring clarification to avoid misinterpretation of 'random' as chance."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP encodes specific metal-chelating substructures",
+   "status": "unsupported",
+   "reason": "AUROC gap proves structural encoding, not specific SMARTS matching. Requires masking ablation."
+  },
+  {
+   "claim": "Layer depth correlates with discrimination of steroid-like ligands",
+   "status": "supported",
+   "reason": "Monotonic AUROC increase (L4->L12) supports correlation claim."
+  },
+  {
+   "claim": "GRASP does not rely solely on heavy atom count",
+   "status": "supported",
+   "reason": "Size baseline (0.63) significantly lower than GRASP (0.88)."
+  }
+ ],
+ "rerun_instructions": "1. Update claims to reflect 'structural encoding' rather than specific substructures without ablation data. 2. Ensure Summary section prioritizes High-Noise results for SR-MMP/SR-ARE if that was the intent of Supervisor Hint revision."
+}

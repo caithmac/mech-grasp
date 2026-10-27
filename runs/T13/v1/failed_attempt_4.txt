@@ -1,0 +1,9 @@
+Processing feature 2610: fg_hydroxyl (family=[2610])
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v1\script.py", line 413, in <module>
+    res = run_feature(j)
+          ^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v1\script.py", line 101, in run_feature
+    within_auroc = utils.roc_auc_score(c_vals[target_rows], z_col[target_rows])
+                   ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'mechlib.utils' has no attribute 'roc_auc_score'

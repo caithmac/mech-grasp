@@ -1,0 +1,19 @@
+Loading molecule-level data...
+Loading pretrained and random activations...
+Positive rates computed: {'ro5_pass': 1.0, 'ro5_mw': 0.0, 'ro5_logp': 0.01656, 'ro5_hbd': 0.0, 'ro5_hba': 2e-05}
+Running probes...
+Initial results.json written.
+Summary added and results.json re-written.
+Figure generation failed: 0
+
+=== Summary ===
+ro5_pass (cls): best=1.0000 @ layer 0, layer12=1.0000, random_at_best=1.0000
+ro5_pass (mean): best=1.0000 @ layer 0, layer12=1.0000, random_at_best=1.0000
+ro5_mw (cls): best=1.0000 @ layer 0, layer12=1.0000, random_at_best=1.0000
+ro5_mw (mean): best=1.0000 @ layer 0, layer12=1.0000, random_at_best=1.0000
+ro5_logp (cls): best=0.2520 @ layer 12, layer12=0.2520, random_at_best=0.0873
+ro5_logp (mean): best=0.2463 @ layer 12, layer12=0.2463, random_at_best=0.0800
+ro5_hbd (cls): best=1.0000 @ layer 0, layer12=1.0000, random_at_best=1.0000
+ro5_hbd (mean): best=1.0000 @ layer 0, layer12=1.0000, random_at_best=1.0000
+ro5_hba (cls): best=1.0000 @ layer 0, layer12=0.3333, random_at_best=0.3333
+ro5_hba (mean): best=1.0000 @ layer 0, layer12=0.3333, random_at_best=0.3333

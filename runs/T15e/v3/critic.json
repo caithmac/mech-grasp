@@ -1,0 +1,21 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Missing 'sanity' key in results.json (Task Spec violation). Script prints sanity check but does not write to JSON structure.",
+  "No seed variance reported. Reviewer Instructions require checking if gap > noise ('std over seeds'). Single run cannot confirm 0.004 is statistically significant vs float32 initialization artifacts or random fluctuations.",
+  "Missing Random Init baseline comparison (Reviewer Instruction: 'was GRASP compared to the random-init model...'). While A1 serves as a no-stereo control, explicit random init check strengthens claims about learned weights."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP-A2 distinguishes stereoisomers from identical molecules",
+   "status": "supported",
+   "reason": "A1 `rel_enant` = 0.0 vs A2 `rel_enant` ~0.004 supports stereochem sensitivity in weights."
+  },
+  {
+   "claim": "LogP probe learns achiral property invariance",
+   "status": "supported",
+   "reason": "`d_enant` (~0.004) << `d_other` (~1.5). Consistent with physical logP invariance for enantiomers."
+  }
+ ],
+ "rerun_instructions": "Add 'sanity' key to results.json as specified (e.g., {\"sanity\": {\"a1_rel_enant_cls_6\": 4.47e-09, \"passed\": true}}). Re-run with at least 3 seeds per model kind and report mean/std for all `rel` metrics to confirm gap > noise. Include a random-init baseline run if team policy requires it."
+}

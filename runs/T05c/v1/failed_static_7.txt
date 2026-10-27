@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:241:14: undefined name 'results'

@@ -1,0 +1,69 @@
+Training mols_pretrained_L6...
+[sae] step 0 nmse 0.7814 dead 0
+[sae] step 2000 nmse 0.1060 dead 0
+[sae] step 4000 nmse 0.0887 dead 0
+[sae] step 6000 nmse 0.0843 dead 0
+[sae] step 8000 nmse 0.0811 dead 0
+[sae] step 10000 nmse 0.0797 dead 0
+[sae] step 12000 nmse 0.0775 dead 0
+[sae] step 14000 nmse 0.0752 dead 0
+[sae] step 16000 nmse 0.0759 dead 0
+[sae] step 18000 nmse 0.0756 dead 0
+[sae] step 20000 nmse 0.0751 dead 0
+[sae] step 22000 nmse 0.0740 dead 0
+[sae] step 24000 nmse 0.0741 dead 0
+[sae] step 26000 nmse 0.0738 dead 0
+[sae] step 28000 nmse 0.0740 dead 0
+Training mols_a1_L6...
+[sae] step 0 nmse 0.7812 dead 0
+[sae] step 2000 nmse 0.2109 dead 0
+[sae] step 4000 nmse 0.1895 dead 0
+[sae] step 6000 nmse 0.1851 dead 0
+[sae] step 8000 nmse 0.1817 dead 0
+[sae] step 10000 nmse 0.1801 dead 0
+[sae] step 12000 nmse 0.1785 dead 0
+[sae] step 14000 nmse 0.1754 dead 0
+[sae] step 16000 nmse 0.1761 dead 0
+[sae] step 18000 nmse 0.1760 dead 0
+[sae] step 20000 nmse 0.1756 dead 0
+[sae] step 22000 nmse 0.1756 dead 0
+[sae] step 24000 nmse 0.1739 dead 0
+[sae] step 26000 nmse 0.1733 dead 0
+[sae] step 28000 nmse 0.1750 dead 0
+Training atoms_pretrained_L6...
+[sae] step 0 nmse 0.7815 dead 0
+[sae] step 2000 nmse 0.0977 dead 0
+[sae] step 4000 nmse 0.0835 dead 0
+[sae] step 6000 nmse 0.0776 dead 0
+[sae] step 8000 nmse 0.0755 dead 0
+[sae] step 10000 nmse 0.0733 dead 0
+[sae] step 12000 nmse 0.0735 dead 0
+[sae] step 14000 nmse 0.0720 dead 0
+[sae] step 16000 nmse 0.0715 dead 0
+[sae] step 18000 nmse 0.0708 dead 0
+[sae] step 20000 nmse 0.0713 dead 0
+[sae] step 22000 nmse 0.0706 dead 0
+[sae] step 24000 nmse 0.0698 dead 0
+[sae] step 26000 nmse 0.0694 dead 0
+[sae] step 28000 nmse 0.0693 dead 0
+Training atoms_random_L6...
+[sae] step 0 nmse 0.7844 dead 0
+[sae] step 2000 nmse 0.0372 dead 20
+[sae] step 4000 nmse 0.0354 dead 6
+[sae] step 6000 nmse 0.0345 dead 5
+[sae] step 8000 nmse 0.0339 dead 28
+[sae] step 10000 nmse 0.0335 dead 67
+[sae] step 12000 nmse 0.0332 dead 97
+[sae] step 14000 nmse 0.0330 dead 108
+[sae] step 16000 nmse 0.0329 dead 109
+[sae] step 18000 nmse 0.0328 dead 110
+[sae] step 20000 nmse 0.0328 dead 111
+[sae] step 22000 nmse 0.0327 dead 110
+[sae] step 24000 nmse 0.0327 dead 113
+[sae] step 26000 nmse 0.0327 dead 110
+[sae] step 28000 nmse 0.0326 dead 113
+Results summary:
+mols_pretrained_L6: FVU=0.0752, Dead=0.00%, Token-like=3.69%
+mols_a1_L6: FVU=0.1785, Dead=0.00%, Token-like=0.27%
+atoms_pretrained_L6: FVU=0.0692, Dead=0.00%, Token-like=0.98%
+atoms_random_L6: FVU=0.0014, Dead=2.69%, Token-like=31.03%

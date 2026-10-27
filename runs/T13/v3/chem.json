@@ -1,0 +1,37 @@
+{
+ "summary": "Feature 2804 encodes local oxygen topology (O neighbors) with high fidelity but has weak causal impact on global logp readout.",
+ "claims": [
+  {
+   "claim": "Latent 2804 detects the presence of covalently bonded Oxygen atoms ('has_O_neighbor') in input layer-6 representations.",
+   "evidence": "AUROC=0.97 between latent activation and ground truth label 'has_O_neighbor' on matching tokens (tok=13).",
+   "kind": "shows",
+   "test": "RDKit SMARTS `[#6]-[#8]` applied to atom rows; prediction: correlation > 0.95 with SAE activations.",
+   "prediction": "If true, AUROC should remain high (>0.9) on held-out test set of molecules containing O atoms (e.g., alcohols/ethers)."
+  },
+  {
+   "claim": "The model uses this feature causally for downstream context propagation, but redundancy exists.",
+   "evidence": "Ablation reduces concept detection by 12% at L7 (`concept_removed`=0.12), dropping to 4.7% at L12 (0.047).",
+   "kind": "shows",
+   "test": "Repeat ablation on subset of molecules; prediction: `gap` metric drops proportionally in intermediate layers.",
+   "prediction": "If true, removing feature should cause measurable drop in probe score at L8 (observed 0.091) vs random edit baseline."
+  },
+  {
+   "claim": "Feature is sufficient for steering detection without noise artifacts.",
+   "evidence": "Steering adds signal (`steer_shift`=0.151 at L7) vs random perturbation (0.001).",
+   "kind": "shows",
+   "test": "Apply steer to alkane molecules; prediction: probe score increases significantly compared to unmodified alkanes.",
+   "prediction": "If true, `steer_shift` should be > 5x larger than `se` (0.151 vs 0.034)."
+  },
+  {
+   "claim": "Local oxygen detection has weak causal impact on global logp readout in this model configuration.",
+   "evidence": "Ablation changes molecule-level logp by <0.01 units (`dlogp`=-0.005 at L8, +0.007 for ablate_fam).",
+   "kind": "suspects",
+   "test": "Measure dlogp distribution across 4000 molecules; prediction: mean shift near zero with high variance.",
+   "prediction": "If true, `sign_agree` should be ~50% (observed 41-69%), indicating no consistent directional bias in logp readout."
+  }
+ ],
+ "trivial_explanations": [
+  "Feature 2804 likely encodes a simple topological feature ('O neighbor') rather than specific electronic state (Crippen delta ~0).",
+  "Small dlogp changes (<0.01) suggest this latent is not the primary driver of hydrophobicity in L8/L12 readout heads."
+ ]
+}

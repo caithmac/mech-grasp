@@ -1,0 +1,31 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Ratio calculation bug in summary printout for fg_nitrile (shows 0.00 but should be Inf given Grasp Err=0, Random Err>0)",
+  "Random Init baseline suspicious: fg_nitrile Layer 8 Random Error=0.0 with n=250 suggests overfitting or metric instability",
+  "Layer 0 vs Token Baseline discrepancy: Pretrained Layer 0 often outperforms Token Baseline (e.g., aromatic 0.106 vs 0.113), needs clarification on whether Layer 0 includes neighbor info"
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP learns H\u00fcckel aromaticity by Layer 3-4",
+   "status": "supported",
+   "reason": "AUROC improves from 0.89 (L0) to 0.997 (L3), gap > noise"
+  },
+  {
+   "claim": "Local heteroatom connectivity resolved in Layer 1-2",
+   "status": "supported",
+   "reason": "has_O_neighbor drops from 0.85 (L0) to 0.992 (L1)"
+  },
+  {
+   "claim": "Global topology harder than local chemistry",
+   "status": "supported",
+   "reason": "min_ring_size/n_rings errors ~0.11 vs local features ~0.00"
+  },
+  {
+   "claim": "Input token does not fully encode neighbor info",
+   "status": "supported",
+   "reason": "Layer 0 error > Token Baseline error for most columns"
+  }
+ ],
+ "rerun_instructions": "1. Fix ratio calculation in summary printout to handle Inf correctly. 2. Re-run fg_nitrile with more seeds or check Random Init generation logic (why does it get 1.0?). 3. Clarify if Layer 0 Grasp embeddings include neighbor info beyond the token baseline."
+}

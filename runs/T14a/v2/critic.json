@@ -1,0 +1,28 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "CRITICAL BUG in rtd_auroc_samedeg metric: The mask keeps (replaced==0) OR (same_degree==1), then scores against replaced labels where most kept samples have label=0. This measures 'can model distinguish non-replaced from same-degree replacements?' not 'does chemistry help detect subtle token changes?'. Chemist's interpretation of this as evidence for chemical detail retention is misaligned with what the metric actually tests.",
+  "CLAIM 2 (Layer 12 collapses space): PR drop from ~183 to ~4-19 supports training-induced specialization, but chemist claims 'Variance ratio (L12/L6) < 0.5 for aromatics' using RDKit SMARTS patterns - this metric is NOT in results.json at all. No aromaticity variance ratios were measured.",
+  "CLAIM 3 (RTD axis orthogonalization): var_frac_rtd drop from ~0.76 to ~0.04 supports RTD direction becoming less aligned with clean chemistry, but chemist claims '|Corr| < 0.1 at L12' for scaffold identity - this correlation metric is NOT in results.json.",
+  "NUMERICAL ANOMALY: rtd_auroc_samedeg values are HIGHER than regular rtd_auroc at most layers (e.g., pretrained L6: 0.973 > 0.968). This suggests the 'hard' case is actually easier, which contradicts intuition and needs explanation - possibly due to class imbalance in mask or label distribution issues.",
+  "GEOMETRY METRICS VARIANCE: PR values for trained models vary wildly across layers (184\u21923.8) while random stays stable (~27-30). This supports training-induced collapse, but chemist's claim about 'blurring chemistry' conflates general compression with specific chemical feature loss without measuring which features are lost."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "At Layer 6, trained models retain sufficient chemical detail to detect replaced tokens even when degree is preserved",
+   "status": "supported",
+   "reason": "AUROC_samedeg at L6 = 0.973 (pretrained) vs Random = 0.746 shows gap of ~0.23, which exceeds noise floor and suggests chemistry beyond topology helps detection."
+  },
+  {
+   "claim": "Layer 12 representation collapses as indicated by drastic reduction in Participation Ratio",
+   "status": "supported",
+   "reason": "PR drops from ~184 to ~4-19 for trained models vs stable ~30 for random. However, chemist's specific prediction about aromaticity variance ratios is NOT measured."
+  },
+  {
+   "claim": "RTD decision axis becomes orthogonalized from general chemical variance by Layer 12",
+   "status": "unsupported",
+   "reason": "var_frac_rtd drop supports RTD direction becoming less aligned with clean chemistry, but chemist's scaffold identity correlation prediction is NOT measured in results.json."
+  }
+ ],
+ "rerun_instructions": "Run the following additional tests to support claims: (1) Measure aromaticity-specific variance ratios at L6 vs L12 using RDKit SMARTS patterns; (2) Compute scaffold identity correlation with RTD direction weights for both layers; (3) Fix rtd_auroc_samedeg metric interpretation - either recompute as AUROC on only replaced atoms where degree matches, or clarify it measures 'non-replaced vs same-degree replacement' distinction. Report these metrics in results.json before accepting claims."
+}

@@ -1,0 +1,44 @@
+{
+ "summary": "Ro5 features are encoded as trivial input statistics in both pretrained and random readouts, with Layer 12 CLS token providing a more linearly separable representation of the 'Pass' decision than Layer 6 mean pooling.",
+ "claims": [
+  {
+   "claim": "The model encodes MW/LogP/HBD/HBA counts directly in its vector space regardless of training.",
+   "evidence": "Random `mean6` AUROC for ro5_mw is 0.999, matching Pretrained (0.997). Random `cls12` AUROC for ro5_logp is 0.989 vs Pretrained (0.982).",
+   "kind": "shows",
+   "test": "Label column: `ro5_mw`. SMARTS: `[C,N,O,S]`. Prediction: Linear regression on atom counts predicts binary MW > 500 with $R^2 \to 1$.",
+   "prediction": "AUROC for bag-of-tokens (0.995) $\neq$ AUROC for transformer readouts ($\text{diff} < 0.01$)."
+  },
+  {
+   "claim": "Layer 12 CLS token aggregates Ro5 constraints into a more linear subspace than Layer 6.",
+   "evidence": "`cls12` reconstruction R\u00b2 = 0.786 vs `mean6` R\u00b2 = 0.533 for reconstructing Pass from flags.",
+   "kind": "shows",
+   "test": "Label column: `ro5_pass`. SMARTS: None (vector space). Prediction: Cosine similarity between $w_{pass}$ and flag vectors is higher in Layer 12 than Layer 6.",
+   "prediction": "Cosine(MW) > 0.8 for cls12 vs ~0.6 for mean6."
+  },
+  {
+   "claim": "MW and HBA dominate the geometric direction of 'Pass' classification in Pretrained `cls12`.",
+   "evidence": "`ro5_mw` cos = 0.803, `ro5_hba` cos = 0.773 vs `ro5_logp` cos = 0.371.",
+   "kind": "suspects",
+   "test": "Label column: `ro5_pass`. SMARTS: `[HBD]`, `[HBA]`. Prediction: Removing MW/HBA features drops AUROC > removing LogP.",
+   "prediction": "AUROC drop when masking MW vectors $\to$ $> 0.2$. Masking LogP $\to$ $< 0.1$."
+  },
+  {
+   "claim": "The dataset contains non-trivial Ro5 violations despite drug-like intent.",
+   "evidence": "`ro5_pass` fail rate = 5.8% (n=8622). MW violation = 7.7%, LogP = 9.3%.",
+   "kind": "shows",
+   "test": "Label column: `smiles`. SMARTS: `[C;$(C(=O)N)]`, `[Cl]` etc for toxicophores.",
+   "prediction": "Count of molecules with Crippen MW > 500 matches reported violation rate (7.7%)."
+  },
+  {
+   "claim": "Bag-of-tokens control confirms atom counts suffice to predict Ro5 compliance.",
+   "evidence": "`bag_of_tokens` AUROC = 0.995 for `ro5_pass`.",
+   "kind": "shows",
+   "test": "Label column: `ro5_mw`. SMARTS: `[C]`, `[N]`, `[O]`. Prediction: Sum of atomic weights predicts MW exactly.",
+   "prediction": "AUROC difference between Bag-of-tokens and Transformer readouts $\to$ 0."
+  }
+ ],
+ "trivial_explanations": [
+  "Random models achieve AUROC > 0.98 on Ro5 features because the input token embeddings preserve atom count statistics that linear probes can exploit without learning chemical rules.",
+  "`ro5_pass` classification is effectively a thresholded sum of atomic weights and heteroatom counts, which are trivially separable in high-dimensional space."
+ ]
+}

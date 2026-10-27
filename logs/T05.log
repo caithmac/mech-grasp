@@ -1,0 +1,9 @@
+[22:37:59] T05 -> C:\Users\ss864\Desktop\mech-grasp\runs\T05\v1
+[22:40:12]   attempt 1: executing
+[22:40:12]   waiting for GPU lock (0s)
+[22:45:20]   waiting for GPU lock (300s)
+[22:50:29]   waiting for GPU lock (600s)
+[22:55:37]   waiting for GPU lock (900s)
+[23:00:46]   waiting for GPU lock (1200s)
+[23:05:55]   waiting for GPU lock (1500s)
+[23:11:04]   waiting for GPU lock (1800s)

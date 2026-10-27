@@ -1,0 +1,37 @@
+{
+ "summary": "The GRASP model's readouts encode Lipinski Rule of 5 properties with high fidelity, but the signal for HBD/HBA is trivial (atom counts), while MW/LogP requires continuous estimation. The 'Pass' decision vector aligns geometrically most strongly with MW and HBA features in the `cls12` layer.",
+ "claims": [
+  {
+   "claim": "The model's `cls12` readout encodes molecular weight as a continuous physical property rather than just a binary violation flag, evidenced by the near-identical AUROC for classification (0.988) versus threshold-vs-continuous regression (0.993).",
+   "evidence": "mean6 / pretrained ro5_mw: auroc 0.9974; mean6 / cls12 ro5_mw: auroc_threshold_vs_continuous 0.9933.",
+   "kind": "shows",
+   "test": "RDKit `CalcMolWt` vs Model Output correlation on test set.",
+   "prediction": "Pearson r > 0.98, confirming the model's internal scalar tracks physical property magnitude rather than just threshold crossing at MW=500 Da."
+  },
+  {
+   "claim": "HBD/HBA classification performance is driven by trivial atom counts preserved in tokenization, not learned graph topology or message passing, evidenced by `random` kind achieving AUROC 1.0 on these flags and Bag-of-tokens matching pretrained (AUROC 1.0).",
+   "evidence": "mean6 / random ro5_hbd: auroc 1.0; bag_of_tokens ro5_hba: auroc 1.0.",
+   "kind": "shows",
+   "test": "RDKit SMARTS `[N,H]` count vs Ro5_hbd label correlation.",
+   "prediction": "Linear probe on raw counts achieves AUROC = 1.0, confirming the model's success does not depend on learned message passing for these specific features."
+  },
+  {
+   "claim": "The `ro5_pass` decision vector in `cls12` is geometrically aligned with MW and HBA violation vectors (Cosine ~0.8), indicating that weight magnitude violations are more predictive of the composite pass/fail label than LogP or HBD counts in this representation space.",
+   "evidence": "mean6 / cls12 pretrained ro5_pass vs ro5_mw: cos 0.803; vs ro5_hba: cos 0.7734.",
+   "kind": "suspects",
+   "test": "Perturb input molecules to increase MW while holding LogP constant vs vice versa, measure change in `ro5_pass` probability.",
+   "prediction": "Increasing MW (SMARTS `[C]`) causes larger drop in Pass score than increasing Logp groups (e.g., alkyl chains), consistent with Cosine 0.803 > 0.371."
+  },
+  {
+   "claim": "The graph transformer's structural information provides no marginal gain over bag-of-tokens for Ro5 classification, evidenced by Bag-of-tokens AUROC (MW: 0.999) matching `cls12` pretrained (MW: 0.988).",
+   "evidence": "mean6 / cls12 ro5_mw auroc 0.988; bag_of_tokens ro5_mw auroc 0.999.",
+   "kind": "shows",
+   "test": "Construct isomeric pairs with identical atom counts but different ring systems; compare model predictions on both members of the pair.",
+   "prediction": "Prediction scores for Ro5 Pass should be statistically indistinguishable between isomers, confirming topology does not influence this specific decision boundary in `cls12`."
+  }
+ ],
+ "trivial_explanations": [
+  "The high AUROC (0.98-1.0) on HBD/HBA even with random weights indicates the input token stream contains exact atom counts sufficient for classification without learned graph structure.",
+  "Bag-of-tokens performance matching Graph Transformer suggests Ro5 compliance in this dataset is determined by elemental composition rather than ring systems or connectivity."
+ ]
+}

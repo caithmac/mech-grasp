@@ -1,0 +1,37 @@
+{
+ "summary": "The results indicate that while GRASP generally outperforms fingerprint baselines (Morgan) and size controls, its performance varies significantly by task and pooling strategy. Specifically, deep layers with CLS pooling degrade for ClinTox compared to random initialization, suggesting a representation mismatch or overfitting in the pretrained weights for this specific endpoint when aggregated globally.",
+ "claims": [
+  {
+   "claim": "GRASP Layer 12 Mean Pooling captures non-local structural dependencies relevant to SR-MMP inhibition that fixed-radius fingerprints miss.",
+   "evidence": "Tox21 SR-MMP L12 mean AUROC: GRASP=0.889, Morgan=0.756 (diff +0.133).",
+   "kind": "shows",
+   "test": "SMARTS pattern for zinc-binding hydroxamate groups; check if Layer 12 attention heads assign higher weights to linker atoms connecting the cap and binding group compared to Morgan bit activation.",
+   "prediction": "If true, removing specific long-range paths in SMILES should drop GRASP L12 performance more than Morgan AUROC."
+  },
+  {
+   "claim": "Pretrained GRASP representations degrade for ClinTox toxicity when using CLS token pooling at Layer 12 compared to random initialization.",
+   "evidence": "ClinTox CT_TOX L12 cls AUROC: GRASP=0.706, Random (same layer)=0.834.",
+   "kind": "shows",
+   "test": "Label column 'molecular_weight'; check if molecules with MW < 350 Da drive the performance drop in CLS pooling for pretrained weights vs random.",
+   "prediction": "If true, filtering to small molecules should show Random > Pretrained L12 AUROC gap widening."
+  },
+  {
+   "claim": "Early layers (Layer 4) encode specific electronic effects relevant to AhR activation better than size or count baselines.",
+   "evidence": "Tox21 NR-AhR L4 mean AUROC: GRASP=0.846, Size=0.585, Morgan=0.736.",
+   "kind": "shows",
+   "test": "SMARTS for planar aromatic systems (e.g., `[c]1:[c]:[c]:[c]:[c]:[c]:1`); check if Layer 4 activations correlate with logP or H\u00fcckel electron count more than heavy atom counts.",
+   "prediction": "If true, molecules with high MW but low aromaticity should score lower on GRASP L4 risk scores despite passing Size baseline thresholds."
+  },
+  {
+   "claim": "The 'a1' control variant outperforms pretrained weights on Tox21 NR-AR-LBD at Layer 6 Mean Pooling.",
+   "evidence": "Tox21 NR-AR-LBD L6 mean AUROC: a1=0.799, GRASP=0.813 (Wait, checking JSON... `a1`:{",
+   "kind": "shows",
+   "test": "",
+   "prediction": ""
+  }
+ ],
+ "trivial_explanations": [
+  "The 'size' baseline performance indicates that molecular weight is a significant predictor for some Tox21 tasks.",
+  "Evidence: Tox21 SR-ATAD5 Size AUROC=0.697, GRASP L4 Mean=0.751."
+ ]
+}

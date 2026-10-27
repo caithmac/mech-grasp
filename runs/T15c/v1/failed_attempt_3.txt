@@ -1,0 +1,7 @@
+Loading/training A2 SAE...
+Loading/training Random A2 SAE...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15c\v1\script.py", line 127, in <module>
+    mask_valid = ~np.isnan(raw_vals) & (raw_vals == target_h)
+                  ^^^^^^^^^^^^^^^^^^
+TypeError: ufunc 'isnan' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''

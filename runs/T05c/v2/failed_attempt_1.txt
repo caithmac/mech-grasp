@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05c\v2\script.py", line 324, in <module>
+    main()
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05c\v2\script.py", line 43, in main
+    if not m.GetAtomWithIdx(a1_idx).IsHydrogen() and \
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Atom' object has no attribute 'IsHydrogen'

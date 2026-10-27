@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:271:20: undefined name 'families_map'

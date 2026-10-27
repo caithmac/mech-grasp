@@ -1,0 +1,37 @@
+{
+ "summary": "The GRASP transformer's Layer 6 mean-pooled embeddings encode Lipinski Rule of 5 (Ro5) physicochemical properties with near-perfect linear separability for both pretrained and random initializations, suggesting these features are trivially preserved in the graph topology rather than learned via pretraining. The 'Pass' direction vector is anti-correlated with violation magnitudes but only partially reconstructible from individual feature vectors.",
+ "claims": [
+  {
+   "claim": "Layer 6 mean-pooled embeddings linearly separate Ro5 violations regardless of model initialization, indicating structural information (MW/LogP) dominates the representation at this depth.",
+   "evidence": "AUROC for `ro5_mw` is 0.9974 (`pretrained`) and 0.9989 (`random`). AUROC for `ro5_logp` is 0.9902 (`pretrained`) and 0.9894 (`random`).",
+   "kind": "shows",
+   "test": "Compute RDKit Crippen MW/LogP on the test set SMILES (using `CalcMolFormula`, `CalcCrippenDescriptors`); verify that a linear probe trained on Layer 6 embeddings achieves >0.98 AUROC against these calculated values.",
+   "prediction": "If true, Probe Accuracy vs RDKit Calc should be >0.95; if false (learned features required), Random model AUROC would drop significantly below Pretrained."
+  },
+  {
+   "claim": "The pretrained 'Ro5 Pass' direction vector is geometrically anti-correlated with the directions encoding high MW and LogP, aligning with chemical intuition that larger/hydrophobic molecules violate Ro5.",
+   "evidence": "Cosine similarity between `ro5_pass` weight vector (`w`) and feature vectors: -0.6082 (MW), -0.3163 (LogP).",
+   "kind": "shows",
+   "test": "Project test set Layer 6 mean embeddings onto the pretrained `w_pass`; verify that molecules with RDKit MW > 500 or LogP > 5 have lower projection scores than compliant molecules.",
+   "prediction": "Mean score for Ro5 Pass=1 group should be significantly higher (positive) than Ro5 Pass=0 group; correlation between Projection Score and -MW/Logp should match the negative cosine values."
+  },
+  {
+   "claim": "The 'Ro5 Pass' decision is not a simple linear superposition of individual violation features in the embedding space, implying non-linear integration (e.g., AND-logic) or unmodeled factors.",
+   "evidence": "R2 = 0.5333 for least-squares reconstruction of `ro5_pass` vector from stacked flag vectors (`mw`, `logp`, etc.).",
+   "kind": "shows",
+   "test": "Train a linear regression model on the stack of feature directions to predict the binary Ro5 Pass label; compare R2 against 0.98 (individual AUROCs).",
+   "prediction": "If true, Linear Regression R2 will remain ~0.53 and not reach >0.90, because 'Pass' requires *all* features below thresholds simultaneously (non-linear intersection), whereas linear reconstruction assumes additive independence."
+  },
+  {
+   "claim": "Layer 12 Class Token representations fail to support classification of Ro5 metrics under the applied scaffold split due to class imbalance or representation collapse.",
+   "evidence": "All `cls12` entries recorded as 'skipped' in results.json (targets: ro5_mw, logp, hbd, hba, pass).",
+   "kind": "suspects",
+   "test": "Count unique scaffolds containing molecules with MW > 500 or LogP > 5; verify if the scaffold split isolates these rare violation classes into training folds only.",
+   "prediction": "If true, Test set will contain <30 examples of each Ro5-violating class (e.g., few high-MW scaffolds in test), preventing probe convergence."
+  }
+ ],
+ "trivial_explanations": [
+  "The near-identical AUROC (~1.0) for `random` and `pretrained` models on MW/LogP suggests these properties are encoded trivially by the graph topology (atom counts/bond types) preserved in Layer 6, rather than requiring learned chemical reasoning.",
+  "Ro5 violation rates show only ~7-9% of molecules violate MW or Logp thresholds individually, but 94.2% fail 'pass' overall; this implies most violations are driven by the intersection of multiple criteria (e.g., a molecule with borderline MW and high LogP)."
+ ]
+}

@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15b\v1\script.py", line 371
+    bin_means = {0: [], 1: [], 2: [], 3: [], 4+: []}
+                                             ^
+SyntaxError: ':' expected after dictionary key

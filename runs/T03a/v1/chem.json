@@ -1,0 +1,55 @@
+{
+ "summary": "The GRASP model demonstrates robust predictive performance across continuous molecular properties (logP, TPSA, QED, SA score, Fsp3, MW) without relying heavily on explicit size features (heavy atom count), except for MW where the property is trivially defined by atom count. Residualizing size features generally degrades performance slightly, suggesting the model uses 'size' as a proxy for correlated structural complexity or heteroatom counts rather than learning these properties directly from topology alone.",
+ "claims": [
+  {
+   "claim": "MW prediction relies on trivial size features but retains high accuracy even after residualization.",
+   "evidence": "raw size R\u00b2=1.0; resid grasp best R\u00b2=0.925 (layer 4).",
+   "kind": "shows",
+   "test": "Remove `heavy_atoms` and `mw` from input features. Predicted R\u00b2 drop: >0.3.",
+   "prediction": "R\u00b2 should drop significantly because MW is a sum of atomic masses encoded in node types."
+  },
+  {
+   "claim": "TPSA prediction is not size-dependent; model performs well without explicit size features.",
+   "evidence": "raw size R\u00b2=0.211; resid grasp best R\u00b2=0.892 (layer 4).",
+   "kind": "shows",
+   "test": "Filter molecules with MW < 200 and MW > 400. Compare TPSA prediction error.",
+   "prediction": "Error should increase if size is removed, because small molecules might lack polar groups while large ones have them (correlation)."
+  },
+  {
+   "claim": "LogP prediction correlates with MW but model handles it well without explicit size features.",
+   "evidence": "raw size R\u00b2=0.189; resid grasp best R\u00b2=0.856 (layer 6).",
+   "kind": "shows",
+   "test": "Compare benzene vs phenol (same C count). Predicted LogP difference: Phenol < Benzene.",
+   "prediction": "Model should distinguish them based on atom types, not just count."
+  },
+  {
+   "claim": "QED prediction relies more on size features than other properties.",
+   "evidence": "raw grasp best R\u00b2=0.667; resid grasp best R\u00b2=0.546 (layer 6).",
+   "kind": "shows",
+   "test": "Remove molecules with MW > 350. Predicted QED R\u00b2 change: Increase or stable.",
+   "prediction": "QED penalizes high MW; removing high MW molecules should stabilize prediction if size is removed."
+  },
+  {
+   "claim": "SA Score prediction is robust to size removal, indicating structural complexity learning.",
+   "evidence": "raw grasp best R\u00b2=0.892; resid grasp best R\u00b2=0.886 (layer 6).",
+   "kind": "shows",
+   "test": "Compare common fragments (ethyl) vs rare (spiro[4.5]decane). Predicted SA score: Rare > Common.",
+   "prediction": "Model should predict higher SA for rare fragments regardless of MW."
+  },
+  {
+   "claim": "Fsp3 prediction is structural, not size-dependent.",
+   "evidence": "raw grasp best R\u00b2=0.960; resid grasp best R\u00b2=0.953 (layer 6).",
+   "kind": "shows",
+   "test": "Compare aromatic vs aliphatic molecules of same MW. Predicted Fsp3: Aliphatic > Aromatic.",
+   "prediction": "Model should predict lower Fsp3 for aromatics based on bond orders/atom types."
+  }
+ ],
+ "trivial_explanations": [
+  "MW is trivially encoded in graph topology (number of nodes).",
+  "TPSA depends on N, O, S, P atoms and connectivity.",
+  "LogP correlates with MW but also functional groups.",
+  "QED penalizes high MW, TPSA, LogP.",
+  "SA Score penalizes rare fragments.",
+  "Fsp3 is ratio of sp3 carbons."
+ ]
+}

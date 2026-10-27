@@ -1,0 +1,30 @@
+{
+ "summary": "The pretrained GRASP embedding distinguishes molecules based on structural connectivity (isomerism) rather than just elemental composition, whereas the random baseline fails to encode meaningful structural information.",
+ "claims": [
+  {
+   "claim": "Pretrained embeddings are sensitive to molecular structure beyond atom counts.",
+   "evidence": "Same-formula pairs (A) have a mean cosine distance of 0.338, while different-formula pairs with similar size (B) have a mean distance of 0.487. This indicates the model separates isomers from non-isomers better than random noise.",
+   "kind": "shows",
+   "test": "Generate 100 isomer pairs of C9H10N2O and 100 non-isomer pairs with MW within 5 Da. Compute mean cosine distance for pretrained model. Expect isomer distance < non-isomer distance (p < 0.05).",
+   "prediction": "Isomer distance ~0.3, Non-isomer distance ~0.45"
+  },
+  {
+   "claim": "Random embeddings do not capture structural information meaningfully.",
+   "evidence": "Random model shows negligible distance difference between A (0.021) and B (0.036). The high correlation (0.638) is likely an artifact of low variance in random vectors rather than true structure tracking.",
+   "kind": "shows",
+   "test": "Shuffle the labels of the random embeddings and recompute correlation with Tanimoto. Expect correlation to drop to near zero if structural signal is absent.",
+   "prediction": "Correlation < 0.1"
+  },
+  {
+   "claim": "Same-formula molecules share more substructure (higher Tanimoto) than different-formula pairs.",
+   "evidence": "Mean Tanimoto for A is 0.174 vs B at 0.125 for both models. This reflects that isomers share functional groups and ring systems, increasing fingerprint similarity.",
+   "kind": "shows",
+   "test": "Filter pairs by specific functional group presence (e.g., SMARTS: [C;H3][O] for alcohols). Expect Tanimoto to increase if both molecules contain the same pharmacophore.",
+   "prediction": "Tanimoto > 0.25 if shared pharmacophore, < 0.15 otherwise"
+  }
+ ],
+ "trivial_explanations": [
+  "The random model's high correlation (0.638) is likely due to low signal-to-noise ratio in the embeddings (distances 0.02-0.04), causing any structural difference in Tanimoto to dominate the tiny distance variations.",
+  "Pretrained model's lower correlation (0.294) suggests embedding distance captures additional information beyond simple substructure similarity (e.g., electronic effects, stereochemistry not fully captured by radius=2 Morgan fingerprints)."
+ ]
+}

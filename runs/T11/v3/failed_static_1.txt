@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:127:27: undefined name 'readout_names'

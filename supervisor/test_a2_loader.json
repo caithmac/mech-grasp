@@ -1,0 +1,16 @@
+{
+ "pretrained": {
+  "atom12": 0.0,
+  "cls12": 0.0,
+  "atom6": 0.0
+ },
+ "a1": {
+  "atom12": 0.0,
+  "cls12": 0.0,
+  "atom6": 0.0
+ },
+ "a2_enantiomer_rel_l2": 0.046191029008864945,
+ "a2_EZ_rel_l2": 0.026083343979707324,
+ "a1_enantiomer_rel_l2": 0.0,
+ "a2_finite": true
+}

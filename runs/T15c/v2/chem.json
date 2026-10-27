@@ -1,0 +1,44 @@
+{
+ "summary": "A2 Layer 6 encodes significantly richer chemical context than the random control and exceeds the reference pretrained GRASP count, suggesting explicit bond inputs do not trivialize feature learning in this layer.",
+ "claims": [
+  {
+   "claim": "Layer 6 of A2 represents a higher density of distinct chemical concepts (178 latents) compared to both the random control (11 latents) and the reference pretrained GRASP (~93 latents).",
+   "evidence": "A2 `counts.context_chemistry`: 178. Random: 11. Reference T08b: ~93.",
+   "kind": "shows",
+   "test": "Filter SAE activations Z[:, j] where AUROC > 0.9 against concept labels; count must equal 178 for A2 and 11 for Random.",
+   "prediction": "If true, the distribution of firing atoms per latent will be bimodal (high vs low) rather than uniform noise in A2."
+  },
+  {
+   "claim": "Despite explicit bond type inputs, Layer 6 re-encodes hybridization and aromaticity as distinct features (`bond_derived` family: 84 latents), indicating these are computed contextually or refined beyond input tokens.",
+   "evidence": "`families.bond_derived`: 84. Top latent (170) AUROC=1.0 for `hybridization_SP`. Random has only 6 in this family.",
+   "kind": "suspects",
+   "test": "SMARTS: `[C;X2]` vs Latent 170 activation on Carbon atoms. Expect correlation > 0.95 in A2, < 0.3 in Random.",
+   "prediction": "Latents will fire selectively on specific hybridization states regardless of global molecule size (Lipinski MW)."
+  },
+  {
+   "claim": "Functional group detection is the most expanded capability in A2 (`functional_group`: 50 latents), surpassing Reference counts and indicating explicit FG parsing remains a learned task rather than input lookup.",
+   "evidence": "`families.functional_group`: 50. Latent 1304 AUROC=0.988 for `fg_ether` on token 'O'. Random has only 3.",
+   "kind": "shows",
+   "test": "SMARTS: `[OX2][CH]` (Ether Oxygen). Check activation of Latents 1182, 1304 vs label column `is_ether_oxygen`.",
+   "prediction": "Precision/Recall on test set should match AUROC > 0.97 reported in JSON."
+  },
+  {
+   "claim": "Topological constraints (Ring size) are explicitly represented in A2 (`ring`: 23 latents), whereas the random control shows no significant ring-specific latents, confirming non-trivial graph computation.",
+   "evidence": "`families.ring`: 23. Latent 122 AUROC=0.975 for `min_ring_size_3`. Random families dict lacks 'ring' key.",
+   "kind": "shows",
+   "test": "SMARTS: `[C]` within a ring of size 3 (e.g., cyclopropane) vs acyclic C. Check Latent 122 activation difference.",
+   "prediction": "Activation should be high for strained rings, low for linear chains."
+  },
+  {
+   "claim": "The Random model exhibits 'ghost' chemistry features due to dataset bias (e.g., `hybridization_SP2` on N), but lacks the specificity and count of A2.",
+   "evidence": "Random Latent 3354 AUROC=1.0 for `hybridization_SP2`. Random FVU reported as 0.0 vs A2 0.145.",
+   "kind": "suspects",
+   "test": "Compare activation of Random Latents on molecules with explicit stereochemistry (A2 input) vs racemic mixtures.",
+   "prediction": "Random latents should not correlate significantly better than chance when controlling for element counts."
+  }
+ ],
+ "trivial_explanations": [
+  "The high AUROC scores in the random model (`hybridization_SP2` at Latent 3354, n_fire=3168) suggest that simple atom-type correlations (N is often SP2 in common datasets like ChEMBL/ZINC) can drive SAE latents without learned context.",
+  "The FVU difference (A2: 0.145 vs Random: 0.0) may reflect reconstruction sparsity rather than feature quality, as A2 has more active units (`n_alive`: 4096)."
+ ]
+}

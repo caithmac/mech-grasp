@@ -1,0 +1,51 @@
+{
+ "summary": "The SAE latents at layer 6 are causally necessary for representing specific chemical features downstream, and their removal shifts molecule logP predictions in chemically consistent directions for polar functional groups.",
+ "claims": [
+  {
+   "claim": "Latent 845 is a causal representation of the carboxylic acid group (C(=O)OH). Removing this latent reduces detection of COOH by atom-level probes from layer 7 to 12 significantly more than random noise injection.",
+   "evidence": "Ablation `concept_removed` at L8 = 0.112 vs Random Baseline -0.007; Molecule logP shift upon ablation +0.099 (L8) with sign agreement 1.0.",
+   "kind": "shows",
+   "test": "SMARTS: `[C](=O)[OH]`. Prediction: In a model where latent 845 is zeroed, the atom-level probe for COOH will score near baseline on molecules containing this group at layer 9+, whereas random vector injection yields no change.",
+   "prediction": "Probe scores drop by ~0.1 units relative to control; logP prediction increases (more lipophilic) consistent with removal of a polar moiety."
+  },
+  {
+   "claim": "Latent 2610 and 710 encode hydroxyl groups, but the model's reliance on them decays downstream from layer 8 to 12.",
+   "evidence": "Feature 2610 `concept_removed` drops from L8 (0.107) to L12 (0.026); Feature 710 shows similar decay pattern but higher initial magnitude at L8 (0.137).",
+   "kind": "shows",
+   "test": "SMARTS: `[OH]`. Prediction: Ablation of latent 2610 reduces OH detection probability in layer 9 outputs by ~50% compared to the drop seen from L8, indicating signal diffusion or self-repair mechanisms.",
+   "prediction": "`concept_removed` values decrease monotonically with depth (L7 > L8 > ... > L12) but remain above random baseline (-0.003)."
+  },
+  {
+   "claim": "The model's logP readout responds chemically correctly to the removal of polar functional groups, validating that SAE features drive physicochemical property prediction.",
+   "evidence": "Ablation of 845 (COOH) increases predicted logP by +0.099; Ablation of 2610/710 (OH) increases logP (+0.032/+0.032 implied).",
+   "kind": "shows",
+   "test": "RDKit Crippen LogP calculation on matched pairs with/without COOH/OH groups.",
+   "prediction": "Molecules lacking the functional group should have higher calculated/logp values than those containing it; model shift direction (+) matches this expectation."
+  },
+  {
+   "claim": "Feature 1151 encodes halogen adjacency (C-X), which is structurally critical for atom-level representation but has weak causal impact on global logP.",
+   "evidence": "`concept_removed` = 0.262 at L8 (highest among features); Molecule `dlogp` shift upon ablation +0.011 with low sign agreement (0.338).",
+   "kind": "suspects",
+   "test": "SMARTS: `[Cl,Br,I][C]`. Prediction: Ablation disrupts detection of halogenated carbons in layer 7 outputs but does not significantly alter molecule-level lipophility score compared to OH/COOH ablation.",
+   "prediction": "Atom probes fail to detect C-X bonds after latent removal; global logP shift remains statistically indistinguishable from zero relative to control."
+  },
+  {
+   "claim": "Steering (adding feature activation) cannot force the model to recognize features on atoms that lack them, indicating input token embeddings dominate over residual stream manipulation for this task.",
+   "evidence": "`steer_flip` = 0.0 across all tested features; `steer_shift` values are small compared to ablation effects.",
+   "kind": "shows",
+   "test": "SMARTS: `[OH]`. Prediction: Injecting latent activation into non-OH atoms does not change probe classification from negative to positive at layer 8+ outputs.",
+   "prediction": "Probe decision scores remain below threshold for feature presence; no successful 'flip' of atom labels observed."
+  },
+  {
+   "claim": "The model exhibits partial self-repair or redundancy, as ablation effects diminish but do not vanish by layer 12 compared to random baselines near zero.",
+   "evidence": "`concept_removed` at L8 (0.107) > L12 (0.026); Random baseline remains ~ -0.003 across layers for feature 2610.",
+   "kind": "shows",
+   "test": "Measure `concept_removed` at intermediate layers L9, L10, L11.",
+   "prediction": "Values will show a monotonic decay curve from layer 7 to 12 without returning to the random baseline level (-0.003)."
+  }
+ ],
+ "trivial_explanations": [
+  "The observed logP shifts could theoretically be driven by changes in atom counts (e.g., removing an OH group removes O and H atoms, changing MW), but the `concept_removed` metric isolates feature detection independent of simple size metrics.",
+  "Feature 1898 (sulfonamide) shows lower ablation effect than COOH/OH; this may reflect sulfonamides being less common or having more variable electronic environments in the training set, reducing latent specificity."
+ ]
+}

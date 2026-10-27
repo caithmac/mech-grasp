@@ -1,0 +1,24 @@
+Loading molecule-level acts and labels...
+Preparing features and splitting...
+Running threshold test...
+Error fitting ro5_pass on mean6/cls12: This solver needs samples of at least 2 classes in the data, but the data contains only one class: np.float64(1.0)
+Running direction test...
+Skipping direction test for ro5_pass due to insufficient training data
+Skipping direction test for ro5_mw due to insufficient training data
+Skipping direction test for ro5_hbd due to insufficient training data
+Skipping direction test for ro5_hba due to insufficient training data
+Processing CLS token...
+Skipping direction test for ro5_pass due to insufficient training data
+Skipping direction test for ro5_mw due to insufficient training data
+Skipping direction test for ro5_hbd due to insufficient training data
+Skipping direction test for ro5_hba due to insufficient training data
+Writing results.json...
+
+--- Summary for MEAN6 ---
+  Direction Test (Cosine Similarities):
+
+--- Summary for CLS12 ---
+  Direction Test (Cosine Similarities):
+
+Done.
+Script completed successfully.

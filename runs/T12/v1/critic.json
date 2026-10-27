@@ -1,0 +1,27 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "**CRITICAL: All model_err = 1.0 across ALL probes** - Every single `model_err` value for all three models (pretrained, a1, a1_step1) on aromatic/min_ring_size/hybridization is exactly 1.0 at every layer. This means probe scores were uniformly zero. If linear probes actually ran with real embeddings and labels, we should see variation even if performance is poor. Default/failure values suggest the probes didn't execute properly.",
+  "**CRITICAL: Crippen R\u00b2 = 0 for A1/A1_step1 controls** - Both model AND control show exactly 0.0 at ALL layers (not just models). If this probe ran correctly, we'd expect some variation across layers or between model/control pairs. Uniform zeros suggest the probe didn't execute.",
+  "**SUSPICIOUS: Order distance shows `-0.0` for A1 variants** - Negative zero values indicate computational artifacts or that no valid comparisons were made (empty dists lists). Pretrained's 0.118 is plausible; A1/A1_step1 should show small positive distances if invariance holds, not negative zeros.",
+  "**POSSIBLE: Lambda closure bug with `utils.memo`** - The lambda captures model/control acts by reference but memoization may cache stale references or fail to re-execute properly. All probes returning uniform values suggests this issue."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained GRASP is not SMILES-order invariant",
+   "status": "supported",
+   "reason": "Order distance 0.118 for pretrained cls[12] shows real variation, unlike A1 variants at ~0. This claim has empirical support."
+  },
+  {
+   "claim": "Atom-level aromaticity/hybridization/Crippen NOT encoded in Pretrained GRASP embeddings",
+   "status": "untested",
+   "reason": "All model_err = 1.0 and R\u00b2 = 0 suggests probe failure, not absence of encoding. Control errors show signal exists (pretrained control ~0.52 Crippen R\u00b2), so if models truly had no information they should also fail similarly."
+  },
+  {
+   "claim": "A1/A1_step1 enforce permutation invariance",
+   "status": "untested",
+   "reason": "-0.0 values are suspicious - could indicate probe failure rather than true zero distance. Need to verify probes actually ran with valid data."
+  }
+ ],
+ "rerun_instructions": "**REQUIRED RE-RUNS BEFORE ANY CLAIMS CAN BE ACCEPTED**:\n\n1. **Add explicit validation in script**: After each `utils.memo` call, print the raw result dict structure and check for default values (e.g., all zeros or uniform errors). Add: `print(f\"Probe {col} layers keys: {list(probe_result.get('layers', {}).keys())}\")`\n\n2. **Verify probe execution**: For each model/layer combination, confirm the score is not exactly 0 before computing error = 1 - score. If all scores are zero, probes didn't run.\n\n3. **Check lambda closures**: Ensure `lambda m=M_acts, c=C_acts` captures values correctly at memoization time (not by reference). Consider using explicit function definitions instead of lambdas for clarity.\n\n4. **Verify order distance computation**: Check that dists_cls12/dists_mean6 lists are non-empty before computing mean. Add: `print(f\"{model_kind}: {len(dists_cls12)} valid comparisons\")`\n\n5. **Add sanity checks to results.json**: Include a field like `"
+}

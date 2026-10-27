@@ -1,0 +1,15 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "API mismatch: probe_mols() does not accept 'size' argument (16/16 calls failed)",
+  "Coverage failure: 0 regression/classification metrics computed due to TypeError"
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP probes show structural alert interpretability",
+   "status": "untested",
+   "reason": "Core probe_mols() function crashed on all targets with 'unexpected keyword argument size'"
+  }
+ ],
+ "rerun_instructions": "1. Inspect mechlib.probes.probe_mols signature to confirm if 'size' is supported.\n2. If unsupported, remove the `size=size_feats` argument from the call in lines 38-40 and 50-52 of the script.\n3. If supported, check for version mismatch between T03a and T03b libraries.\n4. Re-run to verify numeric grasp_best values appear in results.json."
+}

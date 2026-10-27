@@ -1,0 +1,3 @@
+Static check failed before running:
+script.py:151:28: undefined name 'v'
+script.py:151:57: undefined name 'v'

@@ -1,0 +1,81 @@
+{
+ "n": 8622,
+ "violation_rates": {
+  "ro5_mw": {
+   "n": 8622,
+   "rate": 0.0767
+  },
+  "ro5_logp": {
+   "n": 8622,
+   "rate": 0.0931
+  },
+  "ro5_hbd": {
+   "n": 8622,
+   "rate": 0.026
+  },
+  "ro5_hba": {
+   "n": 8622,
+   "rate": 0.0377
+  },
+  "ro5_pass": {
+   "n": 8622,
+   "rate": 0.9417
+  }
+ },
+ "mean6": {
+  "pretrained": {
+   "ro5_mw": {
+    "auroc": 0.9974
+   },
+   "ro5_logp": {
+    "auroc": 0.9902
+   },
+   "ro5_hbd": {
+    "auroc": 0.9985
+   },
+   "ro5_hba": {
+    "auroc": 0.9979
+   },
+   "ro5_pass": {
+    "auroc": 0.9949,
+    "ro5_mw": {
+     "cos": -0.6082
+    },
+    "ro5_logp": {
+     "cos": -0.3163
+    },
+    "ro5_hbd": {
+     "cos": -0.2485
+    },
+    "ro5_hba": {
+     "cos": -0.4864
+    },
+    "reconstruction_r2": {
+     "r2": 0.5333
+    }
+   }
+  },
+  "random": {
+   "ro5_mw": {
+    "auroc": 0.9989
+   },
+   "ro5_logp": {
+    "auroc": 0.9894
+   },
+   "ro5_hbd": {
+    "auroc": 0.9998
+   },
+   "ro5_hba": {
+    "auroc": 0.9993
+   },
+   "ro5_pass": {
+    "auroc": 0.9953
+   }
+  }
+ },
+ "cls12": {
+  "pretrained": {},
+  "random": {}
+ },
+ "skipped": []
+}

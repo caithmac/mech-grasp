@@ -1,0 +1,31 @@
+[17:45:08] T11 -> C:\Users\ss864\Desktop\mech-grasp\runs\T11\v1
+[17:46:56]   static check failed (not executed): ['except[^:\\n]*:\\s*pass\\b']
+[17:46:56]   failed (Script uses forbidden operations: ['except[^:\\n]*:\\s*pass\\b']. Remove them. Silently swallowing exceptions (`except .); asking MI agent to fix
+[17:48:12]   static check failed (not executed): []script.py:29:74: undefined name 'scafs'
+script.py:53:18: undefined name 'pd'
+[17:48:12]   failed (script.py:53:18: undefined name 'pd'); asking MI agent to fix
+[17:49:02]   static check failed (not executed): []script.py:23:18: undefined name 'pd'
+[17:49:02]   failed (script.py:23:18: undefined name 'pd'); asking MI agent to fix
+[17:49:50]   attempt 1: executing
+[17:50:10]   ran in 14s ok=True
+[17:50:10]   chemist reading results
+[17:52:01]   critic reviewing
+[17:54:00]   critic verdict: revise
+[17:54:00]   critic asked for revision; MI agent re-running
+[17:55:37]   attempt 1: executing
+[17:55:53]   ran in 10s ok=False
+[17:55:53]   failed (AttributeError: module 'mechlib.probes' has no attribute 'auroc'); asking MI agent to fix
+[17:57:17]   attempt 2: executing
+[17:57:48]   ran in 25s ok=True
+[17:57:48]   chemist reading results
+[17:59:25]   critic reviewing
+[18:01:42]   critic verdict: revise
+[18:01:42]   critic asked for revision; MI agent re-running
+[18:02:54]   static check failed (not executed): []script.py:127:27: undefined name 'readout_names'
+[18:02:54]   failed (script.py:127:27: undefined name 'readout_names'); asking MI agent to fix
+[18:04:04]   attempt 1: executing
+[18:04:35]   ran in 25s ok=True
+[18:04:35]   chemist reading results
+[18:06:29]   critic reviewing
+[18:10:33]   critic verdict: accept
+[18:10:48] done: C:\Users\ss864\Desktop\mech-grasp\runs\T11\v3

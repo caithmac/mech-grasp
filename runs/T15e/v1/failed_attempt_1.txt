@@ -1,0 +1,20 @@
+Built 0 molecules. Skipped 11607 meso/invalid.
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15e\v1\script.py", line 65, in <module>
+    O = model.run(enc, orig_list, layers=[6, 12], keep_atoms=False, dtype=np.float32)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\AppData\Local\miniconda3\envs\mech-grasp\Lib\site-packages\torch\utils\_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\model.py", line 175, in run
+    return _run_loop(enc, smiles, batch_size, layers, attention, keep_atoms, dtype,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\mechlib\model.py", line 186, in _run_loop
+    for batch in make_loader(smiles, enc.vocabulary, batch_size, chemistry_features=mode):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\a2_wheel\ex\grasp\encoder.py", line 62, in make_loader
+    values = validate_smiles(smiles)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\a2_wheel\ex\grasp\encoder.py", line 48, in validate_smiles
+    raise ValueError("At least one SMILES is required")
+ValueError: At least one SMILES is required

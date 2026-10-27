@@ -1,0 +1,11 @@
+Error in pretrained analysis: list index out of range
+Error in random analysis: operands could not be broadcast together with shapes (12,) (12,19) (12,) 
+Error in a1 analysis: operands could not be broadcast together with shapes (12,) (12,19) (12,) 
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T07a\v1\script.py", line 409, in <module>
+    results = run_analysis()
+              ^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T07a\v1\script.py", line 398, in run_analysis
+    total_keys_per_bin["4+"] = sum(total_possible_keys) - sum([total_keys_per_bin[k] for k in ["0","1","2","3"]])
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'int' object is not iterable

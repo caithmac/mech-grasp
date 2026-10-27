@@ -1,0 +1,37 @@
+{
+ "summary": "GRASP-A2 learns bond types and stereochemistry inputs, but deep layers degrade additive physicochemical property signals while retaining structural features. Aromaticity is accessible via topology alone in this dataset.",
+ "claims": [
+  {
+   "claim": "Aromaticity detection relies on topological inference rather than explicit input tokens for high accuracy; random weights achieve ~95% baseline, but trained models reach near-perfect (0.1-0.3%) error by Layer 2.",
+   "evidence": "a2_random and a1_random both show control accuracies of 95.1%-96.7% at layers 2+ for aromaticity; model errors drop to 0.001 (Layer 2) vs control ~0.04-0.05.",
+   "kind": "shows",
+   "test": "SMARTS: `[cH]` or `[#6X3a]`. Prediction: Layer 2 model predictions for aromatic carbons should match ground truth >99% of time, while random weights show ~4-5% false negatives on ambiguous ring systems.",
+   "prediction": "Layer 2 Model Accuracy > 0.99; Random Control Accuracy < 0.96."
+  },
+  {
+   "claim": "Hybridization states (sp3/sp2) are computed actively by the model rather than inferred from element type embeddings alone, evidenced by a ~10% performance gap between trained models and random controls.",
+   "evidence": "Model error for hybridization is 0.0 at Layer 2; `a2_random`/`a1_random` control errors remain at 0.07-0.1 (90-93% accuracy) even with explicit bond inputs in A2.",
+   "kind": "shows",
+   "test": "RDKit: GetHybridization() on Carbon atoms. Prediction: Model Layer 2 predictions for sp3 carbons (`[#6X4]`) should be perfect, while random controls misclassify ~10% of quaternary centers as aromatic or vice versa.",
+   "prediction": "Model Hybridization R2 = 1.0; Control Hybridization R2 < 0.95."
+  },
+  {
+   "claim": "Deep layers (L>6) degrade the preservation of additive atomic property contributions (Crippen LogP/MR), suggesting training objectives prioritize relational features over local physicochemical additivity.",
+   "evidence": "Model Crippen R2 drops from 0.79-0.95 at Layer 0 to 0.64-0.68 by Layer 12; Random controls maintain stable high performance (R2 ~0.82 for LogP, ~0.95 for MR) throughout layers.",
+   "kind": "suspects",
+   "test": "Compare Model Layer 12 Crippen contributions vs RDKit atomic contributions on a set of alkanes (`[#6X4]`). Prediction: Correlation should be lower than Layer 0 or Random Control, indicating signal scrambling in deep layers.",
+   "prediction": "Model R2 (Layer 12) < Model R2 (Layer 0); Control R2 remains constant."
+  },
+  {
+   "claim": "Local neighbor context (O/Halogen presence on Carbon) is learned faster than topological inference, with models reaching zero error by Layer 2 while controls plateau at ~93-97% accuracy.",
+   "evidence": "`has_O_neighbor` model error = 0.0 at Layers 2-6; `a1_random`/`a2_random` control errors stabilize around 0.065-0.07 (93-94%).",
+   "kind": "shows",
+   "test": "SMARTS: `[CH]([O])`. Prediction: Model Layer 2 should identify all C-O bonds correctly, while random controls miss ~7% of ether/alcohol oxygens due to lack of learned attention routing.",
+   "prediction": "Model Neighbor Accuracy = 1.0; Control Neighbor Accuracy < 0.95."
+  }
+ ],
+ "trivial_explanations": [
+  "Aromaticity accuracy in random controls (~95%) suggests the dataset topology (ring size + element types) is sufficient to infer aromaticity without explicit bond type inputs, making A2's 'explicit input' redundant for this specific feature.",
+  "Crippen property degradation in deep layers may be trivial: if the training objective optimizes for activity prediction where global properties matter more than local atomic sums, gradients will suppress additive signals that do not correlate with labels."
+ ]
+}

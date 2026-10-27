@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05b\v1\script.py", line 5, in <module>
+    from rdkit import Chem, AllChem
+ImportError: cannot import name 'AllChem' from 'rdkit' (C:\Users\ss864\AppData\Local\miniconda3\envs\mech-grasp\Lib\site-packages\rdkit\__init__.py)

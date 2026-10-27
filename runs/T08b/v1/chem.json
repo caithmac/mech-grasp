@@ -1,0 +1,50 @@
+{
+ "summary": "The Pretrained GRASP L6 SAE has learned 44 sparse latent dimensions that specifically encode local chemical functional group contexts, whereas the Random Control learns none (0 context_chemistry latents). These features are highly specific to atom tokens but do not generalize perfectly across all instances of those atoms globally.",
+ "claims": [
+  {
+   "claim": "Pretrained GRASP L6 SAE develops sparse latent dimensions that specifically encode local chemical functional group contexts, whereas the Random Control learns none (0 context_chemistry latents).",
+   "evidence": "counts['context_chemistry'] is 44 for pretrained vs 0 for random. Top latents have within_token_auroc > 0.95.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C;$(CO)]` (hydroxyl-bearing carbon). Prediction: Pretrained latent L2610 activation correlates with this label on Token 150 atoms, Random SAE does not.",
+   "prediction": "Pretrained AUROC > 0.9 for specific latents vs SMARTS labels; Random AUROC ~0.5 (chance)."
+  },
+  {
+   "claim": "Latent L2610 encodes the presence of a hydroxyl group on Carbon atoms represented by Token ID 150.",
+   "evidence": "tok_j=150, element_of_tok_j='C', within_concept='fg_hydroxyl', within_auroc=0.999.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[CH2;$(CO)]` or similar hydroxyl carbon pattern restricted to Token 150 atoms in the dataset.",
+   "prediction": "Activation of L2610 on these specific atoms should be near-maximal compared to other Carbon tokens."
+  },
+  {
+   "claim": "The model distinguishes between atom type (token) and chemical context, as within-token AUROC is high but global AUROC drops significantly (~0.5-0.7).",
+   "evidence": "L2610: within=0.999 vs global=0.567. L845: within=0.996 vs global=0.666.",
+   "kind": "shows",
+   "test": "Compare activation of L2610 on Token 150 atoms with `fg_hydroxyl` label vs all Token 150 atoms regardless of context.",
+   "prediction": "AUROC within token subset >> AUROC across full dataset."
+  },
+  {
+   "claim": "Redundant or split representations exist for the same chemical feature (e.g., O-neighbor) on similar tokens, indicated by near-identical statistics between L2804 and L3314.",
+   "evidence": "L2804: tok_j=13, within_auroc=0.99, freq=1003. L3314: tok_j=13, within_auroc=0.989, freq=1021.",
+   "kind": "suspects",
+   "test": "Compute Pearson correlation between activation vectors of Latent 2804 and Latent 3314 across the validation set.",
+   "prediction": "Correlation > 0.95 if they represent the same feature."
+  },
+  {
+   "claim": "The model captures ionization states or resonance features associated with carboxylic acids, as evidenced by examples containing `[O-]` in L845 activations.",
+   "evidence": "L845 (fg_carboxylic_acid) examples include `C(=O)[O-]`. Global AUROC 0.666 is higher than Hydroxyls (0.567).",
+   "kind": "suspects",
+   "test": "RDKit SMARTS: `[C;$(CO[O-])]` vs `[C;$(CO)]`.",
+   "prediction": "L845 activation should correlate with the anionic form specifically if it captures resonance/charge."
+  },
+  {
+   "claim": "Token ID 13 (Element C) is associated with O-neighbors and Ether features, but this feature appears on multiple latents suggesting high redundancy in L6 representation.",
+   "evidence": "L2804, L3314, L4058 all fire for `has_O_neighbor` or `fg_ether` using Token 13. Firing frequencies >900-1000.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C;$(CO)]`. Check overlap of top firing atoms across L2804, L3314, and L4058.",
+   "prediction": "Significant overlap in atom indices (e.g., >70%) between the three latents."
+  }
+ ],
+ "trivial_explanations": [
+  "The high within-token AUROC is partially trivial because 'Token' IDs are derived from the input graph representation which already encodes local connectivity; however, the *sparsity* of these features in SAE space (44/4096) proves they are not just direct copies of token embeddings."
+ ]
+}

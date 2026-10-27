@@ -1,0 +1,18 @@
+Built 0 molecules. Skipped 11607.
+No valid molecule pairs found, exiting.
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15e\v1\script.py", line 170, in <module>
+    vals_cls_6 = [results['kinds'][kind]['rel']['cls'][6][m] for m in metrics]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15e\v1\script.py", line 170, in <listcomp>
+    vals_cls_6 = [results['kinds'][kind]['rel']['cls'][6][m] for m in metrics]
+                  ^^^^^^^
+NameError: name 'results' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T15e\v1\script.py", line 176, in <module>
+    results["figure_error"] = str(e)
+    ^^^^^^^
+NameError: name 'results' is not defined

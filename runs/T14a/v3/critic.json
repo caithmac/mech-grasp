@@ -1,0 +1,30 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Missing data for key chemist claims (scaffold_corr, aromaticity_var_ratios at L12). Script logic overwrites these values to None/null before saving results.json.",
+  "Random model AUROC baseline (~0.7) is suspiciously high for a 'replaced-token' detection task with random weights; suggests label leakage or trivial signal in token IDs that needs explanation, though Trained vs Random gap still supports specialization claim."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Geometric collapse at Layer 12",
+   "status": "supported",
+   "reason": "PR drops from ~165 to ~4 for trained (a1_step1) but stays stable (~30) for Random. Anisotropy increases in trained, not random."
+  },
+  {
+   "claim": "RTD signal orthogonal to chemical variance at L12",
+   "status": "supported",
+   "reason": "var_frac_rtd drops significantly (e.g., 0.66 -> 0.11), cos_pc remains negligible (<0.1)."
+  },
+  {
+   "claim": "Scaffold identity correlation analysis",
+   "status": "untested",
+   "reason": "results.json shows 'scaffold_corr_6': null for all models due to script logic bug (loop overwrites value at L>6). Chemist's reading relies on this metric."
+  },
+  {
+   "claim": "Aromaticity-specific variance ratios comparison",
+   "status": "untested",
+   "reason": "aromaticity_var_ratios['12'] is explicitly set to null in results.json. Script only computes/populates for Layer 6 or fails logic flow for L12."
+  }
+ ],
+ "rerun_instructions": "Fix script loop variable scoping: ensure `scaffold_corr_6` and `variance_ratio_L12` are computed at their respective layers (L=6, L=12) without being overwritten by subsequent iterations. Re-run to populate these fields in results.json before re-evaluating the Chemist's specific claims on scaffolds/aromaticity."
+}

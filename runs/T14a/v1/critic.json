@@ -1,0 +1,28 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "CRITICAL COVERAGE GAP: Script computes RTD AUROC only for layers L6 and L12 (`for L in [6, 12]:`), ignoring the requested full trajectory `[0, 2, ..., 12]`. Without intermediate layers (e.g., L4-L8), we cannot verify 'specialization' or 'degradation trends'. Claims of layer-specific behavior are based on only two data points.",
+  "SUSPICIOUS METRIC VALUES: `var_frac_rtd` is exactly `0.0` for Layer 12 in all models except Pretrained L6 (e.g., A1_step1, Random). This implies zero variance along the RTD axis in clean activations at L12, directly contradicting the claim that 'clean activations vary strongly'. Likely a calculation bug or silent failure.",
+  "INCONSISTENT TRENDS: `rtd_auroc` trends differ by model. Pretrained drops from 0.967 (L6) to 0.958 (L12). A1_step1 rises from 0.958 (L6) to 0.982 (L12). This inconsistency undermines the 'specialization' claim without full layer data.",
+  "OVER-CLAIMING: Chemist claims Layer 12 is specialized for RTD based on L6 vs L12 comparison only, ignoring missing intermediate layers required to establish a peak or trend. Claims of 'blur chemistry' rely solely on geometric proxies (PR/Aniso) without direct chemical probe validation.",
+  "POTENTIAL TRIVIALITY: `rtd_auroc_samedeg` is extremely high (~0.96-0.98). If degree matches, why is detection so easy? Suggests token ID differences or other trivial signals might be driving the AUROC rather than deep semantic RTD encoding."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "Layer 12 specialization for replaced-token detection",
+   "status": "untested",
+   "reason": "Only L6 and L12 tested. Missing trend data from intermediate layers (L0-L5, L7-11) prevents establishing 'specialization' vs monotonic change."
+  },
+  {
+   "claim": "Layer 12 representations undergo geometric collapse",
+   "status": "supported",
+   "reason": "Geometry metrics show PR drop and Aniso increase at L12 (e.g., A1_step1 PR: 172 -> 3.8). This part of the data is consistent."
+  },
+  {
+   "claim": "Clean activations vary strongly along RTD axis",
+   "status": "unsupported",
+   "reason": "`var_frac_rtd` at L12 is `0.0`, indicating zero variance, contradicting 'vary strongly' claim."
+  }
+ ],
+ "rerun_instructions": "1. Fix script: Change RTD probe loop to iterate over ALL layers `[0, 2, ..., 12]`. Store AUROC for all L in `results.json`.\n2. Debug `var_frac_rtd`: Check if activations are zeroed/NaN at L12 or weights are NaNs. Ensure float precision is maintained (avoid integer division).\n3. Verify 'blur chemistry': Add a chemical probe test on clean data to confirm feature decodability drops, not just geometric proxies.\n4. Re-evaluate trends: Check if AUROC consistently peaks/drops at L12 across all model types before claiming specialization."
+}

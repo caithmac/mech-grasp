@@ -1,0 +1,12 @@
+Loading cached activations...
+  Loaded pretrained
+  Loaded random
+  Loaded a1
+  Loaded a1_random
+  Loaded a1_step1
+Starting probe computations...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T12\v1\script.py", line 81, in <module>
+    probe_result = utils.memo(f"probe_{model_kind}_{col}", lambda m=M_acts, c=C_acts, col_name=col: make_probe_fn(m, c, col_name))()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'dict' object is not callable

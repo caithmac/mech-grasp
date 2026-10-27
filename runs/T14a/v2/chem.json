@@ -1,0 +1,30 @@
+{
+ "summary": "Layer 6 encodes chemistry relevant to RTD; Layer 12 collapses space for task specialization.",
+ "claims": [
+  {
+   "claim": "At Layer 6, trained models retain sufficient chemical detail (beyond graph topology) to detect replaced tokens even when degree is preserved.",
+   "evidence": "`rtd_auroc_samedeg` at L6 = 0.973 (`pretrained`) vs Random = 0.746; `geometry.pr` at L6 = 183.7 (high variance).",
+   "kind": "shows",
+   "test": "Label column: `df.tok_element`. Prediction: If chemistry is retained, AUROC on subsets of atoms where element changes but degree stays same should remain >0.95; if only topology matters, it drops to ~0.75.",
+   "prediction": ">0.95 for trained models at L6"
+  },
+  {
+   "claim": "Layer 12 representation collapses (blurs chemistry) as indicated by a drastic reduction in Participation Ratio (`pr`), discarding orthogonal chemical features.",
+   "evidence": "`geometry.pr` drops from ~183 at L6 to ~4-19 at L12 for trained models; `aniso` increases 0.3 -> 0.7.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[cH]`, `[nH]`. Prediction: Variance contribution of aromatic/heteroaromatic atoms to total activation variance drops disproportionately at L12 compared to aliphatic carbons, confirming loss of specific ring-system encoding.",
+   "prediction": "Variance ratio (L12/L6) < 0.5 for aromatics"
+  },
+  {
+   "claim": "The RTD decision axis becomes orthogonalized from general chemical variance by Layer 12.",
+   "evidence": "`var_frac_rtd` drops from ~0.76 at L6 to ~0.04 at L12 (`pretrained`).",
+   "kind": "shows",
+   "test": "Label column: `scaf`. Prediction: Correlation between scaffold identity and RTD direction weights should be high at L6 but near zero at L12, indicating scaffolds (global chemistry) are suppressed for local anomaly detection.",
+   "prediction": "|Corr| < 0.1 at L12"
+  }
+ ],
+ "trivial_explanations": [
+  "The drop in `pr` could reflect standard transformer depth effects where later layers compress information; however, the Random model maintains high `pr` (~30), confirming this is training-dependent specialization.",
+  "`var_frac_rtd` low values indicate clean chemistry doesn't align with RTD direction, but since RTD task requires detecting anomalies, orthogonalization may be a feature of the discriminator head rather than pure blurring."
+ ]
+}

@@ -1,0 +1,34 @@
+Loading molecule-level data...
+Running probes...
+Error probing logp with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing logp with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing tpsa with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing tpsa with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing hbd with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing hbd with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing hba with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing hba with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing rot_bonds with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing rot_bonds with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing n_rings with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing n_rings with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing n_aromatic_rings with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing n_aromatic_rings with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing fsp3 with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing fsp3 with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing qed with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing qed with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing sa_score with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing sa_score with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing formal_charge with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing formal_charge with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing pains_alert with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing pains_alert with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing brenk_alert with pool=cls, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Error probing brenk_alert with pool=mean, resid=False: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values
+Constructing summary table...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T03\v2\script.py", line 130, in <module>
+    row["size"] = float(baseline_data.get("size", np.nan))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: float() argument must be a string or a real number, not 'dict'

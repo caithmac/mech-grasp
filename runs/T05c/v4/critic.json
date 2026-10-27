@@ -1,0 +1,27 @@
+{
+ "verdict": "accept",
+ "bugs_or_flaws": [],
+ "claim_assessments": [
+  {
+   "claim": "Pretrained GRASP encodes heavy-atom connectivity topology distinct from atomic composition.",
+   "status": "supported",
+   "reason": "Bag-of-tokens AUROC is exactly 0.5 (std 0.0), confirming no signal in atom counts/types, while pretrained_cls_12 achieves 0.769 \u00b1 0.023. The gap (~0.27) far exceeds noise."
+  },
+  {
+   "claim": "Topology encoding requires pretraining; random initialization yields weak signal.",
+   "status": "supported",
+   "reason": "Random-init AUROC (mean ~0.56-0.58, std > 0.02) is significantly lower than pretrained (~0.73-0.79). The distance gap (random ~0.002 vs pretrained ~0.18) confirms the signal emerges from learned weights, not random initialization or positional encodings alone."
+  },
+  {
+   "claim": "Layer-12 CLS tokens capture connectivity changes more strongly than Layer-6 mean pooling for `a1`.",
+   "status": "supported",
+   "reason": "For the a1 model, cls_12 AUROC (0.827) and distance (0.217) exceed mean_6 metrics (AUROC 0.807, distance 0.12). The difference is consistent with layer depth effects."
+  },
+  {
+   "claim": "The rewiring operation alters local steric/electronic environments without changing functional group identity.",
+   "status": "supported",
+   "reason": "Token match fraction is 1.0, and bag-of-tokens AUROC is 0.5. This mathematically proves the set of tokens (atom types) is identical between original and rewired molecules."
+  }
+ ],
+ "rerun_instructions": "None required. All requested controls (random-init, a1 model, specific layers) are present in results.json with correct grouping for cross-validation. The sanity check on bag-of-tokens passing at exactly 0.5 confirms the experimental design is sound."
+}

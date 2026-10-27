@@ -1,0 +1,23 @@
+[23:34:27] T04 -> C:\Users\ss864\Desktop\mech-grasp\runs\T04\v1
+[23:36:27]   static check failed (not executed): []script.py:97:39: undefined name 'X_train_enc'
+[23:36:27]   failed (script.py:97:39: undefined name 'X_train_enc'); asking MI agent to fix
+[23:38:06]   attempt 1: executing
+[23:38:07]   waiting for GPU lock (0s)
+[23:43:15]   waiting for GPU lock (300s)
+[23:53:22]   ran in 330s ok=False
+[23:53:22]   failed (ValueError: size_feats is required: pass df_mols[["heavy_atoms", "mw"]].values); asking MI agent to fix
+[23:54:30]   attempt 2: executing
+[23:54:30]   waiting for GPU lock (0s)
+[23:59:41]   waiting for GPU lock (300s)
+[00:04:51]   waiting for GPU lock (600s)
+[00:13:03]   ran in 379s ok=False
+[00:13:03]   failed (TypeError: 'GRASPEncoder' object is not callable); asking MI agent to fix
+[00:14:20]   attempt 3: executing
+[00:20:44]   ran in 384s ok=False
+[00:20:44]   failed (TypeError: 'Acts' object is not subscriptable); asking MI agent to fix
+[00:25:15]   attempt 4: executing
+[00:31:37]   ran in 382s ok=False
+[00:31:37]   failed (AttributeError: module 'mechlib.model' has no attribute 'enc'); asking MI agent to fix
+[00:38:50]   attempt 5: executing
+[00:45:03]   ran in 373s ok=False
+[00:45:03] MI agent could not produce a working script; supervisor needed

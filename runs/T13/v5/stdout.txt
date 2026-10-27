@@ -1,0 +1,21 @@
+Loaded 4000 molecules and 92662 atom rows
+Fitting molecule logp probes...
+Fitting atom crippen probes...
+=== T13 Results Summary ===
+Feature 2610 (fg_hydroxyl): AUROC=0.996, Ablation@L8 (normed)=0.10700833797835708
+  Random Baseline@L8 (normed)=-0.003368677543787308
+Feature 845 (fg_carboxylic_acid): AUROC=0.984, Ablation@L8 (normed)=0.11185141840203307
+  Random Baseline@L8 (normed)=-0.007848943121021636
+Feature 1898 (fg_sulfonamide): AUROC=0.971, Ablation@L8 (normed)=0.027120968488820275
+  Random Baseline@L8 (normed)=-0.000736008361322363
+Feature 1151 (has_halogen_neighbor): AUROC=0.999, Ablation@L8 (normed)=0.26240169104076033
+  Random Baseline@L8 (normed)=-0.015797057832996925
+Feature 1316 (fg_ester): AUROC=0.824, Ablation@L8 (normed)=0.09159381538330925
+  Random Baseline@L8 (normed)=-0.0018616592999161604
+Feature 2804 (has_O_neighbor): AUROC=0.970, Ablation@L8 (normed)=0.09063221765509558
+Feature 710 (fg_hydroxyl): AUROC=0.906, Ablation@L8 (normed)=0.13744423315716411
+  Random Baseline@L8 (normed)=-0.004963098371760445
+Feature 3867 (has_N_neighbor): AUROC=nan, Ablation@L8 (normed)=0.019457960293777835
+  Random Baseline@L8 (normed)=-0.0020540209706500683
+
+Script completed. Check OUT/results.json and OUT/t13.png

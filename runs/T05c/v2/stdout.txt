@@ -1,0 +1,7 @@
+Kept 300 pairs.
+Token match fraction: 1.0
+Summary:
+Pairs: 300
+Token Match Fraction: 1.0000
+AUROC (cls): 0.7786 ± 0.0120
+AUROC (bag_of_tokens): 0.5000 ± 0.0000

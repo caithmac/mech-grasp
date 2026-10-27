@@ -1,0 +1,16 @@
+Loading data and SAEs...
+Loading pretrained L6 SAE...
+Loading random L6 SAE (control)...
+Constructed 27 concept columns.
+Filtered to 19 concepts with >= 10 positives.
+Analyzing pretrained SAE...
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T08b\v2\script.py", line 275, in <module>
+    results_pre = analyze_sae(S_pre, A_pre.atom[6], A_pre.tokens, C_valid, "pretrained")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T08b\v2\script.py", line 141, in analyze_sae
+    firing_count = int(np.sum(z_col_arr > 0)) # Check threshold: >= 20 atoms
+                              ^^^^^^^^^^^^^
+  File "C:\Users\ss864\AppData\Local\miniconda3\envs\mech-grasp\Lib\site-packages\scipy\sparse\_base.py", line 441, in __bool__
+    raise ValueError("The truth value of an array with more than one "
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all().

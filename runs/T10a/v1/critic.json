@@ -1,0 +1,31 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Claim #4 (NR-AR-LBD L6) is factually wrong: a1=0.799, GRASP=0.813 \u2192 GRASP outperforms 'a1', not the reverse.",
+  "ClinTox CT_TOX CLS shows pretrained worse than random (GRASP 0.706 vs Random 0.834 at L12) - this is a real signal but needs verification that it's systematic, not seed noise given GRASP std=0.129.",
+  "Some tasks have very small n_pos relative to n_total: CT_TOX has only 96 positives out of 1442 (~7%); AUROC may be unstable here."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "GRASP Layer 12 Mean Pooling captures non-local structural dependencies relevant to SR-MMP inhibition",
+   "status": "supported",
+   "reason": "SR-MMP L12 mean: GRASP=0.889 vs Morgan=0.756 (diff +0.133), stds don't overlap much (GRASP 0.012, Morgan not given but bag is 0.037). Gap > noise."
+  },
+  {
+   "claim": "Pretrained GRASP representations degrade for ClinTox toxicity when using CLS token pooling at Layer 12 compared to random initialization",
+   "status": "supported",
+   "reason": "ClinTox CT_TOX L12 cls: GRASP=0.706 (std=0.129) vs Random=0.834 (std=0.025). Gap of 0.128 is larger than combined std, though high variance in GRASP suggests instability."
+  },
+  {
+   "claim": "Early layers (Layer 4) encode specific electronic effects relevant to AhR activation better than size or count baselines",
+   "status": "supported",
+   "reason": "NR-AhR L4 mean: GRASP=0.846 vs Size=0.585, Morgan=0.736. Clear gap of 0.11 over size baseline."
+  },
+  {
+   "claim": "The 'a1' control variant outperforms pretrained weights on Tox21 NR-AR-LBD at Layer 6 Mean Pooling",
+   "status": "unsupported",
+   "reason": "Data shows a1=0.799, GRASP=0.813 \u2192 GRASP is higher by 0.014. Claim reverses the actual relationship."
+  }
+ ],
+ "rerun_instructions": "Fix claim #4 to correctly state 'GRASP outperforms a1 on NR-AR-LBD L6 mean (0.813 vs 0.799)'. For ClinTox CLS degradation, re-run with more seeds or check if this is layer-specific by examining layers [4,6] for CT_TOX cls pooling - currently only L12 cls data exists in results."
+}

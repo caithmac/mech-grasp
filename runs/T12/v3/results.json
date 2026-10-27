@@ -1,0 +1,518 @@
+{
+ "probes": {
+  "pretrained": {
+   "aromatic": {
+    "token_err": 0.11268415996100634,
+    "layers": {
+     "0": {
+      "model_err": 1.0,
+      "control_err": 0.10774090079091858,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.8922590992090814
+     },
+     "2": {
+      "model_err": 1.0,
+      "control_err": 0.059897324746563285,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.9401026752534367
+     },
+     "4": {
+      "model_err": 1.0,
+      "control_err": 0.058043215590027786,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.9419567844099722
+     },
+     "6": {
+      "model_err": 1.0,
+      "control_err": 0.06099881775835991,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.9390011822416401
+     },
+     "8": {
+      "model_err": 1.0,
+      "control_err": 0.05995869615868221,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.9400413038413178
+     },
+     "12": {
+      "model_err": 1.0,
+      "control_err": 0.06321466450891755,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.9367853354910824
+     }
+    },
+    "_sanity_check_has_valid_score": true
+   },
+   "min_ring_size": {
+    "token_err": 0.7786948033508838,
+    "layers": {
+     "0": {
+      "model_err": 1.0,
+      "control_err": 0.779633303437295,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.22036669656270505
+     },
+     "2": {
+      "model_err": 1.0,
+      "control_err": 0.7555481397174364,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.24445186028256358
+     },
+     "4": {
+      "model_err": 1.0,
+      "control_err": 0.7465773262324327,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.2534226737675673
+     },
+     "6": {
+      "model_err": 1.0,
+      "control_err": 0.7433296749947369,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.25667032500526316
+     },
+     "8": {
+      "model_err": 1.0,
+      "control_err": 0.7345996949124629,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.2654003050875371
+     },
+     "12": {
+      "model_err": 1.0,
+      "control_err": 0.719068618768588,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.280931381231412
+     }
+    },
+    "_sanity_check_has_valid_score": true
+   },
+   "hybridization": {
+    "token_err": 0.26891881360760095,
+    "layers": {
+     "0": {
+      "model_err": 1.0,
+      "control_err": 0.26385169527331076,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.7361483047266892
+     },
+     "2": {
+      "model_err": 1.0,
+      "control_err": 0.13568037161571755,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.8643196283842824
+     },
+     "4": {
+      "model_err": 1.0,
+      "control_err": 0.12800190738059258,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.8719980926194074
+     },
+     "6": {
+      "model_err": 1.0,
+      "control_err": 0.12863365193965093,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.8713663480603491
+     },
+     "8": {
+      "model_err": 1.0,
+      "control_err": 0.125553677410975,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.874446322589025
+     },
+     "12": {
+      "model_err": 1.0,
+      "control_err": 0.1257195094166369,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": 0.8742804905833631
+     }
+    },
+    "_sanity_check_has_valid_score": true
+   }
+  },
+  "a1": {
+   "aromatic": {
+    "token_err": 0.11268415996100634,
+    "layers": {
+     "0": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "2": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "4": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "6": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "8": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "12": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     }
+    },
+    "_sanity_check_has_valid_score": true
+   },
+   "min_ring_size": {
+    "token_err": 0.7786948033508838,
+    "layers": {
+     "0": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "2": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "4": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "6": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "8": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "12": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     }
+    },
+    "_sanity_check_has_valid_score": true
+   },
+   "hybridization": {
+    "token_err": 0.26891881360760095,
+    "layers": {
+     "0": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "2": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "4": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "6": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "8": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "12": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     }
+    },
+    "_sanity_check_has_valid_score": true
+   }
+  },
+  "a1_step1": {
+   "aromatic": {
+    "token_err": 0.11268415996100634,
+    "layers": {
+     "0": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "2": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "4": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "6": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "8": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "12": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     }
+    },
+    "_sanity_check_has_valid_score": true
+   },
+   "min_ring_size": {
+    "token_err": 0.7786948033508838,
+    "layers": {
+     "0": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "2": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "4": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "6": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "8": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "12": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     }
+    },
+    "_sanity_check_has_valid_score": true
+   },
+   "hybridization": {
+    "token_err": 0.26891881360760095,
+    "layers": {
+     "0": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "2": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "4": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "6": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "8": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     },
+     "12": {
+      "model_err": 1.0,
+      "control_err": 1.0,
+      "_debug_model_raw": NaN,
+      "_debug_ctrl_raw": NaN
+     }
+    },
+    "_sanity_check_has_valid_score": true
+   }
+  }
+ },
+ "crippen_r2": {
+  "pretrained": {
+   "0": {
+    "model": 0.0,
+    "control": 0.47959437971158775,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.47959437971158775
+   },
+   "2": {
+    "model": 0.0,
+    "control": 0.5183640283023838,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.5183640283023838
+   },
+   "4": {
+    "model": 0.0,
+    "control": 0.5173310883495773,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.5173310883495773
+   },
+   "6": {
+    "model": 0.0,
+    "control": 0.5171304845313791,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.5171304845313791
+   },
+   "8": {
+    "model": 0.0,
+    "control": 0.5175936990060298,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.5175936990060298
+   },
+   "12": {
+    "model": 0.0,
+    "control": 0.5171094492799598,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.5171094492799598
+   }
+  },
+  "a1": {
+   "0": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "2": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "4": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "6": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "8": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "12": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   }
+  },
+  "a1_step1": {
+   "0": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "2": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "4": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "6": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "8": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   },
+   "12": {
+    "model": 0.0,
+    "control": 0.0,
+    "_debug_model_raw": 0.0,
+    "_debug_ctrl_raw": 0.0
+   }
+  }
+ },
+ "order_distance": {
+  "pretrained": {
+   "cls12": 0.11815069643159708,
+   "mean6": 0.07876589983701705
+  },
+  "a1": {
+   "cls12": -1.7881393432617187e-08,
+   "mean6": -8.742014567057292e-09
+  },
+  "a1_step1": {
+   "cls12": 1.3907750447591146e-09,
+   "mean6": -1.529852549235026e-08
+  }
+ }
+}

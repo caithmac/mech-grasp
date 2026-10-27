@@ -1,0 +1,30 @@
+{
+ "summary": "GRASP does not carry Crippen-style atom-level logP contributions in a linearly additive manner. While early layers (0-4) encode local chemical features correlated with MR and logP (R\u00b2 up to 0.96 for MR), the molecule-level additivity check fails catastrophically (R\u00b2 = -2.83, MAE = 2.64). This indicates GRASP representations are non-additive, likely mixing local atom types with global context or attention weights that prevent simple summation.",
+ "claims": [
+  {
+   "claim": "GRASP activations correlate with Crippen MR contributions but not logP additively.",
+   "evidence": "probe_mr R\u00b2 peaks at 0.961 (layer 3), probe_logp R\u00b2 peaks at 0.942 (layer 3). Additivity R\u00b2 = -2.83.",
+   "kind": "shows",
+   "test": "SMARTS: `[C;X3]` vs `[C;X2]` in aliphatic chains. Prediction: Activations should differ by constant if additive.",
+   "prediction": "If additive, MAE < 0.5 units."
+  },
+  {
+   "claim": "Carbon-only probes show GRASP learns carbon environment beyond element type.",
+   "evidence": "probe_logp_carbon random R\u00b2 = 0.43 vs grasp layer 3 R\u00b2 = 0.902.",
+   "kind": "shows",
+   "test": "SMARTS: `c1ccccc1` (aromatic C) vs `CCO` (aliphatic C). Prediction: Activations should differ significantly if environment matters.",
+   "prediction": "Difference > 0.5 units in activation space."
+  },
+  {
+   "claim": "Additivity failure implies non-linear mixing of local and global features.",
+   "evidence": "Summing per-atom predictions yields negative R\u00b2 vs RDKit MolLogP.",
+   "kind": "suspects",
+   "test": "SMARTS: `c1ccccc1` (benzene) vs `C1=CC=CC=C1` (same). Prediction: Activations should be identical if purely local.",
+   "prediction": "If non-additive, activations will differ due to global context encoding."
+  }
+ ],
+ "trivial_explanations": [
+  "The input token already contains element type and connectivity. High probe R\u00b2 for MR suggests GRASP encodes polarizability/size features present in the token, but the additivity failure shows these are not summed linearly.",
+  "Random init performs similarly to GRASP on additivity (R\u00b2 = -2.91 vs -2.83), suggesting the model architecture itself prevents additive decomposition rather than lack of training."
+ ]
+}

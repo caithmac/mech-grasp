@@ -1,0 +1,37 @@
+{
+ "summary": "The results indicate that Pretrained Layer 12 encodes specific substituent effects distinct from trivial size/atom-count biases, whereas Random weights reflect a consistent but chemically undifferentiated 'add atoms' signal. Specifically, the model learns to represent hydrophobic vs polar additions as anti-correlated vectors (CH3 vs COOH), and distinguishes H-bonding groups from acidic ones.",
+ "claims": [
+  {
+   "claim": "Pretrained Layer 12 CLS deltas for CH3 and COOH are anti-correlated, reflecting learned polarity/hydrophobicity contrast absent in Random weights.",
+   "evidence": "Mean delta cosine similarity between CH3 (index 4) and COOH (index 5) is -0.576 in Pretrained L12 (`mean_delta_cosine.pretrained['12'][4][5]`), whereas the same pair shows +0.527 correlation in Random L12.",
+   "kind": "shows",
+   "test": "SMARTS: `[#6]-[cH]` (CH3) vs `[C](=O)[O-]` or `[C](=O)O` (COOH). Compute dot product of CLS deltas on 100 phenol derivatives. Prediction: Pretrained L12 vectors should have negative mean correlation; Random weights positive.",
+   "prediction": "Pretrained L12 delta cosine < -0.5 for CH3/COOH pairs; Random > +0.4"
+  },
+  {
+   "claim": "Halogens (F, Cl) are grouped together in the representation space of substituent effects.",
+   "evidence": "Mean delta vectors for F and Cl have high cosine similarity 0.763 in Pretrained L12 (`mean_delta_cosine.pretrained['12'][0][1]`), significantly higher than their correlation with polar groups like COOH (F-COOH = -0.45).",
+   "kind": "shows",
+   "test": "SMARTS: `[F]` vs `[Cl]`. Cluster CLS deltas for 300 F-substituted and Cl-substituted variants using K-Means on delta vectors. Prediction: High intra-cluster similarity between halogen groups compared to OH/NO2.",
+   "prediction": "Cosine(F_delta, Cl_delta) > 0.7 in Pretrained L12; < 0.5 for F vs COOH."
+  },
+  {
+   "claim": "Pretrained model learns context-dependent substituent effects (lower consistency than Random), whereas Random weights exhibit trivial size-bias consistency.",
+   "evidence": "Consistency scores drop from ~0.5-0.6 in Random L12 to 0.064-0.378 in Pretrained L12 (`consistency.pretrained['12']['F']` = 0.064 vs `random['12']['F']` = 0.473).",
+   "kind": "suspects",
+   "test": "Measure variance of delta vectors across the 300 parent scaffolds for a fixed substituent X in Pretrained L12 vs Random weights.",
+   "prediction": "Pretrained L12 deltas will show higher scaffold-dependent variance (lower consistency) than Random, which shows uniform 'add mass' shifts."
+  },
+  {
+   "claim": "Neutral H-bonding groups (OH, NH2) are represented as a distinct cluster from acidic/polar carboxyls in L12 delta space.",
+   "evidence": "Cosine similarity between OH and NH2 mean deltas is 0.862 (`mean_delta_cosine.pretrained['12'][2][3]`), but drops to 0.186 for OH vs COOH (index [2][5]).",
+   "kind": "shows",
+   "test": "SMARTS: `[OX2H]` (phenol) and `Nc1ccccc1` (aniline) vs `[C](=O)[O-]`. Check if OH/NH2 delta vectors cluster together in L12 CLS space.",
+   "prediction": "OH-NH2 cosine > 0.8; OH-COOH cosine < 0.3."
+  }
+ ],
+ "trivial_explanations": [
+  "The high consistency (~0.5) in Random weights likely stems from trivial input features: adding any substituent increases molecular weight and atom count similarly across all scaffolds, which random linear projections capture as a consistent 'size' shift.",
+  "Pretrained L12 lower consistency indicates the model has learned to modulate this size effect based on electronic context (e.g., resonance with ring), reducing the uniformity of the delta vector."
+ ]
+}

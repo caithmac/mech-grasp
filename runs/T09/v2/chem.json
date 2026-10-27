@@ -1,0 +1,30 @@
+{
+ "summary": "Analysis of T09 Token-swap propagation results indicates that pretrained GRASP models learn topological message passing (distance-dependent attenuation) unlike random baselines, and deep layers transition to global property aggregation.",
+ "claims": [
+  {
+   "claim": "The `pretrained` model encodes graph connectivity via distance-attenuated sensitivity at intermediate layers, distinguishing local from remote atoms chemically similar to inductive effect propagation limits.",
+   "evidence": "At Layer 8, relative change for dist=3 is **0.416** while dist>=6 drops to **0.156**; contrast this with `random` model where L8 values are flat at ~**0.038** (dist=3) vs **0.037** (dist>=6).",
+   "kind": "shows",
+   "test": "Filter molecules by substructure SMARTS `[cH]1ccccc1` (benzene rings) and compare decay rate to alkanes `CCCCC`. Prediction: If model captures electronic delocalization, benzene dist=2 sensitivity should remain higher than saturated chains at same graph distance.",
+   "prediction": "For aromatic subgraphs, relative change at d>=3 will exceed **0.416** (pretrained L8 average) due to pi-system coupling; for alkanes it will follow the standard decay curve."
+  },
+  {
+   "claim": "Deep layers transition from local topology encoding to global molecular property aggregation, evidenced by CLS token sensitivity growth and flattened atom-wise distance dependence.",
+   "evidence": "`pretrained` CLS change grows from **0.0** at L0 to **0.411** at L12; simultaneously, the gap between dist=3 (**0.446**) and dist>=6 (**0.372**) narrows significantly compared to Layer 8 (gap of ~0.26).",
+   "kind": "shows",
+   "test": "Correlate CLS sensitivity with molecular weight or LogP calculated via RDKit for the edited molecules. Prediction: High MW edits will show higher absolute CLS change than low MW edits in `pretrained` but not `random`. ",
+   "prediction": "`pretrained` CLS delta should correlate positively (r > 0.5) with molecular size; `random` correlation remains near zero."
+  },
+  {
+   "claim": "Layer 0 behavior confirms no implicit long-range interactions exist in input tokenization, as propagation requires learned transformer layers.",
+   "evidence": "All models show **0.0** relative change for all distances > 0 at Layer 0 (dist=3: **0.0**, dist>=6: **0.0**), regardless of model type (`pretrained`, `random`, or `a1`).",
+   "kind": "shows",
+   "test": "Verify input token embeddings are independent by checking covariance between atom tokens in the same molecule at Layer 0. Prediction: Covariance matrix should be diagonal (zero off-diagonal) for all models.",
+   "prediction": "Off-diagonal elements of the attention/feature map at L0 will be statistically indistinguishable from zero."
+  }
+ ],
+ "trivial_explanations": [
+  "The `random` model's flat response (~**0.05**) across all distances indicates it lacks learned graph structure; this is a trivial baseline where noise dominates signal.",
+  "Layer 0 zeros are expected for any transformer without pre-trained weights or message passing layers, as embeddings are initialized independently."
+ ]
+}

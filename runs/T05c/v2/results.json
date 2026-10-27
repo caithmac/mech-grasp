@@ -1,0 +1,18 @@
+{
+ "n_pairs": 300,
+ "token_match_fraction": 1.0,
+ "auroc": {
+  "cls": {
+   "mean": 0.7786388888888889,
+   "std": 0.01198616743903336
+  },
+  "bag_of_tokens": {
+   "mean": 0.5,
+   "std": 0.0
+  }
+ },
+ "distance": {
+  "cls": 0.1820494830608368,
+  "bag_of_tokens": -1.0331471678171056e-08
+ }
+}

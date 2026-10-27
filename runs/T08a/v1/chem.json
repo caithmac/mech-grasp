@@ -1,0 +1,36 @@
+{
+ "summary": "Layer-6 of pretrained GRASP does not encode simple atom tokens; it encodes distributed chemical context.",
+ "claims": [
+  {
+   "claim": "Pretrained Layer-6 activations do not map to discrete atomic identities (tokens).",
+   "evidence": "`frac_token_like`=0.037 for `mols_pretrained_L6`, compared to 0.31 for the trivial baseline `atoms_random_L6`. Median purity is lower (0.403 vs 0.671).",
+   "kind": "shows",
+   "test": "SMARTS: `[C](=O)[O]` (Carbonyl) vs `[O]` (Generic Oxygen). Prediction: If latents encoded tokens, one latent would fire exclusively for all O atoms with high purity (>90%). Since `frac_token_like`=3.7%, no single latent captures 'O' universally; firing must correlate with specific environments like carbonyls.",
+   "prediction": "Latent activation counts will be significantly higher when the Carbonyl SMARTS is present compared to generic Oxygen presence, indicating functional group sensitivity rather than atom type identity."
+  },
+  {
+   "claim": "Layer-6 representations contain entangled chemical features (electronic/steric effects) that resist sparse decomposition into single-token concepts.",
+   "evidence": "FVU=0.075 for `mols_pretrained_L6`, significantly higher than FVU=0.0014 for the trivial baseline `atoms_random_L6`.",
+   "kind": "suspects",
+   "test": "Label: Presence of specific electronic motif (e.g., conjugated system). Prediction: Reconstruction error will remain high (>5%) even if latents capture atom types, because FVU reflects non-linear mixing not captured by sparse linear combinations.",
+   "prediction": "If we force the SAE to reconstruct only based on Crippen atom types, FVU should drop towards 0.075; however, since current FVU is already higher than trivial baselines, it implies features like resonance or H-bonding are mixed in Layer-6."
+  },
+  {
+   "claim": "The `a1` condition (`mols_a1_L6`) represents a state of reduced feature compressibility compared to standard pretraining.",
+   "evidence": "FVU=0.179 for `mols_a1_L6`, more than double the 0.075 observed in `mols_pretrained_L6`. Token-like fraction drops further (0.3% vs 3.7%).",
+   "kind": "shows",
+   "test": "Label: Chemical class of molecules in `a1` subset. Prediction: If `a1` contains specific toxicophores or outliers, the SAE will struggle to find sparse latents that generalize across them, increasing FVU.",
+   "prediction": "The chemical diversity (e.g., MW distribution) of the `a1` dataset should show higher variance than standard pretraining data if this explains the compressibility drop."
+  },
+  {
+   "claim": "Pretrained Layer-6 maintains feature diversity without 'dead neuron' collapse.",
+   "evidence": "`dead_frac`=0.0 for all pretrained variants (`mols_pretrained_L6`, `atoms_pretrained_L6`) vs 2.7% for `atoms_random_L6`.",
+   "kind": "shows",
+   "test": "Label: Molecule class (Aliphatic, Aromatic). Prediction: If dead neurons existed due to chemical bias, specific classes would be systematically ignored by the latent space.",
+   "prediction": "Monitoring `n_alive` over training steps should show stability near 4096 for pretrained models, whereas random baselines may lose latents as they specialize on trivial features (seen in Random control's 2.7% dead)."
+  }
+ ],
+ "trivial_explanations": [
+  "The high token purity and low FVU of `atoms_random_L6` likely reflect a baseline where input activations are dominated by simple categorical identifiers or one-hot encodings, allowing the SAE to reconstruct them trivially compared to contextual embeddings."
+ ]
+}

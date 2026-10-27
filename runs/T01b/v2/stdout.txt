@@ -1,0 +1,37 @@
+Working in C:\Users\ss864\Desktop\mech-grasp\runs\T01b\v2
+Processing column: aromatic
+Processing column: conjugated
+Processing column: has_O_neighbor
+Processing column: has_N_neighbor
+Processing column: has_halogen_neighbor
+Processing column: fg_carbonyl_C
+Processing column: fg_amide
+Processing column: fg_ester
+Processing column: fg_carboxylic_acid
+Processing column: fg_nitrile
+Processing column: fg_aromatic_N
+Processing column: fg_michael_acceptor
+Processing column: fg_ether
+Processing column: fg_hydroxyl
+Processing column: min_ring_size
+Processing column: n_rings
+Saved results to C:\Users\ss864\Desktop\mech-grasp\runs\T01b\v2\results.json
+Saved figure to C:\Users\ss864\Desktop\mech-grasp\runs\T01b\v2\errors.png
+
+=== SUMMARY ===
+aromatic: Best Layer=6, GRASP Err=0.0007, Random Err=0.0583, Ratio=12.50
+conjugated: Best Layer=4, GRASP Err=0.0003, Random Err=0.0508, Ratio=6.80
+has_O_neighbor: Best Layer=4, GRASP Err=0.0000, Random Err=0.0748, Ratio=3.34
+has_N_neighbor: Best Layer=4, GRASP Err=0.0001, Random Err=0.1589, Ratio=6.05
+has_halogen_neighbor: Best Layer=5, GRASP Err=0.0000, Random Err=0.0638, Ratio=6.61
+fg_carbonyl_C: Best Layer=4, GRASP Err=0.0001, Random Err=0.0198, Ratio=17.51
+fg_amide: Best Layer=4, GRASP Err=0.0003, Random Err=0.0481, Ratio=7.57
+fg_ester: Best Layer=4, GRASP Err=0.0023, Random Err=0.0564, Ratio=2.16
+fg_carboxylic_acid: Best Layer=3, GRASP Err=0.0000, Random Err=0.0157, Ratio=21.19
+fg_nitrile: Best Layer=2, GRASP Err=0.0000, Random Err=0.0436, Ratio=0.00
+fg_aromatic_N: Best Layer=5, GRASP Err=0.0011, Random Err=0.0612, Ratio=9.86
+fg_michael_acceptor: Best Layer=6, GRASP Err=0.0066, Random Err=0.0753, Ratio=5.38
+fg_ether: Best Layer=4, GRASP Err=0.0001, Random Err=0.0570, Ratio=2.16
+fg_hydroxyl: Best Layer=4, GRASP Err=0.0000, Random Err=0.0233, Ratio=6.71
+min_ring_size: Best Layer=8, GRASP Err=0.1164, Random Err=0.7305, Ratio=1.56
+n_rings: Best Layer=6, GRASP Err=0.1151, Random Err=0.6051, Ratio=1.25

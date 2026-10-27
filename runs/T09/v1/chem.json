@@ -1,0 +1,37 @@
+{
+ "summary": "The results indicate that GRASP does not propagate edit signals via graph-distance-dependent decay (chemical locality) but instead exhibits global mixing behavior from early layers, with specific layer gaps where signal vanishes.",
+ "claims": [
+  {
+   "claim": "GRASP represents molecular structure as globally mixed context rather than locally propagating electronic effects at Layer 6+.",
+   "evidence": "Pretrained model L6 rel_change for dist=3 is 0.2259, while dist>=6+ is 0.2421; difference <8% despite doubling graph distance (bond path length).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `C-C` vs `[C]~[C]-[C]-[C]-[C]-[C]-[C]`. Prediction: Mean rel_change for neighbors and distant atoms at L6 should be statistically indistinguishable (p>0.05).",
+   "prediction": "If locality held, dist>=6+ would drop below 0.1; observed flat profile implies attention heads mix all nodes regardless of bond distance."
+  },
+  {
+   "claim": "Pretrained weights amplify sensitivity to token edits compared to random initialization.",
+   "evidence": "Random L1 mean rel_change ~0.057 (dist=3) vs Pretrained L1 0.11; Random CLS at L12 is 0.069, Pretrained is 0.067 but atom sensitivity differs significantly.",
+   "kind": "shows",
+   "test": "Label column: `model_type` (pretrained vs random). Prediction: Mean rel_change for pretrained > 0.1 at L1; Random < 0.08 across all layers except late mixing.",
+   "prediction": "Trained embeddings encode specific atom identities that trigger larger hidden state shifts upon perturbation than unstructured weights."
+  },
+  {
+   "claim": "Layers 2-4 exhibit signal vanishing (zero sensitivity) for single-atom edits in this dataset configuration.",
+   "evidence": "Pretrained L2-L4 rel_change = 0.0 across all distance bins; identical pattern observed in Random and a1 models.",
+   "kind": "shows",
+   "test": "Architecture config check: Layer indices [2,3,4]. Prediction: These layers will show high residual connection weights or zero attention scores masking perturbations.",
+   "prediction": "If this is structural (skip connections), rel_change should remain 0.0 for any edit type; if data artifact, other edits might yield non-zero."
+  },
+  {
+   "claim": "CLS token aggregates global information with delayed sensitivity compared to atom-level states.",
+   "evidence": "Pretrained CLS L12 = 0.067 vs Atom Dist=3 at L12 = 0.194; however, CLS shows non-zero change starting Layer 6 (0.019) while atoms show signal earlier.",
+   "kind": "shows",
+   "test": "Label column: `token_type` (",
+   "prediction": "CLS vs Atom). Prediction: CLS rel_change should scale with molecule size differently than atom-level changes; here it lags behind local sensitivity at early layers (L1-L4)."
+  }
+ ],
+ "trivial_explanations": [
+  "The zero signal in Layers 2-3 for all models suggests a potential experimental artifact or architectural skip connections that bypass computation of hidden state changes relative to the norm calculation used.",
+  "Token override on 'carbon atoms' may not change elemental composition (C->N), limiting chemical impact; observed rel_change reflects embedding vector shift rather than electronic property change."
+ ]
+}

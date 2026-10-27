@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T05b\v1\script.py", line 285
+    print(f"Consistency (Pretrained L12): {[f'{x}: {results["consistency"]["pretrained"]["layer12"][x]}' for x in order]}")
+                                                             ^^^^^^^^^^^
+SyntaxError: f-string: unterminated string

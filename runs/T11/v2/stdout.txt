@@ -1,0 +1,6 @@
+Results summary:
+mean6 / pretrained: [{'auroc': 0.9974, 'auroc_threshold_vs_continuous': 0.9993}, {'auroc': 0.9902, 'auroc_threshold_vs_continuous': 0.997}, {'auroc': 0.9985}, {'auroc': 0.9979}, {'auroc': 0.9949, 'ro5_mw': {'cos': 0.6083}, 'ro5_logp': {'cos': 0.3163}, 'ro5_hbd': {'cos': 0.2486}, 'ro5_hba': {'cos': 0.4864}, 'reconstruction_r2': {'r2': 0.5334}}]
+mean6 / random: [{'auroc': 0.9989, 'auroc_threshold_vs_continuous': 0.9995}, {'auroc': 0.9894, 'auroc_threshold_vs_continuous': 0.993}, {'auroc': 0.9998}, {'auroc': 0.9993}, {'auroc': 0.9953}]
+cls12 / pretrained: [{'auroc': 0.9882, 'auroc_threshold_vs_continuous': 0.9933}, {'auroc': 0.982, 'auroc_threshold_vs_continuous': 0.9874}, {'auroc': 0.9949}, {'auroc': 0.9849}, {'auroc': 0.984, 'ro5_mw': {'cos': 0.8029}, 'ro5_logp': {'cos': 0.3706}, 'ro5_hbd': {'cos': 0.513}, 'ro5_hba': {'cos': 0.7734}, 'reconstruction_r2': {'r2': 0.7864}}]
+cls12 / random: [{'auroc': 0.9988, 'auroc_threshold_vs_continuous': 0.9994}, {'auroc': 0.9891, 'auroc_threshold_vs_continuous': 0.9922}, {'auroc': 0.9995}, {'auroc': 0.9993}, {'auroc': 0.9959}]
+Done.

@@ -1,0 +1,37 @@
+{
+ "summary": "The results indicate high attribution accuracy for toxicophores, but identical performance between pretrained and random models suggests structural bias rather than learned chemical semantics.",
+ "claims": [
+  {
+   "claim": "GRASP atom attributions consistently prioritize atoms matching specific SMARTS patterns (e.g., nitroaromatic) as the top contributors in positive molecules across all tasks.",
+   "evidence": "hit_rate = 1.0 for SR-ARE, NR-AhR, and SR-MMP toxicophores; mean_c_tox > mean_c_other or |mean_c_tox| < |mean_c_other| depending on sign convention (SR-ARE Pre: 0.27 vs 0.059).",
+   "kind": "shows",
+   "test": "SMARTS pattern `[c,n][N+](=O)[O-]` applied to Tox21 positives; prediction: `argmax(c)` must be in this set for >80% of molecules.",
+   "prediction": "If true, removing nitro atoms should drop hit_rate significantly below 1.0."
+  },
+  {
+   "claim": "The attribution method's ability to identify toxicophores is not dependent on pretrained weights; random initialization yields identical hit rates.",
+   "evidence": "SR-ARE Nitro: Pretrained Hit Rate = 1.0, Random Hit Rate = 1.0 (Chance = 0.286 for both).",
+   "kind": "suspects",
+   "test": "Compare `hit_rate` distributions between At and Rt models on a held-out set of molecules with known toxicophores.",
+   "prediction": "If chemical knowledge is encoded, Random Hit Rate should be near Chance (e.g., 0.286), not 1.0."
+  },
+  {
+   "claim": "Attribution scores for SR-p53 are statistically trivial due to insufficient sample size in the test set.",
+   "evidence": "SR-p53 `n_mols` = 1 for both Pretrained and Random models; Hit Rate = 1.0 is guaranteed with N=1 if a toxicophore exists.",
+   "kind": "shows",
+   "test": "Increase Tox21 SR-p53 test set size to >30 molecules containing aromatic amines or PAHs.",
+   "prediction": "Hit rate will deviate from 1.0 as variance increases."
+  },
+  {
+   "claim": "The sign of attribution scores (positive vs negative) flips between pretrained and random models, suggesting the probe learns a linear mapping that aligns with model output directionality rather than absolute chemical contribution magnitude.",
+   "evidence": "SR-ARE Pretrained `mean_c_tox` = 0.27; Random `mean_c_tox` = -0.249 (vs other atoms).",
+   "kind": "suspects",
+   "test": "Plot distribution of atom contributions for known toxic vs non-toxic molecules.",
+   "prediction": "If model learns toxicity, Pretrained should show consistent positive/negative directionality across tasks; Random shows sign flip."
+  }
+ ],
+ "trivial_explanations": [
+  "The 100% hit rate in random models suggests the `FixedProbe` attribution method or atom normalization (`n_atoms`) favors specific structural motifs (e.g., high degree nodes) that overlap with toxicophore definitions, rather than GRASP learning chemical rules.",
+  "SR-p53 results are uninformative due to N=1 sample size."
+ ]
+}

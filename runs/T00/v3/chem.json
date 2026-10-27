@@ -1,0 +1,45 @@
+{
+ "summary": "Sanity checks confirm GRASP is a graph-based model that ignores stereochemistry and input token aromaticity labels, relying on learned connectivity.",
+ "claims": [
+  {
+   "claim": "SMILES invariance holds (max/mean distance 0.0).",
+   "evidence": "smiles_invariance distances are 0.0.",
+   "kind": "shows",
+   "test": "MolFromSmiles('CCO') -> canonical vs random SMILES. CosineDist(CLS_canonical, CLS_random) < 1e-6.",
+   "prediction": "Distance should be ~0.0 for graph models; >0.1 implies string dependency."
+  },
+  {
+   "claim": "Model is stereo-blind (mean/max distance 0.0).",
+   "evidence": "stereo_blindness distances are 0.0.",
+   "kind": "shows",
+   "test": "MolFromSmiles('C[C@H](O)F') vs MolFromSmiles('C[C@@H](O)F'). CosineDist(CLS_R, CLS_S) < 1e-6.",
+   "prediction": "Distance should be ~0.0; >0.5 implies stereo encoding."
+  },
+  {
+   "claim": "Pretrained weights are stable; random init explodes (Inf norms).",
+   "evidence": "norms_pretrained finite; norms_random contains Infinity.",
+   "kind": "shows",
+   "test": "MolFromSmiles('CCO'). Layer-12 norm < 50 for pretrained; > 100 or Inf for random.",
+   "prediction": "Pretrained norms should be stable (<50); Random norms unstable (>100) without training."
+  },
+  {
+   "claim": "Input tokens do not fully encode aromaticity (48.6% mixed).",
+   "evidence": "token_check fraction_atoms_carrying_mixed_tokens: 0.486.",
+   "kind": "shows",
+   "test": "MolFromSmiles('c1ccccc1') vs MolFromSmiles('C1=CC=CC=C1'). Check token ID for C atoms.",
+   "prediction": "If tokens differ, aromaticity is encoded in input; if same, model must learn it."
+  },
+  {
+   "claim": "Pretrained CLS uses more dimensions (Effective Rank 9.89 vs 5.81).",
+   "evidence": "cls_effective_rank pretrained: 9.89, random: 5.81.",
+   "kind": "shows",
+   "test": "Compute covariance eigenvalues of CLS layer-12 over 'mols' set.",
+   "prediction": "Pretrained rank > Random rank indicates better feature utilization."
+  }
+ ],
+ "trivial_explanations": [
+  "SMILES invariance is expected for graph models (RDKit canonicalization vs random permutation).",
+  "Stereo blindness is expected if input lacks chiral tags or model architecture ignores them.",
+  "Inf norms in random init indicate divergence without gradient descent regularization."
+ ]
+}

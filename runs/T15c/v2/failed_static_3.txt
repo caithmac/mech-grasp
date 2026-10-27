@@ -1,0 +1,3 @@
+Static check failed before running:
+script.py:81:8: undefined name 'total_tts'
+script.py:83:33: undefined name 'total_tts'

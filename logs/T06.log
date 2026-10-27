@@ -1,0 +1,47 @@
+[20:51:04] T06 -> C:\Users\ss864\Desktop\mech-grasp\runs\T06\v1
+[20:53:41]   static check failed (not executed): []script.py:445:1: undefined name 'plt'
+script.py:449:1: undefined name 'plt'
+script.py:451:1: undefined name 'plt'
+scri
+[20:53:41]   failed (script.py:509:1: undefined name 'plt'); asking MI agent to fix
+[20:56:52]   static check failed (not executed): []script.py:312:29: undefined name 'rdMolDescriptors'
+[20:56:52]   failed (script.py:312:29: undefined name 'rdMolDescriptors'); asking MI agent to fix
+[21:00:11]   attempt 1: executing
+[21:00:11]   waiting for GPU lock (0s)
+[21:05:20]   waiting for GPU lock (300s)
+[21:10:28]   waiting for GPU lock (600s)
+[21:15:37]   waiting for GPU lock (900s)
+[21:20:47]   waiting for GPU lock (1200s)
+[21:25:57]   waiting for GPU lock (1500s)
+[21:31:09]   waiting for GPU lock (1800s)
+[21:36:21]   waiting for GPU lock (2100s)
+[21:41:32]   waiting for GPU lock (2400s)
+[21:46:43]   waiting for GPU lock (2700s)
+[21:51:54]   waiting for GPU lock (3000s)
+[21:57:05]   waiting for GPU lock (3300s)
+[22:02:15]   waiting for GPU lock (3600s)
+[22:07:26]   waiting for GPU lock (3900s)
+[22:11:46]   ran in 13s ok=False
+[22:11:46]   failed (TypeError: only integer scalar arrays can be converted to a scalar index); asking MI agent to fix
+[22:14:20]   attempt 2: executing
+[22:14:20]   waiting for GPU lock (0s)
+[22:19:30]   waiting for GPU lock (300s)
+[22:24:40]   waiting for GPU lock (600s)
+[22:29:10]   ran in 13s ok=False
+[22:29:10]   failed (TypeError: only integer scalar arrays can be converted to a scalar index); asking MI agent to fix [REPEATED - escalating]
+[22:34:37]   attempt 3: executing
+[22:34:38]   waiting for GPU lock (0s)
+[22:39:19]   ran in 76s ok=False
+[22:39:19]   failed (IndexError: index 1800 is out of bounds for axis 0 with size 1800); asking MI agent to fix
+[22:42:40]   attempt 4: executing
+[22:42:41]   waiting for GPU lock (0s)
+[22:47:49]   waiting for GPU lock (300s)
+[22:52:58]   waiting for GPU lock (600s)
+[22:56:13]   ran in 62s ok=False
+[22:56:13]   failed (TypeError: cannot unpack non-iterable int object); asking MI agent to fix
+[22:58:06]   attempt 5: executing
+[22:58:06]   waiting for GPU lock (0s)
+[23:03:15]   waiting for GPU lock (300s)
+[23:08:23]   waiting for GPU lock (600s)
+[23:11:17]   ran in 71s ok=False
+[23:11:17] MI agent could not produce a working script; supervisor needed

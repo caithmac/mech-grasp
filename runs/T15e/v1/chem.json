@@ -1,0 +1,30 @@
+{
+ "summary": "The experimental run T15e yielded zero valid stereochemical pairs (`n=0`) from the first 1000 candidates of `data.get_smiles(",
+ "claims": [
+  {
+   "claim": "GRASP-A2's layer representations (6 and 12) contain no measurable signal for enantiomer/diastereomer discrimination in this run because zero molecule vectors were generated.",
+   "evidence": "\"n\":0",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `Chem.FindMolChiralCenters(m)` must return >= 2 centers; if count < 100% on top 1000 SMILES, the model cannot be tested.",
+   "prediction": "If valid molecules exist in input list, n > 0. If all are meso or mono-chiral, n = 0 (as observed)."
+  },
+  {
+   "claim": "The dataset slice is biased towards achiral or symmetric structures (`n_meso_skipped`=1000), preventing evaluation of GRASP-A2's stereochemical sensitivity.",
+   "evidence": "\"n_meso_skipped\":1000",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[C@H]` or `[C@@H]`; check canonical SMILES equality after inversion for top 1000 molecules.",
+   "prediction": "If the input list contains diverse chiral centers (e.g., sugars, amino acid derivatives), `n_meso_skipped` < 1000."
+  },
+  {
+   "claim": "The A1 sanity condition (`rel_enant`, `d_enant` < thresholds) is unverified because no model outputs exist to compare against the 1e-4/1e-3 limits.",
+   "evidence": "\"n\":0",
+   "kind": "shows",
+   "test": "Label column check: Verify if A1 vectors were computed. If `model.run` was skipped due to empty lists, sanity is undefined.",
+   "prediction": "If model runs execute on valid inputs (n>0), values should be < 1e-4 for A1."
+  }
+ ],
+ "trivial_explanations": [
+  "The result n=0 is trivially explained by the input filtering logic (`>=2 specified tetrahedral centres`) combined with meso detection, not model failure.",
+  "No Lipinski or Crippen features were computed because `O`, `E`, `D` tensors are empty."
+ ]
+}

@@ -1,0 +1,594 @@
+{
+ "SR-ARE": {
+  "pretrained": {
+   "auroc": 0.7462800334832983,
+   "std_auroc": 0.032872784127209204,
+   "decomp_err": 7.060156974983426,
+   "std_decomp_err": 1.9620508036728928,
+   "per_toxicophore": {
+    "nitroaromatic": {
+     "hit_rate": 0.9272727272727274,
+     "std_hit_rate": 0.14545454545454545,
+     "chance": 0.3517476720358792,
+     "std_chance": 0.07248235837619922
+    },
+    "aromatic_amine": {
+     "hit_rate": 0.22417582417582418,
+     "std_hit_rate": 0.20946680748219512,
+     "chance": 0.1591035244985477,
+     "std_chance": 0.02884723349274877
+    },
+    "polycyclic_aromatic": {
+     "hit_rate": 0.5,
+     "std_hit_rate": 0.4472135954999579,
+     "chance": 0.44606481238060186,
+     "std_chance": 0.16529249281469915
+    },
+    "michael_acceptor": {
+     "hit_rate": 0.4453333333333333,
+     "std_hit_rate": 0.27979834007926335,
+     "chance": 0.2747893440265434,
+     "std_chance": 0.032777646591511465
+    },
+    "quinone": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.3333333333333333,
+     "std_chance": 0.0
+    },
+    "azo": {
+     "hit_rate": 0.5,
+     "std_hit_rate": 0.5,
+     "chance": 0.19617224880382775,
+     "std_chance": 0.014354066985645925
+    },
+    "epoxide": {
+     "hit_rate": 0.7222222222222222,
+     "std_hit_rate": 0.20786985482077452,
+     "chance": 0.3510982844316177,
+     "std_chance": 0.055093439449236246
+    },
+    "aldehyde": {
+     "hit_rate": 0.1875,
+     "std_hit_rate": 0.2072890493972125,
+     "chance": 0.2671266233766234,
+     "std_chance": 0.040633330911432834
+    },
+    "alkyl_halide": {
+     "hit_rate": 0.13,
+     "std_hit_rate": 0.1661324772583615,
+     "chance": 0.23741847635111393,
+     "std_chance": 0.11832624175405018
+    },
+    "thiol": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.13863636363636364,
+     "std_chance": 0.04556804012673505
+    }
+   },
+   "any": {
+    "n_mols": 27.2,
+    "hit_rate": 0.41043062200956937,
+    "std_hit_rate": 0.09917950264804497,
+    "chance": 0.26878471603651577,
+    "mean_c_tox": NaN,
+    "mean_c_other": NaN
+   }
+  },
+  "random": {
+   "auroc": 0.7185800321049511,
+   "std_auroc": 0.027697104003474273,
+   "decomp_err": 3.969610305949787,
+   "std_decomp_err": 1.476940088964337,
+   "per_toxicophore": {
+    "nitroaromatic": {
+     "hit_rate": 0.6212121212121213,
+     "std_hit_rate": 0.3181096599275323,
+     "chance": 0.3517476720358792,
+     "std_chance": 0.07248235837619922
+    },
+    "aromatic_amine": {
+     "hit_rate": 0.09047619047619046,
+     "std_hit_rate": 0.11703053073756674,
+     "chance": 0.1591035244985477,
+     "std_chance": 0.02884723349274877
+    },
+    "polycyclic_aromatic": {
+     "hit_rate": 0.3,
+     "std_hit_rate": 0.4,
+     "chance": 0.44606481238060186,
+     "std_chance": 0.16529249281469915
+    },
+    "michael_acceptor": {
+     "hit_rate": 0.4666666666666667,
+     "std_hit_rate": 0.09189365834726815,
+     "chance": 0.2747893440265434,
+     "std_chance": 0.032777646591511465
+    },
+    "quinone": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.3333333333333333,
+     "std_chance": 0.0
+    },
+    "azo": {
+     "hit_rate": 0.5,
+     "std_hit_rate": 0.5,
+     "chance": 0.19617224880382775,
+     "std_chance": 0.014354066985645925
+    },
+    "epoxide": {
+     "hit_rate": 0.4444444444444444,
+     "std_hit_rate": 0.41573970964154905,
+     "chance": 0.3510982844316177,
+     "std_chance": 0.055093439449236246
+    },
+    "aldehyde": {
+     "hit_rate": 0.25,
+     "std_hit_rate": 0.25,
+     "chance": 0.2671266233766234,
+     "std_chance": 0.040633330911432834
+    },
+    "alkyl_halide": {
+     "hit_rate": 0.30333333333333334,
+     "std_hit_rate": 0.2852679052711289,
+     "chance": 0.23741847635111393,
+     "std_chance": 0.11832624175405018
+    },
+    "thiol": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.13863636363636364,
+     "std_chance": 0.04556804012673505
+    }
+   },
+   "any": {
+    "n_mols": 27.2,
+    "hit_rate": 0.3382296650717703,
+    "std_hit_rate": 0.06421480458368956,
+    "chance": 0.26878471603651577,
+    "mean_c_tox": NaN,
+    "mean_c_other": NaN
+   }
+  }
+ },
+ "NR-AhR": {
+  "pretrained": {
+   "auroc": 0.8516810620650836,
+   "std_auroc": 0.015761315390327272,
+   "decomp_err": 12.157765291980525,
+   "std_decomp_err": 2.636553525200264,
+   "per_toxicophore": {
+    "nitroaromatic": {
+     "hit_rate": 0.8693181818181819,
+     "std_hit_rate": 0.13092862070230582,
+     "chance": 0.30827179356591117,
+     "std_chance": 0.062136002808424864
+    },
+    "aromatic_amine": {
+     "hit_rate": 0.08333333333333333,
+     "std_hit_rate": 0.10540925533894598,
+     "chance": 0.16526522322558496,
+     "std_chance": 0.03267770001864441
+    },
+    "polycyclic_aromatic": {
+     "hit_rate": 1.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.6263602187286398,
+     "std_chance": 0.12606997230331599
+    },
+    "michael_acceptor": {
+     "hit_rate": 0.14634920634920637,
+     "std_hit_rate": 0.1446044813768424,
+     "chance": 0.27157053870294817,
+     "std_chance": 0.09982546674753708
+    },
+    "quinone": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.3333333333333333,
+     "std_chance": 0.0
+    },
+    "azo": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.2276315789473684,
+     "std_chance": 0.039035087719298256
+    },
+    "epoxide": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.21513157894736842,
+     "std_chance": 0.061216035865542716
+    },
+    "aldehyde": {
+     "hit_rate": 0.25,
+     "std_hit_rate": 0.25,
+     "chance": 0.287405303030303,
+     "std_chance": 0.028230975730613332
+    },
+    "alkyl_halide": {
+     "hit_rate": 0.27692307692307694,
+     "std_hit_rate": 0.16703115962006512,
+     "chance": 0.3999888933306116,
+     "std_chance": 0.15096313908105993
+    },
+    "thiol": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.13571428571428573,
+     "std_chance": 0.0
+    }
+   },
+   "any": {
+    "n_mols": 28.6,
+    "hit_rate": 0.34523076923076923,
+    "std_hit_rate": 0.0622901517820437,
+    "chance": 0.3305590847003903,
+    "mean_c_tox": NaN,
+    "mean_c_other": NaN
+   }
+  },
+  "random": {
+   "auroc": 0.839703919615301,
+   "std_auroc": 0.018152777707199273,
+   "decomp_err": 8.314536335336454,
+   "std_decomp_err": 1.410462647369752,
+   "per_toxicophore": {
+    "nitroaromatic": {
+     "hit_rate": 0.19886363636363635,
+     "std_hit_rate": 0.22462951591784994,
+     "chance": 0.30827179356591117,
+     "std_chance": 0.062136002808424864
+    },
+    "aromatic_amine": {
+     "hit_rate": 0.31525641025641027,
+     "std_hit_rate": 0.17091835330852825,
+     "chance": 0.16526522322558496,
+     "std_chance": 0.03267770001864441
+    },
+    "polycyclic_aromatic": {
+     "hit_rate": 0.76,
+     "std_hit_rate": 0.3878143885933063,
+     "chance": 0.6263602187286398,
+     "std_chance": 0.12606997230331599
+    },
+    "michael_acceptor": {
+     "hit_rate": 0.3879365079365079,
+     "std_hit_rate": 0.04680359998471648,
+     "chance": 0.27157053870294817,
+     "std_chance": 0.09982546674753708
+    },
+    "quinone": {
+     "hit_rate": 1.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.3333333333333333,
+     "std_chance": 0.0
+    },
+    "azo": {
+     "hit_rate": 0.5,
+     "std_hit_rate": 0.5,
+     "chance": 0.2276315789473684,
+     "std_chance": 0.039035087719298256
+    },
+    "epoxide": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.21513157894736842,
+     "std_chance": 0.061216035865542716
+    },
+    "aldehyde": {
+     "hit_rate": 0.625,
+     "std_hit_rate": 0.414578098794425,
+     "chance": 0.287405303030303,
+     "std_chance": 0.028230975730613332
+    },
+    "alkyl_halide": {
+     "hit_rate": 0.3769230769230769,
+     "std_hit_rate": 0.19368735864637188,
+     "chance": 0.3999888933306116,
+     "std_chance": 0.15096313908105993
+    },
+    "thiol": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.13571428571428573,
+     "std_chance": 0.0
+    }
+   },
+   "any": {
+    "n_mols": 28.6,
+    "hit_rate": 0.4565616605616606,
+    "std_hit_rate": 0.045737198269537496,
+    "chance": 0.3305590847003903,
+    "mean_c_tox": NaN,
+    "mean_c_other": NaN
+   }
+  }
+ },
+ "SR-MMP": {
+  "pretrained": {
+   "auroc": 0.8719138936839717,
+   "std_auroc": 0.018203383055307536,
+   "decomp_err": 13.460017842324135,
+   "std_decomp_err": 2.3147582904914263,
+   "per_toxicophore": {
+    "nitroaromatic": {
+     "hit_rate": 0.3125,
+     "std_hit_rate": 0.3365728004459065,
+     "chance": 0.28685533216783216,
+     "std_chance": 0.0177424035117632
+    },
+    "aromatic_amine": {
+     "hit_rate": 0.031578947368421054,
+     "std_hit_rate": 0.042105263157894736,
+     "chance": 0.15351467068863778,
+     "std_chance": 0.020095651501544312
+    },
+    "polycyclic_aromatic": {
+     "hit_rate": 0.5333333333333333,
+     "std_hit_rate": 0.3231786571610886,
+     "chance": 0.5797276661296624,
+     "std_chance": 0.14496357781861646
+    },
+    "michael_acceptor": {
+     "hit_rate": 0.22420634920634921,
+     "std_hit_rate": 0.12037618452148086,
+     "chance": 0.2537091555662779,
+     "std_chance": 0.04393262790243534
+    },
+    "azo": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.2540834845735027,
+     "std_chance": 0.030799569416473944
+    },
+    "epoxide": {
+     "hit_rate": 0.3333333333333333,
+     "std_hit_rate": 0.408248290463863,
+     "chance": 0.24968236563631302,
+     "std_chance": 0.05291062012452406
+    },
+    "aldehyde": {
+     "hit_rate": 0.85,
+     "std_hit_rate": 0.2,
+     "chance": 0.28541666666666665,
+     "std_chance": 0.04325319725226815
+    },
+    "alkyl_halide": {
+     "hit_rate": 0.34047619047619043,
+     "std_hit_rate": 0.319047619047619,
+     "chance": 0.292844375967011,
+     "std_chance": 0.056972242475095
+    },
+    "thiol": {
+     "hit_rate": 0.4583333333333333,
+     "std_hit_rate": 0.36084391824351614,
+     "chance": 0.1190340909090909,
+     "std_chance": 0.02758722477525247
+    }
+   },
+   "any": {
+    "n_mols": 39.6,
+    "hit_rate": 0.27546240805622146,
+    "std_hit_rate": 0.0704588773867294,
+    "chance": 0.2713950949039743,
+    "mean_c_tox": NaN,
+    "mean_c_other": NaN
+   }
+  },
+  "random": {
+   "auroc": 0.8400134232003241,
+   "std_auroc": 0.02752308714716833,
+   "decomp_err": 9.456113674307314,
+   "std_decomp_err": 2.7302593764208885,
+   "per_toxicophore": {
+    "nitroaromatic": {
+     "hit_rate": 0.78125,
+     "std_hit_rate": 0.13621559198564606,
+     "chance": 0.28685533216783216,
+     "std_chance": 0.0177424035117632
+    },
+    "aromatic_amine": {
+     "hit_rate": 0.11626180836707149,
+     "std_hit_rate": 0.08883736744029991,
+     "chance": 0.15351467068863778,
+     "std_chance": 0.020095651501544312
+    },
+    "polycyclic_aromatic": {
+     "hit_rate": 0.8133333333333332,
+     "std_hit_rate": 0.19843834754849624,
+     "chance": 0.5797276661296624,
+     "std_chance": 0.14496357781861646
+    },
+    "michael_acceptor": {
+     "hit_rate": 0.26626984126984127,
+     "std_hit_rate": 0.20974164962352537,
+     "chance": 0.2537091555662779,
+     "std_chance": 0.04393262790243534
+    },
+    "azo": {
+     "hit_rate": 0.3333333333333333,
+     "std_hit_rate": 0.4714045207910317,
+     "chance": 0.2540834845735027,
+     "std_chance": 0.030799569416473944
+    },
+    "epoxide": {
+     "hit_rate": 0.08333333333333333,
+     "std_hit_rate": 0.14433756729740646,
+     "chance": 0.24968236563631302,
+     "std_chance": 0.05291062012452406
+    },
+    "aldehyde": {
+     "hit_rate": 0.05,
+     "std_hit_rate": 0.10000000000000002,
+     "chance": 0.28541666666666665,
+     "std_chance": 0.04325319725226815
+    },
+    "alkyl_halide": {
+     "hit_rate": 0.48650793650793644,
+     "std_hit_rate": 0.2636497902372848,
+     "chance": 0.292844375967011,
+     "std_chance": 0.056972242475095
+    },
+    "thiol": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.1190340909090909,
+     "std_chance": 0.02758722477525247
+    }
+   },
+   "any": {
+    "n_mols": 39.6,
+    "hit_rate": 0.32381749373382235,
+    "std_hit_rate": 0.1185660786822467,
+    "chance": 0.2713950949039743,
+    "mean_c_tox": NaN,
+    "mean_c_other": NaN
+   }
+  }
+ },
+ "SR-p53": {
+  "pretrained": {
+   "auroc": 0.8316857188994822,
+   "std_auroc": 0.024792537873216575,
+   "decomp_err": 15.057080853523416,
+   "std_decomp_err": 5.559970021360334,
+   "per_toxicophore": {
+    "nitroaromatic": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.20941558441558444,
+     "std_chance": 0.04274891774891776
+    },
+    "aromatic_amine": {
+     "hit_rate": 0.24,
+     "std_hit_rate": 0.3878143885933063,
+     "chance": 0.12869563687007907,
+     "std_chance": 0.035302386773368055
+    },
+    "polycyclic_aromatic": {
+     "hit_rate": 0.9333333333333332,
+     "std_hit_rate": 0.13333333333333336,
+     "chance": 0.5482876470172295,
+     "std_chance": 0.104974934320348
+    },
+    "michael_acceptor": {
+     "hit_rate": 0.48888888888888893,
+     "std_hit_rate": 0.36548631563107836,
+     "chance": 0.3748670054483381,
+     "std_chance": 0.09605457319747328
+    },
+    "azo": {
+     "hit_rate": 0.375,
+     "std_hit_rate": 0.414578098794425,
+     "chance": 0.1730590844928413,
+     "std_chance": 0.04118670156409064
+    },
+    "epoxide": {
+     "hit_rate": 1.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.13043478260869565,
+     "std_chance": 0.0
+    },
+    "aldehyde": {
+     "hit_rate": 0.6666666666666666,
+     "std_hit_rate": 0.4714045207910317,
+     "chance": 0.3246753246753247,
+     "std_chance": 0.07346563960379715
+    },
+    "alkyl_halide": {
+     "hit_rate": 0.125,
+     "std_hit_rate": 0.21650635094610965,
+     "chance": 0.26163895794894243,
+     "std_chance": 0.1571011064505219
+    },
+    "thiol": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.11688311688311688,
+     "std_chance": 0.02597402597402597
+    }
+   },
+   "any": {
+    "n_mols": 12.6,
+    "hit_rate": 0.4798534798534798,
+    "std_hit_rate": 0.2714406823040981,
+    "chance": 0.36519317231186804,
+    "mean_c_tox": NaN,
+    "mean_c_other": NaN
+   }
+  },
+  "random": {
+   "auroc": 0.77153858456454,
+   "std_auroc": 0.01175971676498409,
+   "decomp_err": 6.44778702312188,
+   "std_decomp_err": 1.1828228951708601,
+   "per_toxicophore": {
+    "nitroaromatic": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.20941558441558444,
+     "std_chance": 0.04274891774891776
+    },
+    "aromatic_amine": {
+     "hit_rate": 0.2033333333333333,
+     "std_hit_rate": 0.22070593809662464,
+     "chance": 0.12869563687007907,
+     "std_chance": 0.035302386773368055
+    },
+    "polycyclic_aromatic": {
+     "hit_rate": 0.7333333333333333,
+     "std_hit_rate": 0.22607766610417562,
+     "chance": 0.5482876470172295,
+     "std_chance": 0.104974934320348
+    },
+    "michael_acceptor": {
+     "hit_rate": 0.2111111111111111,
+     "std_hit_rate": 0.14989708403591157,
+     "chance": 0.3748670054483381,
+     "std_chance": 0.09605457319747328
+    },
+    "azo": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.1730590844928413,
+     "std_chance": 0.04118670156409064
+    },
+    "epoxide": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.13043478260869565,
+     "std_chance": 0.0
+    },
+    "aldehyde": {
+     "hit_rate": 1.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.3246753246753247,
+     "std_chance": 0.07346563960379715
+    },
+    "alkyl_halide": {
+     "hit_rate": 0.275,
+     "std_hit_rate": 0.2772634126602354,
+     "chance": 0.26163895794894243,
+     "std_chance": 0.1571011064505219
+    },
+    "thiol": {
+     "hit_rate": 0.0,
+     "std_hit_rate": 0.0,
+     "chance": 0.11688311688311688,
+     "std_chance": 0.02597402597402597
+    }
+   },
+   "any": {
+    "n_mols": 12.6,
+    "hit_rate": 0.48923076923076925,
+    "std_hit_rate": 0.2936146934572312,
+    "chance": 0.36519317231186804,
+    "mean_c_tox": NaN,
+    "mean_c_other": NaN
+   }
+  }
+ }
+}

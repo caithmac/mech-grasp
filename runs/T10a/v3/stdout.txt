@@ -1,0 +1,13 @@
+Running Supervisor Hint re-runs for tox21/SR-ARE (10 seeds, residualized_size=True)
+Running Supervisor Hint re-runs for tox21/SR-HSE (10 seeds, residualized_size=True)
+Running Supervisor Hint re-runs for tox21/SR-MMP (10 seeds, residualized_size=True)
+Running Supervisor Hint re-runs for tox21/SR-p53 (10 seeds, residualized_size=True)
+Running Supervisor Hint re-runs for clintox/CT_TOX (10 seeds, residualized_size=True)
+Figure saved to C:\Users\ss864\Desktop\mech-grasp\runs\T10a\v3\toxicity_performance.png
+Analysis complete. Results written to OUT/results.json
+Claim check NR-AR-LBD L6: GRASP=0.8202641571169528, A1=0.8304291861953415. A1 outperforms or equal.
+High-noise re-run available: tox21/SR-ARE -> high_noise_repro.resid_mean_10seeds_l12
+High-noise re-run available: tox21/SR-HSE -> high_noise_repro.resid_mean_10seeds_l12
+High-noise re-run available: tox21/SR-MMP -> high_noise_repro.resid_mean_10seeds_l12
+High-noise re-run available: tox21/SR-p53 -> high_noise_repro.resid_mean_10seeds_l12
+High-noise re-run available: clintox/CT_TOX -> high_noise_repro.resid_mean_10seeds_l12

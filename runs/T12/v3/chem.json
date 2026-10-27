@@ -1,0 +1,30 @@
+{
+ "summary": "GRASP Pretrained encodes SMILES order; A1 variants are permutation invariant.",
+ "claims": [
+  {
+   "claim": "Pretrained GRASP retains sensitivity to atom ordering in the CLS token, whereas A1 and A1-Step1 models exhibit perfect order invariance due to missing positional embeddings.",
+   "evidence": "`order_distance.cls12` for `pretrained` is **0.118**, while `a1` and `a1_step1` are **-0.0** (effectively 0).",
+   "kind": "shows",
+   "test": "SMARTS: `[C]`. Permute atom indices in SMILES string; Pretrained CLS cosine distance should remain ~0.12, A1/Step1 should be <0.01.",
+   "prediction": "If true, `a1` embeddings for permuted molecules will match originals (cosine=1), while `pretrained` will diverge."
+  },
+  {
+   "claim": "`pretrained` GRASP layers do not linearly encode atomic aromaticity or Crippen logP contributions better than a random baseline in this probe setup.",
+   "evidence": "`aromatic` model error is **1.0** across all layers (L0-L12), while control error drops to ~**0.06**. `crippen_r2.model` is **0.0**, whereas control R2 is ~**0.517**.",
+   "kind": "shows",
+   "test": "Linear regression on Layer 12 embeddings predicting Crippen logP contributions for Carbon atoms (SMARTS: `[C]`).",
+   "prediction": "If true, model coefficients will be near zero or uncorrelated with target; Random weights baseline should yield R\u00b2 ~0.5."
+  },
+  {
+   "claim": "`a1` and `a1_step1` variants returned no valid probe signal for atomic properties in this run (likely caching/extraction artifact).",
+   "evidence": "_debug_model_raw is **null** for all layers; model R2 values are reported as **0.0**; control errors also show nulls.",
+   "kind": "suspects",
+   "test": "Re-run `probes.probe_atoms` with explicit key extraction (avoiding `.get()` defaults) to verify if 'grasp' keys exist in layer results for A1 models.",
+   "prediction": "If artifact, re-running will yield non-null `_debug_model_raw` values and R2 > 0.0."
+  }
+ ],
+ "trivial_explanations": [
+  "The order distance difference (Pretrained ~0.12 vs A1 = 0) is a direct consequence of the 'no position embeddings' design in A1 variants, not necessarily superior chemical understanding.",
+  "Model R2=0 for Crippen may reflect linear probe limitations rather than absence of information; non-linear readouts might recover signal."
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "summary": "The model clearly represents logP (lipophilicity) information at layer-6 readout, but we cannot claim it encodes 'Lipinski rule' broadly because all other Lipinski properties were skipped due to class imbalance (<20 positives).",
+ "claims": [
+  {
+   "claim": "GRASP mean-pooled layer-6 representation captures logP information with high fidelity.",
+   "evidence": "Ridge regression on X=Am.mean[6] achieves AUROC=0.966 for ro5_logp threshold (logP>5).",
+   "kind": "shows",
+   "test": "Add alkyl chain to phenol: SMILES 'c1ccccc1O' vs 'CCc1ccccc1O'. If claim true, predicted logP should increase by ~0.7-1.0 units.",
+   "prediction": "For c1ccccc1O (phenol), expected logP \u2248 1.5; for CCc1ccccc1O (ethyl phenol), expect logP \u2248 2.3."
+  },
+  {
+   "claim": "GRASP cls token embedding also captures logP information with high fidelity.",
+   "evidence": "Ridge regression on X=Am.cls[12] achieves AUROC=0.966 for ro5_logp threshold (logP>5).",
+   "kind": "shows",
+   "test": "Compare mean-pooled layer-6 vs CLS token: both show identical performance metrics.",
+   "prediction": "Both readouts should predict logP within \u00b10.2 units for same molecule set."
+  },
+  {
+   "claim": "We cannot assess whether GRASP encodes other Lipinski properties (MW, HBD/HBA) from these results alone.",
+   "evidence": "All direction tests skipped due to 'insufficient training data' (<20 positives).",
+   "kind": "shows",
+   "test": "Check dataset distribution: count molecules with MW>500 or HBD\u22651 in train set.",
+   "prediction": "If claim true, we should see balanced accuracy for these properties; if false, they remain untested."
+  },
+  {
+   "claim": "High ro5_logp performance (AUROC=0.966) reflects learning of lipophilicity features rather than full Lipinski rule.",
+   "evidence": "Only logP threshold tested successfully; other properties skipped due to class imbalance.",
+   "kind": "shows",
+   "test": "Test on molecules with known toxicophores: e.g., 'c1ccccc1-c2ccccc2' (biphenyl, high MW) vs single ring compounds.",
+   "prediction": "If claim true, model should flag biphenyl as violating Lipinski due to MW>500; if false, it only captures logP."
+  },
+  {
+   "claim": "The identical performance between mean6 and cls12 suggests both readouts capture similar chemical information.",
+   "evidence": "Both show lr_balanced_accuracy=0.953 for ro5_logp; ridge_auc=0.966 (note: values appear duplicated in results).",
+   "kind": "shows",
+   "test": "Compare mean-pooled vs CLS token on molecules with different topologies.",
+   "prediction": "Both should predict similar logP for same molecule set."
+  }
+ ],
+ "trivial_explanations": [
+  "The high AUROC values (0.966) likely reflect that the input features already contain strong lipophilicity signals from atom types and connectivity.",
+  "Class imbalance (<20 positives for MW, HBD/HBA properties) prevents testing whether GRASP captures these rules beyond logP."
+ ]
+}

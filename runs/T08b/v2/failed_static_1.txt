@@ -1,0 +1,5 @@
+Static check failed before running:
+script.py:134:75: undefined name 'Z'
+script.py:147:75: undefined name 'Z'
+script.py:295:64: undefined name 'roc_auc_score'
+script.py:306:64: undefined name 'roc_auc_score'

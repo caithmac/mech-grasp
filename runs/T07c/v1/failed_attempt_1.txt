@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T07c\v1\script.py", line 156
+    sorted_by_aro = sorted(all_heads_list, key=lambda x: x[1]["d_aro"], reverse=True) if all(x[1]["d_aro"] is not None for _, v in all_heads_list else True) else []
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: expected 'else' after 'if' expression

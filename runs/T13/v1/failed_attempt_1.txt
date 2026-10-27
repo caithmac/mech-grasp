@@ -1,0 +1,9 @@
+Processing feature 2610: fg_hydroxyl (family=[2610])
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v1\script.py", line 475, in <module>
+    res = run_feature(j)
+          ^^^^^^^^^^^^^^
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T13\v1\script.py", line 57, in run_feature
+    tok_j = utils.mode(A.tokens[z_col > 0]) if np.any(z_col > 0) else A.tokens[0] # Fallback mode
+            ^^^^^^^^^^
+AttributeError: module 'mechlib.utils' has no attribute 'mode'

@@ -1,0 +1,26 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Random baseline sanity check failed: R\u00b2 ~0.876 for LogP random model is impossible for a truly random weight model; suggests 'random' act is pre-trained or mislabeled.",
+  "TPSA claim over-claims independence: Size R\u00b2=0.211 and performance drop (0.913->0.892) indicate weak but non-zero size dependency, contradicting 'not size-dependent'.",
+  "MW residualized size baseline R\u00b2=0.888 implies MW is still predictable via proxy features (node count), so claim 'retains high accuracy' is true but mechanism (proxy vs explicit) should be clarified."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "TPSA prediction is not size-dependent",
+   "status": "unsupported",
+   "reason": "Size R\u00b2=0.211 and performance drop indicate weak dependency; claim should be 'weakly dependent'."
+  },
+  {
+   "claim": "MW relies on trivial size features but retains high accuracy after residualization",
+   "status": "supported",
+   "reason": "Raw Size R\u00b2=1.0, Resid GRASP R\u00b2=0.925; drop due to removing explicit MW feature but proxy (node count) remains."
+  },
+  {
+   "claim": "QED relies more on size features than other properties",
+   "status": "supported",
+   "reason": "Larger performance drop (0.667->0.546) and higher Size R\u00b2 (0.275) vs TPSA (0.211)."
+  }
+ ],
+ "rerun_instructions": "1. Verify `data.get_acts('mols','random')` definition; ensure it uses frozen random weights or a proper null model (e.g., mean predictor). 2. Re-run with explicit check that Random R\u00b2 is near 0 for non-trivial tasks. 3. Adjust TPSA claim to 'weakly size-dependent' and report Size R\u00b2=0.211 as evidence of correlation."
+}
