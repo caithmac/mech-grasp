@@ -1,13 +1,13 @@
 # mech-grasp — is it chemistry or not?
 
 A mechanistic-interpretability study of **GRASP**, a DeBERTa-style graph transformer for molecules
-([model code](https://github.com/caithmac/GRASP)), and its successor **GRASP-A2**
-([weights](https://huggingface.co/caithmac/GRASP-A2)).
+([model code](https://github.com/caithmac/GRASP)), and its successors **GRASP-A1**, **GRASP-A2** and **GRASP-A3**
+([A1](https://huggingface.co/caithmac/GRASP-A1), [A2](https://huggingface.co/caithmac/GRASP-A2), [A3](https://huggingface.co/caithmac/GRASP-A3)).
 
 The research was carried out by local LLM agents (an MI engineer, a chemist, a critic and a scribe, running on Ollama).
 A supervisor (Claude) designed the workflow, wrote the shared tooling and checked every claim; key results were re-derived
 with independent verification scripts. Every claim, with its status, is in [`ledger.json`](ledger.json)
-(160 claims: 99 confirmed, 22 rejected, the rest plausible / weak / untested / superseded).
+(181 claims: 123 confirmed, 20 of them after correction; 24 rejected; the rest plausible / weak / untested / process notes).
 
 ## Headline results
 
@@ -20,8 +20,14 @@ with independent verification scripts. Every claim, with its status, is in [`led
 - **Layer 12 blurs the chemistry (T14).** The participation ratio collapses between layers 8 and 12 (GRASP 180 → 13.5), and atom-level
   chemistry becomes unrecoverable even by a nonlinear probe (Crippen error 0.013 at L4 → 0.172 at L12, ≈ the random baseline):
   the information is lost, not re-encoded. **Use layers 4–8 for downstream features.**
-- **GRASP-A2 (T15)** gets bond-type inputs and sharper aromaticity, has 178 context features, still collapses at L12, and encodes
-  stereochemistry only weakly (enantiomer moves the CLS embedding by 0.37 %).
+- **GRASP-A2 (T15)** gets bond-type inputs and sharper aromaticity, has about as many context features as GRASP (72 vs 81 on
+  equally trained dictionaries; an earlier agent count of 178 was wrong), still collapses at L12, and encodes stereochemistry
+  only weakly (enantiomer moves the CLS embedding by 0.39 %).
+- **GRASP-A3 (T16)** replaces the hashed atom token with 7 explicit atom fields. Beyond those inputs it learns ring size,
+  conjugation and atom logP contributions better than A2, and has the most context features of the four checkpoints
+  (strict count, splitting atoms with identical inputs: A3 86, GRASP 75, A1 70, A2 66; untrained A3 3). They are causal: removing
+  one cuts its concept at layer 8 by 4–37 % (random edit ≤ 2 %). A3 is ~16× more stereo-sensitive than A2 (enantiomer moves the
+  L12 CLS by 6.3 %), enough that its logP read-out differs by 0.04 between enantiomers. L12 still collapses (197 → 20 dims).
 
 ## Read / watch
 
@@ -37,7 +43,7 @@ with independent verification scripts. Every claim, with its status, is in [`led
 ```
 mechlib/      shared analysis library (model runs + hooks/patching, SAE, probes, labels, edits)
 harness/      agent orchestration (MI → chemist → critic loop), API docs given to the agents
-tasks/        task specs T01–T15e (+ hints added by the supervisor)
+tasks/        task specs T01–T16e (+ hints added by the supervisor)
 runs/         every agent attempt: scripts, stdout, results.json, figures
 supervisor/   verification scripts and their outputs, ledger and report builders, library patches
 logs/         run logs; llm_calls.jsonl is the full agent transcript
