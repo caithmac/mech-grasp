@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16c\v2\script.py", line 35, in <module>
+    rec = S_.decode(S_.encode(acts_layer))
+          ^^^^^^^^^
+  File "C:\Users\ss864\AppData\Local\miniconda3\envs\mech-grasp\Lib\site-packages\torch\nn\modules\module.py", line 1928, in __getattr__
+    raise AttributeError(
+AttributeError: 'SAE' object has no attribute 'decode'. Did you mean: 'encode'?

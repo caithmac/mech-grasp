@@ -1,0 +1,32 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Metric Normalization Bug: `top1`/`top10` values in geometry results are >700 (e.g., L8 top1=176, L12 top1=729). These should be variance fractions summing to <= 1. The script calculates raw eigenvalues/variances (`S**2 / len(S)`) without normalizing by total variance `np.sum(variances)`. This makes the 'fraction' metric uninterpretable as a proportion.",
+  "Missing Noise Estimation: Probe scores (Linear/MLP R^2) are computed with only `seed=0` for all concepts. The Chemist claims differences are 'significant', but without standard deviation over multiple seeds, we cannot quantify noise or verify if the gap is statistically robust against random initialization variance.",
+  "Metric Terminology: Chemist's reading refers to 'AUC' in predictions (e.g., `prediction`: AUC(A3_L12) < 0.6), but probes on continuous/integer labels (`crippen_logp_contrib`, `min_ring_size`) typically output R^2 or Accuracy, not AUROC unless thresholded. The numbers match R^2 scores (~0.05-0.3 range).",
+  "Summary Output Confusion: Script prints 'Linear Error' (1 - Score) in summary text but Chemist claims refer to Scores/R^2 directly (e.g., `R^2 > 0.3`). While consistent with JSON data, the printed summary labels might confuse readers if they expect error rates."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "A3 undergoes a significant geometry collapse at layer 12 (PR drop).",
+   "status": "supported",
+   "reason": "Geometry PR drops from ~197 to ~20.5 in A3, while Random stays flat (~6-7). This confirms learned collapse distinct from architecture default."
+  },
+  {
+   "claim": "Structural topology decodability (Ring5) is suppressed at L12 compared to random.",
+   "status": "supported",
+   "reason": "A3 Ring5 Linear Score=0.049 vs Random 0.186. Gap (~0.14 R^2) is large and consistent across MLP scores (0.065 vs 0.185). Lacks p-values but effect size supports observation."
+  },
+  {
+   "claim": "Physicochemical properties (Crippen LogP) show improved decodability at L12.",
+   "status": "supported",
+   "reason": "A3 Crippen Linear Score=0.306 vs Random 0.185. Improvement is clear in point estimates."
+  },
+  {
+   "claim": "Anisotropy increases at L12 matching initial layer.",
+   "status": "supported",
+   "reason": "A3 Aniso: L8=0.33 -> L12=0.63 (L0=0.63). Random stays ~0.9."
+  }
+ ],
+ "rerun_instructions": "1. Fix PCA metric normalization in script (`top1_frac = variances[0] / np.sum(variances)` if sum > 0) to ensure values are [0,1].\n2. Re-run probe experiments with at least 5 random seeds per concept/kind (e.g., `seed=range(5)`). Report mean and std deviation for Linear/MLP scores in results.json.\n3. Update Chemist reading: Replace 'AUC' references with 'R^2' or 'Score' to match regression probe output type, unless thresholding is applied."
+}

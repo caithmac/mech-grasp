@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16e\v1\script.py", line 20, in <module>
+    idx_first = int(centres[0][1])
+                ^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'R'

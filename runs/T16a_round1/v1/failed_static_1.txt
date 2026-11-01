@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:61:24: local variable 'data' defined in enclosing scope on line 13 referenced before assignment

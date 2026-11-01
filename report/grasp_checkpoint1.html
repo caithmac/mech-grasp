@@ -83,10 +83,10 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%,
 
 <main>
   <header style="display:grid; gap:14px">
-    <div class="eyebrow">GRASP · mechanistic interpretability · checkpoints 1–3</div>
+    <div class="eyebrow">GRASP · mechanistic interpretability · checkpoints 1–4</div>
     <h1>Does GRASP know chemistry?</h1>
-    <p class="lede">Yes, and we can now see how. GRASP passes information along bonds like a message-passing network, builds features that recognise functional groups in context (none exist in an untrained copy), and notices when a molecule's connectivity is scrambled. That chemistry comes from self-supervised pretraining, not from the assay labels. The assay step adds a real but narrow toxicity signal. The functional-group features are causally used: removing one at layer 6 takes its concept away from later layers, and for polar groups it moves the logP read-out in the chemically expected direction. The final layer collapses into a few directions and discards fine-grained chemistry in every checkpoint, including GRASP-A2 with explicit bond and stereo inputs. The released model's dependence on SMILES order is caused by its absolute position embeddings: GRASP-A1, trained without them, is exactly order-invariant and loses nothing.</p>
-    <p class="meta">caithmac/GRASP (Step 2), caithmac/GRASP-A1 (Step 1 and Step 2), caithmac/GRASP-A2 (Step 2) · ZINC250k (4,000 molecules atom-level, 50,000 molecule-level), Tox21, ClinTox · Murcko-scaffold splits · Local agents: qwen3.5 9B/4B (checkpoint 1), qwen3.5 35B-A3B (checkpoints 2–3) via Ollama · Every claim below was re-checked by the supervisor</p>
+    <p class="lede">Yes, and we can now see how. GRASP passes information along bonds like a message-passing network, builds features that recognise functional groups in context (none exist in an untrained copy), and notices when a molecule's connectivity is scrambled. That chemistry comes from self-supervised pretraining, not from the assay labels. The assay step adds a real but narrow toxicity signal. The functional-group features are causally used: removing one at layer 6 takes its concept away from later layers, and for polar groups it moves the logP read-out in the chemically expected direction. The final layer collapses into a few directions and discards fine-grained chemistry in every checkpoint, including GRASP-A2 with explicit bond and stereo inputs. The released model's dependence on SMILES order is caused by its absolute position embeddings: GRASP-A1, trained without them, is exactly order-invariant and loses nothing. GRASP-A3, which replaces the hashed atom token with seven explicit atom fields, builds the most context-chemistry features of the four checkpoints and uses them causally. It is also the first that reads stereochemistry noticeably.</p>
+    <p class="meta">caithmac/GRASP (Step 2), caithmac/GRASP-A1 (Step 1 and Step 2), caithmac/GRASP-A2, caithmac/GRASP-A3 (Step 2) · ZINC250k (4,000 molecules atom-level, 50,000 molecule-level), Tox21, ClinTox · Murcko-scaffold splits · Local agents: qwen3.5 9B/4B (checkpoint 1), qwen3.5 35B-A3B (checkpoints 2–4) via Ollama · Every claim below was re-checked by the supervisor</p>
   </header>
 
   <section>
@@ -101,7 +101,8 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%,
       <div class="v"><span class="pill warn">Toxicity</span><h3>Real, narrow, and possibly leaked</h3><p>Four Tox21 stress-response endpoints beat every control by 0.05–0.11 AUROC, and that gain appears only after Step-2 assay training, whose ChEMBL data may contain Tox21. Nuclear-receptor endpoints and ClinTox show no learned signal.</p></div>
       <div class="v"><span class="pill bad">Shortcut</span><h3>SMILES order leaks in through position embeddings</h3><p>Rewriting a SMILES string moves a layer-12 logP prediction by 0.57 on average. GRASP-A1, the same recipe without absolute positions, is exactly order-invariant and learns the same chemistry.</p></div>
       <div class="v"><span class="pill warn">Lost</span><h3>Layer 12 collapses and discards chemistry</h3><p>In all four checkpoints the atom representation shrinks from ~180 effective dimensions at layer 8 to 4–22 at layer 12. Even a non-linear probe then reads atom logP contributions no better than from a random network. This comes from pretraining, not the assays. Lipinski flags are no test at all: token counts predict them as well as GRASP.</p></div>
-      <div class="v"><span class="pill good">GRASP-A2</span><h3>Explicit bonds sharpen chemistry, but don't change the story</h3><p>A2 learns aromaticity ~5× more precisely than A1 and builds 178 context features (A1-style GRASP: 93), but its random control gains almost nothing from the bond inputs, and its last layer collapses like the others. Stereo inputs reach the model and spread outward along bonds, but change the final embedding by only ~0.3%, and diastereomers move less than enantiomers.</p></div>
+      <div class="v"><span class="pill good">GRASP-A3</span><h3>Explicit atom fields: the most chemistry, and it is used</h3><p>A3's input is element, degree, H count, charge, aromaticity, ring membership and hybridization. On top of that it learns ring size, conjugation and atom logP contributions better than A2, has 86 features that split atoms with identical inputs (GRASP 75, A1 70, A2 66; untrained A3: 3), and removing one cuts its concept downstream by up to 37%. It is also 16× more stereo-sensitive than A2. Its last layer still collapses.</p></div>
+      <div class="v"><span class="pill good">GRASP-A2</span><h3>Explicit bonds sharpen chemistry, but don't change the story</h3><p>A2 learns aromaticity ~5× more precisely than A1 and builds about as many context features as GRASP (72 vs 81 on equally trained dictionaries), but its random control gains almost nothing from the bond inputs, and its last layer collapses like the others. Stereo inputs reach the model and spread outward along bonds, but change the final embedding by only ~0.3%, and diastereomers move less than enantiomers.</p></div>
     </div>
   </section>
 
@@ -221,8 +222,8 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%,
       <tbody>
         <tr><td>GRASP, 96k atoms</td><td class="num">0.069</td><td class="num">1.0%</td><td class="num"><strong>93</strong></td><td class="num"><strong>53</strong></td></tr>
         <tr><td>Random-init, 96k atoms</td><td class="num">0.0014</td><td class="num">31%</td><td class="num">0</td><td class="num">0</td></tr>
-        <tr><td>GRASP, 1.16M atoms</td><td class="num">0.075</td><td class="num">3.7%</td><td class="num">44</td><td class="num">–</td></tr>
-        <tr><td>GRASP-A1, 1.16M atoms</td><td class="num">0.179</td><td class="num">0.3%</td><td class="num">–</td><td class="num">–</td></tr>
+        <tr><td>GRASP, 1.16M atoms</td><td class="num">0.075</td><td class="num">3.7%</td><td class="num">81</td><td class="num">52</td></tr>
+        <tr><td>GRASP-A1, 1.16M atoms</td><td class="num">0.179</td><td class="num">0.3%</td><td class="num">76</td><td class="num">–</td></tr>
       </tbody></table></div>
     <div class="tablewrap"><table>
       <thead><tr><th>Example GRASP feature</th><th>Fires on token</th><th>Separates</th><th>Within-token AUROC</th></tr></thead>
@@ -234,7 +235,7 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%,
         <tr><td>1898</td><td>chain NH, 2 neighbours</td><td>sulfonamide nitrogen</td><td class="num">0.988</td></tr>
         <tr><td>1316</td><td>chain O, 2 neighbours</td><td>ester oxygen</td><td class="num">0.975</td></tr>
       </tbody></table></div>
-    <p class="caption">The random network's activations are almost fully determined by the token (it reconstructs to 0.14% unexplained variance, and a third of its features are token-pure), so it has nothing contextual to decompose. A1's layer 6 is harder to compress than GRASP's (0.179 vs 0.075). Tasks T08a and T08b; four features and both size-matched counts recomputed by the supervisor.</p>
+    <p class="caption">The random network's activations are almost fully determined by the token (it reconstructs to 0.14% unexplained variance, and a third of its features are token-pure), so it has nothing contextual to decompose. A1's layer 6 is harder to compress than GRASP's (0.179 vs 0.075). Tasks T08a and T08b; four features and every count recomputed by the supervisor with one tested routine (<code>mechlib.saefeat</code>: within-token AUROC of the activation value over all atoms of the token). The size-matched 93 vs 0 reproduces exactly. The agents' original 44 for the 1.16M-atom dictionary used a different scoring; the routine gives 81.</p>
   </section>
 
   <section>
@@ -329,6 +330,7 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%,
         <tr><td rowspan="4">Effective dimensions (participation ratio)</td><td>GRASP</td><td class="num">24</td><td class="num">54</td><td class="num">120</td><td class="num"><strong>180</strong></td><td class="num">108</td><td class="num">34</td><td class="num"><strong>13.5</strong></td></tr>
         <tr><td>A1 Step 1</td><td class="num">10</td><td class="num">109</td><td class="num">163</td><td class="num">171</td><td class="num">56</td><td class="num">35</td><td class="num"><strong>3.8</strong></td></tr>
         <tr><td>GRASP-A2</td><td class="num">10</td><td class="num">86</td><td class="num">167</td><td class="num">217</td><td class="num">123</td><td class="num">48</td><td class="num">21.9</td></tr>
+        <tr><td>GRASP-A3</td><td class="num">7</td><td class="num">64</td><td class="num">162</td><td class="num">197</td><td class="num">151</td><td class="num">62</td><td class="num">20.5</td></tr>
         <tr><td>Random-init</td><td class="num">26</td><td class="num">27</td><td class="num">28</td><td class="num">29</td><td class="num">29</td><td class="num">29</td><td class="num">30</td></tr>
       </tbody></table></div>
     <div class="tablewrap"><table>
@@ -358,11 +360,53 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%,
         <tr><td>Smallest ring size, best layer (6)</td><td class="num">0.245</td><td class="num">0.61</td><td class="num"><strong>0.185</strong></td><td class="num">0.64</td></tr>
         <tr><td>Atom logP contribution (1 − R²), layer 2</td><td class="num"><strong>0.066</strong></td><td class="num">0.18</td><td class="num">0.092</td><td class="num">0.18</td></tr>
         <tr><td>Carbon next to O, layer 2</td><td class="num">0.000</td><td class="num">0.072</td><td class="num">0.000</td><td class="num">0.074</td></tr>
-        <tr><td>SAE context-chemistry features, layer 6</td><td class="num"><strong>178</strong></td><td class="num">11</td><td class="num">–</td><td class="num">–</td></tr>
+        <tr><td>SAE context-chemistry features, layer 6</td><td class="num"><strong>72</strong></td><td class="num">7</td><td class="num">76</td><td class="num">–</td></tr>
       </tbody></table></div>
-    <p class="caption">Linear probes, 3 scaffold splits (T15a). SAE count (T15c): 50 functional-group, 84 bond-derived, 21 neighbour and 23 ring features; GRASP had 93 on the same atoms. Not like-for-like: A2's SAE leaves more variance unexplained (0.145 vs 0.075), and the random control's SAE has 52% dead latents. T15c counts were read from the agents' results and not re-run by the supervisor.</p>
+    <p class="caption">Linear probes, 3 scaffold splits (T15a). SAE count, supervisor recount: 38 functional-group, 22 neighbour, 8 bond-derived and 4 ring features; GRASP has 81 on an equally trained dictionary. <b>Correction:</b> the agents reported 178 (T15c) because they grouped latents by element instead of input token and scored AUROC only over atoms where the latent fires; that claim is rejected. The random control's SAE has 52% dead latents.</p>
     <div class="prose"><p>The random A2 network is no better than the random A1 network at aromaticity, so the bond inputs do not hand the answer over: A2 still learns it, just more precisely. Molar refractivity is not a useful test for any model (random weights already reach R² 0.96 because atom type almost fixes it). <b>Stereo.</b> A1 gives bit-identical vectors for enantiomers; A2 does not. Flipping a stereocentre changes only that atom at layer 0, spreads outward with a bond-distance gradient by layer 2, and is nearly uniform by layer 12, where it changes the CLS embedding by about 0.3%. Across 1,000 molecules with two or more stereocentres, the enantiomer (all centres flipped) moves the layer-12 CLS by 0.37% and a diastereomer (one centre flipped) by only 0.24%, against 96% for a different molecule; the logP read-out moves by about 0.003 log units for either. So enantiomers' logP stays essentially identical, as chemistry requires, but only because stereo barely changes anything: A2 does not treat diastereomers as the more different pair. Task T15e, spot-checked by the supervisor on 200 other molecules; A1 gives identical vectors (sanity check).</p></div>
     <p class="caption">A2 inputs here are computed with RDKit 2026.09; the release pins 2025.3.6. On 21,680 molecules the two differ for 5 (stereo label "none" vs "unspecified" on symmetric ring centres). The A2 loader reproduces GRASP and A1 activations bit-for-bit and matches the release's enantiomer control (0.04619).</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">15 · GRASP-A3</div>
+    <h2>Seven explicit atom fields: more chemistry on top, and it is causal</h2>
+    <div class="prose"><p>GRASP-A3 keeps A2's bond and stereo inputs but replaces the hashed atom token with seven categorical fields: element, degree, total H, formal charge, aromatic, in ring, hybridization. Its replaced-token objective also predicts those seven fields. The input is therefore finer than GRASP's token: 75 distinct input bundles on our atoms against 57 tokens, each bundle inside one token. So every test below asks what A3 adds <em>beyond its bundle</em>: aromaticity and hybridization are inputs, and context features must split atoms with identical bundles.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Error (lower is better)</th><th>A3</th><th>A3 random-init</th><th>Input bundle alone</th><th>A2</th></tr></thead>
+      <tbody>
+        <tr><td>Atom logP contribution (1 − R²), best layer</td><td class="num"><strong>0.031</strong> (L2)</td><td class="num">0.168</td><td class="num">0.179</td><td class="num">0.066</td></tr>
+        <tr><td>Smallest ring size (balanced-acc. error), ring atoms</td><td class="num"><strong>0.165</strong> (L6)</td><td class="num">0.689</td><td class="num">0.776</td><td class="num">0.194</td></tr>
+        <tr><td>Conjugated, atoms the bundle can't decide (1 − AUROC)</td><td class="num"><strong>0.001</strong> (L6)</td><td class="num">0.044</td><td class="num">0.243</td><td class="num">0.002</td></tr>
+        <tr><td>Carbon bearing OH / next to O / next to halogen</td><td class="num">0.000</td><td class="num">0.065–0.080</td><td class="num">0.17–0.30</td><td class="num">0.000</td></tr>
+      </tbody></table></div>
+    <p class="caption">Linear probes, 3 Murcko-scaffold splits, layers 0–12; the bundle baseline is a one-hot of the 7 fields. A2 is probed with the same bundle definitions so the columns compare directly. Supervisor run <code>supervisor/sup_T16a.py</code> (the agents' T16a run collected no layer data and was rejected by the critic).</p>
+
+    <div class="tablewrap"><table>
+      <thead><tr><th>Layer-6 SAE, 1.16M atoms (same recipe for all)</th><th>GRASP</th><th>A1</th><th>A2</th><th>A3</th></tr></thead>
+      <tbody>
+        <tr><td>Context-chemistry features, strict (split identical 7-field bundles)</td><td class="num">75</td><td class="num">70</td><td class="num">66</td><td class="num"><strong>86</strong></td></tr>
+        <tr><td>… of which functional group / neighbour / ring</td><td class="num">44 / 30 / 1</td><td class="num">43 / 24 / 3</td><td class="num">40 / 21 / 5</td><td class="num">49 / 29 / 6</td></tr>
+        <tr><td>Context-chemistry features, by hashed token (earlier definition)</td><td class="num">81</td><td class="num">76</td><td class="num">72</td><td class="num">94</td></tr>
+        <tr><td>Same, untrained copy of the model (strict)</td><td class="num">0</td><td class="num">–</td><td class="num">8</td><td class="num">3</td></tr>
+        <tr><td>Unexplained variance of the SAE</td><td class="num">0.075</td><td class="num">0.179</td><td class="num">0.145</td><td class="num">0.149</td></tr>
+        <tr><td>Phenol carbon: best single feature (within-input AUROC)</td><td class="num">1.000 (2610)</td><td class="num">–</td><td class="num">1.000 (3790)</td><td class="num">0.94 (816, 3202)</td></tr>
+      </tbody></table></div>
+    <p class="caption">AUROC ≥ 0.9 of the activation value over all atoms in the feature's input group; concepts exclude aromaticity and hybridization in the strict row. Grouping untrained A3 by hashed token gives 256 "context" features: A3's inputs (aromaticity, H count) look like context when the coarser token is used, which is why the strict definition is needed. A3 splits the phenol carbon over two features that each fire on 89% of phenol carbons and on under 1.2% of the 14,952 other carbons in the same bundle. Agents' T16c counts (86 / 3) reproduced exactly by <code>supervisor/recount_all.py</code>.</p>
+
+    <div class="tablewrap"><table>
+      <thead><tr><th>A3 feature (concept)</th><th>Removed, L8</th><th>Random edit, L8</th><th>Removed, L12</th><th>Added (steer), L8</th><th>Atoms</th></tr></thead>
+      <tbody>
+        <tr><td>3583 aromatic N bonded to O</td><td class="num"><strong>0.37</strong></td><td class="num">0.02</td><td class="num">0.12</td><td class="num">0.33</td><td class="num">186</td></tr>
+        <tr><td>3363 sp3 C bearing OH</td><td class="num"><strong>0.29</strong></td><td class="num">0.02</td><td class="num">0.13</td><td class="num">0.23</td><td class="num">110</td></tr>
+        <tr><td>1468 C next to halogen</td><td class="num">0.19</td><td class="num">0.01</td><td class="num">0.06</td><td class="num">0.16</td><td class="num">163</td></tr>
+        <tr><td>2131 sulfonamide N</td><td class="num">0.18</td><td class="num">0.02</td><td class="num">0.04</td><td class="num">0.17</td><td class="num">31</td></tr>
+        <tr><td>3854 atom in a six-membered ring</td><td class="num">0.12</td><td class="num">0.01</td><td class="num">0.05</td><td class="num">0.11</td><td class="num">139</td></tr>
+        <tr><td>1024 basic amine N</td><td class="num">0.08</td><td class="num">0.01</td><td class="num">0.14</td><td class="num">0.08</td><td class="num">73</td></tr>
+        <tr><td>2108 atom in a seven-membered ring</td><td class="num">0.08</td><td class="num">0.01</td><td class="num">0.01</td><td class="num">0.10</td><td class="num">26</td></tr>
+        <tr><td>112 OH oxygen</td><td class="num">0.04</td><td class="num">0.00</td><td class="num">0.03</td><td class="num">0.06</td><td class="num">123</td></tr>
+      </tbody></table></div>
+    <p class="caption">Same method as section 12, now with a within-bundle probe for each concept; standard errors ≤ 0.011. Layer 8 is the first cached layer after the edit. A zero edit reproduces the clean run exactly. One conjugation feature could not be steered (its bundle has no unconjugated atoms). Supervisor computation (<code>supervisor/verify_A3_causal.py</code>).</p>
+    <div class="prose"><p><b>Collapse.</b> A3's atom representation peaks at 197 effective dimensions at layer 8 and falls to 20 at layer 12, like the other trained checkpoints; untrained A3 stays at 6–7. Atom logP contributions read linearly fall from R² 0.93 (L4) to 0.70 (L12), below the untrained copy (0.84); a non-linear probe still gets 0.87 at L12, slightly above it, so A3 loses less than GRASP did. <b>Stereo.</b> On the same 1,000 molecules with two or more stereocentres, the enantiomer moves A3's layer-12 CLS by 6.3% (A2 0.39%, A1 exactly 0) and a one-centre diastereomer by 4.3%, against 100% for a different molecule. A3 therefore reads stereo inputs far more than A2, but still does not treat diastereomers as the more different pair, and its logP read-out shifts by 0.043 log units between enantiomers, which should be zero. Small, but the first checkpoint where it is not negligible.</p></div>
   </section>
 
   <section>
@@ -371,6 +415,7 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%,
       <li>Canonicalise SMILES (<code>Chem.MolToSmiles(Chem.MolFromSmiles(s))</code>) before calling <code>encode()</code>; consider doing it inside <code>encode()</code>.</li>
       <li>Prefer GRASP-A1 where it performs comparably: it is exactly order-invariant and carries the same atom-level chemistry.</li>
       <li>For property prediction from frozen embeddings, use mean-pooled atom vectors from layers 4–8 rather than the final-layer CLS: layer 12 has discarded most atom-level chemistry in every checkpoint (section 13).</li>
+      <li>If you need atom-level chemistry from a frozen encoder, GRASP-A3 carries the most of it. If you need enantiomers to get identical predictions for achiral properties, check A3's outputs: they now differ slightly.</li>
       <li>Treat the layer-12 CLS as assay-specialised: good for transfer tasks that resemble Step-2 assays, weaker as a general chemistry representation.</li>
       <li>Before claiming toxicity transfer, check the target assays against the 642 Step-2 ChEMBL assays; publishing their ChEMBL IDs with the model would make this easy.</li>
     </ul>
@@ -380,7 +425,7 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%,
     <div class="eyebrow">How this was done</div>
     <h2>Local agents did the work; every claim was audited</h2>
     <div class="prose"><p>A Python harness drives four local agents through Ollama: an MI engineer that writes and runs experiment scripts against a fixed library with built-in controls, a chemist that interprets results, a skeptical critic, and a scribe. The supervisor (Claude) wrote the task specs and the verified library (probes, interventions, sparse autoencoder), intervened through hint files, and re-checked every claim before it entered the ledger. Checkpoint 2 ran 11 tasks in about 7 hours on one 16 GB GPU, with a 35B mixture-of-experts model (3B active) at about 60 tokens/s.</p></div>
-    <div class="stats"><span><b>160</b> claims in ledger</span><span><b>107</b> confirmed (15 after correction)</span><span><b>22</b> rejected</span><span><b>20</b> weak, untested or plausible</span><span><b>11</b> process notes or superseded</span></div>
+    <div class="stats"><span><b>181</b> claims in ledger</span><span><b>123</b> confirmed (20 after correction)</span><span><b>24</b> rejected</span><span><b>19</b> weak, untested or plausible</span><span><b>15</b> process notes or superseded</span></div>
     <ul class="tight">
       <li>The agent pipeline found the order-sensitivity first (T00), with the wrong magnitude; the supervisor confirmed and measured it.</li>
       <li>Agents' numbers were wrong in 4 places (summed norms, token counting, a misaligned drift estimate, a broken random control). The critic caught three of them.</li>
@@ -389,6 +434,7 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--rule) 55%,
       <li>Checkpoint 2: the agents ran every experiment, but in 3 of 11 tasks (T12, T07a, T10b) their final numbers were wrong, and in 2 more (T09, T05b) an earlier run or a bookkeeping field was. Causes: reading the wrong result keys, a row offset that never advanced, misses never counted, an exception hiding every probe. Because they used a library that caches intermediate results, the supervisor could re-extract or recompute the correct numbers. Three of those bugs led to harness changes: results with no finite numbers, or only error entries, now fail the run.</li>
       <li>The critic caught most broken runs, but also endorsed two chemically wrong readings (Tox21 SR-MMP taken as matrix metalloproteinase rather than mitochondrial membrane potential; "aromaticity is in the token") and once rejected a correct result over a bookkeeping field. Supervisor review stayed necessary.</li>
       <li>Checkpoint 3 (8 tasks): the causal-ablation task failed twice on row bookkeeping (10 attempts), so the supervisor added a tested helper (<code>mechlib.edits</code>) that does the mapping; with it the agents completed the task, but one condition was still wrong and was recomputed. Recurring failure: a per-item <code>try/except</code> that swallows every error and writes an empty or partial result. The critic caught a hard-coded 0.0 standing in for a measurement (T15b) and the chemist repeatedly cited metrics that did not exist; those claims were rejected.</li>
+      <li>Checkpoint 4 (GRASP-A3, 4 tasks): the agents completed the SAE and collapse tasks, and both reproduced exactly. They failed the stereo task 5 times, and their probe run collected no data (the critic rejected it). The supervisor ran both from the accepted A2 scripts. A re-audit with one tested counting routine found the A2 count of 178 context features was wrong (72; latents grouped by element, not token). The supervisor also briefly "corrected" GRASP's 93 to 81 before noticing the two numbers come from different dictionaries; 93 stands.</li>
     </ul>
   </section>
 

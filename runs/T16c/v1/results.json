@@ -1,0 +1,1832 @@
+{
+ "a3": {
+  "stats": {
+   "fvu": 0.1485413327934493,
+   "l0": 32.0,
+   "dead_frac": 0.0,
+   "n_alive": 4096
+  },
+  "strict": {
+   "counts": {
+    "context_chemistry": 86,
+    "input": 427,
+    "mixed": 3583
+   },
+   "families": {
+    "functional_group": 49,
+    "neighbour": 29,
+    "ring": 6,
+    "conjugation": 2
+   }
+  },
+  "legacy": {
+   "counts": {
+    "context_chemistry": 94,
+    "input": 456,
+    "mixed": 3546
+   },
+   "families": {
+    "functional_group": 47,
+    "neighbour": 28,
+    "bond_derived": 11,
+    "ring": 6,
+    "conjugation": 2
+   }
+  }
+ },
+ "a3_random": {
+  "stats": {
+   "fvu": 0.00012672852097124308,
+   "l0": 32.0,
+   "dead_frac": 0.735595703125,
+   "n_alive": 1083
+  },
+  "strict": {
+   "counts": {
+    "context_chemistry": 3,
+    "input": 565,
+    "mixed": 436
+   },
+   "families": {
+    "functional_group": 2,
+    "neighbour": 1
+   }
+  },
+  "legacy": {
+   "counts": {
+    "context_chemistry": 256,
+    "input": 428,
+    "mixed": 320
+   },
+   "families": {
+    "bond_derived": 204,
+    "functional_group": 51,
+    "neighbour": 1
+   }
+  }
+ },
+ "a3_top_context": [
+  {
+   "latent": 2131,
+   "n_fire": 162,
+   "group": 29,
+   "purity": 0.47530864197530864,
+   "concept": "fg_sulfonamide",
+   "within_auroc": 1.0,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 1024,
+   "n_fire": 303,
+   "group": 30,
+   "purity": 0.2706270627062706,
+   "concept": "fg_amine_basic",
+   "within_auroc": 0.9998602180598267,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 1597,
+   "n_fire": 286,
+   "group": 30,
+   "purity": 0.36363636363636365,
+   "concept": "fg_sulfonamide",
+   "within_auroc": 0.9998602180598266,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 881,
+   "n_fire": 494,
+   "group": 9,
+   "purity": 0.5364372469635628,
+   "concept": "fg_carboxylic_acid",
+   "within_auroc": 0.9996876626756896,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 1468,
+   "n_fire": 348,
+   "group": 14,
+   "purity": 0.6293103448275862,
+   "concept": "has_halogen_neighbor",
+   "within_auroc": 0.9995910020449899,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  },
+  {
+   "latent": 3583,
+   "n_fire": 377,
+   "group": 27,
+   "purity": 0.7771883289124668,
+   "concept": "has_O_neighbor",
+   "within_auroc": 0.9994120570728928,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  },
+  {
+   "latent": 3363,
+   "n_fire": 252,
+   "group": 7,
+   "purity": 0.7658730158730159,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.9991216345235822,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 24,
+   "n_fire": 985,
+   "group": 52,
+   "purity": 0.9614213197969543,
+   "concept": "fg_ester",
+   "within_auroc": 0.9986801932459262,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 435,
+   "n_fire": 414,
+   "group": 59,
+   "purity": 0.606280193236715,
+   "concept": "has_N_neighbor",
+   "within_auroc": 0.998215864595175,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  },
+  {
+   "latent": 2660,
+   "n_fire": 415,
+   "group": 52,
+   "purity": 0.8626506024096385,
+   "concept": "fg_carboxylic_acid",
+   "within_auroc": 0.9978376397287887,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 1066,
+   "n_fire": 394,
+   "group": 19,
+   "purity": 0.565989847715736,
+   "concept": "fg_amide",
+   "within_auroc": 0.997796017631859,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 1911,
+   "n_fire": 351,
+   "group": 52,
+   "purity": 0.7948717948717948,
+   "concept": "has_N_neighbor",
+   "within_auroc": 0.9969312441841487,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  },
+  {
+   "latent": 3,
+   "n_fire": 607,
+   "group": 52,
+   "purity": 0.6342668863261944,
+   "concept": "has_N_neighbor",
+   "within_auroc": 0.9969174663131053,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  },
+  {
+   "latent": 3238,
+   "n_fire": 1028,
+   "group": 52,
+   "purity": 0.9017509727626459,
+   "concept": "fg_sulfonamide",
+   "within_auroc": 0.9968324875166116,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 923,
+   "n_fire": 405,
+   "group": 9,
+   "purity": 0.7506172839506173,
+   "concept": "fg_carboxylic_acid",
+   "within_auroc": 0.9923829994458531,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 62,
+   "n_fire": 414,
+   "group": 2,
+   "purity": 0.8985507246376812,
+   "concept": "fg_ester",
+   "within_auroc": 0.9908434787075563,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 1974,
+   "n_fire": 305,
+   "group": 4,
+   "purity": 0.580327868852459,
+   "concept": "has_O_neighbor",
+   "within_auroc": 0.9899686520376176,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  },
+  {
+   "latent": 3708,
+   "n_fire": 322,
+   "group": 6,
+   "purity": 0.593167701863354,
+   "concept": "has_O_neighbor",
+   "within_auroc": 0.9896978243352136,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  },
+  {
+   "latent": 1661,
+   "n_fire": 687,
+   "group": 2,
+   "purity": 0.8427947598253275,
+   "concept": "fg_ester",
+   "within_auroc": 0.9889089694914938,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 2493,
+   "n_fire": 219,
+   "group": 42,
+   "purity": 0.6073059360730594,
+   "concept": "fg_sulfonamide",
+   "within_auroc": 0.9874146218062231,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 544,
+   "n_fire": 453,
+   "group": 52,
+   "purity": 0.9161147902869757,
+   "concept": "has_N_neighbor",
+   "within_auroc": 0.9870387327750115,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  },
+  {
+   "latent": 2938,
+   "n_fire": 1044,
+   "group": 52,
+   "purity": 0.9013409961685823,
+   "concept": "fg_sulfonamide",
+   "within_auroc": 0.9826927168873265,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 1304,
+   "n_fire": 251,
+   "group": 31,
+   "purity": 0.2948207171314741,
+   "concept": "fg_aniline_N",
+   "within_auroc": 0.9826818406729343,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 2572,
+   "n_fire": 189,
+   "group": 25,
+   "purity": 0.3333333333333333,
+   "concept": "has_N_neighbor",
+   "within_auroc": 0.9810568295114656,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  },
+  {
+   "latent": 1431,
+   "n_fire": 197,
+   "group": 33,
+   "purity": 0.5786802030456852,
+   "concept": "has_N_neighbor",
+   "within_auroc": 0.9806315104166666,
+   "cls": "context_chemistry",
+   "family": "neighbour"
+  }
+ ],
+ "a3_hydroxyl": [
+  {
+   "latent": 46,
+   "n_fire": 280,
+   "group": 13,
+   "purity": 0.65,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.9556124018641539,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 54,
+   "n_fire": 392,
+   "group": 11,
+   "purity": 0.7091836734693877,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5297864625133761,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 63,
+   "n_fire": 850,
+   "group": 11,
+   "purity": 0.611764705882353,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6164147145866774,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 88,
+   "n_fire": 636,
+   "group": 7,
+   "purity": 0.330188679245283,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5216622979846199,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 112,
+   "n_fire": 590,
+   "group": 53,
+   "purity": 0.20847457627118643,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.98046875,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 203,
+   "n_fire": 248,
+   "group": 12,
+   "purity": 0.3951612903225806,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7595522811368418,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 213,
+   "n_fire": 488,
+   "group": 11,
+   "purity": 0.7069672131147541,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6291251797418406,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 274,
+   "n_fire": 335,
+   "group": 7,
+   "purity": 0.608955223880597,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5368930859096985,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 300,
+   "n_fire": 760,
+   "group": 11,
+   "purity": 0.8421052631578947,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6894674938971375,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 321,
+   "n_fire": 431,
+   "group": 12,
+   "purity": 0.4431554524361949,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5950083436116955,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 324,
+   "n_fire": 669,
+   "group": 7,
+   "purity": 0.18236173393124067,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5067543874876317,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 341,
+   "n_fire": 346,
+   "group": 7,
+   "purity": 0.3670520231213873,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5249553005711111,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 347,
+   "n_fire": 876,
+   "group": 7,
+   "purity": 0.3116438356164384,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5344393910462271,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 365,
+   "n_fire": 233,
+   "group": 53,
+   "purity": 0.5965665236051502,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.849431818181818,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 374,
+   "n_fire": 424,
+   "group": 7,
+   "purity": 0.5683962264150944,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5374789522106688,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 388,
+   "n_fire": 232,
+   "group": 7,
+   "purity": 0.6853448275862069,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5168529866162098,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 420,
+   "n_fire": 207,
+   "group": 15,
+   "purity": 0.5120772946859904,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.9569178852643421,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 443,
+   "n_fire": 573,
+   "group": 7,
+   "purity": 0.6596858638743456,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5419445553491763,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 469,
+   "n_fire": 1222,
+   "group": 7,
+   "purity": 0.22831423895253683,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5156378565104935,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 470,
+   "n_fire": 720,
+   "group": 11,
+   "purity": 0.7402777777777778,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5212299148943285,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 495,
+   "n_fire": 232,
+   "group": 53,
+   "purity": 0.5431034482758621,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.9545454545454546,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 516,
+   "n_fire": 240,
+   "group": 13,
+   "purity": 0.5083333333333333,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.611273800435273,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 572,
+   "n_fire": 580,
+   "group": 7,
+   "purity": 0.39827586206896554,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.525542034822157,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 638,
+   "n_fire": 505,
+   "group": 11,
+   "purity": 0.9267326732673268,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5952307801631889,
+   "cls": "input",
+   "family": null
+  },
+  {
+   "latent": 664,
+   "n_fire": 285,
+   "group": 13,
+   "purity": 0.7087719298245614,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5570298879912491,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 695,
+   "n_fire": 436,
+   "group": 7,
+   "purity": 0.7889908256880734,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.535898415123162,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 699,
+   "n_fire": 307,
+   "group": 11,
+   "purity": 0.739413680781759,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.519918426464687,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 734,
+   "n_fire": 297,
+   "group": 7,
+   "purity": 0.6767676767676768,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7079330636901765,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 765,
+   "n_fire": 559,
+   "group": 11,
+   "purity": 0.8032200357781754,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.580095367676565,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 767,
+   "n_fire": 799,
+   "group": 11,
+   "purity": 0.8473091364205256,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5723664685326377,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 793,
+   "n_fire": 249,
+   "group": 11,
+   "purity": 0.6626506024096386,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5339210473515248,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 816,
+   "n_fire": 263,
+   "group": 11,
+   "purity": 0.8821292775665399,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.9446551882691278,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 823,
+   "n_fire": 251,
+   "group": 11,
+   "purity": 0.32669322709163345,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5919139161985018,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 824,
+   "n_fire": 1045,
+   "group": 11,
+   "purity": 0.5799043062200957,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5603535480203318,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 846,
+   "n_fire": 626,
+   "group": 11,
+   "purity": 0.8833865814696485,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5172212538456394,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 968,
+   "n_fire": 372,
+   "group": 11,
+   "purity": 0.6370967741935484,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.503785551264045,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 972,
+   "n_fire": 336,
+   "group": 13,
+   "purity": 0.7053571428571429,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6204521370540445,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1059,
+   "n_fire": 267,
+   "group": 7,
+   "purity": 0.550561797752809,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5278464422726404,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1075,
+   "n_fire": 361,
+   "group": 12,
+   "purity": 0.6343490304709142,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.75584547499225,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1092,
+   "n_fire": 391,
+   "group": 12,
+   "purity": 0.6342710997442456,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7079043353802115,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1154,
+   "n_fire": 903,
+   "group": 11,
+   "purity": 0.6533776301218162,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5279132808319957,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1187,
+   "n_fire": 452,
+   "group": 11,
+   "purity": 0.7920353982300885,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.535405485052167,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1232,
+   "n_fire": 638,
+   "group": 7,
+   "purity": 0.3605015673981191,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5200617980453763,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1241,
+   "n_fire": 866,
+   "group": 7,
+   "purity": 0.25519630484988454,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5160622840974187,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1282,
+   "n_fire": 577,
+   "group": 11,
+   "purity": 0.2322357019064125,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5112312525080257,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1307,
+   "n_fire": 267,
+   "group": 11,
+   "purity": 0.8089887640449438,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5828659522973515,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1320,
+   "n_fire": 700,
+   "group": 11,
+   "purity": 0.7371428571428571,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.556962227043205,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1347,
+   "n_fire": 200,
+   "group": 13,
+   "purity": 0.47,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7414569113843278,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1350,
+   "n_fire": 183,
+   "group": 7,
+   "purity": 0.22950819672131148,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5192320377731873,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1360,
+   "n_fire": 336,
+   "group": 13,
+   "purity": 0.7172619047619048,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6419992935358532,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1440,
+   "n_fire": 283,
+   "group": 13,
+   "purity": 0.35335689045936397,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5570925581978329,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1450,
+   "n_fire": 591,
+   "group": 11,
+   "purity": 0.8595600676818951,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5215549132223114,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1472,
+   "n_fire": 518,
+   "group": 7,
+   "purity": 0.861003861003861,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5662853472668252,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1522,
+   "n_fire": 295,
+   "group": 7,
+   "purity": 0.5288135593220339,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6392278716128248,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1524,
+   "n_fire": 743,
+   "group": 11,
+   "purity": 0.21399730820995963,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5144629481005886,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1532,
+   "n_fire": 652,
+   "group": 13,
+   "purity": 0.7929447852760736,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7796857374004398,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1558,
+   "n_fire": 592,
+   "group": 11,
+   "purity": 0.6993243243243243,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5251314623461744,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1600,
+   "n_fire": 774,
+   "group": 13,
+   "purity": 0.32170542635658916,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6073654584610476,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1605,
+   "n_fire": 308,
+   "group": 7,
+   "purity": 0.775974025974026,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.486076344888642,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1648,
+   "n_fire": 388,
+   "group": 13,
+   "purity": 0.5309278350515464,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5629436765761557,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1727,
+   "n_fire": 244,
+   "group": 15,
+   "purity": 0.45491803278688525,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7401574803149606,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1731,
+   "n_fire": 434,
+   "group": 11,
+   "purity": 0.6013824884792627,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5655477737092027,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1803,
+   "n_fire": 1081,
+   "group": 7,
+   "purity": 0.9167437557816837,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.8096602843404447,
+   "cls": "input",
+   "family": null
+  },
+  {
+   "latent": 1805,
+   "n_fire": 236,
+   "group": 7,
+   "purity": 0.2796610169491525,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5076067144617842,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1876,
+   "n_fire": 566,
+   "group": 7,
+   "purity": 0.1784452296819788,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5742982623639488,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1898,
+   "n_fire": 277,
+   "group": 12,
+   "purity": 0.6895306859205776,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6122100347595523,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1910,
+   "n_fire": 139,
+   "group": 14,
+   "purity": 0.39568345323741005,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.873241341991342,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1933,
+   "n_fire": 404,
+   "group": 13,
+   "purity": 0.452970297029703,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6434663460990645,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 1966,
+   "n_fire": 223,
+   "group": 13,
+   "purity": 0.5874439461883408,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5257175738653844,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2001,
+   "n_fire": 413,
+   "group": 13,
+   "purity": 0.7675544794188862,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5784460067683823,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2003,
+   "n_fire": 417,
+   "group": 7,
+   "purity": 0.5371702637889688,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5306855069696391,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2069,
+   "n_fire": 492,
+   "group": 7,
+   "purity": 0.4796747967479675,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5052424184560904,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2074,
+   "n_fire": 391,
+   "group": 13,
+   "purity": 0.5856777493606138,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7880522099793758,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2111,
+   "n_fire": 365,
+   "group": 13,
+   "purity": 0.663013698630137,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5307140985175649,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2114,
+   "n_fire": 206,
+   "group": 11,
+   "purity": 0.6893203883495146,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5266300076912788,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2185,
+   "n_fire": 510,
+   "group": 12,
+   "purity": 0.7235294117647059,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6967410446333758,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2199,
+   "n_fire": 369,
+   "group": 7,
+   "purity": 0.5745257452574526,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5361483847449094,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2227,
+   "n_fire": 354,
+   "group": 11,
+   "purity": 0.7740112994350282,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6040305540228732,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2265,
+   "n_fire": 190,
+   "group": 13,
+   "purity": 0.43157894736842106,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.551059126491266,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2267,
+   "n_fire": 544,
+   "group": 11,
+   "purity": 0.8069852941176471,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5084786943218299,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2269,
+   "n_fire": 509,
+   "group": 11,
+   "purity": 0.8781925343811395,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5472616539593366,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2278,
+   "n_fire": 2423,
+   "group": 11,
+   "purity": 0.16797358646306232,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.63176696679374,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2283,
+   "n_fire": 1345,
+   "group": 11,
+   "purity": 0.23568773234200743,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5050902471241305,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2287,
+   "n_fire": 569,
+   "group": 12,
+   "purity": 0.27943760984182775,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5804977145759269,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2318,
+   "n_fire": 599,
+   "group": 11,
+   "purity": 0.8363939899833055,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5903040772137508,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2352,
+   "n_fire": 511,
+   "group": 11,
+   "purity": 0.776908023483366,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5542856933855003,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2382,
+   "n_fire": 413,
+   "group": 11,
+   "purity": 0.7191283292978208,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7884746814807383,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2387,
+   "n_fire": 634,
+   "group": 11,
+   "purity": 0.5914826498422713,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5192851499799358,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2436,
+   "n_fire": 743,
+   "group": 7,
+   "purity": 0.26379542395693134,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5045740968979464,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2447,
+   "n_fire": 424,
+   "group": 7,
+   "purity": 0.714622641509434,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6051877376013332,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2498,
+   "n_fire": 551,
+   "group": 7,
+   "purity": 0.3992740471869328,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5530230701130072,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2507,
+   "n_fire": 315,
+   "group": 11,
+   "purity": 0.5333333333333333,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5336117241840557,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2514,
+   "n_fire": 827,
+   "group": 11,
+   "purity": 0.31680773881499397,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5149337254213483,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2533,
+   "n_fire": 295,
+   "group": 13,
+   "purity": 0.5627118644067797,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5562607536377207,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2570,
+   "n_fire": 273,
+   "group": 7,
+   "purity": 0.4908424908424908,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5102418108910375,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2578,
+   "n_fire": 318,
+   "group": 7,
+   "purity": 0.36792452830188677,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5215503324248789,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2607,
+   "n_fire": 900,
+   "group": 7,
+   "purity": 0.6111111111111112,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6742722238616834,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2642,
+   "n_fire": 690,
+   "group": 11,
+   "purity": 0.8420289855072464,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5556159920077582,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2673,
+   "n_fire": 208,
+   "group": 7,
+   "purity": 0.46634615384615385,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5466037113545229,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2682,
+   "n_fire": 406,
+   "group": 11,
+   "purity": 0.7068965517241379,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5259423906500802,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2701,
+   "n_fire": 598,
+   "group": 7,
+   "purity": 0.7608695652173914,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.47879684760532576,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2712,
+   "n_fire": 465,
+   "group": 11,
+   "purity": 0.31827956989247314,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5107719703049759,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2718,
+   "n_fire": 464,
+   "group": 11,
+   "purity": 0.3728448275862069,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5412643375468165,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2724,
+   "n_fire": 455,
+   "group": 7,
+   "purity": 0.43736263736263736,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.522890447341469,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2760,
+   "n_fire": 311,
+   "group": 11,
+   "purity": 0.7041800643086816,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.512227670211343,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2763,
+   "n_fire": 370,
+   "group": 7,
+   "purity": 0.5972972972972973,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6066632527297029,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2768,
+   "n_fire": 554,
+   "group": 11,
+   "purity": 0.7021660649819494,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5225534209470305,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2811,
+   "n_fire": 220,
+   "group": 12,
+   "purity": 0.740909090909091,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.9621272582166437,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 2847,
+   "n_fire": 1103,
+   "group": 11,
+   "purity": 0.8458748866727108,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6947649143927234,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2858,
+   "n_fire": 264,
+   "group": 12,
+   "purity": 0.3333333333333333,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5528879449651414,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2939,
+   "n_fire": 483,
+   "group": 11,
+   "purity": 0.5693581780538303,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5064106181447299,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 2984,
+   "n_fire": 936,
+   "group": 7,
+   "purity": 0.1858974358974359,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5580988421545993,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3050,
+   "n_fire": 913,
+   "group": 11,
+   "purity": 0.3329682365826944,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5173291512005083,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3068,
+   "n_fire": 328,
+   "group": 15,
+   "purity": 0.45426829268292684,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7267341582302214,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3070,
+   "n_fire": 564,
+   "group": 11,
+   "purity": 0.6471631205673759,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5153522522070626,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3082,
+   "n_fire": 470,
+   "group": 13,
+   "purity": 0.6893617021276596,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5891170337621494,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3084,
+   "n_fire": 463,
+   "group": 7,
+   "purity": 0.5118790496760259,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.533806655441179,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3087,
+   "n_fire": 350,
+   "group": 12,
+   "purity": 0.43714285714285717,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6165104575465165,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3114,
+   "n_fire": 263,
+   "group": 11,
+   "purity": 0.8212927756653993,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5401310234416801,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3132,
+   "n_fire": 757,
+   "group": 11,
+   "purity": 0.8784676354029062,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5573653399210808,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3190,
+   "n_fire": 511,
+   "group": 7,
+   "purity": 0.2974559686888454,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5086499904525491,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3202,
+   "n_fire": 358,
+   "group": 11,
+   "purity": 0.7849162011173184,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.9439701837546817,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 3263,
+   "n_fire": 429,
+   "group": 7,
+   "purity": 0.5967365967365967,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.536485149374208,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3291,
+   "n_fire": 464,
+   "group": 11,
+   "purity": 0.7068965517241379,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5245423375635366,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3322,
+   "n_fire": 764,
+   "group": 11,
+   "purity": 0.7068062827225131,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6440664814907705,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3323,
+   "n_fire": 466,
+   "group": 13,
+   "purity": 0.51931330472103,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5915383826528868,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3325,
+   "n_fire": 416,
+   "group": 11,
+   "purity": 0.5697115384615384,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.519628958500535,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3363,
+   "n_fire": 252,
+   "group": 7,
+   "purity": 0.7658730158730159,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.9991216345235822,
+   "cls": "context_chemistry",
+   "family": "functional_group"
+  },
+  {
+   "latent": 3410,
+   "n_fire": 358,
+   "group": 7,
+   "purity": 0.3240223463687151,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6244796639297308,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3446,
+   "n_fire": 499,
+   "group": 13,
+   "purity": 0.4088176352705411,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5527455247775208,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3485,
+   "n_fire": 932,
+   "group": 11,
+   "purity": 0.47317596566523606,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5323765215355806,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3504,
+   "n_fire": 1103,
+   "group": 11,
+   "purity": 0.3236627379873073,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5549320325040128,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3577,
+   "n_fire": 525,
+   "group": 13,
+   "purity": 0.4876190476190476,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5467804605690455,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3612,
+   "n_fire": 95,
+   "group": 7,
+   "purity": 0.42105263157894735,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5193500789834568,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3620,
+   "n_fire": 729,
+   "group": 11,
+   "purity": 0.8545953360768176,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5421583442014446,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3658,
+   "n_fire": 1111,
+   "group": 11,
+   "purity": 0.31233123312331235,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5395970229735153,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3668,
+   "n_fire": 348,
+   "group": 11,
+   "purity": 0.6781609195402298,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5156626203852328,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3684,
+   "n_fire": 507,
+   "group": 11,
+   "purity": 0.8165680473372781,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5286330319522472,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3728,
+   "n_fire": 185,
+   "group": 7,
+   "purity": 0.6594594594594595,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6421042581630706,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3734,
+   "n_fire": 389,
+   "group": 15,
+   "purity": 0.480719794344473,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.8202474690663667,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3758,
+   "n_fire": 370,
+   "group": 12,
+   "purity": 0.4783783783783784,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6757336112338652,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3777,
+   "n_fire": 417,
+   "group": 12,
+   "purity": 0.4292565947242206,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6360866152638625,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3801,
+   "n_fire": 641,
+   "group": 7,
+   "purity": 0.23712948517940718,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5131997847483811,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3949,
+   "n_fire": 261,
+   "group": 11,
+   "purity": 0.7586206896551724,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.7267884835640717,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 3997,
+   "n_fire": 208,
+   "group": 7,
+   "purity": 0.18269230769230768,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5056347318902216,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 4007,
+   "n_fire": 154,
+   "group": 7,
+   "purity": 0.551948051948052,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5336391410766053,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 4008,
+   "n_fire": 351,
+   "group": 13,
+   "purity": 0.6809116809116809,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.6668480304463258,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 4016,
+   "n_fire": 522,
+   "group": 11,
+   "purity": 0.8122605363984674,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5366226612660514,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 4046,
+   "n_fire": 638,
+   "group": 11,
+   "purity": 0.41379310344827586,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5420844096943552,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 4049,
+   "n_fire": 481,
+   "group": 11,
+   "purity": 0.8461538461538461,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5215057977193687,
+   "cls": "mixed",
+   "family": null
+  },
+  {
+   "latent": 4070,
+   "n_fire": 352,
+   "group": 11,
+   "purity": 0.7471590909090909,
+   "concept": "fg_hydroxyl",
+   "within_auroc": 0.5188060125735688,
+   "cls": "mixed",
+   "family": null
+  }
+ ]
+}

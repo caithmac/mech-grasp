@@ -1,0 +1,49 @@
+{
+ "is_input": {
+  "aromatic": true,
+  "hybridization": true
+ },
+ "ring_size": {
+  "a2": {
+   "layers": {},
+   "bundle_baseline": 0.13169439051788254
+  }
+ },
+ "conjugated": {
+  "a2": {
+   "layers": {},
+   "bundle_baseline": 0.9467967675710685
+  }
+ },
+ "crippen_logp_contrib": {
+  "a2": {
+   "layers": {},
+   "bundle_baseline": 0.21178438337294073
+  }
+ },
+ "crippen_mr_contrib": {
+  "a2": {
+   "layers": {},
+   "bundle_baseline": 0.9015472534587091
+  }
+ },
+ "o_neighbor_C": {
+  "a2": {
+   "layers": {},
+   "bundle_baseline": 1.0
+  }
+ },
+ "halogen_nbr_C": {
+  "a2": {
+   "layers": {},
+   "bundle_baseline": 0.6666666666666666
+  }
+ },
+ "hydroxyl_C": {
+  "a2": {
+   "layers": {},
+   "bundle_baseline": 0.6666666666666666
+  }
+ },
+ "figure_error": "'a3'"
+}

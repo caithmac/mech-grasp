@@ -1,0 +1,9 @@
+=== T16d Results Summary ===
+
+Model: a3
+  Layer 12 PR: 20.45 (Layer 8 was 196.75)
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16d\v1\script.py", line 287, in <module>
+    print(f"  Concept {concept}: Linear Score@L12={lin_12:.3f}, MLP Score@L12={mlp_12:.3f}")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to NoneType.__format__

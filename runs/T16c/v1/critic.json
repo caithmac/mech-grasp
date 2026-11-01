@@ -1,0 +1,26 @@
+{
+ "verdict": "revise",
+ "bugs_or_flaws": [
+  "Random model stats show 'fvu': 0.0, but printed training logs show NMSE ~0.0314 at convergence. This indicates a bug in the FVU metric calculation or serialization for random weights (likely division by zero variance or silent NaN handling).",
+  "Classification table sizes differ: A3 returns all 4096 latents ('Strict Latents': 4096), while Random returns only ~1004. This is likely due to `saefeat.classify` filtering out dead/zero-activation latents, but the comparison of raw counts (86 vs 3) should account for this denominator difference or explicitly state it relies on 'active' latent space.",
+  "Legacy mode shows Random > Trained (256 vs 94 context_chemistry), which contradicts expected training improvement. This suggests potential metric instability in legacy classification or token-space leakage that needs investigation before claiming stable capacity."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "A3 learns specific chemical motifs beyond bundle",
+   "status": "supported",
+   "reason": "Strict count gap (86 vs 3) is large and consistent with task goal, despite denominator differences. Top latents show high AUROC for functional groups."
+  },
+  {
+   "claim": "Hydroxyl representation distinguishes context from input",
+   "status": "supported",
+   "reason": "Multiple hydroxyl latents found; specific ones (e.g., latent 46) classified as 'context_chemistry' with high purity/AUROC, distinct from 'input' class."
+  },
+  {
+   "claim": "Random weights do not learn context features",
+   "status": "supported",
+   "reason": "Strict count is very low (3). However, FVU metric bug casts slight doubt on Random model health reporting; NMSE logs confirm training occurred but stats are inconsistent."
+  }
+ ],
+ "rerun_instructions": "1. Fix `sae.stats()` or serialization to correctly report non-zero FVU for random models when reconstruction error exists (check division by variance). 2. Normalize context_chemistry counts by number of active latents in the classification table before comparing A3 vs Random, OR explicitly document that filtering dead latents is applied consistently and explain why it doesn't bias the conclusion. 3. Investigate Legacy mode inversion: check if `C_all` or token alignment introduces noise for random weights specifically."
+}

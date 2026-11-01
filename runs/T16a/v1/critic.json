@@ -1,0 +1,38 @@
+{
+ "verdict": "reject",
+ "bugs_or_flaws": [
+  "CRITICAL: NO LAYER DATA COLLECTED FOR A3 MODELS - results.json shows 'layers':{} for ALL concepts in BOTH a2 and (missing) a3 entries. The probe calls either failed silently or memoization returned empty cached data.",
+  "KEY ERROR IN PLOTTING: Figure generation fails with KeyError('a3') because the code attempts final_results[c_name]['a3'] but only 'a2' keys exist in results - A3 model probes did not produce stored layer entries",
+  "MODEL_KEY LOGIC BUG: The script sets `model_key = \"a3\" if (grasp_kind == \"a3\") else \"a2\"` correctly, BUT the probe result structure from utils.memo() is empty for a3/a3_random pairs - likely because data.get_acts(\"atoms\", kind) returned None or failed silently for A3 variants",
+  "NO LEARNED_GAIN COMPUTABLE: All concepts show Best Error=None and Learned Gain=None because layer_results dict was never populated with actual probe scores (empty {} means no layers were processed)",
+  "BUNDLE BASELINE VALUES ARE MISLEADING: Values like bundle_baseline=0.132 for ring_size exist but cannot be interpreted without corresponding model/control error values at each layer - learned_gain = control_error/model_error requires both to be numeric"
+ ],
+ "claim_assessments": [
+  {
+   "claim": "\"GRASP-A3 aromaticity and hybridization are confirmed as INPUT fields\"",
+   "status": "supported",
+   "reason": "is_input shows {'aromatic':true,'hybridization':true} which correctly indicates these properties ARE determined by the bundle input (100% agreement between bundle.aromatic/hybridization and df columns)"
+  },
+  {
+   "claim": "\"NO LAYER DATA WAS COLLECTED FOR ANY CONCEPT IN EITHER A3 OR A2\"",
+   "status": "supported",
+   "reason": "results.json shows 'layers':{} for ALL concepts in BOTH model pairs. Printed output confirms Best Error=None, Learned Gain=None across all 7 concepts"
+  },
+  {
+   "claim": "\"BUNDLE BASELINE VALUES EXIST BUT CANNOT BE INTERPRETED WITHOUT PROBE SCORES\"",
+   "status": "supported",
+   "reason": "bundle_baseline values exist (0.132, 0.947, etc.) but without model/control scores at each layer, learned_gain cannot be calculated - these baselines alone indicate nothing about learning"
+  },
+  {
+   "claim": "\"A3 RANDOM CONTROL CANNOT BE COMPARED TO A2 OR ANYTHING ELSE\"",
+   "status": "supported",
+   "reason": "No 'a3' or 'a3_random' layer data exists in results - control scores are missing entirely, making any comparison impossible"
+  },
+  {
+   "claim": "\"LEARNED GAIN CANNOT BE CALCULATED\"",
+   "status": "supported",
+   "reason": "learned_gain = None for ALL concepts because best_model_err is NaN/None (no layer data to compute error from). Cannot infer any learning without numeric errors"
+  }
+ ],
+ "rerun_instructions": "1. Verify data.get_acts(\"atoms\", \"a3\") and data.get_acts(\"atoms\", \"a3_random\") actually return valid act dictionaries with layers [0,2,4,6,8,10,12] - print len(acts) for each before probing\n2. Clear utils.memo cache (delete cached files or add force=True parameter) to ensure fresh probe runs are executed\n3. Add debug prints inside _get_concept_data() showing r.get(\"layers\", {}) content after probes.probe_atoms returns, verify non-empty dict is returned with layer keys as strings '0','2',...'12'\n4. Fix plotting section to handle missing a3 data gracefully OR ensure A3 models are loaded correctly before attempting plot\n5. After fixing: re-run and confirm results.json shows layers dict populated for BOTH \"a3\" AND \"a2\" entries in every concept, with numeric model/control values at each layer"
+}

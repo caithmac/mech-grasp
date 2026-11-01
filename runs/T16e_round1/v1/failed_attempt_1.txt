@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16e\v1\script.py", line 66, in <module>
+    v_O_cls = utils.to_numpy(O.cls[L])
+              ^^^^^^^^^^^^^^
+AttributeError: module 'mechlib.utils' has no attribute 'to_numpy'

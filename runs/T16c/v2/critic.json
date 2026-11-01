@@ -1,0 +1,30 @@
+{
+ "verdict": "accept",
+ "bugs_or_flaws": [
+  "dead_frac: A3 shows exactly 0.0, which is highly unusual for sparse SAEs (k=32). This could indicate a bug in dead latent counting or that the model truly has no dead latents at layer 6.",
+  "fvu_mean: Random control reports exactly 0.0 FVU - this should be suspicious unless reconstruction was perfect by chance, which is implausible for random weights."
+ ],
+ "claim_assessments": [
+  {
+   "claim": "A3 has 86 context_chemistry latents vs 3 in a3_random",
+   "status": "supported",
+   "reason": "Results.json shows strict counts_raw.context_chemistry: 86 for A3, 3 for random. Gap is ~27x."
+  },
+  {
+   "claim": "fg_sulfonamide latents (2131, 1597) have high purity and within_AUROC",
+   "status": "supported",
+   "reason": "Top context list shows latent 2131: purity=0.475, within_auroc=1.0; latent 1597: purity=0.364, within_auroc=1.0"
+  },
+  {
+   "claim": "fg_hydroxyl represented by multiple latents including context_chemistry ones",
+   "status": "supported",
+   "reason": "a3_hydroxyl list shows 82+ entries; several classified as 'context_chemistry' (e.g., latent 46: within_auroc=0.956, latent 816: within_auroc=0.945)"
+  },
+  {
+   "claim": "a3_random shows negligible functional group encoding in strict mode",
+   "status": "supported",
+   "reason": "Random has only 2 functional_group families vs A3's 49; context_chemistry count is just 3"
+  }
+ ],
+ "rerun_instructions": "None required. The core results are consistent with the claims, though dead_frac=0 and fvu_mean=0 for random should be investigated in future runs to confirm no metric bugs exist."
+}

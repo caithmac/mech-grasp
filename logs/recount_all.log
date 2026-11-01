@@ -1,0 +1,2 @@
+a3 {'token|all|value': 94, 'token|all|binary': 65, 'token|noinput|value': 87, 'token|noinput|binary': 60, 'bundle|all|value': 86, 'bundle|all|binary': 55, 'bundle|noinput|value': 86, 'bundle|noinput|binary': 55} 260s
+a3_random {'token|all|value': 256, 'token|all|binary': 219, 'token|noinput|value': 221, 'token|noinput|binary': 189, 'bundle|all|value': 3, 'bundle|all|binary': 0, 'bundle|noinput|value': 3, 'bundle|noinput|binary': 0} 44s

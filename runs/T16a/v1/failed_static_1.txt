@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:40:61: undefined name 'metric_type'

@@ -1,0 +1,11 @@
+Figure generation failed: 'a3'
+
+=== T16a Summary ===
+  ring_size - a2: Best Error=None, Learned Gain=None
+  conjugated - a2: Best Error=None, Learned Gain=None
+  crippen_logp_contrib - a2: Best Error=None, Learned Gain=None
+  crippen_mr_contrib - a2: Best Error=None, Learned Gain=None
+  o_neighbor_C - a2: Best Error=None, Learned Gain=None
+  halogen_nbr_C - a2: Best Error=None, Learned Gain=None
+  hydroxyl_C - a2: Best Error=None, Learned Gain=None
+Script completed.

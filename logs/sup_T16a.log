@@ -1,0 +1,44 @@
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+a3 ring_size balanced_acc bundle_err=0.776 best L6 err=0.165 ctrl=0.689 gain=4.18
+a3 conjugated auroc bundle_err=0.243 best L6 err=0.001 ctrl=0.044 gain=63.11
+a3 crippen_logp_contrib r2 bundle_err=0.179 best L2 err=0.031 ctrl=0.168 gain=5.42
+a3 crippen_mr_contrib r2 bundle_err=0.045 best L2 err=0.018 ctrl=0.040 gain=2.23
+a3 has_O_neighbor auroc bundle_err=0.171 best L2 err=0.000 ctrl=0.079 gain=4046.98
+a3 has_halogen_neighbor auroc bundle_err=0.233 best L4 err=0.000 ctrl=0.065 gain=148489.87
+a3 hydroxyl_C auroc bundle_err=0.297 best L2 err=0.000 ctrl=0.080 gain=54508.79
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+C:\Users\ss864\AppData\Local\miniconda3\Lib\site-packages\sklearn\metrics\_classification.py:2776: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+a2 ring_size balanced_acc bundle_err=0.776 best L6 err=0.194 ctrl=0.673 gain=3.47
+a2 conjugated auroc bundle_err=0.243 best L4 err=0.002 ctrl=0.045 gain=22.58
+a2 crippen_logp_contrib r2 bundle_err=0.179 best L2 err=0.066 ctrl=0.183 gain=2.79
+a2 crippen_mr_contrib r2 bundle_err=0.045 best L2 err=0.041 ctrl=0.044 gain=1.05
+a2 has_O_neighbor auroc bundle_err=0.171 best L2 err=0.000 ctrl=0.071 gain=6756.71
+a2 has_halogen_neighbor auroc bundle_err=0.233 best L2 err=0.000 ctrl=0.065 gain=18079.45
+a2 hydroxyl_C auroc bundle_err=0.297 best L2 err=0.000 ctrl=0.026 gain=25652522.58

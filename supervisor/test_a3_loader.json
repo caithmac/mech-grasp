@@ -1,0 +1,34 @@
+{
+ "legacy_max_abs_diff": {
+  "pretrained": {
+   "atom0": 0.0,
+   "atom6": 0.0,
+   "atom12": 0.0,
+   "cls12": 0.0
+  },
+  "a1": {
+   "atom0": 0.0,
+   "atom6": 0.0,
+   "atom12": 0.0,
+   "cls12": 0.0
+  },
+  "a2": {
+   "atom0": 0.0,
+   "atom6": 0.0,
+   "atom12": 0.0,
+   "cls12": 0.0
+  }
+ },
+ "a3_run_vs_encode_max_abs": 1.8551945686340332e-06,
+ "a3_enantiomer_rel_l2": 0.02647083692704671,
+ "a3_EZ_rel_l2": 0.02706158494130456,
+ "a3_release_reference": {
+  "enantiomer": 0.02647089585661888,
+  "ez": 0.034076862037181854
+ },
+ "a3_finite": true,
+ "a3_random_finite": true,
+ "a3_token_override_raises": true,
+ "a3_vs_a2_layer0_mean_abs": 0.37922270326401586,
+ "grasp_pkg": "C:\\Users\\ss864\\a3_wheel\\ex\\grasp\\__init__.py"
+}

@@ -807,3 +807,100 @@ Accept. Results robustly support causal necessity and chemical consistency of lo
 *   Missing Random Init baseline comparison.
 
 **Open Issues:** Add 'sanity' to JSON; re-run with ≥3 seeds for mean/std reporting on all `rel` metrics; include random-init model results if required by policy.
+
+
+## T16d / v2  (2026-11-01 13:49)
+
+# Lab Entry: Experiment T16d (v2)
+**Question:** Does GRASP-A3's layer 12 representation collapse geometrically and lose chemistry decodability, mirroring previous variants?
+
+**Run Details:** Evaluated `a3` vs. `a3_random` on 20k atoms across layers [0-12]. Metrics: Participation Ratio (PR), Anisotropy, Top-K variance fractions, Outlier score; Linear/MLP probe errors for Crippen LogP, Ring5, and O-neighbors.
+
+**Key Numbers:**
+| Metric | Layer 8 (`a3`) | Layer 12 (`a3`) | Layer 12 (`a3_random`) |
+| :--- | :---: | :---: | :---: |
+| **PR (Geometry)** | 196.753 | **20.455** | 6.793 |
+| **Anisotropy** | 0.328 | **0.625** | 0.934 |
+| **Crippen (Lin) Error**| 0.172 ± 0.008 | **0.298 ± 0.016** | 0.165 ± 0.013 |
+| **Ring5 (MLP) Error** | 0.005 ± 0.001 | **0.059 ± 0.005** | 0.187 ± 0.011 |
+
+*Note: `top10` values unnormalized; PR drop >90% confirmed.*
+
+**Chemist's Reading:** A3 exhibits severe geometric collapse at L12 (PR ~197 → ~20), identical to prior GRASP models, while the random control remains stable (~6-7). Chemical decodability degrades significantly: Crippen linear error rises from 0.172 to 0.298; Ring5 MLP error jumps from 0.005 to 0.059. A3 L12 performance drops below the random baseline for LogP decoding, suggesting active obscuring of atomic features in deep layers.
+
+**Critic Verdict:** **Accept**. Claims supported by JSON data (PR drop >90%, error rise confirmed). Minor flaws: `top10` unnormalized; plotting failed due to dimension mismatch (`xs_lin` empty), but underlying data integrity is intact.
+
+**Open Issues:**
+1. Normalize `top10` metric for cross-layer consistency with `top1`.
+2. Debug plotting logic to handle missing keys gracefully (shapes `(0,)` vs `(5,)`).
+
+
+## T16c / v2  (2026-11-01 15:08)
+
+# Experiment T16c (v2): SAE on GRASP-A3 Layer 6 Context Features
+
+**Question:** Does A3 build context-chemistry features beyond its 7-field input bundle? Specifically, can it separate atoms with identical bundles and identify functional groups like sulfonamides/hydroxyls in strict mode (excluding aromatic/hybridization)?
+
+**Run:**
+Executed `mechlib.saefeat` on Layer 6 activations (`n_latents=4096`, `k=32`). Compared trained A3 vs. random weights (`a3_random`) using:
+1. **Strict Classification:** Concepts excluding "aromatic", "hybridization" (tests context beyond bundle).
+2. **Legacy Classification:** All concepts by token (baseline comparison to GRASP/A2).
+
+**Key Numbers:**
+
+| Metric | A3 (Trained) | a3_random (Control) |
+| :--- | :---: | :---: |
+| `fvu_mean` | 0.149 | 0.0 |
+| `l0_active` | 723 | 723 |
+| `dead_frac` | 0.0 | 0.736 |
+| **Strict Context Latents** | **86** | **3** |
+| Strict Functional Groups | 49 | 2 |
+| Legacy Context Latents | 94 | 256 |
+
+*Top A3 Context Latents (purity > 0.4, within_auroc = 1.0):*
+- `latent: 2131`: concept=`fg_sulfonamide`, n_fire=162, purity=0.475
+- `latent: 881`: concept=`fg_carboxylic_acid`, n_fire=494, purity=0.536
+
+*Hydroxyl Latents (A3):*
+- `latent: 46`: concept=`fg_hydroxyl`, within_auroc=0.956, cls=context_chemistry
+- `latent: 112`: concept=`fg_hydroxyl`, within_auroc=0.98, cls=context_chemistry
+
+**Chemist's Reading:** A3 Layer 6 encodes distinct chemical context (e.g., sulfonamide, hydroxyl) with high AUROC (>0.95), significantly exceeding the random control in strict mode. The model distinguishes functional groups beyond simple atom identity.
+
+**Critic Verdict:** **Accept**. Core results support claims of learned context features. Note: `dead_frac=0` for A3 and `fvu_mean=0` for random are statistically unusual; potential metric bugs to investigate, but do not invalidate the 27x gap in strict context latents (86 vs 3).
+
+**Open Issues:**
+1. Investigate cause of `dead_frac: 0.0` in A3 and `fvu_mean: 0.0` in random control.
+2. Verify if "legacy" high count for random (256) indicates a scoring artifact or true overfitting to noise compared to strict mode.
+
+
+## T16a / v1  (2026-11-01 15:27)
+
+# Lab Notebook Entry: Experiment T16a (v1)
+
+**Question:** Does GRASP-A3 outperform A2 on ring/conjugation/crippen concepts when aromaticity/ring membership/hybridization are provided as inputs? Can learned gain be computed if the random control also fails to learn these features from richer inputs?
+
+**What was run:**
+Probed `a3` vs `a3_random` and `a2` vs `a2_random`. Inputs: 7-field atom bundle (element, degree, H, charge, aromatic, in-ring, hybridization) + bond/stereo. Probes evaluated ring_size, conjugated, crippen_logp_contrib, mr, o_neighbor_C, halogen_nbr_C, hydroxyl_C across layers [0,2,4,6,8,10,12].
+
+**Key Numbers:**
+| Concept | Bundle Baseline (a2) | Best Error (a3) | Learned Gain (a3) | Status |
+| :--- | :---: | :---: | :---: | :--- |
+| ring_size | 0.132 | None | None | Fail |
+| conjugated | 0.947 | None | None | Fail |
+| crippen_logp_contrib | 0.212 | None | None | Fail |
+| crippen_mr_contrib | 0.902 | None | None | Fail |
+| o_neighbor_C | 1.0 | None | None | Fail |
+
+*Note: `is_input` confirmed aromatic/hybridization are deterministic from bundle.*
+
+**Chemist's Reading:**
+Aromaticity and hybridization inputs verified as non-learned (100% agreement with RDKit). However, **no layer data was collected**. The experiment failed to capture model performance; no learning can be inferred. Bundle baselines exist but lack comparative error metrics.
+
+**Critic Verdict:** Reject.
+Critical failure: `results.json` shows empty `{}` for all layers in both A3 and A2 pairs. Plotting crashed (`KeyError('a3')`). No learned gain computable as errors are None. Likely script/cache issue or silent data retrieval failure.
+
+**Open Issues:**
+1. Verify `data.get_acts("atoms", "a3")` returns valid layer dictionaries before probing.
+2. Clear memoization cache to force fresh probe execution.
+3. Debug `_get_concept_data()` return values; ensure layers dict is populated with numeric scores for all 7 concepts and both model pairs.

@@ -28,6 +28,8 @@ You write ONE Python script. Rules:
 | `"a1_random"` | A1 architecture, random weights (control for a1) |
 | `"a2"` | GRASP-A2: A1 + explicit BOND inputs (single/double/triple/AROMATIC bond type, as per-head attention biases) + atom/bond STEREO inputs (R/S, E/Z embeddings). Aromaticity of bonds is therefore GIVEN to A2, not inferred |
 | `"a2_random"` | A2 architecture, random weights (control for a2; still receives the bond/stereo inputs) |
+| `"a3"` | GRASP-A3: A2 (bond + stereo inputs, no absolute positions) but the opaque atom token is REPLACED by 7 categorical atom fields given as input: element, degree, total H, formal charge, AROMATIC, IN-RING, HYBRIDIZATION. So aromaticity, ring membership and hybridization are GIVEN to A3. Its input id is the 7-field bundle: use `data.get_atom_fields(name)["bundle"]` where other models use `A.tokens`. `token_override` raises on A3 |
+| `"a3_random"` | A3 architecture, random weights (control for a3; still receives the 7 fields + bond/stereo inputs) |
 Cached layers: pretrained/random on "atoms"/"mols": all 0..12. Everything else: `data.cached_layers(name, kind)`
 = [0, 2, 4, 6, 8, 10, 12]. Indexing a missing layer raises an IndexError listing available layers.
 
@@ -38,6 +40,7 @@ Cached layers: pretrained/random on "atoms"/"mols": all 0..12. Everything else: 
 | `A.atom[l]` | (N_atoms_total, 768) | ATOM (atoms set only; None for "mols" set) |
 | `A.mol_index`, `A.atom_index`, `A.tokens` | (N_atoms_total,) | ATOM |
 | `data.get_atom_labels(...)` rows | N_atoms_total | ATOM (same order as A.atom) |
+| `data.get_atom_fields(...)` rows | N_atoms_total | ATOM (same order as A.atom): A3 input fields + "bundle" |
 | `data.get_mol_labels(...)` rows, `get_smiles`, `get_scaffolds` | N_mols | MOLECULE |
 | `model.run(enc, smiles).cls[12]` | (len(smiles), 768) | MOLECULE, same order as `smiles` |
 | `A.attn[l][m]` | (12, n_m+1, n_m+1) | heads x query x key for molecule m |
@@ -163,6 +166,12 @@ r = probes.probe_atoms(df_atoms["aromatic"].values, A, R, scaf, layers=[0, 6, 12
 # HARD version (preferred for classification): only atoms whose token occurs with >1 label value,
 # so the token baseline is near chance. On all atoms AUROC saturates (~0.99) and hides differences.
 r = probes.probe_atoms(df_atoms["aromatic"].values, A, R, scaf, layers=[0, 3, 6, 12], ambiguous_only=True)
+# A3 (and any cross-model comparison that includes A3): the INPUT id is the 7-field bundle, not the hashed token.
+# Pass it as tokens= : it is used for the input-only baseline ("token" in the result) and for ambiguous_only.
+bundle = data.get_atom_fields("atoms")["bundle"].values
+r = probes.probe_atoms(df_atoms["conjugated"].values, A3, R3, scaf, layers=[0, 6, 12], ambiguous_only=True, tokens=bundle)
+# Concepts that ARE A3 input fields (aromatic, hybridization, in-ring) have no ambiguous atoms under the bundle:
+# do not probe them with ambiguous_only for A3 - report them as "input".
 # Report ERRORS (1 - score) when scores are near 1: 0.999 vs 0.990 is a 10x error difference.
 # r = {"metric": "auroc", "token": {"mean","std"},             # best from input token alone
 #      "layers": {"0": {"grasp": {"mean","std"}, "random": {...}}, ...}}
@@ -207,3 +216,12 @@ for col in ["aromatic", "conjugated"]:
 json.dump(results, open(OUT / "results.json", "w"), indent=1)
 print({k: v["layers"]["12"]["grasp"]["mean"] for k, v in results.items()})
 ```
+
+## mechlib.saefeat - classify SAE latents (context chemistry / input / mixed). TESTED; use it, do not reimplement.
+```python
+from mechlib import saefeat
+C = saefeat.concept_matrix(df_atoms, exclude=("aromatic", "hybridization"))   # bool DataFrame of concepts
+tab = saefeat.classify(sp.csc_matrix(Z), grp, C)      # grp = A.tokens (GRASP/A1/A2) or get_atom_fields(...)["bundle"] (A3)
+counts, families = saefeat.summary(tab)               # dicts
+```
+One row per latent firing on >= 20 atoms: latent, n_fire, group, purity, concept, within_auroc, cls, family.

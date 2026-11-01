@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16e\v1\script.py", line 121, in <module>
+    sanity_checks[f"a1_rel_enant_{6}"] = float(s_rel["cls"][6]["enant"]) < 1e-4
+                                               ~~~~~~~~~~~~^^^
+KeyError: 6

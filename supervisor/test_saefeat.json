@@ -1,0 +1,55 @@
+{
+ "a2_by_token_all": {
+  "counts": {
+   "context_chemistry": 72,
+   "input": 188,
+   "mixed": 3836
+  },
+  "families": {
+   "functional_group": 38,
+   "neighbour": 22,
+   "bond_derived": 8,
+   "ring": 4
+  },
+  "n_classified": 4096
+ },
+ "a2_by_bundle_all": {
+  "counts": {
+   "context_chemistry": 66,
+   "input": 168,
+   "mixed": 3862
+  },
+  "families": {
+   "functional_group": 40,
+   "neighbour": 21,
+   "ring": 5
+  },
+  "n_classified": 4096
+ },
+ "a2_by_bundle_noinput": {
+  "counts": {
+   "context_chemistry": 66,
+   "input": 168,
+   "mixed": 3862
+  },
+  "families": {
+   "functional_group": 40,
+   "neighbour": 21,
+   "ring": 5
+  },
+  "n_classified": 4096
+ },
+ "T15c_reference": {
+  "counts": {
+   "context_chemistry": 178,
+   "token": 1753,
+   "mixed": 2165
+  },
+  "families": {
+   "functional_group": 50,
+   "bond_derived": 84,
+   "neighbour": 21,
+   "ring": 23
+  }
+ }
+}

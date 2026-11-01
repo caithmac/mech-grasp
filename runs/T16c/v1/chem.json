@@ -1,0 +1,37 @@
+{
+ "summary": "A3 Layer 6 encodes functional group context beyond basic atom properties.",
+ "claims": [
+  {
+   "claim": "GRASP-A3 layer 6 learns specific chemical motifs (e.g., sulfonamides, carboxylic acids) that are not reducible to the 7-field input bundle alone.",
+   "evidence": "Trained A3 has 86 'context_chemistry' latents in strict classification vs only 3 for a3_random control. Top latent 2131 (fg_sulfonamide) achieves within_auroc=1.0 with purity=0.475.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[N,S](=O)(=O)[C]` for sulfonamides; check correlation between latent 2131 activation and subgraph presence in molecules where atom bundle properties (element, degree) are held constant.",
+   "prediction": "Latent 2131 should fire significantly more often when the specific connectivity of a sulfone/sulfonamide group is present compared to random O/N/S atoms with similar degrees but different bonding patterns."
+  },
+  {
+   "claim": "Hydroxyl representation in A3 layer 6 distinguishes between simple atom presence and chemical context, as evidenced by 'context_chemistry' classified latents.",
+   "evidence": "In `a3_hydroxyl` list, latent 46 is classified as 'context_chemistry' (purity=0.65, within_auroc=0.956), whereas latent 1803 is 'input'.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[OX2H]` for hydroxyl oxygen; compare activation of latent 46 vs latent 1803 on phenols (aromatic OH) vs aliphatic alcohols.",
+   "prediction": "Latent 46 should show higher specificity to the chemical environment (e.g. distinguishing alcohol from acid or amide neighbors), while 'input' latents like 1803 may fire simply based on O-H presence regardless of neighbor connectivity."
+  },
+  {
+   "claim": "The number of context-chemistry features in A3 layer 6 is comparable to previous GRASP/A2 baselines, indicating stable representation capacity.",
+   "evidence": "A3 legacy count = 94; Reference supervisor recount for GRASP/A2 Layer 6 was ~81 (legacy) / 72. Strict count here is 86 vs Random's 3.",
+   "kind": "shows",
+   "test": "Compare `a3` strict context_chemistry counts against a fresh run of the same SAE training on A2 tokens using identical mechlib parameters.",
+   "prediction": "A3 legacy/strict counts should remain within the range [70, 100] if architecture and task complexity are consistent."
+  },
+  {
+   "claim": "Random weights do not spontaneously learn chemical context features from atom statistics alone in this configuration.",
+   "evidence": "`a3_random` strict 'context_chemistry' count = 3. `dead_frac`=0.736 (1083 alive) vs A3's 4096 alive with fvu=0.149.",
+   "kind": "shows",
+   "test": "Run SAE training on shuffled atom labels or random weights for the same dataset and measure 'context_chemistry' classification accuracy against chemical ground truth.",
+   "prediction": "Random model latents should show near-zero AUROC (e.g., <0.5) when tested against specific functional group concepts, unlike A3's 1.0 scores."
+  }
+ ],
+ "trivial_explanations": [
+  "Some 'input' classified hydroxyl latents may simply encode the presence of an oxygen atom with a hydrogen neighbor detectable in the bundle (element=O, degree>=2), which is trivially available without context learning.",
+  "The high AUROC for functional groups might partially reflect that these atoms have distinct degrees or hybridization states compared to non-functionalized carbons."
+ ]
+}

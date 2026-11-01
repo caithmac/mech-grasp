@@ -1,0 +1,37 @@
+{
+ "summary": "GRASP-A3 exhibits geometric collapse at Layer 12 similar to previous GRASP variants, accompanied by degradation in atom-level physicochemical decodability.",
+ "claims": [
+  {
+   "claim": "A3 layer representations undergo a geometric dimensionality collapse at Layer 12 (PR drops from ~197 to ~20), whereas the `a3_random` control maintains stable low-dimension geometry (~6-7).",
+   "evidence": "A3 PR: L8=196.75, L12=20.45. Random PR: L8=6.40, L12=6.79.",
+   "kind": "shows",
+   "test": "Label column `layer_index`. SMARTS pattern `[C]` (all carbons). Prediction: A3 atom embeddings for carbon show reduced variance in latent space at L12 compared to L8; Random shows no layer-dependent trend.",
+   "prediction": "If true, PCA on Layer 12 C-atom vectors yields ~5x fewer significant eigenvalues than Layer 8. Control model retains consistent eigenvalue distribution across layers."
+  },
+  {
+   "claim": "Linear decodability of atomic LogP contributions degrades at Layer 12 (Error rises from mean=0.067 to 0.298), indicating loss of additive physicochemical signatures.",
+   "evidence": "A3 Crippen Linear Error: L4=0.067, L12=0.298. Random Stable at ~0.165-0.169.",
+   "kind": "shows",
+   "test": "Label column `crippen_logp_contrib`. SMARTS pattern `[!#0]` (all non-hydrogen atoms). Prediction: Linear regression R^2 between L12 vectors and Crippen values drops significantly compared to L8.",
+   "prediction": "If true, the slope of LogP contribution vs. vector projection becomes unstable at L12 for heteroatoms; Random model shows no layer-dependent change in this correlation."
+  },
+  {
+   "claim": "Ring topology information (5-membered rings) persists but degrades similarly to LogP features (Error rises from 0.003 to 0.054), suggesting local structural distinctiveness is obscured.",
+   "evidence": "A3 Ring5 Linear Error: L4=0.003, L12=0.054. MLP error also rises (L8=0.005 -> L12=0.059).",
+   "kind": "shows",
+   "test": "Label column `min_ring_size == 5`. SMARTS pattern `[nH]` or specific aromatic patterns like `c1cc[nH]c1`. Prediction: Classification accuracy for identifying ring size drops at L12.",
+   "prediction": "If true, the model fails to distinguish 5-membered rings from others in Layer 12 embeddings more than in earlier layers; Control shows no such degradation."
+  },
+  {
+   "claim": "The collapse is not a trivial artifact of input size or random noise; trained A3 degrades below Random baseline performance for LogP decoding at L12.",
+   "evidence": "A3 Crippen Error@L12=0.298 > Random~0.165. PR Drop (197->20) absent in Control (~6).",
+   "kind": "shows",
+   "test": "Label column `model_kind` ('a3' vs 'a3_random'). Prediction: A3 L12 LogP error is statistically higher than Random L12; PR variance fraction concentration (top1) increases at L12 for A3 but not Control.",
+   "prediction": "If true, the trained model actively obscures atomic property information in deep layers to optimize global task performance, unlike random weights which remain constant."
+  }
+ ],
+ "trivial_explanations": [
+  "The `a3_random` geometry metrics (PR ~6) are stable because untrained weights do not learn chemical structure-property relationships; thus no collapse occurs.",
+  "Layer index is fixed in the experiment, so 'layer' effects cannot be trivially explained by molecule size distribution changes across layers."
+ ]
+}

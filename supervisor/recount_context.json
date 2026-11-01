@@ -1,0 +1,38 @@
+{
+ "pretrained": {
+  "dense_n_latents_ge20": 4096,
+  "dense_ge_0.9": 81,
+  "saefeat": [
+   {
+    "context_chemistry": 81,
+    "input": 1332,
+    "mixed": 2683
+   },
+   {
+    "functional_group": 41,
+    "neighbour": 28,
+    "bond_derived": 7,
+    "ring": 5
+   }
+  ],
+  "saefeat_n": 4096
+ },
+ "a2": {
+  "dense_n_latents_ge20": 4096,
+  "dense_ge_0.9": 72,
+  "saefeat": [
+   {
+    "context_chemistry": 72,
+    "input": 188,
+    "mixed": 3836
+   },
+   {
+    "functional_group": 38,
+    "neighbour": 22,
+    "bond_derived": 8,
+    "ring": 4
+   }
+  ],
+  "saefeat_n": 4096
+ }
+}

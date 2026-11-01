@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16e\v1\script.py", line 29, in <module>
+    Dm.GetAtomWithIdx(idx_first).InvertChirality()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Boost.Python.ArgumentError: Python argument types in
+    Mol.GetAtomWithIdx(Mol, str)
+did not match C++ signature:
+    GetAtomWithIdx(class RDKit::ROMol {lvalue} self, unsigned int idx)

@@ -168,6 +168,27 @@ def get_atom_labels(name: str = "atoms") -> pd.DataFrame:
     return df
 
 
+def get_atom_fields(name: str = "atoms") -> pd.DataFrame:
+    """GRASP-A3 input schema per atom (rows aligned with get_acts(name).atom): the 7 categorical fields A3 is GIVEN
+    (element, degree, hydrogens, formal_charge, aromatic, ring, hybridization; schema indices, as the model sees them)
+    plus 'bundle' = integer id of the whole 7-tuple. For A3, 'bundle' plays the role the hashed token plays for
+    GRASP/A1/A2: atoms with the same bundle are indistinguishable at the input. It is finer than the token
+    (adds aromaticity and hybridization)."""
+    path = _cache_path(f"{name}_atom_fields.pkl")
+    if path.exists():
+        return pd.read_pickle(path)
+    from . import model  # noqa: F401  (puts the A3 loader on sys.path)
+    from rdkit import Chem
+    from mole.training.data.atom_features import FIELDS, extract_atom_features
+    rows = [extract_atom_features(Chem.MolFromSmiles(s))[1:] for s in get_smiles(name)]
+    F = np.concatenate(rows)
+    df = pd.DataFrame(F, columns=list(FIELDS))
+    _, df["bundle"] = np.unique(F, axis=0, return_inverse=True)
+    df["bundle"] = df["bundle"].astype(np.int32)
+    df.to_pickle(path)
+    return df
+
+
 def get_mol_labels(name: str = "mols") -> pd.DataFrame:
     """Cached labels.mol_labels(get_smiles(name)); rows aligned with molecules."""
     path = _cache_path(f"{name}_mol_labels.pkl")

@@ -1,0 +1,20 @@
+Error probing pair ('a3', 'a3_random'), concept ring_size: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a2', 'a2_random'), concept ring_size: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a3', 'a3_random'), concept conjugated: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a2', 'a2_random'), concept conjugated: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a3', 'a3_random'), concept crippen_logp_contrib: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a2', 'a2_random'), concept crippen_logp_contrib: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a3', 'a3_random'), concept crippen_mr_contrib: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a2', 'a2_random'), concept crippen_mr_contrib: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a3', 'a3_random'), concept o_neighbor_C: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a2', 'a2_random'), concept o_neighbor_C: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a3', 'a3_random'), concept halogen_nbr_C: probe_atoms() got an unexpected keyword argument 'metric'
+Error probing pair ('a2', 'a2_random'), concept halogen_nbr_C: probe_atoms() got an unexpected keyword argument 'metric'
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16a\v1\script.py", line 239, in <module>
+    if c_name == "hydroxyl_C" and np.sum((df.tok_element=="C") & df.fg_hydrohilo.values) < 30: 
+                                                                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\AppData\Local\miniconda3\envs\mech-grasp\Lib\site-packages\pandas\core\generic.py", line 6321, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'fg_hydrohilo'. Did you mean: 'fg_hydroxyl'?

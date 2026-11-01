@@ -1,0 +1,20 @@
+{
+ "atoms_pretrained_L6": {
+  "all|0.9": 94,
+  "all|0.95": 53,
+  "no_hyb|0.9": 93,
+  "no_hyb|0.95": 53
+ },
+ "atoms_random_L6": {
+  "all|0.9": 0,
+  "all|0.95": 0,
+  "no_hyb|0.9": 0,
+  "no_hyb|0.95": 0
+ },
+ "mols_pretrained_L6": {
+  "all|0.9": 81,
+  "all|0.95": 52,
+  "no_hyb|0.9": 77,
+  "no_hyb|0.95": 50
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "summary": "GRASP A3 Layer 6 encodes distinct chemical context features beyond the atom bundle, specifically identifying sulfonamides and hydroxyls with high AUROC (0.95\u20131.0), whereas a3_random shows negligible functional group encoding in strict mode.",
+ "claims": [
+  {
+   "claim": "A3 layer 6 latent space contains at least 86 latents classified as 'context_chemistry' under strict conditions, significantly exceeding the random control's count of 3.",
+   "evidence": "\"strict\":{\"counts_raw\":{\"context_chemistry\":86...}}\" for a3 vs \"a3_random\":{\"stats\":...,\"strict\":{\"counts_raw\":{\"context_chemistry\":3...}}\"",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `C(=O)N` (amide/sulfonamide context). Prediction: Latents 2131, 1597 fire significantly more often on molecules containing sulfone groups than random baseline.",
+   "prediction": "Latent activation counts for A3 > Random; AUROC > 0.98"
+  },
+  {
+   "claim": "The model represents 'fg_sulfonamide' as a distinct context feature (latent IDs 2131, 1597) with high purity and perfect within-AUROC.",
+   "evidence": "`a3_top_context`: latent 2131 (`purity:0.475`, `within_auroc:1.0`) and 1597 (`purity:0.364`, `within_auroc:1.0`).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[NX2][SX4](=[O])(=[O])` (sulfonamide). Prediction: Latent 2131 fires on sulfonamides but not simple amides.",
+   "prediction": "Latent activation correlates with `S(=O)(=O)N` presence; non-sulfonamide amines show low fire counts."
+  },
+  {
+   "claim": "'fg_hydroxyl' is represented by multiple fragmented latents (e.g., 321, 46), some classified as 'context_chemistry', indicating the model distinguishes hydroxyls from other oxygenated groups.",
+   "evidence": "`a3_hydroxyl`: latent 46 (`purity:0.65`, `within_auroc:0.956`) and 816 (`purity:0.882`).",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[OX2H]` (hydroxyl). Prediction: Latent 46 fires on aliphatic/aromatic hydroxyls; non-hydroxyl oxygens show low activation.",
+   "prediction": "Latent fire counts correlate with `O-H` presence, not just oxygen atoms."
+  },
+  {
+   "claim": "A3_random does not learn functional group context features (only 'bond_derived' or 'input'), confirming A3's capacity is data-dependent rather than trivial size effects.",
+   "evidence": "`a3_random`: strict families show only 2 `functional_group`, whereas a3 has 49. Random top latents are mostly mixed/bond derived.",
+   "kind": "shows",
+   "test": "RDKit SMARTS: `[OX1]` (carbonyl). Prediction: A3 random latent fire counts do not correlate with carbonyls; A3 does.",
+   "prediction": "A3_random AUROC for functional groups < 0.6 vs A3 > 0.95."
+  }
+ ],
+ "trivial_explanations": [
+  "The input bundle includes 'element' and 'degree', so some latents may simply detect atom types (e.g., Oxygen) rather than context; however, high within-AUROC (>0.98) for specific groups like sulfonamide implies contextual binding beyond element identity.",
+  "A3 inputs exclude aromatic/hybridization in strict analysis (`C_noin`), meaning the model must infer chemical environment from other fields or latent interactions to distinguish hydroxyls."
+ ]
+}

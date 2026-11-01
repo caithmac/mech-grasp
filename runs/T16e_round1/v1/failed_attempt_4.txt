@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16e\v1\script.py", line 86, in <module>
+    results[kind]["rel"][vec_name][L] = {"enant": rel_enant, "diast": rel_diast, "other": rel_other}
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'cls'

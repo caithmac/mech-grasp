@@ -1,0 +1,1717 @@
+{
+ "pretrained": {
+  "sae": "mols_pretrained_L6",
+  "stats": {
+   "fvu": 0.07522608528271399,
+   "l0": 32.0,
+   "dead_frac": 0.0,
+   "n_alive": 4096
+  },
+  "token|all|value": {
+   "counts": {
+    "context_chemistry": 81,
+    "input": 1332,
+    "mixed": 2683
+   },
+   "families": {
+    "functional_group": 41,
+    "neighbour": 28,
+    "bond_derived": 7,
+    "ring": 5
+   }
+  },
+  "token|all|binary": {
+   "counts": {
+    "context_chemistry": 49,
+    "input": 1339,
+    "mixed": 2708
+   },
+   "families": {
+    "functional_group": 27,
+    "neighbour": 15,
+    "bond_derived": 4,
+    "ring": 3
+   }
+  },
+  "token|noinput|value": {
+   "counts": {
+    "context_chemistry": 77,
+    "input": 1332,
+    "mixed": 2687
+   },
+   "families": {
+    "functional_group": 41,
+    "neighbour": 28,
+    "ring": 5,
+    "conjugation": 3
+   }
+  },
+  "token|noinput|binary": {
+   "counts": {
+    "context_chemistry": 47,
+    "input": 1339,
+    "mixed": 2710
+   },
+   "families": {
+    "functional_group": 27,
+    "neighbour": 15,
+    "ring": 3,
+    "conjugation": 2
+   }
+  },
+  "bundle|all|value": {
+   "counts": {
+    "context_chemistry": 75,
+    "input": 1150,
+    "mixed": 2871
+   },
+   "families": {
+    "functional_group": 44,
+    "neighbour": 30,
+    "ring": 1
+   }
+  },
+  "bundle|all|binary": {
+   "counts": {
+    "context_chemistry": 46,
+    "input": 1155,
+    "mixed": 2895
+   },
+   "families": {
+    "functional_group": 29,
+    "neighbour": 16,
+    "ring": 1
+   }
+  },
+  "bundle|noinput|value": {
+   "counts": {
+    "context_chemistry": 75,
+    "input": 1150,
+    "mixed": 2871
+   },
+   "families": {
+    "functional_group": 44,
+    "neighbour": 30,
+    "ring": 1
+   }
+  },
+  "top_context_strict": [
+   {
+    "latent": 691,
+    "n_fire": 173,
+    "group": 53,
+    "purity": 0.7572254335260116,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 1.0,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1898,
+    "n_fire": 376,
+    "group": 30,
+    "purity": 0.26063829787234044,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 1.0,
+    "family": "functional_group"
+   },
+   {
+    "latent": 921,
+    "n_fire": 113,
+    "group": 4,
+    "purity": 0.5929203539823009,
+    "concept": "has_O_neighbor",
+    "within_auroc": 1.0,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3045,
+    "n_fire": 683,
+    "group": 52,
+    "purity": 0.8682284040995608,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9999989220537033,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2610,
+    "n_fire": 177,
+    "group": 11,
+    "purity": 0.9548022598870056,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9999947749464955,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2837,
+    "n_fire": 511,
+    "group": 8,
+    "purity": 0.9432485322896281,
+    "concept": "min_ring_size_3",
+    "within_auroc": 0.9999734916763864,
+    "family": "ring"
+   },
+   {
+    "latent": 1151,
+    "n_fire": 274,
+    "group": 14,
+    "purity": 0.6277372262773723,
+    "concept": "has_halogen_neighbor",
+    "within_auroc": 0.9999707858603565,
+    "family": "neighbour"
+   },
+   {
+    "latent": 845,
+    "n_fire": 256,
+    "group": 9,
+    "purity": 0.78515625,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9998606236671088,
+    "family": "functional_group"
+   },
+   {
+    "latent": 822,
+    "n_fire": 474,
+    "group": 29,
+    "purity": 0.270042194092827,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.999857437239985,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2804,
+    "n_fire": 1003,
+    "group": 2,
+    "purity": 0.9930209371884346,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9993723638665951,
+    "family": "neighbour"
+   },
+   {
+    "latent": 365,
+    "n_fire": 316,
+    "group": 50,
+    "purity": 0.9208860759493671,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9992886456908345,
+    "family": "functional_group"
+   },
+   {
+    "latent": 4047,
+    "n_fire": 173,
+    "group": 19,
+    "purity": 0.7341040462427746,
+    "concept": "fg_amide",
+    "within_auroc": 0.9983280133758929,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1535,
+    "n_fire": 289,
+    "group": 19,
+    "purity": 0.4844290657439446,
+    "concept": "fg_amide",
+    "within_auroc": 0.9974160206718345,
+    "family": "functional_group"
+   },
+   {
+    "latent": 710,
+    "n_fire": 291,
+    "group": 7,
+    "purity": 0.9140893470790378,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9972138802576076,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1727,
+    "n_fire": 316,
+    "group": 52,
+    "purity": 0.9430379746835443,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9970430569068468,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3314,
+    "n_fire": 1021,
+    "group": 2,
+    "purity": 0.960822722820764,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9961226540226469,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2765,
+    "n_fire": 204,
+    "group": 42,
+    "purity": 0.6029411764705882,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9952883885656464,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2893,
+    "n_fire": 340,
+    "group": 12,
+    "purity": 0.4676470588235294,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9952378753800795,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1744,
+    "n_fire": 474,
+    "group": 50,
+    "purity": 0.6329113924050633,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9925096693359481,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1667,
+    "n_fire": 446,
+    "group": 50,
+    "purity": 0.852017937219731,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.988859835485101,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1316,
+    "n_fire": 581,
+    "group": 55,
+    "purity": 0.5834767641996558,
+    "concept": "fg_ester",
+    "within_auroc": 0.9882325348677217,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3262,
+    "n_fire": 134,
+    "group": 25,
+    "purity": 0.5074626865671642,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9878697241608508,
+    "family": "neighbour"
+   },
+   {
+    "latent": 326,
+    "n_fire": 1080,
+    "group": 2,
+    "purity": 0.9666666666666667,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9837848336631474,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2305,
+    "n_fire": 557,
+    "group": 2,
+    "purity": 0.9497307001795332,
+    "concept": "fg_ester",
+    "within_auroc": 0.9826104316395579,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2154,
+    "n_fire": 543,
+    "group": 6,
+    "purity": 0.9079189686924494,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9823761079774375,
+    "family": "neighbour"
+   }
+  ],
+  "bundle|noinput|binary": {
+   "counts": {
+    "context_chemistry": 46,
+    "input": 1155,
+    "mixed": 2895
+   },
+   "families": {
+    "functional_group": 29,
+    "neighbour": 16,
+    "ring": 1
+   }
+  }
+ },
+ "random": {
+  "sae": "atoms_random_L6",
+  "stats": {
+   "fvu": 0.0013641322901574683,
+   "l0": 32.0,
+   "dead_frac": 0.02685546875,
+   "n_alive": 3986
+  },
+  "token|all|value": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 1924,
+    "mixed": 1549
+   },
+   "families": {}
+  },
+  "token|all|binary": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 1924,
+    "mixed": 1549
+   },
+   "families": {}
+  },
+  "token|noinput|value": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 1924,
+    "mixed": 1549
+   },
+   "families": {}
+  },
+  "token|noinput|binary": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 1924,
+    "mixed": 1549
+   },
+   "families": {}
+  },
+  "bundle|all|value": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 1641,
+    "mixed": 1832
+   },
+   "families": {}
+  },
+  "bundle|all|binary": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 1641,
+    "mixed": 1832
+   },
+   "families": {}
+  },
+  "bundle|noinput|value": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 1641,
+    "mixed": 1832
+   },
+   "families": {}
+  },
+  "top_context_strict": [],
+  "bundle|noinput|binary": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 1641,
+    "mixed": 1832
+   },
+   "families": {}
+  }
+ },
+ "a1": {
+  "sae": "mols_a1_L6",
+  "stats": {
+   "fvu": 0.17853535935739678,
+   "l0": 32.0,
+   "dead_frac": 0.0,
+   "n_alive": 4096
+  },
+  "token|all|value": {
+   "counts": {
+    "context_chemistry": 76,
+    "input": 481,
+    "mixed": 3539
+   },
+   "families": {
+    "functional_group": 44,
+    "neighbour": 23,
+    "ring": 5,
+    "bond_derived": 4
+   }
+  },
+  "token|all|binary": {
+   "counts": {
+    "context_chemistry": 51,
+    "input": 481,
+    "mixed": 3564
+   },
+   "families": {
+    "functional_group": 32,
+    "neighbour": 15,
+    "ring": 2,
+    "bond_derived": 2
+   }
+  },
+  "token|noinput|value": {
+   "counts": {
+    "context_chemistry": 75,
+    "input": 481,
+    "mixed": 3540
+   },
+   "families": {
+    "functional_group": 45,
+    "neighbour": 23,
+    "ring": 5,
+    "conjugation": 2
+   }
+  },
+  "token|noinput|binary": {
+   "counts": {
+    "context_chemistry": 50,
+    "input": 481,
+    "mixed": 3565
+   },
+   "families": {
+    "functional_group": 32,
+    "neighbour": 15,
+    "ring": 2,
+    "conjugation": 1
+   }
+  },
+  "bundle|all|value": {
+   "counts": {
+    "context_chemistry": 70,
+    "input": 415,
+    "mixed": 3611
+   },
+   "families": {
+    "functional_group": 43,
+    "neighbour": 24,
+    "ring": 3
+   }
+  },
+  "bundle|all|binary": {
+   "counts": {
+    "context_chemistry": 48,
+    "input": 415,
+    "mixed": 3633
+   },
+   "families": {
+    "functional_group": 32,
+    "neighbour": 15,
+    "ring": 1
+   }
+  },
+  "bundle|noinput|value": {
+   "counts": {
+    "context_chemistry": 70,
+    "input": 415,
+    "mixed": 3611
+   },
+   "families": {
+    "functional_group": 43,
+    "neighbour": 24,
+    "ring": 3
+   }
+  },
+  "top_context_strict": [
+   {
+    "latent": 99,
+    "n_fire": 321,
+    "group": 50,
+    "purity": 0.7694704049844237,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 1.0,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3025,
+    "n_fire": 380,
+    "group": 50,
+    "purity": 0.5815789473684211,
+    "concept": "has_N_neighbor",
+    "within_auroc": 1.0,
+    "family": "neighbour"
+   },
+   {
+    "latent": 833,
+    "n_fire": 349,
+    "group": 27,
+    "purity": 0.7621776504297995,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9999474690168221,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1767,
+    "n_fire": 421,
+    "group": 42,
+    "purity": 0.2826603325415677,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9999367568934987,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1842,
+    "n_fire": 330,
+    "group": 29,
+    "purity": 0.4696969696969697,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.999857437239985,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1017,
+    "n_fire": 413,
+    "group": 9,
+    "purity": 0.7651331719128329,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9992930429379859,
+    "family": "functional_group"
+   },
+   {
+    "latent": 520,
+    "n_fire": 273,
+    "group": 7,
+    "purity": 0.7985347985347986,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9990452549169372,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1873,
+    "n_fire": 1088,
+    "group": 2,
+    "purity": 0.9457720588235294,
+    "concept": "fg_ether",
+    "within_auroc": 0.9980079666146445,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2020,
+    "n_fire": 616,
+    "group": 42,
+    "purity": 0.44642857142857145,
+    "concept": "fg_amine_basic",
+    "within_auroc": 0.9975651403996965,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3174,
+    "n_fire": 497,
+    "group": 52,
+    "purity": 0.7464788732394366,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.997004372884302,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1688,
+    "n_fire": 308,
+    "group": 6,
+    "purity": 0.672077922077922,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9965595621810368,
+    "family": "neighbour"
+   },
+   {
+    "latent": 988,
+    "n_fire": 243,
+    "group": 11,
+    "purity": 0.8148148148148148,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9960553458567415,
+    "family": "functional_group"
+   },
+   {
+    "latent": 616,
+    "n_fire": 571,
+    "group": 52,
+    "purity": 0.7635726795096323,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9960288458429002,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1357,
+    "n_fire": 361,
+    "group": 29,
+    "purity": 0.5484764542936288,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9960045742883105,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1468,
+    "n_fire": 575,
+    "group": 9,
+    "purity": 0.8469565217391304,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9954408826048261,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1880,
+    "n_fire": 381,
+    "group": 12,
+    "purity": 0.4225721784776903,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9952972370443168,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3293,
+    "n_fire": 694,
+    "group": 52,
+    "purity": 0.4884726224783862,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9950606332309531,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3848,
+    "n_fire": 381,
+    "group": 42,
+    "purity": 0.3910761154855643,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9946559575006324,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1596,
+    "n_fire": 347,
+    "group": 59,
+    "purity": 0.6772334293948127,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9944897056966022,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1589,
+    "n_fire": 353,
+    "group": 14,
+    "purity": 0.6685552407932012,
+    "concept": "has_halogen_neighbor",
+    "within_auroc": 0.9942740286298568,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2480,
+    "n_fire": 494,
+    "group": 50,
+    "purity": 0.4048582995951417,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9934902217137875,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1735,
+    "n_fire": 518,
+    "group": 59,
+    "purity": 0.6003861003861004,
+    "concept": "min_ring_size_6",
+    "within_auroc": 0.993311770188038,
+    "family": "ring"
+   },
+   {
+    "latent": 3291,
+    "n_fire": 282,
+    "group": 19,
+    "purity": 0.475177304964539,
+    "concept": "fg_amide",
+    "within_auroc": 0.9904240766073871,
+    "family": "functional_group"
+   },
+   {
+    "latent": 350,
+    "n_fire": 711,
+    "group": 52,
+    "purity": 0.3319268635724332,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9874780348940482,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2209,
+    "n_fire": 299,
+    "group": 39,
+    "purity": 0.26421404682274247,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9873145979703357,
+    "family": "functional_group"
+   }
+  ],
+  "bundle|noinput|binary": {
+   "counts": {
+    "context_chemistry": 48,
+    "input": 415,
+    "mixed": 3633
+   },
+   "families": {
+    "functional_group": 32,
+    "neighbour": 15,
+    "ring": 1
+   }
+  }
+ },
+ "a2": {
+  "sae": "mols_a2_L6",
+  "stats": {
+   "fvu": 0.14481217323881088,
+   "l0": 32.0,
+   "dead_frac": 0.0,
+   "n_alive": 4096
+  },
+  "token|all|value": {
+   "counts": {
+    "context_chemistry": 72,
+    "input": 188,
+    "mixed": 3836
+   },
+   "families": {
+    "functional_group": 38,
+    "neighbour": 22,
+    "bond_derived": 8,
+    "ring": 4
+   }
+  },
+  "token|all|binary": {
+   "counts": {
+    "context_chemistry": 39,
+    "input": 189,
+    "mixed": 3868
+   },
+   "families": {
+    "functional_group": 27,
+    "neighbour": 9,
+    "ring": 2,
+    "bond_derived": 1
+   }
+  },
+  "token|noinput|value": {
+   "counts": {
+    "context_chemistry": 68,
+    "input": 188,
+    "mixed": 3840
+   },
+   "families": {
+    "functional_group": 39,
+    "neighbour": 22,
+    "ring": 4,
+    "conjugation": 3
+   }
+  },
+  "token|noinput|binary": {
+   "counts": {
+    "context_chemistry": 38,
+    "input": 189,
+    "mixed": 3869
+   },
+   "families": {
+    "functional_group": 27,
+    "neighbour": 9,
+    "ring": 2
+   }
+  },
+  "bundle|all|value": {
+   "counts": {
+    "context_chemistry": 66,
+    "input": 168,
+    "mixed": 3862
+   },
+   "families": {
+    "functional_group": 40,
+    "neighbour": 21,
+    "ring": 5
+   }
+  },
+  "bundle|all|binary": {
+   "counts": {
+    "context_chemistry": 40,
+    "input": 169,
+    "mixed": 3887
+   },
+   "families": {
+    "functional_group": 31,
+    "neighbour": 8,
+    "ring": 1
+   }
+  },
+  "bundle|noinput|value": {
+   "counts": {
+    "context_chemistry": 66,
+    "input": 168,
+    "mixed": 3862
+   },
+   "families": {
+    "functional_group": 40,
+    "neighbour": 21,
+    "ring": 5
+   }
+  },
+  "top_context_strict": [
+   {
+    "latent": 2739,
+    "n_fire": 295,
+    "group": 30,
+    "purity": 0.33559322033898303,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 1.0,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1187,
+    "n_fire": 467,
+    "group": 19,
+    "purity": 0.2462526766595289,
+    "concept": "fg_amide",
+    "within_auroc": 1.0,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2604,
+    "n_fire": 540,
+    "group": 42,
+    "purity": 0.2962962962962963,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9999367568934986,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3790,
+    "n_fire": 313,
+    "group": 11,
+    "purity": 0.7987220447284346,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9999163991439273,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3452,
+    "n_fire": 314,
+    "group": 7,
+    "purity": 0.6273885350318471,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9993577169441213,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3229,
+    "n_fire": 236,
+    "group": 19,
+    "purity": 0.5296610169491526,
+    "concept": "fg_amide",
+    "within_auroc": 0.9991640066879465,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1943,
+    "n_fire": 513,
+    "group": 27,
+    "purity": 0.6530214424951267,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.999020095121488,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2668,
+    "n_fire": 615,
+    "group": 53,
+    "purity": 0.2146341463414634,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9985795454545454,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2490,
+    "n_fire": 1209,
+    "group": 2,
+    "purity": 0.9040529363110008,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9983046806405644,
+    "family": "neighbour"
+   },
+   {
+    "latent": 703,
+    "n_fire": 770,
+    "group": 52,
+    "purity": 0.7883116883116883,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9979217195399326,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1642,
+    "n_fire": 828,
+    "group": 52,
+    "purity": 0.3611111111111111,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9970117917379406,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1809,
+    "n_fire": 686,
+    "group": 52,
+    "purity": 0.7653061224489796,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9968655343376341,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3820,
+    "n_fire": 648,
+    "group": 6,
+    "purity": 0.5401234567901234,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.996303552242815,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2716,
+    "n_fire": 397,
+    "group": 9,
+    "purity": 0.6020151133501259,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9932746721297713,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2930,
+    "n_fire": 891,
+    "group": 50,
+    "purity": 0.25813692480359146,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9918559677507218,
+    "family": "neighbour"
+   },
+   {
+    "latent": 446,
+    "n_fire": 499,
+    "group": 50,
+    "purity": 0.5230460921843687,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9918287301846707,
+    "family": "neighbour"
+   },
+   {
+    "latent": 676,
+    "n_fire": 916,
+    "group": 52,
+    "purity": 0.5458515283842795,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9903756271580915,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1428,
+    "n_fire": 512,
+    "group": 2,
+    "purity": 0.388671875,
+    "concept": "fg_ester",
+    "within_auroc": 0.9896935139653587,
+    "family": "functional_group"
+   },
+   {
+    "latent": 825,
+    "n_fire": 396,
+    "group": 59,
+    "purity": 0.648989898989899,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9894057092332954,
+    "family": "neighbour"
+   },
+   {
+    "latent": 879,
+    "n_fire": 781,
+    "group": 50,
+    "purity": 0.4673495518565941,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9874692202462381,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1177,
+    "n_fire": 279,
+    "group": 25,
+    "purity": 0.24731182795698925,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9863742107012297,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2939,
+    "n_fire": 678,
+    "group": 50,
+    "purity": 0.4528023598820059,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9859454159176335,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3438,
+    "n_fire": 669,
+    "group": 50,
+    "purity": 0.4499252615844544,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9851162790697675,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3318,
+    "n_fire": 1054,
+    "group": 2,
+    "purity": 0.706831119544592,
+    "concept": "fg_ester",
+    "within_auroc": 0.9850679705048637,
+    "family": "functional_group"
+   },
+   {
+    "latent": 3938,
+    "n_fire": 647,
+    "group": 9,
+    "purity": 0.7171561051004637,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9832916323823278,
+    "family": "functional_group"
+   }
+  ],
+  "bundle|noinput|binary": {
+   "counts": {
+    "context_chemistry": 40,
+    "input": 169,
+    "mixed": 3887
+   },
+   "families": {
+    "functional_group": 31,
+    "neighbour": 8,
+    "ring": 1
+   }
+  }
+ },
+ "a2_random": {
+  "sae": "atoms_a2_random_L6",
+  "stats": {
+   "fvu": 0.0001392305393025078,
+   "l0": 32.0,
+   "dead_frac": 0.523193359375,
+   "n_alive": 1953
+  },
+  "token|all|value": {
+   "counts": {
+    "context_chemistry": 7,
+    "input": 1271,
+    "mixed": 330
+   },
+   "families": {
+    "functional_group": 5,
+    "neighbour": 2
+   }
+  },
+  "token|all|binary": {
+   "counts": {
+    "context_chemistry": 4,
+    "input": 1272,
+    "mixed": 332
+   },
+   "families": {
+    "functional_group": 4
+   }
+  },
+  "token|noinput|value": {
+   "counts": {
+    "context_chemistry": 7,
+    "input": 1271,
+    "mixed": 330
+   },
+   "families": {
+    "functional_group": 5,
+    "neighbour": 2
+   }
+  },
+  "token|noinput|binary": {
+   "counts": {
+    "context_chemistry": 4,
+    "input": 1272,
+    "mixed": 332
+   },
+   "families": {
+    "functional_group": 4
+   }
+  },
+  "bundle|all|value": {
+   "counts": {
+    "context_chemistry": 8,
+    "input": 1026,
+    "mixed": 574
+   },
+   "families": {
+    "functional_group": 6,
+    "neighbour": 2
+   }
+  },
+  "bundle|all|binary": {
+   "counts": {
+    "context_chemistry": 4,
+    "input": 1027,
+    "mixed": 577
+   },
+   "families": {
+    "functional_group": 4
+   }
+  },
+  "bundle|noinput|value": {
+   "counts": {
+    "context_chemistry": 8,
+    "input": 1026,
+    "mixed": 574
+   },
+   "families": {
+    "functional_group": 6,
+    "neighbour": 2
+   }
+  },
+  "top_context_strict": [
+   {
+    "latent": 2355,
+    "n_fire": 401,
+    "group": 29,
+    "purity": 0.4912718204488778,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9656812555891082,
+    "family": "functional_group"
+   },
+   {
+    "latent": 148,
+    "n_fire": 261,
+    "group": 12,
+    "purity": 1.0,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9580642820866284,
+    "family": "functional_group"
+   },
+   {
+    "latent": 582,
+    "n_fire": 3960,
+    "group": 11,
+    "purity": 0.42247474747474745,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9531124598715891,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2984,
+    "n_fire": 523,
+    "group": 14,
+    "purity": 0.6175908221797323,
+    "concept": "has_halogen_neighbor",
+    "within_auroc": 0.9328659070990359,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2459,
+    "n_fire": 403,
+    "group": 13,
+    "purity": 0.8089330024813896,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9309545242191863,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1147,
+    "n_fire": 1291,
+    "group": 7,
+    "purity": 0.9976762199845082,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9217074313885465,
+    "family": "functional_group"
+   },
+   {
+    "latent": 620,
+    "n_fire": 10787,
+    "group": 8,
+    "purity": 0.29359414109576343,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.909687657383997,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3221,
+    "n_fire": 203,
+    "group": 39,
+    "purity": 0.7487684729064039,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.907103825136612,
+    "family": "functional_group"
+   }
+  ],
+  "bundle|noinput|binary": {
+   "counts": {
+    "context_chemistry": 4,
+    "input": 1027,
+    "mixed": 577
+   },
+   "families": {
+    "functional_group": 4
+   }
+  }
+ },
+ "a3": {
+  "sae": "mols_a3_L6",
+  "stats": {
+   "fvu": 0.1485413327934493,
+   "l0": 32.0,
+   "dead_frac": 0.0,
+   "n_alive": 4096
+  },
+  "token|all|value": {
+   "counts": {
+    "context_chemistry": 94,
+    "input": 456,
+    "mixed": 3546
+   },
+   "families": {
+    "functional_group": 47,
+    "neighbour": 28,
+    "bond_derived": 11,
+    "ring": 6,
+    "conjugation": 2
+   }
+  },
+  "token|all|binary": {
+   "counts": {
+    "context_chemistry": 65,
+    "input": 459,
+    "mixed": 3572
+   },
+   "families": {
+    "functional_group": 34,
+    "neighbour": 17,
+    "bond_derived": 8,
+    "ring": 4,
+    "conjugation": 2
+   }
+  },
+  "token|noinput|value": {
+   "counts": {
+    "context_chemistry": 87,
+    "input": 456,
+    "mixed": 3553
+   },
+   "families": {
+    "functional_group": 48,
+    "neighbour": 28,
+    "ring": 6,
+    "conjugation": 5
+   }
+  },
+  "token|noinput|binary": {
+   "counts": {
+    "context_chemistry": 60,
+    "input": 459,
+    "mixed": 3577
+   },
+   "families": {
+    "functional_group": 34,
+    "neighbour": 17,
+    "conjugation": 5,
+    "ring": 4
+   }
+  },
+  "bundle|all|value": {
+   "counts": {
+    "context_chemistry": 86,
+    "input": 427,
+    "mixed": 3583
+   },
+   "families": {
+    "functional_group": 49,
+    "neighbour": 29,
+    "ring": 6,
+    "conjugation": 2
+   }
+  },
+  "bundle|all|binary": {
+   "counts": {
+    "context_chemistry": 55,
+    "input": 428,
+    "mixed": 3613
+   },
+   "families": {
+    "functional_group": 33,
+    "neighbour": 18,
+    "conjugation": 2,
+    "ring": 2
+   }
+  },
+  "bundle|noinput|value": {
+   "counts": {
+    "context_chemistry": 86,
+    "input": 427,
+    "mixed": 3583
+   },
+   "families": {
+    "functional_group": 49,
+    "neighbour": 29,
+    "ring": 6,
+    "conjugation": 2
+   }
+  },
+  "top_context_strict": [
+   {
+    "latent": 2131,
+    "n_fire": 162,
+    "group": 29,
+    "purity": 0.47530864197530864,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 1.0,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1024,
+    "n_fire": 303,
+    "group": 30,
+    "purity": 0.2706270627062706,
+    "concept": "fg_amine_basic",
+    "within_auroc": 0.9998602180598267,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1597,
+    "n_fire": 286,
+    "group": 30,
+    "purity": 0.36363636363636365,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9998602180598266,
+    "family": "functional_group"
+   },
+   {
+    "latent": 881,
+    "n_fire": 494,
+    "group": 9,
+    "purity": 0.5364372469635628,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9996876626756896,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1468,
+    "n_fire": 348,
+    "group": 14,
+    "purity": 0.6293103448275862,
+    "concept": "has_halogen_neighbor",
+    "within_auroc": 0.9995910020449899,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3583,
+    "n_fire": 377,
+    "group": 27,
+    "purity": 0.7771883289124668,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9994120570728928,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3363,
+    "n_fire": 252,
+    "group": 7,
+    "purity": 0.7658730158730159,
+    "concept": "fg_hydroxyl",
+    "within_auroc": 0.9991216345235822,
+    "family": "functional_group"
+   },
+   {
+    "latent": 24,
+    "n_fire": 985,
+    "group": 52,
+    "purity": 0.9614213197969543,
+    "concept": "fg_ester",
+    "within_auroc": 0.9986801932459262,
+    "family": "functional_group"
+   },
+   {
+    "latent": 435,
+    "n_fire": 414,
+    "group": 59,
+    "purity": 0.606280193236715,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.998215864595175,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2660,
+    "n_fire": 415,
+    "group": 52,
+    "purity": 0.8626506024096385,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9978376397287887,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1066,
+    "n_fire": 394,
+    "group": 19,
+    "purity": 0.565989847715736,
+    "concept": "fg_amide",
+    "within_auroc": 0.997796017631859,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1911,
+    "n_fire": 351,
+    "group": 52,
+    "purity": 0.7948717948717948,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9969312441841487,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3,
+    "n_fire": 607,
+    "group": 52,
+    "purity": 0.6342668863261944,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9969174663131053,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3238,
+    "n_fire": 1028,
+    "group": 52,
+    "purity": 0.9017509727626459,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9968324875166116,
+    "family": "functional_group"
+   },
+   {
+    "latent": 923,
+    "n_fire": 405,
+    "group": 9,
+    "purity": 0.7506172839506173,
+    "concept": "fg_carboxylic_acid",
+    "within_auroc": 0.9923829994458531,
+    "family": "functional_group"
+   },
+   {
+    "latent": 62,
+    "n_fire": 414,
+    "group": 2,
+    "purity": 0.8985507246376812,
+    "concept": "fg_ester",
+    "within_auroc": 0.9908434787075563,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1974,
+    "n_fire": 305,
+    "group": 4,
+    "purity": 0.580327868852459,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9899686520376176,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3708,
+    "n_fire": 322,
+    "group": 6,
+    "purity": 0.593167701863354,
+    "concept": "has_O_neighbor",
+    "within_auroc": 0.9896978243352136,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1661,
+    "n_fire": 687,
+    "group": 2,
+    "purity": 0.8427947598253275,
+    "concept": "fg_ester",
+    "within_auroc": 0.9889089694914938,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2493,
+    "n_fire": 219,
+    "group": 42,
+    "purity": 0.6073059360730594,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9874146218062231,
+    "family": "functional_group"
+   },
+   {
+    "latent": 544,
+    "n_fire": 453,
+    "group": 52,
+    "purity": 0.9161147902869757,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9870387327750115,
+    "family": "neighbour"
+   },
+   {
+    "latent": 2938,
+    "n_fire": 1044,
+    "group": 52,
+    "purity": 0.9013409961685823,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9826927168873265,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1304,
+    "n_fire": 251,
+    "group": 31,
+    "purity": 0.2948207171314741,
+    "concept": "fg_aniline_N",
+    "within_auroc": 0.9826818406729343,
+    "family": "functional_group"
+   },
+   {
+    "latent": 2572,
+    "n_fire": 189,
+    "group": 25,
+    "purity": 0.3333333333333333,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9810568295114656,
+    "family": "neighbour"
+   },
+   {
+    "latent": 1431,
+    "n_fire": 197,
+    "group": 33,
+    "purity": 0.5786802030456852,
+    "concept": "has_N_neighbor",
+    "within_auroc": 0.9806315104166666,
+    "family": "neighbour"
+   }
+  ],
+  "bundle|noinput|binary": {
+   "counts": {
+    "context_chemistry": 55,
+    "input": 428,
+    "mixed": 3613
+   },
+   "families": {
+    "functional_group": 33,
+    "neighbour": 18,
+    "conjugation": 2,
+    "ring": 2
+   }
+  }
+ },
+ "a3_random": {
+  "sae": "atoms_a3_random_L6",
+  "stats": {
+   "fvu": 0.00012672852097124308,
+   "l0": 32.0,
+   "dead_frac": 0.735595703125,
+   "n_alive": 1083
+  },
+  "token|all|value": {
+   "counts": {
+    "context_chemistry": 256,
+    "input": 428,
+    "mixed": 320
+   },
+   "families": {
+    "bond_derived": 204,
+    "functional_group": 51,
+    "neighbour": 1
+   }
+  },
+  "token|all|binary": {
+   "counts": {
+    "context_chemistry": 219,
+    "input": 441,
+    "mixed": 344
+   },
+   "families": {
+    "bond_derived": 169,
+    "functional_group": 49,
+    "conjugation": 1
+   }
+  },
+  "token|noinput|value": {
+   "counts": {
+    "context_chemistry": 221,
+    "input": 448,
+    "mixed": 335
+   },
+   "families": {
+    "functional_group": 111,
+    "conjugation": 105,
+    "ring": 4,
+    "neighbour": 1
+   }
+  },
+  "token|noinput|binary": {
+   "counts": {
+    "context_chemistry": 189,
+    "input": 460,
+    "mixed": 355
+   },
+   "families": {
+    "functional_group": 101,
+    "conjugation": 84,
+    "ring": 4
+   }
+  },
+  "bundle|all|value": {
+   "counts": {
+    "context_chemistry": 3,
+    "input": 565,
+    "mixed": 436
+   },
+   "families": {
+    "functional_group": 2,
+    "neighbour": 1
+   }
+  },
+  "bundle|all|binary": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 566,
+    "mixed": 438
+   },
+   "families": {}
+  },
+  "bundle|noinput|value": {
+   "counts": {
+    "context_chemistry": 3,
+    "input": 565,
+    "mixed": 436
+   },
+   "families": {
+    "functional_group": 2,
+    "neighbour": 1
+   }
+  },
+  "top_context_strict": [
+   {
+    "latent": 1621,
+    "n_fire": 278,
+    "group": 14,
+    "purity": 0.9424460431654677,
+    "concept": "has_halogen_neighbor",
+    "within_auroc": 0.9907683318726264,
+    "family": "neighbour"
+   },
+   {
+    "latent": 3086,
+    "n_fire": 4093,
+    "group": 52,
+    "purity": 0.5037869533349622,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9366879745375828,
+    "family": "functional_group"
+   },
+   {
+    "latent": 1897,
+    "n_fire": 3806,
+    "group": 41,
+    "purity": 0.33815028901734107,
+    "concept": "fg_sulfonamide",
+    "within_auroc": 0.9096608720433171,
+    "family": "functional_group"
+   }
+  ],
+  "bundle|noinput|binary": {
+   "counts": {
+    "context_chemistry": 0,
+    "input": 566,
+    "mixed": 438
+   },
+   "families": {}
+  }
+ }
+}

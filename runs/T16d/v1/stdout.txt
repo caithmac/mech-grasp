@@ -1,0 +1,15 @@
+=== T16d Results Summary ===
+
+Model: a3
+  Layer 12 PR: 20.45 (Layer 8 was 196.75)
+  Concept crippen: Linear Error@L12=0.694, MLP Error@L12=0.768
+  Concept ring5: Linear Error@L12=0.951, MLP Error@L12=0.935
+  Concept o_neighbor: Linear Error@L12=0.949, MLP Error@L12=0.938
+
+Model: a3_random
+  Layer 12 PR: 6.79 (Layer 8 was 6.40)
+  Concept crippen: Linear Error@L12=0.815, MLP Error@L12=0.802
+  Concept ring5: Linear Error@L12=0.850, MLP Error@L12=0.815
+  Concept o_neighbor: Linear Error@L12=0.921, MLP Error@L12=0.912
+
+Script completed. Results written to OUT/results.json and t16d.png.

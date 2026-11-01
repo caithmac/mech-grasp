@@ -20,7 +20,8 @@ import torch
 import sys as _sys
 # A2 release loader (grasp_molecular 0.1.1): superset of the GRASP/A1 loader, adds bond + stereo inputs.
 # Parity with the old loader on GRASP/A1 activations verified by supervisor/test_a2_loader.py.
-A2_LOADER = r"C:\Users\ss864\a2_wheel\ex"
+# grasp_molecular 0.1.2 (GRASP-A3 release): superset loader for GRASP, A1, A2 and factorized A3
+A2_LOADER = r"C:\Users\ss864\a3_wheel\ex"
 if A2_LOADER not in _sys.path:
     _sys.path.insert(0, A2_LOADER)
 from grasp.encoder import GRASPEncoder, encoder_inputs, make_loader
@@ -38,7 +39,8 @@ _CACHE: dict[str, GRASPEncoder] = {}
 SOURCES = {"pretrained": ("caithmac/GRASP", None), "random": ("caithmac/GRASP", None),
            "a1": ("caithmac/GRASP-A1", None), "a1_random": ("caithmac/GRASP-A1", None),
            "a1_step1": ("caithmac/GRASP-A1", "step1"),
-           "a2": ("caithmac/GRASP-A2", None), "a2_random": ("caithmac/GRASP-A2", None)}
+           "a2": ("caithmac/GRASP-A2", None), "a2_random": ("caithmac/GRASP-A2", None),
+           "a3": ("caithmac/GRASP-A3", None), "a3_random": ("caithmac/GRASP-A3", None)}
 KINDS = list(SOURCES)
 
 
@@ -179,11 +181,20 @@ def run(enc: GRASPEncoder, smiles: list[str], batch_size: int = 64,
             h.remove()
 
 
+def is_factorized(enc) -> bool:
+    """True for A3-style encoders whose input is 7 categorical atom fields."""
+    return bool(enc.config.get("architecture", {}).get("factorized_atom_features", False))
+
+
 def _run_loop(enc, smiles, batch_size, layers, attention, keep_atoms, dtype, token_override, state,
               atom, cls, mean, attn, mol_idx, atom_idx, toks) -> Acts:
     offset = 0
     mode = feature_mode(enc.model.config)
-    for batch in make_loader(smiles, enc.vocabulary, batch_size, chemistry_features=mode):
+    fact = is_factorized(enc)
+    if token_override and fact:
+        raise NotImplementedError("token_override has no effect on A3: its input is 7 atom fields, not the hashed token")
+    for batch in make_loader(smiles, enc.vocabulary, batch_size, chemistry_features=mode,
+                             factorized_atom_features=fact):
         batch = batch.to(enc.device)
         ids, mask, rel = encoder_inputs(batch)
         chem = dense_chemistry(batch) if mode != "none" else {}

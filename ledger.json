@@ -1167,7 +1167,7 @@
   "critic_reason": "44 context_chemistry vs 0 in random is a strong signal. Within-token AUROCs >0.95 are consistent.",
   "critic_verdict": "revise",
   "supervisor": "confirmed",
-  "supervisor_note": "44 vs 0 context features (within-token AUROC>=0.9); same-data-size control 93 vs 0 (supervisor/verify_T08b_fair.py)."
+  "supervisor_note": "Supervisor recount 2026-11-01 with one tested method (mechlib.saefeat: L6, within-token AUROC of activation value over all atoms of the token, >= 0.9; supervisor/recount_fair.json, recount_all.json): size-matched 96k-atom SAEs: GRASP 93 vs random 0 (53 vs 0 at >= 0.95), reproduced exactly. On the large 1.16M-atom SAE GRASP has 81 (the agents' 44 used a different scoring)."
  },
  {
   "id": "C0079",
@@ -1272,7 +1272,7 @@
   "critic_reason": "",
   "critic_verdict": "n/a",
   "supervisor": "confirmed",
-  "supervisor_note": "Key evidence for 'GRASP learned chemistry'."
+  "supervisor_note": "Supervisor recount 2026-11-01 with one tested method (mechlib.saefeat: L6, within-token AUROC of activation value over all atoms of the token, >= 0.9; supervisor/recount_fair.json, recount_all.json): 93 vs 0 reproduced exactly (96k-atom SAEs); 81 on the 1.16M-atom SAE. Key evidence for 'GRASP learned chemistry'."
  },
  {
   "id": "C0086",
@@ -2156,8 +2156,8 @@
   "critic_status": "unassessed",
   "critic_reason": "",
   "critic_verdict": "revise",
-  "supervisor": "plausible",
-  "supervisor_note": "Counts read from runs/T15c/v3 (178 vs GRASP 93), not independently re-run. Not like-for-like: A2 SAE FVU 0.145 vs GRASP 0.075, and A2 receives bond inputs."
+  "supervisor": "rejected",
+  "supervisor_note": "Supervisor recount 2026-11-01 (supervisor/recount_all.py, one tested method for every model: L6, within-token AUROC of activation value over all atoms of the token, >= 0.9): A2 72 vs GRASP 81 (both 1.16M-atom SAEs): A2 has slightly FEWER, not 93% more. T15c's 178 grouped latents by element instead of token and scored AUROC only over firing atoms."
  },
  {
   "id": "C0145",
@@ -2171,8 +2171,8 @@
   "critic_status": "unassessed",
   "critic_reason": "",
   "critic_verdict": "revise",
-  "supervisor": "plausible",
-  "supervisor_note": "84/178 bond-derived, from results; not re-run."
+  "supervisor": "rejected",
+  "supervisor_note": "Supervisor recount 2026-11-01 (supervisor/recount_all.py, one tested method for every model: L6, within-token AUROC of activation value over all atoms of the token, >= 0.9): bond-derived is 8/72 in A2 (functional_group 38, neighbour 22, ring 4); the 84/178 came from the flawed T15c grouping."
  },
  {
   "id": "C0146",
@@ -2216,8 +2216,8 @@
   "critic_status": "untested",
   "critic_reason": "FVU=0.0 for Random is impossible with dead_frac=0.523; suggests training failure or metric bug, not genuine lack of learning.",
   "critic_verdict": "revise",
-  "supervisor": "plausible",
-  "supervisor_note": "11 vs 178 from results. Caveat: the a2_random SAE has 52% dead latents (near-low-rank activations)."
+  "supervisor": "confirmed",
+  "supervisor_note": "Supervisor recount 2026-11-01 (supervisor/recount_all.py, one tested method for every model: L6, within-token AUROC of activation value over all atoms of the token, >= 0.9): a2_random 7 vs A2 72 (supersedes 11 vs 178). Caveat stands: the a2_random SAE has many dead latents."
  },
  {
   "id": "C0149",
@@ -2411,7 +2411,8 @@
   "critic_status": "supported",
   "critic_reason": "A1 `rel_enant` = 0.0 vs A2 `rel_enant` ~0.004 supports stereochem sensitivity in weights.",
   "critic_verdict": "revise",
-  "supervisor": "pending"
+  "supervisor": "confirmed",
+  "supervisor_note": "supervisor/sup_T16e.py reproduces T15e exactly: A2 enantiomer moves L6 CLS by 0.20%, A1 by 3e-8 %."
  },
  {
   "id": "C0162",
@@ -2425,7 +2426,8 @@
   "critic_status": "supported",
   "critic_reason": "`d_enant` (~0.004) << `d_other` (~1.5). Consistent with physical logP invariance for enantiomers.",
   "critic_verdict": "revise",
-  "supervisor": "pending"
+  "supervisor": "confirmed-with-correction",
+  "supervisor_note": "Not identical: the A2 logP read-out moves 0.0035 (enantiomer) / 0.0028 (diastereomer) log units vs 1.50 for another molecule. Near-invariant because stereo barely changes the embedding, not because the probe learned invariance."
  },
  {
   "id": "C0163",
@@ -2439,7 +2441,8 @@
   "critic_status": "unassessed",
   "critic_reason": "",
   "critic_verdict": "revise",
-  "supervisor": "pending"
+  "supervisor": "weak",
+  "supervisor_note": "Diastereomer < enantiomer distance holds for A2 (0.31% vs 0.39%, L12 CLS) and A3 (4.3% vs 6.3%). 'Dominated by scaffold topology' was not tested."
  },
  {
   "id": "C0164",
@@ -2453,6 +2456,262 @@
   "critic_status": "unassessed",
   "critic_reason": "",
   "critic_verdict": "revise",
-  "supervisor": "pending"
+  "supervisor": "untested",
+  "supervisor_note": "Interpretation only; no experiment separates the two readings."
+ },
+ {
+  "id": "C0165",
+  "task": "T16d",
+  "run": "v2",
+  "claim": "A3 layer representations undergo a geometric dimensionality collapse at Layer 12 (PR drops from ~197 to ~20), whereas the `a3_random` control maintains stable low-dimension geometry (~6-7).",
+  "evidence": "A3 PR: L8=196.75, L12=20.45. Random PR: L8=6.40, L12=6.79.",
+  "kind": "shows",
+  "test": "Label column `layer_index`. SMARTS pattern `[C]` (all carbons). Prediction: A3 atom embeddings for carbon show reduced variance in latent space at L12 compared to L8; Random shows no layer-dependent trend.",
+  "prediction": "If true, PCA on Layer 12 C-atom vectors yields ~5x fewer significant eigenvalues than Layer 8. Control model retains consistent eigenvalue distribution across layers.",
+  "critic_status": "supported",
+  "critic_reason": "JSON shows A3 PR L8=196.75 -> L12=20.45 (drop > 90%). Random stays ~6-7 across layers.",
+  "critic_verdict": "accept",
+  "supervisor": "confirmed",
+  "supervisor_note": "supervisor/verify_T16d.py: A3 PR L4 64.2, L8 196.8, L12 20.5; a3_random 5.8-6.8. GRASP 54/180/13.5, A2 86/217/21.9 on the same 20k-atom subsample."
+ },
+ {
+  "id": "C0166",
+  "task": "T16d",
+  "run": "v2",
+  "claim": "Linear decodability of atomic LogP contributions degrades at Layer 12 (Error rises from mean=0.067 to 0.298), indicating loss of additive physicochemical signatures.",
+  "evidence": "A3 Crippen Linear Error: L4=0.067, L12=0.298. Random Stable at ~0.165-0.169.",
+  "kind": "shows",
+  "test": "Label column `crippen_logp_contrib`. SMARTS pattern `[!#0]` (all non-hydrogen atoms). Prediction: Linear regression R^2 between L12 vectors and Crippen values drops significantly compared to L8.",
+  "prediction": "If true, the slope of LogP contribution vs. vector projection becomes unstable at L12 for heteroatoms; Random model shows no layer-dependent change in this correlation.",
+  "critic_status": "supported",
+  "critic_reason": "JSON `crippen.lin` error L4=0.067 -> L12=0.298. R^2 drops from ~0.93 to ~0.70.",
+  "critic_verdict": "accept",
+  "supervisor": "confirmed",
+  "supervisor_note": "verify_T16d: linear Crippen 1-R2 0.070 (L4) -> 0.295 (L12); MLP 0.008 -> 0.125."
+ },
+ {
+  "id": "C0167",
+  "task": "T16d",
+  "run": "v2",
+  "claim": "Ring topology information (5-membered rings) persists but degrades similarly to LogP features (Error rises from 0.003 to 0.054), suggesting local structural distinctiveness is obscured.",
+  "evidence": "A3 Ring5 Linear Error: L4=0.003, L12=0.054. MLP error also rises (L8=0.005 -> L12=0.059).",
+  "kind": "shows",
+  "test": "Label column `min_ring_size == 5`. SMARTS pattern `[nH]` or specific aromatic patterns like `c1cc[nH]c1`. Prediction: Classification accuracy for identifying ring size drops at L12.",
+  "prediction": "If true, the model fails to distinguish 5-membered rings from others in Layer 12 embeddings more than in earlier layers; Control shows no such degradation.",
+  "critic_status": "supported",
+  "critic_reason": "JSON `ring5.lin` error L4=0.003 -> L12=0.054.",
+  "critic_verdict": "accept",
+  "supervisor": "confirmed-with-correction",
+  "supervisor_note": "verify_T16d: ring-5 linear AUROC error 0.002 (L4) -> 0.050 (L12)."
+ },
+ {
+  "id": "C0168",
+  "task": "T16d",
+  "run": "v2",
+  "claim": "The collapse is not a trivial artifact of input size or random noise; trained A3 degrades below Random baseline performance for LogP decoding at L12.",
+  "evidence": "A3 Crippen Error@L12=0.298 > Random~0.165. PR Drop (197->20) absent in Control (~6).",
+  "kind": "shows",
+  "test": "Label column `model_kind` ('a3' vs 'a3_random'). Prediction: A3 L12 LogP error is statistically higher than Random L12; PR variance fraction concentration (top1) increases at L12 for A3 but not Control.",
+  "prediction": "If true, the trained model actively obscures atomic property information in deep layers to optimize global task performance, unlike random weights which remain constant.",
+  "critic_status": "supported",
+  "critic_reason": "A3 Error 0.298 > Random Error 0.165 at L12 (higher error = worse).",
+  "critic_verdict": "accept",
+  "supervisor": "confirmed-with-correction",
+  "supervisor_note": "Linear only: A3 L12 linear Crippen R2 0.705 < a3_random 0.840. With an MLP A3 L12 is 0.875, still slightly ABOVE random 0.840 (GRASP L12 was at the random level)."
+ },
+ {
+  "id": "C0169",
+  "task": "T16c",
+  "run": "v2",
+  "claim": "A3 layer 6 latent space contains at least 86 latents classified as 'context_chemistry' under strict conditions, significantly exceeding the random control's count of 3.",
+  "evidence": "\"strict\":{\"counts_raw\":{\"context_chemistry\":86...}}\" for a3 vs \"a3_random\":{\"stats\":...,\"strict\":{\"counts_raw\":{\"context_chemistry\":3...}}\"",
+  "kind": "shows",
+  "test": "RDKit SMARTS: `C(=O)N` (amide/sulfonamide context). Prediction: Latents 2131, 1597 fire significantly more often on molecules containing sulfone groups than random baseline.",
+  "prediction": "Latent activation counts for A3 > Random; AUROC > 0.98",
+  "critic_status": "unassessed",
+  "critic_reason": "",
+  "critic_verdict": "accept",
+  "supervisor": "confirmed",
+  "supervisor_note": "supervisor/recount_all.py reproduces 86 (strict: grouped by A3's 7-field bundle, aromatic/hybridization excluded) vs a3_random 3."
+ },
+ {
+  "id": "C0170",
+  "task": "T16c",
+  "run": "v2",
+  "claim": "The model represents 'fg_sulfonamide' as a distinct context feature (latent IDs 2131, 1597) with high purity and perfect within-AUROC.",
+  "evidence": "`a3_top_context`: latent 2131 (`purity:0.475`, `within_auroc:1.0`) and 1597 (`purity:0.364`, `within_auroc:1.0`).",
+  "kind": "shows",
+  "test": "RDKit SMARTS: `[NX2][SX4](=[O])(=[O])` (sulfonamide). Prediction: Latent 2131 fires on sulfonamides but not simple amides.",
+  "prediction": "Latent activation correlates with `S(=O)(=O)N` presence; non-sulfonamide amines show low fire counts.",
+  "critic_status": "supported",
+  "critic_reason": "Top context list shows latent 2131: purity=0.475, within_auroc=1.0; latent 1597: purity=0.364, within_auroc=1.0",
+  "critic_verdict": "accept",
+  "supervisor": "confirmed",
+  "supervisor_note": "Latent 2131 within-bundle AUROC 1.000 for sulfonamide N (verify_A3_causal); 1597 not checked."
+ },
+ {
+  "id": "C0171",
+  "task": "T16c",
+  "run": "v2",
+  "claim": "'fg_hydroxyl' is represented by multiple fragmented latents (e.g., 321, 46), some classified as 'context_chemistry', indicating the model distinguishes hydroxyls from other oxygenated groups.",
+  "evidence": "`a3_hydroxyl`: latent 46 (`purity:0.65`, `within_auroc:0.956`) and 816 (`purity:0.882`).",
+  "kind": "shows",
+  "test": "RDKit SMARTS: `[OX2H]` (hydroxyl). Prediction: Latent 46 fires on aliphatic/aromatic hydroxyls; non-hydroxyl oxygens show low activation.",
+  "prediction": "Latent fire counts correlate with `O-H` presence, not just oxygen atoms.",
+  "critic_status": "supported",
+  "critic_reason": "a3_hydroxyl list shows 82+ entries; several classified as 'context_chemistry' (e.g., latent 46: within_auroc=0.956, latent 816: within_auroc=0.945)",
+  "critic_verdict": "accept",
+  "supervisor": "corrected",
+  "supervisor_note": "Strict hydroxyl context latents are 3363 (sp3 C bearing OH, AUROC 0.999) and 112 (OH oxygen, 0.98), not 321/46. Phenol carbon is split across 816 and 3202 (AUROC 0.94 each, fire on 89% of phenol C, <1.2% of other C in the same bundle); GRASP and A2 each have one phenol latent at 0.9999 (supervisor/a3_phenol.py)."
+ },
+ {
+  "id": "C0172",
+  "task": "T16c",
+  "run": "v2",
+  "claim": "A3_random does not learn functional group context features (only 'bond_derived' or 'input'), confirming A3's capacity is data-dependent rather than trivial size effects.",
+  "evidence": "`a3_random`: strict families show only 2 `functional_group`, whereas a3 has 49. Random top latents are mostly mixed/bond derived.",
+  "kind": "shows",
+  "test": "RDKit SMARTS: `[OX1]` (carbonyl). Prediction: A3 random latent fire counts do not correlate with carbonyls; A3 does.",
+  "prediction": "A3_random AUROC for functional groups < 0.6 vs A3 > 0.95.",
+  "critic_status": "supported",
+  "critic_reason": "Random has only 2 functional_group families vs A3's 49; context_chemistry count is just 3",
+  "critic_verdict": "accept",
+  "supervisor": "confirmed-with-correction",
+  "supervisor_note": "Strict count (by bundle) 3 (2 functional-group, 1 neighbour). The legacy by-token count of 256 for a3_random is an artefact: A3 inputs (aromatic, hybridization, H count) look like 'context' when grouping by the coarser hashed token."
+ },
+ {
+  "id": "C0173",
+  "task": "T16a",
+  "run": "v1",
+  "claim": "GRASP-A3 aromaticity and hybridization are confirmed as INPUT fields (not learned)",
+  "evidence": "\"is_input\":{\"aromatic\":true,\"hybridization\":true}\n\nFALSIFIABLE TEST: RDKit SMARTS pattern for sp2 carbon in benzene ring should show 100% agreement with bundle.aromatic field",
+  "kind": "shows",
+  "test": "SMARTS=[C;X3]([cH])=:[cH]:[cH]; check df[df.tok_element=='C'].aromatic == (df.min_ring_size>0 & df.hybridization=='sp2')",
+  "prediction": "If aromatic/hybridization are truly inputs: 1.0 agreement between bundle fields and RDKit computation",
+  "critic_status": "supported",
+  "critic_reason": "is_input shows {'aromatic':true,'hybridization':true} which correctly indicates these properties ARE determined by the bundle input (100% agreement between bundle.aromatic/hybridization and df columns)",
+  "critic_verdict": "reject",
+  "supervisor": "confirmed",
+  "supervisor_note": "Every bundle has a single aromatic and hybridization value (supervisor/sup_T16a.py)."
+ },
+ {
+  "id": "C0174",
+  "task": "T16a",
+  "run": "v1",
+  "claim": "NO LAYER DATA WAS COLLECTED FOR ANY CONCEPT IN EITHER A3 OR A2",
+  "evidence": "\"layers\":{} for ALL concepts in BOTH model pairs; \"Best Error=None, Learned Gain=None\" printed output\n\nFALSIFIABLE TEST: Check results.json structure - every concept should have layers dict with keys '0','1','2'...'12'",
+  "kind": "shows",
+  "test": "results['ring_size']['a3']['layers'] must contain 7 layer entries (L=0,2,4,6,8,10,12)",
+  "prediction": "If experiment succeeded: each concept has model/control scores at all layers",
+  "critic_status": "supported",
+  "critic_reason": "results.json shows 'layers':{} for ALL concepts in BOTH model pairs. Printed output confirms Best Error=None, Learned Gain=None across all 7 concepts",
+  "critic_verdict": "reject",
+  "supervisor": "process-note",
+  "supervisor_note": "Describes the agents' broken T16a run (empty layer data). Superseded by supervisor/sup_T16a.py, runs/T16a/sup."
+ },
+ {
+  "id": "C0175",
+  "task": "T16a",
+  "run": "v1",
+  "claim": "BUNDLE BASELINE VALUES EXIST BUT CANNOT BE INTERPRETED WITHOUT PROBE SCORES",
+  "evidence": "\"ring_size\":{\"a2\":{\"bundle_baseline\":0.132}} etc.\n\nFALSIFIABLE TEST: Compare bundle baseline to model error at best layer - learned_gain = control_error/model_error requires both values",
+  "kind": "shows",
+  "test": "results[concept][pair]['best_err'] must be numeric (not None)",
+  "prediction": "If experiment succeeded: all concepts have valid best_err and learned_gain > 1.0",
+  "critic_status": "supported",
+  "critic_reason": "bundle_baseline values exist (0.132, 0.947, etc.) but without model/control scores at each layer, learned_gain cannot be calculated - these baselines alone indicate nothing about learning",
+  "critic_verdict": "reject",
+  "supervisor": "process-note",
+  "supervisor_note": "Describes the agents' broken T16a run (empty layer data). Superseded by supervisor/sup_T16a.py, runs/T16a/sup."
+ },
+ {
+  "id": "C0176",
+  "task": "T16a",
+  "run": "v1",
+  "claim": "A3 RANDOM CONTROL CANNOT BE COMPARED TO A2 OR ANYTHING ELSE",
+  "evidence": "\"a3_random\" pair has no layer data; \"figure_error\":\"'a3'\" indicates figure generation failed\n\nFALSIFIABLE TEST: Check if a3_random probe results exist in any concept dict under 'control'",
+  "kind": "shows",
+  "test": "results[concept]['a3']['layers'][L]['control'] must be numeric for at least one layer L",
+  "prediction": "If experiment succeeded: control scores match model score format (float, not None)",
+  "critic_status": "supported",
+  "critic_reason": "No 'a3' or 'a3_random' layer data exists in results - control scores are missing entirely, making any comparison impossible",
+  "critic_verdict": "reject",
+  "supervisor": "process-note",
+  "supervisor_note": "Describes the agents' broken T16a run (empty layer data). Superseded by supervisor/sup_T16a.py, runs/T16a/sup."
+ },
+ {
+  "id": "C0177",
+  "task": "T16a",
+  "run": "v1",
+  "claim": "LEARNED GAIN CANNOT BE CALCULATED - NO LEARNING CAN BE INFERRED ABOUT GRASP-A3 REPRESENTATION",
+  "evidence": "\"learned_gain\":None for ALL concepts; learned_gain = control_error/model_error requires both errors to be non-None\n\nFALSIFIABLE TEST: At best layer, model error must differ from random control error by >0.1x factor",
+  "kind": "shows",
+  "test": "results[concept]['a3']['learned_gain'] must exist and be numeric (not None)",
+  "prediction": "If A3 learns chemistry beyond inputs: learned_gain >> 1.0 at best layer",
+  "critic_status": "supported",
+  "critic_reason": "learned_gain = None for ALL concepts because best_model_err is NaN/None (no layer data to compute error from). Cannot infer any learning without numeric errors",
+  "critic_verdict": "reject",
+  "supervisor": "process-note",
+  "supervisor_note": "Describes the agents' broken T16a run (empty layer data). Superseded by supervisor/sup_T16a.py, runs/T16a/sup."
+ },
+ {
+  "id": "C0178",
+  "task": "T16a",
+  "run": "runs/T16a/sup",
+  "claim": "GRASP-A3 learns chemistry beyond its 7-field atom input: at the best layer, error vs the input-bundle baseline / untrained A3: atom logP contribution 0.031 vs 0.179 / 0.168 (1-R2); smallest ring size 0.165 vs 0.776 / 0.689 (balanced-acc error); conjugated (ambiguous atoms) 0.001 vs 0.243 / 0.044 (1-AUROC). A3 beats A2 on all three (0.066, 0.194, 0.002).",
+  "evidence": "supervisor computation",
+  "kind": "supervisor",
+  "test": "",
+  "prediction": "",
+  "critic_status": null,
+  "critic_reason": "",
+  "critic_verdict": null,
+  "supervisor": "confirmed",
+  "supervisor_note": "Computed by the supervisor (agent run failed or was rejected)."
+ },
+ {
+  "id": "C0179",
+  "task": "T16c",
+  "run": "supervisor/recount_all.json",
+  "claim": "Like-for-like SAE count (1.16M-atom SAEs, layer 6, grouped by the 7-field bundle, aromatic/hybridization excluded): A3 86, GRASP 75, A1 70, A2 66 context-chemistry latents; untrained A3 3, A2 8, GRASP 0. A3 has the most, mainly functional-group (49) and neighbour (29).",
+  "evidence": "supervisor computation",
+  "kind": "supervisor",
+  "test": "",
+  "prediction": "",
+  "critic_status": null,
+  "critic_reason": "",
+  "critic_verdict": null,
+  "supervisor": "confirmed",
+  "supervisor_note": "Computed by the supervisor (agent run failed or was rejected)."
+ },
+ {
+  "id": "C0180",
+  "task": "T16e",
+  "run": "runs/T16e/sup",
+  "claim": "GRASP-A3 is ~16x more stereo-sensitive than A2: enantiomer moves the L12 CLS by 6.3% (A2 0.39%, A1 0), a single-centre diastereomer by 4.3%; different molecules 100%. The logP read-out moves 0.043 log units for an enantiomer (A2 0.0035), small but no longer negligible.",
+  "evidence": "supervisor computation",
+  "kind": "supervisor",
+  "test": "",
+  "prediction": "",
+  "critic_status": null,
+  "critic_reason": "",
+  "critic_verdict": null,
+  "supervisor": "confirmed",
+  "supervisor_note": "Computed by the supervisor (agent run failed or was rejected)."
+ },
+ {
+  "id": "C0181",
+  "task": "T16f",
+  "run": "supervisor/verify_A3_causal.json",
+  "claim": "A3's context features are causal. Removing one layer-6 feature removes 4-37% of its concept at layer 8 (aromatic N next to O 0.37, sp3 C-OH 0.29, C next to halogen 0.19, sulfonamide N 0.18, 6-ring 0.12, basic amine 0.08, 7-ring 0.08, OH oxygen 0.04); equal-size random edits 0.002-0.024; adding the feature to atoms without the concept moves read-outs toward it by 0.06-0.33. Effects fade by L12 (0.01-0.14). Zero-edit check exact (0.0).",
+  "evidence": "supervisor computation",
+  "kind": "supervisor",
+  "test": "",
+  "prediction": "",
+  "critic_status": null,
+  "critic_reason": "",
+  "critic_verdict": null,
+  "supervisor": "confirmed",
+  "supervisor_note": "Computed by the supervisor (agent run failed or was rejected)."
  }
 ]

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16c\v1\script.py", line 18, in <module>
+    S_a3 = sae.load_or_train("mols_a3_L6", n_latents=4096, k=32) 
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: load_or_train() missing 1 required positional argument: 'X'

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16a\v1\script.py", line 312, in <module>
+    run_t16a()
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16a\v1\script.py", line 91, in run_t16a
+    "R": rand_map[control_kind],
+         ~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'a3_random'

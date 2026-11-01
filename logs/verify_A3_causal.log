@@ -1,0 +1,20 @@
+picked       latent  n_fire  group    purity               concept  within_auroc            family
+2131    2131     162     29  0.475309        fg_sulfonamide      1.000000  functional_group
+1024    1024     303     30  0.270627        fg_amine_basic      0.999860  functional_group
+1468    1468     348     14  0.629310  has_halogen_neighbor      0.999591         neighbour
+3583    3583     377     27  0.777188        has_O_neighbor      0.999412         neighbour
+3363    3363     252      7  0.765873           fg_hydroxyl      0.999122  functional_group
+112      112     590     53  0.208475           fg_hydroxyl      0.980469  functional_group
+3854    3854     419     43  0.632458       min_ring_size_6      0.953217              ring
+2108    2108     530     57  0.224528       min_ring_size_7      0.952225              ring
+2261    2261     420     17  0.516667            conjugated      0.944444       conjugation
+zero-edit max diff 0.0
+3363 fg_hydroxyl {'ablate': {'8': 0.29, '12': 0.125}, 'random': {'8': 0.016, '12': 0.009}, 'steer': {'8': 0.232, '12': 0.068}, 'steer_rand': {'8': 0.002, '12': -0.002}}
+112 fg_hydroxyl {'ablate': {'8': 0.036, '12': 0.034}, 'random': {'8': 0.002, '12': 0.001}, 'steer': {'8': 0.064, '12': 0.039}, 'steer_rand': {'8': 0.003, '12': 0.001}}
+2131 fg_sulfonamide {'ablate': {'8': 0.175, '12': 0.042}, 'random': {'8': 0.024, '12': 0.0}, 'steer': {'8': 0.172, '12': 0.033}, 'steer_rand': {'8': 0.002, '12': 0.001}}
+1024 fg_amine_basic {'ablate': {'8': 0.078, '12': 0.144}, 'random': {'8': 0.006, '12': 0.004}, 'steer': {'8': 0.084, '12': 0.036}, 'steer_rand': {'8': 0.009, '12': -0.002}}
+1468 has_halogen_neighbor {'ablate': {'8': 0.185, '12': 0.062}, 'random': {'8': 0.009, '12': 0.003}, 'steer': {'8': 0.156, '12': 0.071}, 'steer_rand': {'8': 0.002, '12': -0.003}}
+3583 has_O_neighbor {'ablate': {'8': 0.37, '12': 0.121}, 'random': {'8': 0.017, '12': 0.006}, 'steer': {'8': 0.329, '12': 0.072}, 'steer_rand': {'8': 0.002, '12': 0.002}}
+3854 min_ring_size_6 {'ablate': {'8': 0.124, '12': 0.052}, 'random': {'8': 0.01, '12': -0.003}, 'steer': {'8': 0.111, '12': 0.034}, 'steer_rand': {'8': 0.001, '12': 0.004}}
+2108 min_ring_size_7 {'ablate': {'8': 0.081, '12': 0.011}, 'random': {'8': 0.007, '12': 0.007}, 'steer': {'8': 0.099, '12': 0.013}, 'steer_rand': {'8': -0.001, '12': -0.002}}
+2261 skipped: too few atoms 144 0

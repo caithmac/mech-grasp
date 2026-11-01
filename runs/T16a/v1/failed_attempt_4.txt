@@ -1,0 +1,8 @@
+Figure generation failed: 'a3'
+
+=== T16a Summary ===
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16a\v1\script.py", line 258, in <module>
+    print(f"  {c_name} - {model_key}: Best Error={best_err:.4f}, Learned Gain={gain:.2f}")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to NoneType.__format__

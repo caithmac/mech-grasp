@@ -263,12 +263,14 @@ def _summ(vals):
 
 
 def probe_atoms(y, acts_grasp, acts_random, scaffolds, layers=None, seeds=(0, 1, 2),
-                mask=None, ambiguous_only=False) -> dict:
+                mask=None, ambiguous_only=False, tokens=None) -> dict:
     """y: per-atom labels aligned with Acts atom rows. scaffolds: per-molecule scaffold string.
     mask: optional boolean per-atom subset (e.g. only carbons).
     ambiguous_only: classification only - keep only atoms whose input token occurs with more than
       one label value (the token alone cannot decide). This is the discriminating test; on all atoms
-      AUROC saturates because most atoms are easy. Also reports 'error' = 1 - score."""
+      AUROC saturates because most atoms are easy. Also reports 'error' = 1 - score.
+    tokens: per-atom INPUT ids replacing acts_grasp.tokens for the token baseline and ambiguous_only.
+      For GRASP-A3 pass data.get_atom_fields(name)["bundle"].values (its input is the 7-field bundle)."""
     y = np.asarray(y)
     cls = _is_classification(y)
     if cls:
@@ -277,14 +279,15 @@ def probe_atoms(y, acts_grasp, acts_random, scaffolds, layers=None, seeds=(0, 1,
     if mask is None:
         mask = np.ones(len(y), bool)
     mask = np.asarray(mask, bool).copy()
+    toks = np.asarray(acts_grasp.tokens if tokens is None else tokens)
+    if len(toks) != len(y):
+        raise ValueError(f"tokens has {len(toks)} rows, labels have {len(y)}")
     if ambiguous_only and cls:
-        toks = acts_grasp.tokens
         mixed = {t for t in np.unique(toks[mask]) if len(np.unique(y[mask & (toks == t)])) > 1}
         mask &= np.isin(toks, list(mixed))
     idx = np.where(mask)[0]
     layers = _avail(acts_grasp.atom) if layers is None else layers
-    tok = OneHotEncoder(handle_unknown="ignore", sparse_output=False).fit_transform(
-        acts_grasp.tokens.reshape(-1, 1))
+    tok = OneHotEncoder(handle_unknown="ignore", sparse_output=False).fit_transform(toks.reshape(-1, 1))
     res = {"task": "classification" if cls else "regression",
            "metric": ("auroc" if len(np.unique(y)) == 2 else "balanced_acc") if cls else "r2",
            "n_atoms": int(len(idx)), "ambiguous_only": bool(ambiguous_only), "layers": {}, "token": None}

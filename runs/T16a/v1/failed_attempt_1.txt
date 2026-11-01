@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16a\v1\script.py", line 35, in <module>
+    hydroxyl_mask = df.fg_hydrohilo.values & (df.tok_element == "C").values # Fixed typo in column name access if needed, but prompt says fg_hydroxyl. 
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\ss864\AppData\Local\miniconda3\envs\mech-grasp\Lib\site-packages\pandas\core\generic.py", line 6321, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'fg_hydrohilo'. Did you mean: 'fg_hydroxyl'?

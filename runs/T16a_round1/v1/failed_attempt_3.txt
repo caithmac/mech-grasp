@@ -1,0 +1,4 @@
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16a\v1\script.py", line 227
+    fig, axes = plt.subplots(int(np.ceil(n_concepts / 4.0)), min(4, max(1, (n_concepts + 2) // 2)), figsize=(5*min(4, max(1, (n_concepts + 2) // 2))), 3*np.ceil(n_concepts / 4.0), constrained_layout=True)
+                                                                                                                                                                                                           ^
+SyntaxError: positional argument follows keyword argument

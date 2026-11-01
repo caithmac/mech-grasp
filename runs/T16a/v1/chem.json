@@ -1,0 +1,45 @@
+{
+ "summary": "T16a EXPERIMENTAL RESULTS CANNOT BE INTERPRETED CHEMICALLY",
+ "claims": [
+  {
+   "claim": "GRASP-A3 aromaticity and hybridization are confirmed as INPUT fields (not learned)",
+   "evidence": "\"is_input\":{\"aromatic\":true,\"hybridization\":true}\n\nFALSIFIABLE TEST: RDKit SMARTS pattern for sp2 carbon in benzene ring should show 100% agreement with bundle.aromatic field",
+   "kind": "shows",
+   "test": "SMARTS=[C;X3]([cH])=:[cH]:[cH]; check df[df.tok_element=='C'].aromatic == (df.min_ring_size>0 & df.hybridization=='sp2')",
+   "prediction": "If aromatic/hybridization are truly inputs: 1.0 agreement between bundle fields and RDKit computation"
+  },
+  {
+   "claim": "NO LAYER DATA WAS COLLECTED FOR ANY CONCEPT IN EITHER A3 OR A2",
+   "evidence": "\"layers\":{} for ALL concepts in BOTH model pairs; \"Best Error=None, Learned Gain=None\" printed output\n\nFALSIFIABLE TEST: Check results.json structure - every concept should have layers dict with keys '0','1','2'...'12'",
+   "kind": "shows",
+   "test": "results['ring_size']['a3']['layers'] must contain 7 layer entries (L=0,2,4,6,8,10,12)",
+   "prediction": "If experiment succeeded: each concept has model/control scores at all layers"
+  },
+  {
+   "claim": "BUNDLE BASELINE VALUES EXIST BUT CANNOT BE INTERPRETED WITHOUT PROBE SCORES",
+   "evidence": "\"ring_size\":{\"a2\":{\"bundle_baseline\":0.132}} etc.\n\nFALSIFIABLE TEST: Compare bundle baseline to model error at best layer - learned_gain = control_error/model_error requires both values",
+   "kind": "shows",
+   "test": "results[concept][pair]['best_err'] must be numeric (not None)",
+   "prediction": "If experiment succeeded: all concepts have valid best_err and learned_gain > 1.0"
+  },
+  {
+   "claim": "A3 RANDOM CONTROL CANNOT BE COMPARED TO A2 OR ANYTHING ELSE",
+   "evidence": "\"a3_random\" pair has no layer data; \"figure_error\":\"'a3'\" indicates figure generation failed\n\nFALSIFIABLE TEST: Check if a3_random probe results exist in any concept dict under 'control'",
+   "kind": "shows",
+   "test": "results[concept]['a3']['layers'][L]['control'] must be numeric for at least one layer L",
+   "prediction": "If experiment succeeded: control scores match model score format (float, not None)"
+  },
+  {
+   "claim": "LEARNED GAIN CANNOT BE CALCULATED - NO LEARNING CAN BE INFERRED ABOUT GRASP-A3 REPRESENTATION",
+   "evidence": "\"learned_gain\":None for ALL concepts; learned_gain = control_error/model_error requires both errors to be non-None\n\nFALSIFIABLE TEST: At best layer, model error must differ from random control error by >0.1x factor",
+   "kind": "shows",
+   "test": "results[concept]['a3']['learned_gain'] must exist and be numeric (not None)",
+   "prediction": "If A3 learns chemistry beyond inputs: learned_gain >> 1.0 at best layer"
+  }
+ ],
+ "trivial_explanations": [
+  "The experiment failed due to script errors - this is NOT a chemical finding about GRASP-A3",
+  "Bundle baseline values are computed from input fields alone (aromatic, hybridization already given) so they cannot indicate learning",
+  "No learned_gain can be calculated when both model and control have no layer data"
+ ]
+}

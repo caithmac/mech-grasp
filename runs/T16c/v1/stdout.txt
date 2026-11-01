@@ -1,0 +1,34 @@
+[sae] step 0 nmse 0.7820 dead 0
+[sae] step 2000 nmse 0.1787 dead 0
+[sae] step 4000 nmse 0.1579 dead 0
+[sae] step 6000 nmse 0.1546 dead 0
+[sae] step 8000 nmse 0.1522 dead 0
+[sae] step 10000 nmse 0.1501 dead 0
+[sae] step 12000 nmse 0.1490 dead 0
+[sae] step 14000 nmse 0.1457 dead 0
+[sae] step 16000 nmse 0.1472 dead 0
+[sae] step 18000 nmse 0.1466 dead 0
+[sae] step 20000 nmse 0.1464 dead 0
+[sae] step 22000 nmse 0.1461 dead 0
+[sae] step 24000 nmse 0.1447 dead 0
+[sae] step 26000 nmse 0.1446 dead 0
+[sae] step 28000 nmse 0.1455 dead 0
+[sae] step 0 nmse 0.8163 dead 0
+[sae] step 2000 nmse 0.0270 dead 1858
+[sae] step 4000 nmse 0.0322 dead 1374
+[sae] step 6000 nmse 0.0322 dead 1673
+[sae] step 8000 nmse 0.0318 dead 2011
+[sae] step 10000 nmse 0.0317 dead 2365
+[sae] step 12000 nmse 0.0316 dead 2698
+[sae] step 14000 nmse 0.0315 dead 2845
+[sae] step 16000 nmse 0.0315 dead 2927
+[sae] step 18000 nmse 0.0314 dead 2930
+[sae] step 20000 nmse 0.0314 dead 2978
+[sae] step 22000 nmse 0.0314 dead 2966
+[sae] step 24000 nmse 0.0314 dead 2994
+[sae] step 26000 nmse 0.0314 dead 3002
+[sae] step 28000 nmse 0.0314 dead 3007
+Results written to OUT/results.json
+a3 Strict Latents: 4096
+a3_random Strict Latents: 1004
+Found hydroxyl latent(s) in A3 strict set.

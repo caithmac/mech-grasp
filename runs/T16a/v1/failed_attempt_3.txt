@@ -1,0 +1,19 @@
+Error probing pair ('a3', 'a3_random'), concept ring_size: 'ring_size'
+Error probing pair ('a2', 'a2_random'), concept ring_size: 'ring_size'
+Error probing pair ('a3', 'a3_random'), concept conjugated: 'conjugated'
+Error probing pair ('a2', 'a2_random'), concept conjugated: 'conjugated'
+Error probing pair ('a3', 'a3_random'), concept crippen_logp_contrib: 'crippen_logp_contrib'
+Error probing pair ('a2', 'a2_random'), concept crippen_logp_contrib: 'crippen_logp_contrib'
+Error probing pair ('a3', 'a3_random'), concept crippen_mr_contrib: 'crippen_mr_contrib'
+Error probing pair ('a2', 'a2_random'), concept crippen_mr_contrib: 'crippen_mr_contrib'
+Error probing pair ('a3', 'a3_random'), concept o_neighbor_C: 'o_neighbor_C'
+Error probing pair ('a2', 'a2_random'), concept o_neighbor_C: 'o_neighbor_C'
+Error probing pair ('a3', 'a3_random'), concept halogen_nbr_C: 'halogen_nbr_C'
+Error probing pair ('a2', 'a2_random'), concept halogen_nbr_C: 'halogen_nbr_C'
+Error probing pair ('a3', 'a3_random'), concept hydroxyl_C: 'hydroxyl_C'
+Error probing pair ('a2', 'a2_random'), concept hydroxyl_C: 'hydroxyl_C'
+Traceback (most recent call last):
+  File "C:\Users\ss864\Desktop\mech-grasp\runs\T16a\v1\script.py", line 310, in <module>
+    ctrl_at_best = float(layer_results[str(best_layer_idx)]["control"])
+                         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+KeyError: '-1'

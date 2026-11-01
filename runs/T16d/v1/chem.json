@@ -1,0 +1,44 @@
+{
+ "summary": "GRASP-A3 Layer 12 exhibits dimensionality collapse similar to T14a GRASP, but selectively degrades structural topology decodability compared to random control while enhancing physicochemical property encoding.",
+ "claims": [
+  {
+   "claim": "A3 undergoes a significant geometry collapse at layer 12 where the participation ratio (PR) drops from ~197 at L8 to ~20.5, indicating an information bottleneck that compresses atom representations into fewer effective dimensions compared to earlier layers.",
+   "evidence": "geometry.pr: {L8: 196.753 -> L12: 20.455}",
+   "kind": "shows",
+   "test": "Compute PR on `A.atom[12]` vs `A.atom[8]`. Expect ratio < 0.1.",
+   "prediction": "PR(L12) / PR(L8) \u2248 0.1"
+  },
+  {
+   "claim": "The collapse correlates with a loss of structural topology decodability: Linear probe scores for ring systems (Ring5/6) at L12 are significantly lower than the random control baseline, suggesting topological features are suppressed in favor of other properties.",
+   "evidence": "decode.ring5.lin.L12=0.049 vs a3_random.decode.ring5.lin.L12=0.15",
+   "kind": "shows",
+   "test": "SMARTS `[#6]1:[#6]:[#6]:[#6]:[#6]:[#6]:1` (benzene) or `min_ring_size==5`. Compare Linear Probe R^2 on A3 vs Random at L12.",
+   "prediction": "R^2(A3_L12, Ring) < 0.05; R^2(Random_L12, Ring) > 0.14"
+  },
+  {
+   "claim": "Physicochemical properties (Crippen LogP contributions) show improved decodability at L12 compared to early layers and the random baseline, indicating the collapsed representation specializes in electronic/physico-chemical features rather than topology.",
+   "evidence": "decode.crippen.lin.L4=0.076 -> L12=0.306; Random Crippen Lin ~0.185",
+   "kind": "shows",
+   "test": "SMARTS `C` (carbon) with LogP contribution labels. Compare Linear Probe R^2 on A3 vs Random at L12.",
+   "prediction": "R^2(A3_L12, Crippen) > 0.3; R^2(Random_L12, Crippen) \u2248 0.18"
+  },
+  {
+   "claim": "The anisotropy metric increases from ~0.33 at L8 to ~0.63 at L12 (matching the initial layer value), implying atom vectors realign along a dominant axis, consistent with H\u00fcckel aromaticity or global electronic effects dominating local structural variance.",
+   "evidence": "geometry.aniso: {L8: 0.328 -> L12: 0.625}",
+   "kind": "suspects",
+   "test": "Calculate cosine similarity of atom vectors to the mean vector for aromatic vs aliphatic carbons.",
+   "prediction": "Aromatic C atoms show higher alignment (cosine > 0.8) than aliphatic at L12."
+  },
+  {
+   "claim": "MLP probes confirm that structural features are not merely linearly uncorrelated but non-linearly obscured: MLP scores for Ring5 drop to ~0.065 compared to Random's ~0.185, indicating the collapse removes feature distinctiveness rather than just linearity.",
+   "evidence": "decode.ring5.mlp.L12=0.065 vs a3_random.decode.ring5.mlp.L12=0.185",
+   "kind": "shows",
+   "test": "Train MLP on L12 embeddings to predict `min_ring_size`. Compare AUC/R^2 against Random baseline.",
+   "prediction": "AUC(A3_L12) < 0.6; AUC(Random_L12) > 0.7"
+  }
+ ],
+ "trivial_explanations": [
+  "The PR drop could be trivial if L12 is a projection layer, but the Random control (same architecture) does not collapse (PR ~6 constant), proving it is learned behavior.",
+  "Low Ring5 scores in A3 may reflect that LogP prediction dominates training loss at Layer 12, suppressing ring topology gradients."
+ ]
+}

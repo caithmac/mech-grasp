@@ -1,0 +1,2 @@
+Static check failed before running:
+script.py:144:30: undefined name 'A'

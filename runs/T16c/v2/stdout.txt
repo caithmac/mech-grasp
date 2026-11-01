@@ -1,0 +1,6 @@
+Results written to OUT/results.json
+a3 Strict Latents (active): 4096
+a3_random Strict Latents (active): 1004
+Found hydroxyl latent(s) in A3 strict set.
+a3 Context Latents (Strict): 3
+a3_random Context Latents (Strict): 3
